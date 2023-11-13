@@ -49,8 +49,6 @@ function AdminLogin() {
           <div className='Admin-login-form'>
             <div className='Admin-login-email'>
               <h3 className='Admin-label'>Email</h3>
-              <br />
-              <br />
               <input
                 type='email'
                 placeholder='Email'
@@ -61,8 +59,6 @@ function AdminLogin() {
             </div>
             <div className='Admin-login-password'>
               <h3 className='Admin-label'>Password</h3>
-              <br />
-              <br />
               <input
                 type='password'
                 placeholder='Password'
@@ -71,8 +67,6 @@ function AdminLogin() {
                 className='Admin-login-input'
               />
             </div>
-            <br />
-            <br />
             <div className='Admin-login-button'>
               <button onClick={login} className='Admin-login-button-value'>
                 Login
@@ -80,8 +74,8 @@ function AdminLogin() {
             </div>
             <div className='Admin-login-not-req'>
               <p className='Admin-login-not'>Not Admin? 
-                <a className ='a' href='/staff'>staff</a>
-                <a  className ='a' href='/user'>user</a>
+                <a className ='admin-a' href='/staff'>staff</a>
+                <a  className ='admin-a' href='/user'>user</a>
               </p>
             </div>
             <div className='Admin-login-error'>

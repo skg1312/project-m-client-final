@@ -9,7 +9,7 @@ function AdminCompanyManage() {
   const [companies, setCompanies] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
   const [selectedCompanyId, setSelectedCompanyId] = useState(null);
-  const API = process.env.REACT_APP_API || 'https://octopus-app-2s9og.ondigitalocean.app';
+  const API = process.env.REACT_APP_API;
   const [selectedCompanyData, setSelectedCompanyData] = useState({
     companyid: '',
     companyname: '',
@@ -43,7 +43,7 @@ function AdminCompanyManage() {
 
   useEffect(() => {
     axios
-      .get(`${API}/company`)
+      .get(`${API}company`)
       .then((response) => {
         setCompanies(response.data);
         console.log(response.data);
@@ -65,7 +65,7 @@ function AdminCompanyManage() {
     if (selectedCompanyId) {
       // Update an existing company
       axios
-        .put(`${API}/company/${selectedCompanyId}`, selectedCompanyData)
+        .put(`${API}company/${selectedCompanyId}`, selectedCompanyData)
         .then((response) => {
           // Handle successful update (if needed)
           console.log('Company updated successfully:', response.data);
@@ -82,7 +82,7 @@ function AdminCompanyManage() {
     } else {
       // Create a new company
       axios
-        .post(`${API}/company`, selectedCompanyData)
+        .post(`${API}company`, selectedCompanyData)
         .then((response) => {
           // Handle successful creation (if needed)
           console.log('Company created successfully:', response.data);

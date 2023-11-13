@@ -5,14 +5,14 @@ const AdminAuthContext = React.createContext(null);
 const AdminAuthProvider = (props) => {
     const [admin, setAdmin] = useState(null);
     const [adminlist, setAdminlist] = useState([]);
-    const API = process.env.REACT_APP_API || 'https://octopus-app-2s9og.ondigitalocean.app';
+    const API = process.env.REACT_APP_API;
     const adminlogin = (
         adminname, adminemail, adminpassword) => 
         {
             setAdmin(adminname, adminemail, adminpassword);
         }
     useEffect(() => {
-        axios.get(`${API}/admin`)
+        axios.get(`${API}admin`)
         .then(res=>{setAdminlist(res.data)
         })
         .catch(err=>{console.log(err)})

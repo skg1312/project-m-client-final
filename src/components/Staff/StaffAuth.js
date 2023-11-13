@@ -36,7 +36,7 @@ const StaffAuthProvider = (props) => {
   };
 
   useEffect(() => {
-    axios.get(`${API}/staff`)
+    axios.get(`${API}staff`)
       .then(res => {
         setStafflist(res.data);
       })

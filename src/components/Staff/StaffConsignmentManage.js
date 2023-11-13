@@ -10,7 +10,7 @@ import StaffNavbar from './StaffNavbar';
 function StaffConsignmentManage() {
   const [consignedItems, setConsignedItems] = useState([]);
   const [selectedConsignmentId, setSelectedConsignmentId] = useState(null);
-  const API = process.env.REACT_APP_API || 'https://octopus-app-2s9og.ondigitalocean.app';
+  const API = process.env.REACT_APP_API;
   const [selectedConsignmentData, setSelectedConsignmentData] = useState({
     itemname: '',
     itemquantity: '',
@@ -25,7 +25,7 @@ function StaffConsignmentManage() {
 
   useEffect(() => {
     axios
-      .get(`${API}/consignment`)
+      .get(`${API}consignment`)
       .then((response) => {
         setConsignedItems(response.data);
       })
@@ -61,7 +61,7 @@ function StaffConsignmentManage() {
     if (selectedConsignmentId) {
       // Update an existing consignment
       axios
-        .put(`${API}/consignment/${selectedConsignmentId}`, selectedConsignmentData)
+        .put(`${API}consignment/${selectedConsignmentId}`, selectedConsignmentData)
         .then((response) => {
           // Handle successful update (if needed)
           console.log('Consignment updated successfully:', response.data);
@@ -78,7 +78,7 @@ function StaffConsignmentManage() {
     } else {
       // Create a new consignment
       axios
-        .post(`${API}/consignment`, selectedConsignmentData)
+        .post(`${API}consignment`, selectedConsignmentData)
         .then((response) => {
           // Handle successful creation (if needed)
           console.log('Consignment created successfully:', response.data);

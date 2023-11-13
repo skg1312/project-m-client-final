@@ -11,20 +11,20 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-gap: 15px;
-    ;
+    display: flex;
+    justify-content:space-evenly;
   }
 
   .staff-logout-button-value-no-img{
     text-align: center;
-    height: 50px;
-    width: 190px;
-    border-radius: 15px;
+    height: 40px;
+    width: 150px;
+    border-radius: 10px;
     border: 2px solid #D2D2D2;
-    font-family: urbanist;
-    font-size: 24px;
+    font-family: Calibri;
+    font-size: 20px;
     background-color: #fff;
     color: #000;
-    padding-top: 10px;
   }
   .disabled{
     border: none;

@@ -44,7 +44,7 @@ function StaffDashboard() {
         <h1 className='staff-dashboard-title'>MAIN MENU</h1>
           <div className='staff-dashboard-buttons'>
             <div className='staff-dashboard-buttons-row'>
-              <button className='staff-dashboard-button' onClick={() => '/staffgenrep'}>
+              <button className='staff-dashboard-button' onClick={() => navigate('/staffgenrep')}>
                 <img src={gr} alt='gr' className='staff-dashboard-button-icon' />
                 GENERATE REPORTS
                 </button>

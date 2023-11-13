@@ -9,7 +9,7 @@ function AdminStaffManage() {
   const [staffMembers, setStaffMembers] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
   const [selectedStaffId, setSelectedStaffId] = useState(null);
-  const API = process.env.REACT_APP_API || 'https://octopus-app-2s9og.ondigitalocean.app';
+  const API = process.env.REACT_APP_API;
   const [selectedStaffData, setSelectedStaffData] = useState({
     staffname: '',
     staffemail: '',
@@ -40,7 +40,7 @@ function AdminStaffManage() {
 
   useEffect(() => {
     axios
-      .get(`${API}/staff`)
+      .get(`${API}staff`)
       .then((response) => {
         setStaffMembers(response.data);
       })
@@ -61,7 +61,7 @@ function AdminStaffManage() {
     if (selectedStaffId) {
       // Update an existing staff member
       axios
-        .put(`${API}/staff/${selectedStaffId}`, selectedStaffData)
+        .put(`${API}staff/${selectedStaffId}`, selectedStaffData)
         .then((response) => {
           // Handle successful update (if needed)
           console.log('Staff member updated successfully:', response.data);
@@ -76,7 +76,7 @@ function AdminStaffManage() {
     } else {
       // Create a new staff member
       axios
-        .post(`${API}/staff`, selectedStaffData)
+        .post(`${API}staff`, selectedStaffData)
         .then((response) => {
           // Handle successful creation (if needed)
           console.log('Staff member created successfully:', response.data);
@@ -134,7 +134,7 @@ function AdminStaffManage() {
             {displayedStaffSearch.map((staff) => (
               <tr key={staff._id} className='admin-staff-manager-data-table-row-body'>
                 <td className='admin-staff-manager-data-table-data highlight'>{staff.staffname.substring(0, 12)}</td>
-                <td className='admin-staff-manager-data-table-data'>{staff.staffemail.substring(0, 12)}</td>
+                <td className='admin-staff-manager-data-table-data'>{staff.staffemail.substring(0, 18)}</td>
                 <td className='admin-staff-manager-data-table-data'>{staff.staffphone}</td>
                 <td className='admin-staff-manager-data-table-data'>
                   {staff.staffofficebranch.substring(0, 12)}

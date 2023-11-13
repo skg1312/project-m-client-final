@@ -64,8 +64,6 @@ function UserLogin() {
           <div className='user-login-form'>
             <div className='user-login-email'>
               <h3 className='user-label'>Email</h3>
-              <br />
-              <br />
               <input
                 type='email'
                 placeholder='Email'
@@ -76,8 +74,6 @@ function UserLogin() {
             </div>
             <div className='user-login-password'>
               <h3 className='user-label'>Password</h3>
-              <br />
-              <br />
               <input
                 type='password'
                 placeholder='Password'
@@ -86,8 +82,6 @@ function UserLogin() {
                 className='user-login-input'
               />
             </div>
-            <br />
-            <br />
             <div className='user-login-button'>
               <button onClick={login} className='user-login-button-value'>
                 Login
@@ -95,8 +89,8 @@ function UserLogin() {
             </div>
             <div className='staff-login-not-req'>
               <p className='staff-login-not'>Not User? 
-                <a className ='a' href='/'>admin</a>
-                <a  className ='a' href='/staff'>staff</a>
+                <a className ='user-a' href='/'>admin</a>
+                <a  className ='user-a' href='/staff'>staff</a>
               </p>
             </div>
             <div className='user-login-error'>

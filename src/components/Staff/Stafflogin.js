@@ -63,8 +63,6 @@ function StaffLogin() {
           <div className='staff-login-form'>
             <div className='staff-login-email'>
               <h3 className='staff-label'>Email</h3>
-              <br />
-              <br />
               <input
                 type='email'
                 placeholder='Email'
@@ -75,8 +73,6 @@ function StaffLogin() {
             </div>
             <div className='staff-login-password'>
               <h3 className='staff-label'>Password</h3>
-              <br />
-              <br />
               <input
                 type='password'
                 placeholder='Password'
@@ -85,8 +81,6 @@ function StaffLogin() {
                 className='staff-login-input'
               />
             </div>
-            <br />
-            <br />
             <div className='staff-login-button'>
               <button onClick={login} className='staff-login-button-value'>
                 Login
@@ -94,8 +88,8 @@ function StaffLogin() {
             </div>
             <div className='staff-login-not-req'>
               <p className='staff-login-not'>Not Staff? 
-                <a className ='a' href='/'>admin</a>
-                <a  className ='a' href='/user'>user</a>
+                <a className ='staff-a' href='/'>admin</a>
+                <a  className ='staff-a' href='/user'>user</a>
               </p>
             </div>
             <div className='staff-login-error'>

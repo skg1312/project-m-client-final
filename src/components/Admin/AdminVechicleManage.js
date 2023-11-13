@@ -9,7 +9,7 @@ function AdminVechicleManage() {
   const [vechicle, setVechicle] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
   const [selectedVechicleId, setSelectedVechicleId] = useState(null);
-  const API = process.env.REACT_APP_API || 'https://octopus-app-2s9og.ondigitalocean.app';
+  const API = process.env.REACT_APP_API;
   const [selectedVechicleData, setSelectedVechicleData] = useState({
     vechicleid: '',
     drivername: '',
@@ -44,7 +44,7 @@ function AdminVechicleManage() {
 
   useEffect(() => {
     axios
-      .get(`${API}/vechicle`)
+      .get(`${API}vechicle`)
       .then((response) => {
         setVechicle(response.data);
       })
@@ -65,7 +65,7 @@ function AdminVechicleManage() {
     if (selectedVechicleId) {
       // Update an existing vehicle
       axios
-        .put(`${API}/vechicle/${selectedVechicleId}`, selectedVechicleData)
+        .put(`${API}vechicle/${selectedVechicleId}`, selectedVechicleData)
         .then((response) => {
           // Handle successful update (if needed)
           console.log('Vehicle updated successfully:', response.data);
@@ -80,7 +80,7 @@ function AdminVechicleManage() {
     } else {
       // Create a new vehicle
       axios
-        .post(`${API}/vechicle`, selectedVechicleData)
+        .post(`${API}vechicle`, selectedVechicleData)
         .then((response) => {
           // Handle successful creation (if needed)
           console.log('Vehicle created successfully:', response.data);

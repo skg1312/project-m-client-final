@@ -9,7 +9,7 @@ function AdminUserManage() {
   const [users, setUsers] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
   const [selectedUserId, setSelectedUserId] = useState(null);
-  const API = process.env.REACT_APP_API || 'https://octopus-app-2s9og.ondigitalocean.app';
+  const API = process.env.REACT_APP_API;
   const [selectedUserData, setSelectedUserData] = useState({
     username: '',
     useremail: '',
@@ -39,7 +39,7 @@ function AdminUserManage() {
 
   useEffect(() => {
     axios
-      .get(`${API}/user`)
+      .get(`${API}user`)
       .then((response) => {
         setUsers(response.data);
       })
@@ -60,7 +60,7 @@ function AdminUserManage() {
     if (selectedUserId) {
       // Update an existing user
       axios
-        .put(`${API}/user/${selectedUserId}`, selectedUserData)
+        .put(`${API}user/${selectedUserId}`, selectedUserData)
         .then((response) => {
           // Handle successful update (if needed)
           console.log('User updated successfully:', response.data);
@@ -75,7 +75,7 @@ function AdminUserManage() {
     } else {
       // Create a new user
       axios
-        .post(`${API}/user`, selectedUserData)
+        .post(`${API}user`, selectedUserData)
         .then((response) => {
           // Handle successful creation (if needed)
           console.log('User created successfully:', response.data);
@@ -137,7 +137,7 @@ function AdminUserManage() {
               {displayedUserSearch.map((user) => (
                 <tr key={user._id} className='admin-user-manage-data-table-row-body'>
                   <td className='admin-user-manage-data-table-data highlight'>{user.username.substring(0, 12)}</td>
-                  <td className='admin-user-manage-data-table-data'>{user.useremail.substring(0, 12)}</td>
+                  <td className='admin-user-manage-data-table-data'>{user.useremail.substring(0, 18)}</td>
                   <td className='admin-user-manage-data-table-data'>{user.userphone}</td>
                   <td className='admin-user-manage-data-table-data'>{user.useraccess.substring(0, 12)}</td>
                   <td className='admin-user-manage-data-table-data'>{user.useridproof.substring(0, 12)}</td>

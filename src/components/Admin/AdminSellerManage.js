@@ -9,7 +9,7 @@ function AdminSellerManage() {
   const [sellers, setSellers] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
   const [selectedSellerId, setSelectedSellerId] = useState(null);
-  const API = process.env.REACT_APP_API || 'https://octopus-app-2s9og.ondigitalocean.app';
+  const API = process.env.REACT_APP_API;
   const [selectedSellerData, setSelectedSellerData] = useState({
     sellerid: '',
     sellercompanyname: '',
@@ -39,7 +39,7 @@ function AdminSellerManage() {
 
   useEffect(() => {
     axios
-      .get(`${API}/seller`)
+      .get(`${API}seller`)
       .then((response) => {
         setSellers(response.data);
       })
@@ -60,7 +60,7 @@ function AdminSellerManage() {
     if (selectedSellerId) {
       // Update an existing seller
       axios
-        .put(`${API}/seller/${selectedSellerId}`, selectedSellerData)
+        .put(`${API}seller/${selectedSellerId}`, selectedSellerData)
         .then((response) => {
           // Handle successful update (if needed)
           console.log('Seller updated successfully:', response.data);
@@ -75,7 +75,7 @@ function AdminSellerManage() {
     } else {
       // Create a new seller
       axios
-        .post(`${API}/seller`, selectedSellerData)
+        .post(`${API}seller`, selectedSellerData)
         .then((response) => {
           // Handle successful creation (if needed)
           console.log('Seller created successfully:', response.data);

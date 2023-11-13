@@ -10,7 +10,7 @@ function AdminBuyerManage() {
   const [pageNumber, setPageNumber] = useState(0);
   const [selectedBuyerId, setSelectedBuyerId] = useState(null);
 
-  const API = process.env.REACT_APP_API || 'https://octopus-app-2s9og.ondigitalocean.app';
+  const API = process.env.REACT_APP_API;
 
   const [selectedBuyerData, setSelectedBuyerData] = useState({
     buyerid: '',
@@ -40,7 +40,7 @@ function AdminBuyerManage() {
 
   useEffect(() => {
     axios
-      .get(`${API}/buyer`) // Use the appropriate API endpoint for buyers
+      .get(`${API}buyer`) // Use the appropriate API endpoint for buyers
       .then((response) => {
         setBuyers(response.data);
       })
@@ -76,7 +76,7 @@ function AdminBuyerManage() {
     } else {
       // Create a new buyer
       axios
-        .post(`${API}/buyer`, selectedBuyerData)
+        .post(`${API}buyer`, selectedBuyerData)
         .then((response) => {
           // Handle successful creation (if needed)
           console.log('Buyer created successfully:', response.data);

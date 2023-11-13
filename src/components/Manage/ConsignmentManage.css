@@ -1,0 +1,169 @@
+/* consignment-manage component styles */
+.consignment-manage {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.consignment-manage-data {
+  margin-left: 100px;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  margin-right: 50px;
+  border-radius: 15px;
+  border: 2px solid #D2D2D2;
+}
+
+.consignment-manage-data-title {
+  font-family: Urbanist;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 38px;
+  letter-spacing: -0.578px;
+  text-align: left;
+}
+
+.consignment-manage-data-table-head {
+  color: #1A1A1A;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: bold;
+}
+
+.consignment-manage-data-table {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.consignment-manage-data-table-body {
+  color: #767676;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: bold;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: -0.289px;
+}
+
+.highlight {
+  color: green !important;
+}
+
+.consignment-manage-form {
+  margin-left: 50px;
+  margin-top: 100px;
+  margin-right: 100px;
+  margin-bottom: 100px;
+  border-radius: 15px;
+  border: 2px solid #D2D2D2;
+}
+
+.consignment-manage-form-title {
+  font-family: Urbanist;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 38px;
+  letter-spacing: -0.578px;
+  text-align: left;
+  padding-left: 50px;
+}
+
+.consignment-manage-form-input {
+  border-radius: 6px;
+  border: 1px solid #ededed;
+  background: #EDEDED;
+  height: 50px;
+  width: 86%;
+  margin-bottom: 20px;
+  color: var(--color-grey-60, #767676);
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
+  letter-spacing: -0.289px;
+}
+.highlight{
+  color: green !important;
+}
+
+.consignment-manage-form-button {
+  color: var(--color-white-100, #FEFEFE);
+  text-align: center;
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: Urbanist;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 26px;
+  letter-spacing: -0.289px;
+  width: 331px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  border: 1px solid #5925DC;
+  background: var(--color-primary-1, #5925DC);
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.consignment-manage-form-input-checkbox{
+  width: 16px;
+  height: 16px;
+}
+.consignment-manage-form-input-checkbox-label{
+  color: var(--color-grey-100, #1A1A1A);
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: Urbanist;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 26px;
+  letter-spacing: -0.289px;
+}
+.consignment-manage-data-table-button{
+  color: #FEFEFE;
+  font-family: Urbanist;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 28px;
+  letter-spacing: -0.325px;
+  background-color: #5925DC;
+  border-radius: 3px;
+  border: 1px solid #5925DC;
+}
+.pagination-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
+}
+.pagination-container li{
+  padding: 10px;
+  border: 1px solid #5925DC;
+  border-radius: 3px;
+  color: #fff;
+  font-family: Urbanist;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 28px;
+  letter-spacing: -0.325px;
+  background-color: #5925DC;
+  margin: 5px;
+}
+.pagination-container li:hover{
+  cursor: pointer;
+}
+.pagination-container .active{
+  background-color: #767676;
+  color: #fff;
+}
+.pagination-container .disabled{
+  color: #ada9a9;
+  cursor: not-allowed;
+}

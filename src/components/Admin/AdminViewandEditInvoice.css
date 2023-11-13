@@ -1,0 +1,258 @@
+
+.invoice-container{
+    margin-top: 2%;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-bottom: 3%;
+    border: 1px solid #000;
+    background: #FFF;
+    }
+.invoice-container-first{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.invoice-container-first-left{
+    margin-left: 5%;
+}
+.invoice-container-first-left-companyname{
+    color: #211313;
+    font-family:'Courier New', Courier, monospace;
+    font-size: 16px;
+    text-align: left;
+    text-transform: uppercase;
+}
+.invoice-container-first-left-companyaddress{
+    color: #211313;
+    font-family:'Courier New', Courier, monospace;
+    font-size: 10px;
+    text-align: left;
+}
+.invoice-container-first-left-companydetails{
+    color: #211313;
+    font-family:'Courier New', Courier, monospace;
+    font-size: 10px;
+    text-align: left;
+}
+.span{
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.invoice-container-first-left-hr{
+    width: 95%;
+    border: 5px solid #000;
+}
+.invoice-container-second{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.invoice-container-second-left{
+    margin-left: 5%;
+}
+.invoice-container-second-left-hr{
+    width: 100%;
+    border: 2px solid #000;
+    margin-right: 5%;
+}
+.invoice-container-second-hr{
+    width: 100%;
+    border: 2px solid #000;
+}
+.invoice-container-first-left-hr1{
+    width: 95%;
+    border: 5px solid #000;
+    
+}
+.invoice-container-first-right-hr{
+    width: 90%;
+    border: 5px solid #000;
+}
+.invoice-container-first-right{
+    margin-right: 50px;
+}
+.invoice-container-first-right-taxinvoice{
+    color: #211313;
+    font-family:'Courier New', Courier, monospace;
+    font-size:16px;
+    text-align: right;
+    text-transform: uppercase;
+}
+.invoice-container-first-right-qr{
+    margin-left: 300px;
+}
+.invoice-container-first-left-hr-div{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.invoice-container-second-right-invoice{
+    color: #211313;
+    font-family:'Courier New', Courier, monospace;
+    font-size: 6px;
+    text-align: left;
+    text-transform: uppercase; 
+    margin-left: 50px;
+}
+
+.invoice-container-second-right-hr{
+    width: 90%;
+    border: 1px solid #000;
+}
+.head{
+    color: #211313;
+    font-family:'Courier New', Courier, monospace;
+    font-size: 8px;
+    text-align: right;
+    text-transform: uppercase; 
+    margin-left: 50px;
+}
+.invoice-container-second-right-things{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.invoice-container-third-table{
+    width: 100%;
+    border-collapse: collapse;
+}
+.invoice-container-third-table-head{
+    color: #211313;
+    font-family:'Courier New', Courier, monospace;
+    font-size: 10px;
+    text-align: center;
+    text-transform: uppercase;
+}
+.invoice-container-third-table-hr{
+    width: 1200%;
+    border: 2px solid #000;
+    margin-left: 30%;
+}
+.invoice-container-third-table-body{
+    color: #211313;
+    font-family:'Courier New', Courier, monospace;
+    font-size: 10px;
+    text-align: center;
+}
+.invoice-container-third-table-mid-hr{
+    width: 1200%;
+    border: 1px solid #000;
+    margin-left: 30%;
+}
+.invoice-container-third-table-below-hr{
+    width: 95%;
+    border: 2px solid #000;
+}
+.invoice-container-third-below{
+    text-align: left;
+    margin-left: 50px;
+}
+.style{
+    font-style: italic;
+}
+.invoice-container-third-below-content{
+    color: #211313;
+    font-family:'Courier New', Courier, monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+}
+.invoice-container-third-below-value{
+    color: #211313;
+    font-family:'Courier New', Courier, monospace;
+    font-size:8px;
+    text-transform: uppercase;
+    font-style: italic;
+}
+.invoice-container-third-table-hr-end{
+    width: 95%;
+    border: 5px solid #000;
+}
+.invoice-container-fourth-table-hr{
+    width: 1100%;
+    border: 2px solid #000;
+    margin-left: 30%;
+
+}
+.invoice-container-fourth-table{
+    width: 105%;
+    border-collapse: collapse;
+}
+.invoice-container-fourth-table-head{
+    color: #211313;
+    font-family:'Courier New', Courier, monospace;
+    font-size: 10px;
+    text-align: center;
+    text-transform: uppercase;
+
+}
+.invoice-container-fourth-table-body{
+    color: #211313;
+    font-family:'Courier New', Courier, monospace;
+    font-size: 10px;
+    text-align: center;
+}
+.invoice-container-fourth-table-mid-hr{
+    width: 1100%;
+    border: 1px solid #000;
+    margin-left: 30%;
+}
+.invoice-container-fourth-table-hr-end{
+    width : 95%;
+    border: 5px solid #000;
+}
+.invoice-container-fourth-table-head-tr-th-th{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+}
+.invoice-container-fourth-table-head-tr-th-th-th{
+    font-size: 10px;
+}
+.invoice-container-fourth-table-body-tr-td-td{
+    display: grid;
+    grid-template-columns: 1fr 1fr;   
+}
+.invoice-container-fourth-table-below-hr{
+    width: 95%;
+    border: 2px solid #000;
+}
+.invoice-container-fifth{
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    margin-left: 5%;
+}
+.invoice-container-fifth-left-content{
+    color: #211313;
+    font-family:'Courier New', Courier, monospace;
+    font-size: 10px;
+    text-align: left;
+    text-transform: uppercase;
+    text-decoration-line: underline;
+}
+.invoice-container-fifth-left-content-value{
+    color: #211313;
+    font-family:'Courier New', Courier, monospace;
+    font-size: 10px;
+    text-align: left;
+    text-transform: uppercase;
+    font-style: normal;
+}
+.invoice-container-fifth-right-content{
+    color: #211313;
+    font-family:'Courier New', Courier, monospace;
+    font-size: 10px;
+    text-align: right;
+    text-transform: uppercase;
+    text-decoration-line: underline;
+    margin-right: 5%;
+}
+.invoice-container-fifth-end{
+    color: #211313;
+    font-family:'Courier New', Courier, monospace;
+    font-size: 10px;
+    text-align: center;
+    text-transform: uppercase;
+    font-style:italic;
+}
+
+
+
+
+

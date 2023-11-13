@@ -1,0 +1,27 @@
+
+.admin-logout-icon{
+    padding-left: 10%;
+    width: 30px;
+    height: 30px;
+   
+  }
+  .admin-logout-button-nav{
+    margin-top: 20px;
+    margin-left: 5px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-gap: 15px;
+  }
+
+  .admin-logout-button-value-no-img{
+    text-align: center;
+    height: 50px;
+    width: 190px;
+    border-radius: 15px;
+    border: 2px solid #D2D2D2;
+    font-family: urbanist;
+    font-size: 24px;
+    background-color: #fff;
+    color: #000;
+    padding-top: 10px;
+  }

@@ -82,7 +82,7 @@ function AdminCompanyManage() {
     } else {
       // Create a new company
       axios
-        .post(`${API}company`, selectedCompanyData)
+        .post(`${API}/company`, selectedCompanyData)
         .then((response) => {
           // Handle successful creation (if needed)
           console.log('Company created successfully:', response.data);

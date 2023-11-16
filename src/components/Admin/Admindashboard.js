@@ -52,7 +52,7 @@ function Admindashboard() {
                 <img src={mu} alt='mu' className='admin-dashboard-button-icon' />
                 MANAGE USERS
                 </button>
-              <button className='admin-dashboard-button' onClick={() => navigate('/admininman')}>
+              <button className='admin-dashboard-button' onClick={() => navigate('/admininvdash')}>
                 <img src={mi} alt='ms' className='admin-dashboard-button-icon' />
                 MANAGE INVOICE
                 </button>

@@ -1,0 +1,56 @@
+.admin-in-dashboard-title {
+    color: #1A1A1A;
+    font-family: Calibri;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 62px;
+    letter-spacing: -0.939px;
+    text-align: center;
+}
+.admin-in-dashboard-buttons-row{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+.admin-in-dashboard-button{
+    width: 300px;
+    height: 200px;
+    border-radius: 15px;
+    border: 2px solid #D2D2D2;
+    background: none;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    color: #1A1A1A;
+    font-family: Calibri;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.361px;
+}
+.admin-in-dashboard-button-icon{
+    padding-left: 70px;
+    padding-right: 70px;
+}
+
+.admin-in-logout-container{
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+}
+.admin-in-logout-button-value{
+    height: 50px;
+    width: 200px;
+    border-radius: 15px;
+    border: 2px solid #D2D2D2;
+    font-family: Calibri;
+    font-size: 24px;
+    background-color: #fff;
+    color: #000;
+    padding-top: 10px;
+}

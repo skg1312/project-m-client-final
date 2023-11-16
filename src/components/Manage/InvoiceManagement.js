@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './StaffInvoiceManage.css';
+import './InvoiceManagement.css';
 import background from '../images/Desktop.png';
 import ReactPaginate from 'react-paginate';
-import StaffNavbar from './StaffNavbar';
 
-function StaffInvoiceManagement() {
+function InvoiceManagement() {
     const [invoice, setInvoice] = useState([]);
     const [pageNumber, setPageNumber] = useState(0);
     const [selectedInvoiceId, setSelectedInvoiceId] = useState(null);
@@ -57,11 +56,10 @@ function StaffInvoiceManagement() {
                 minHeight: '100vh',
             }}
         >
-          <StaffNavbar/>
             <div className='invoice-management'>
                 <div className='invoice-management-data'>
                     <div className='invoice-management-data-header'>
-                        All Invoice
+                        Invoice Management
                         
                         <input
                             type='text'
@@ -121,4 +119,4 @@ function StaffInvoiceManagement() {
     );
 }
 
-export default StaffInvoiceManagement;
+export default InvoiceManagement;

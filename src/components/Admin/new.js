@@ -46,13 +46,15 @@ const AdminCreateInvoice = () => {
           buyercompanystatecode: '',
         },
         vehicledetails: {
-          vehicleid: '',
-          vehiclenumber: '',
-          vehicleownername: '',
-          vehicleownergstno: '',
-          vehicleowneraddress: '',
-          vehicleownerstatename: '',
-          vehicleownerstatecode: '',
+            vehicleid: '',
+            drivername: '',
+            drivernumber: '',
+            driveraddress: '',
+            driveridproof: '',
+            driverlicenseno: '',
+            vehiclenumber: '',
+            vehiclemodel: '',
+            vehicleofficebranch: '',
         },
         consignmentdetails: {
             itemdetails: [
@@ -168,6 +170,25 @@ const AdminCreateInvoice = () => {
         fetchVehicles();
         }, [API]);
 
+        useEffect(() => {
+            const fetchConsignments = async () => {
+            try {
+                const response = await fetch(`${API}consignment`);
+                if (response.ok) {
+                const data = await response.json();
+                setConsignments(data);
+                }
+                else{
+                console.error('Failed to fetch consignments data');
+                }
+            }
+            catch (error) {
+                console.error('Error fetching consignments data:', error);
+            }
+        };
+        fetchConsignments();
+        }, [API]);
+
         const handleSelectChangeCompany = (e) => {
             const selectedCompanyId = e.target.value;
             const selectedCompany = companies.find((company) => company._id === selectedCompanyId);
@@ -242,13 +263,32 @@ const AdminCreateInvoice = () => {
                             driveraddress: selectedVehicle.driveraddress,
                             driveridproof: selectedVehicle.driveridproof,
                             driverlicenseno: selectedVehicle.driverlicenseno,
-                            vehiclenumber: selectedVehicle.vehiclen,
+                            vehiclenumber: selectedVehicle.vehiclenumber,
                             vehiclemodel: selectedVehicle.vehiclemodel,
                             vehicleofficebranch: selectedVehicle.vehicleofficebranch,
                           },
                         }));
                         setSelectedVehicle(selectedVehicle);
                       };
+                        const handleSelectChangeConsignment = (e) => {
+                            const selectedConsignmentId = e.target.value;
+                            const selectedConsignment = consignments.find((consignment) => consignment._id === selectedConsignmentId);
+                    
+                            setDataToSend((prevData) => ({
+                              ...prevData,
+                              consignmentdetails: {
+                                ...prevData.consignmentdetails,
+                                itemname: selectedConsignment.itemname,
+                                itemquantity: selectedConsignment.itemquantity,
+                                itemhsn: selectedConsignment.itemhsn,
+                                itemprice: selectedConsignment.itemprice,
+                                itemtaxrate: selectedConsignment.itemtaxrate,
+
+                              },
+                            }));
+
+                            setSelectedConsignment(selectedConsignment);
+                          };
                           
             const handleChange = (e, section, field) => {
                 const value = e.target.value;
@@ -260,6 +300,53 @@ const AdminCreateInvoice = () => {
                   },
                 }));
             }
+            const ConsignmentsAdd = () => {
+                setDataToSend((prevData) => ({
+                    ...prevData,
+                    consignmentdetails: {
+                        ...prevData.consignmentdetails,
+                        itemdetails: [
+                            ...prevData.consignmentdetails.itemdetails,
+                            {
+                                itemname: '',
+                                itemquantity: 0,
+                                itemhsn: '',
+                                itemprice: 0,
+                                itemtaxrate: '',
+                            },
+                        ],
+                    },
+                }));
+            };
+            const ConsignmentsRemove = (index) => {
+                setDataToSend((prevData) => ({
+                    ...prevData,
+                    consignmentdetails: {
+                        ...prevData.consignmentdetails,
+                        itemdetails: prevData.consignmentdetails.itemdetails.filter((item, i) => i !== index),
+                    },
+                }));
+            };
+
+            const handleConsignmentChange = (e, index, field) => {
+                const value = e.target.value;
+                setDataToSend((prevData) => ({
+                    ...prevData,
+                    consignmentdetails: {
+                        ...prevData.consignmentdetails,
+                        itemdetails: prevData.consignmentdetails.itemdetails.map((item, i) => {
+                            if (i === index) {
+                                return {
+                                    ...item,
+                                    [field]: value,
+                                };
+                            }
+                            return item;
+                        }),
+                    },
+                }));
+            };
+
 
             const handleSubmit = async (e) => {
                 e.preventDefault();
@@ -297,11 +384,12 @@ const AdminCreateInvoice = () => {
                                         name="companyid"
                                         value={selectedCompany.companyid}
                                         onChange={handleSelectChangeCompany}
+                                        required
                                     >
                                         <option value="">Select Company ID</option>
                                         {companies.map((company) => (
                                         <option key={company._id} value={company._id}>
-                                            {companies.companyid}
+                                            {company.companyname}
                                         </option>
                                         ))}
                                     </select>
@@ -403,6 +491,7 @@ const AdminCreateInvoice = () => {
                                         name="sellerid"
                                         value={selectedSeller.sellerid}
                                         onChange={handleSelectChangeSeller}
+                                        required
                                     >
                                         <option value="">Select Seller ID</option>
                                         {sellers.map((seller) => (
@@ -476,7 +565,7 @@ const AdminCreateInvoice = () => {
                                         name="buyerid"
                                         value={selectedBuyer.buyerid}
                                         onChange={handleSelectChangeBuyer}
-                                        
+                                        required
                                     >
                                         <option value="">Select Buyer ID</option>
                                         {buyers.map((buyer) => (
@@ -550,12 +639,12 @@ const AdminCreateInvoice = () => {
                                         name="vehicleid"
                                         value={selectedVehicle.vehicleid}
                                         onChange={handleSelectChangeVehicle}
-                                        
+                                        required
                                     >
                                         <option value="">Select Vehicle ID</option>
                                         {vehicles.map((vehicle) => (
                                         <option key={vehicle._id} value={vehicle._id}>
-                                            {vehicle.vehicleid}
+                                            {vehicle.drivername}
                                         </option>
                                         ))}
                                     </select>
@@ -621,7 +710,7 @@ const AdminCreateInvoice = () => {
                                         id="vehiclenumber"
                                         name="vehiclenumber"
                                         type="text"
-                                        value={selectedVehicle.vehiclenumber}
+                                        value={selectedVehicle.vechiclenuumber}
                                         onChange={(e) => handleChange(e, 'vehicledetails', 'vehiclenumber')}
                                         required
                                     />
@@ -632,7 +721,7 @@ const AdminCreateInvoice = () => {
                                         id="vehiclemodel"
                                         name="vehiclemodel"
                                         type="text"
-                                        value={selectedVehicle.vehiclemodel}
+                                        value={selectedVehicle.vechiclemodel}
                                         onChange={(e) => handleChange(e, 'vehicledetails', 'vehiclemodel')}
                                         required
                                     />
@@ -643,13 +732,121 @@ const AdminCreateInvoice = () => {
                                         id="vehicleofficebranch"
                                         name="vehicleofficebranch"
                                         type="text"
-                                        value={selectedVehicle.vehicleofficebranch}
+                                        value={selectedVehicle.vechicleofficebranch}
                                         onChange={(e) => handleChange(e, 'vehicledetails', 'vehicleofficebranch')}
                                         required
                                     />
                                 </div>
                             </div>
-                        
+                        <div className='invoice-form-secion'>
+                            <h3 className='invoice-form-section-heading'>Consignment Details</h3>
+                            <select
+                                        id="consignmentid"
+                                        name="consignmentid"
+                                        value={selectedConsignment.consignmentid}
+                                        onChange={handleSelectChangeConsignment}
+                                        required
+                                    >
+                                        <option value="">Select Consignment ID</option>
+                                        {consignments.map((consigment) => (
+                                        <option key={consignments._id} value={consignments._id}>
+                                            {consignments.consigmentid}
+                                        </option>
+                                        ))}
+                                    </select>
+                            <table className='invoice-form-section-table'>
+                                <thead className='invoice-form-section-table-thead'>
+                                    <tr className='invoice-form-section-table-thead-tr'>
+                                        <th className='invoice-form-section-table-thead-th'>Item Name</th>
+                                        <th className='invoice-form-section-table-thead-th'>Item Quantity</th>
+                                        <th className='invoice-form-section-table-thead-th'>Item HSN</th>
+                                        <th className='invoice-form-section-table-thead-th'>Item Price</th>
+                                        <th className='invoice-form-section-table-thead-th'>Item Tax Rate</th>
+                                        <th className='invoice-form-section-table-thead-th'>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody className='invoice-form-section-table-tbody'>
+                                    <tr className='invoice-form-section-table-tbody-input-tr'>
+                                        <td className='invoice-form-section-table-tbody-input-td'>
+                                            <input
+                                                type='text'
+                                                value={selectedConsignment.itemname}
+                                                onChange={(e) => handleConsignmentChange(e, 0, 'itemname')}
+                                                required
+                                            />
+                                        </td>
+                                        <td className='invoice-form-section-table-tbody-input-td'>
+                                            <input
+                                                type='number'
+                                                value={selectedConsignment.itemquantity}
+                                                onChange={(e) => handleConsignmentChange(e, 0, 'itemquantity')}
+                                                required
+                                            />
+                                        </td>
+                                        <td className='invoice-form-section-table-tbody-input-td'>
+                                            <input
+                                                type='text'
+                                                value={selectedConsignment.itemhsn}
+                                                onChange={(e) => handleConsignmentChange(e, 0, 'itemhsn')}
+                                                required
+                                            />
+                                        </td>
+                                        <td className='invoice-form-section-table-tbody-input-td'>
+                                            <input
+                                                type='number'
+                                                value={selectedConsignment.itemprice}
+                                                onChange={(e) => handleConsignmentChange(e, 0, 'itemprice')}
+                                                required
+                                            />
+                                        </td>
+                                        <td className='invoice-form-section-table-tbody-input-td'>
+                                            <input
+                                                type='text'
+                                                value={selectedConsignment.itemtaxrate}
+                                                onChange={(e) => handleConsignmentChange(e, 0, 'itemtaxrate')}
+                                                required
+                                            />
+                                        </td>
+                                        <td className='invoice-form-section-table-tbody-input-td'>
+                                            <button
+                                                type='button'
+                                                onClick={() => ConsignmentsAdd(0)}
+                                            >
+                                                Add
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    {dataToSend.consignmentdetails.itemdetails.map((item, index) => (
+  <tr key={index} className='invoice-form-section-table-tbody-view-tr'>
+    <td className='invoice-form-section-table-tbody-view-td'>
+      {item.itemname || `Item ${index + 1}`}
+    </td>
+    <td className='invoice-form-section-table-tbody-view-td'>
+      {item.itemquantity || `Item ${index + 1}`}
+    </td>
+    <td className='invoice-form-section-table-tbody-view-td'>
+      {item.itemhsn || `Item ${index + 1}`}
+    </td>
+    <td className='invoice-form-section-table-tbody-view-td'>
+      {item.itemprice || `Item ${index + 1}`}
+    </td>
+    <td className='invoice-form-section-table-tbody-view-td'>
+      {item.itemtaxrate || `Item ${index + 1}`}
+    </td>
+    <td className='invoice-form-section-table-tbody-view-td'>
+      <button
+        type='button'
+        onClick={() => ConsignmentsRemove(index)}  // Assuming ConsignmentsRemove takes an index argument
+      >
+        Remove
+      </button>
+    </td>
+  </tr>
+))}
+
+                                </tbody>
+                            </table>
+                        </div>
                         <div className="invoice-form-section-inputs-left">
                             <div className="invoice-form-section-inputs-left-input">
                                 <label htmlFor="invoiceno">Invoice No.</label>

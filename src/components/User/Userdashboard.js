@@ -60,7 +60,7 @@ function UserDashboard() {
                 <img src={mv} alt='mv' className='user-dashboard-button-icon' />
                 MANAGE VECHICLES
                 </button>
-              <button className='user-dashboard-button' onClick={() => navigate('/userinman')}>
+              <button className='user-dashboard-button' onClick={() => navigate('/userinvdash')}>
                 <img src={mi} alt='mi' className='user-dashboard-button-icon' />
                 MANAGE INVOICE
                 </button>

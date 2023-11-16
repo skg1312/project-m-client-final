@@ -6,7 +6,6 @@ import { useUserAuth } from './UserAuth';
 function UserNavbar() {
     const navigate = useNavigate();
     const auth = useUserAuth();
-    console.log(auth.access);
     const dashboard = () => {
         switch (auth.access) {
             case 'Super-User':
@@ -47,7 +46,7 @@ function UserNavbar() {
                 VEHICLES
               </button> : <button className="disabled" disabled></button> }
               {(auth.access === 'Super-User') ?
-              <button className='user-logout-button-value-no-img'  onClick={() => navigate('/userinman')}>
+              <button className='user-logout-button-value-no-img'  onClick={() => navigate('/userinvdash')}>
                 INOVICE 
               </button> : <button className="disabled" disabled></button> }
               <button className='user-logout-button-value-no-img'  onClick={dashboard}>

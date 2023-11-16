@@ -27,7 +27,7 @@ function StaffNavbar() {
           <div className='staff-logout-container-nav'>
             <div className='staff-logout-button-nav'>
             { (auth.access === 'Super-Staff') ?
-              <button className='staff-logout-button-value-no-img'  onClick={() => navigate('/staffrepman')}>
+              <button className='staff-logout-button-value-no-img'  onClick={() => navigate('/staffgenrep')}>
                 REPORTS
               </button>: <button className="disabled" disabled></button>}
              {(auth.access === 'Super-Staff' || auth.access === 'HO-Staff') ?
@@ -47,7 +47,7 @@ function StaffNavbar() {
               <button className='staff-logout-button-value-no-img'  onClick={() => navigate('/staffvecman')}>
                 VEHICLES
               </button> : <button className="disabled" disabled></button> }
-              <button className='staff-logout-button-value-no-img'  onClick={() => navigate('/staffinman')}>
+              <button className='staff-logout-button-value-no-img'  onClick={() => navigate('/staffinvdash')}>
                 INOVICE
               </button>
               <button className='staff-logout-button-value-no-img'  onClick={dashboard}>

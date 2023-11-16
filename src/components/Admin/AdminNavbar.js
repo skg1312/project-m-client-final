@@ -9,7 +9,7 @@ function AdminNavbar() {
         <div className='admin-logout-box-nav'>
           <div className='admin-logout-container-nav'>
             <div className='admin-logout-button-nav'>
-            <button className='admin-logout-button-value-no-img'  onClick={() => navigate('/adminrepman')}>
+            <button className='admin-logout-button-value-no-img'  onClick={() => navigate('/admingenrep')}>
                 REPORTS
               </button>
               <button className='admin-logout-button-value-no-img'  onClick={() => navigate('/adminuserman')}>
@@ -33,7 +33,7 @@ function AdminNavbar() {
               <button className='admin-logout-button-value-no-img'  onClick={() => navigate('/adminvecman')}>
                 VEHICLES
               </button>
-              <button className='admin-logout-button-value-no-img'  onClick={() => navigate('/admininman')}>
+              <button className='admin-logout-button-value-no-img'  onClick={() => navigate('/admininvdash')}>
                 INOVICE
               </button>
               <button className='admin-logout-button-value-no-img'  onClick={() => navigate('/admindashboard')}>

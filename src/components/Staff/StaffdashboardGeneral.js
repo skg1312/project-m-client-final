@@ -49,7 +49,7 @@ function StaffDashboardGeneral() {
                 </button>
             </div>
             <div className='staff-dashboard-buttons-row-general'>
-              <button className='staff-dashboard-button-general' onClick={() => navigate('/staffinman')}>
+              <button className='staff-dashboard-button-general' onClick={() => navigate('/staffinvdash')}>
                 <img src={mi} alt='mi' className='staff-dashboard-button-icon-general' />
                 MANAGE INVOICE
                 </button>

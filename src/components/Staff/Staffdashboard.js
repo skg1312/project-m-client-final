@@ -66,7 +66,7 @@ function StaffDashboard() {
                 <img src={vs} alt='mv' className='staff-dashboard-button-icon' />
                 MANAGE VECHICLES
                 </button>
-              <button className='staff-dashboard-button' onClick={() => navigate('/staffinman')}>
+              <button className='staff-dashboard-button' onClick={() => navigate('/staffinvdash')}>
                 <img src={mi} alt='mi' className='staff-dashboard-button-icon' />
                 MANAGE INVOICE
                 </button>

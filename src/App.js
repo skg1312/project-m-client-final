@@ -33,6 +33,18 @@ import UserCompanyManage from './components/User/UserCompanyManage';
 import UserConsignmentManage from './components/User/UserConsignmentManage';
 import UserVechicleManage from './components/User/UserVechicleManage';
 import AdminVechicleManage from './components/Admin/AdminVechicleManage';
+import AdminReports from './components/Admin/AdminReport';
+import AdminInvoiceManagement from './components/Admin/AdminInvoiceManager';
+import AdminCreateInvoice from './components/Admin/AdminCreateInvoice';
+import AdminInvoiceDashboard from './components/Admin/AdminInvoiceDashboard';
+import StaffReports from './components/Staff/StaffReport';
+import StaffCreateInvoice from './components/Staff/StaffCreateInvoice';
+import StaffInvoiceManagement from './components/Staff/StaffInvoiceManage';
+import StaffInvoiceDashboard from './components/Staff/StaffInvoiceDashboard';
+import UserInvoiceDashboard from './components/User/UserInvoiceDashboard';
+import UserInvoiceManagement from './components/User/UserInvoiceManage';
+import UserReports from './components/User/UserReport';
+import UserCreateInvoice from './components/User/UserCreateInvoice';
 
 
 function App() {
@@ -46,6 +58,11 @@ function App() {
             <Route path='/admindashboard' element={
               <ReqAdminAuth>
                 <AdminDashboard />
+              </ReqAdminAuth>
+            } />
+            <Route path='/admininvdash' element={
+              <ReqAdminAuth>
+                <AdminInvoiceDashboard />
               </ReqAdminAuth>
             } />
             <Route path='/adminbuyman' element={
@@ -83,6 +100,21 @@ function App() {
                 <AdminVechicleManage />
               </ReqAdminAuth>
             } />
+            <Route path='/admingenrep' element={
+              <ReqAdminAuth>
+                <AdminReports />
+              </ReqAdminAuth>
+            } />
+            <Route path='/admininman' element={
+              <ReqAdminAuth>
+                <AdminInvoiceManagement />
+                </ReqAdminAuth>
+            } />
+            <Route path='/admincreinv' element={
+              <ReqAdminAuth>
+                <AdminCreateInvoice />
+                </ReqAdminAuth>
+            } />
           </Routes>
         </AdminAuthProvider>
 
@@ -90,6 +122,9 @@ function App() {
         <StaffAuthProvider>
           <Routes>
             <Route path='/staff' element={<StaffLogin />} />
+            <Route path='/staffinvdash' element={<ReqStaffAuth>
+              <StaffInvoiceDashboard />
+            </ReqStaffAuth>} />
             <Route path='/staffsuperdash' element={<ReqStaffAuth>
               <StaffDashboard />
             </ReqStaffAuth>} />
@@ -101,6 +136,15 @@ function App() {
             </ReqStaffAuth>} />
             <Route path='/staffbuyman' element={<ReqStaffAuth>
               <StaffBuyerManage />
+            </ReqStaffAuth>} />
+            <Route path='/staffcrein' element={<ReqStaffAuth>
+              <StaffCreateInvoice />
+            </ReqStaffAuth>} />
+            <Route path='/staffinman' element={<ReqStaffAuth>
+              <StaffInvoiceManagement />
+            </ReqStaffAuth>} />
+            <Route path='/staffgenrep' element={<ReqStaffAuth>
+              <StaffReports />
             </ReqStaffAuth>} />
             <Route path='/staffsellman' element={<ReqStaffAuth>
               <StaffSellerManage />
@@ -124,6 +168,10 @@ function App() {
         <UserAuthProvider>
           <Routes>
             <Route path='/user' element={<UserLogin />} />
+            <Route path='/userinvdash' element={<ReqUserAuth>
+            <UserInvoiceDashboard />
+            </ReqUserAuth>
+            } />
             <Route path='/usersuperdash' element={<ReqUserAuth>
               <UserDashboard />
             </ReqUserAuth>} />
@@ -148,6 +196,15 @@ function App() {
             <Route path='/uservecman' element={<ReqUserAuth>
               <UserVechicleManage />
             </ReqUserAuth>} />
+            <Route path='/userinman' element={<ReqUserAuth>
+              <UserInvoiceManagement />
+            </ReqUserAuth> } />
+            <Route path='/usergenrep' element={<ReqUserAuth>
+              <UserReports />
+            </ReqUserAuth> } />
+            <Route path='/usercrein' element={<ReqUserAuth>
+              <UserCreateInvoice />
+            </ReqUserAuth> } />
           </Routes>
         </UserAuthProvider>
       </div>

@@ -1,13 +1,13 @@
 import React,{useEffect,useState} from 'react'
-import './AdminCreateInvoice.css';
+import './UserCreateInvoice.css';
 import background from '../images/Desktop.png'
 import A from '../images/A.png';
 import D from '../images/D.png';
 import E from '../images/E.png';
-import AdminNavbar from './AdminNavbar';
+import UserNavbar from './UserNavbar';
 
 
-const AdminCreateInvoice = () => {
+const UserCreateInvoice = () => {
 
     const [companies, setCompanies] = useState([]);
     const [selectedCompany, setSelectedCompany] = useState({});
@@ -382,13 +382,13 @@ const AdminCreateInvoice = () => {
             minHeight: '100vh',
         }}
         >
-          <AdminNavbar/>
+          <UserNavbar/>
             <form onSubmit={handleSubmit}>
-            <h1 className='admin-create-invoice-title'>CREATE INVOICE</h1>
-            <div className='admin-create-invoice-container'>
-        <div className='admin-create-invoice-data'>
-      <h2 className='admin-create-invoice-subtitle'>COMPANY DETAILS</h2>
-      <select className='admin-create-invoice-select' 
+            <h1 className='user-create-invoice-title'>CREATE INVOICE</h1>
+            <div className='user-create-invoice-container'>
+        <div className='user-create-invoice-data'>
+      <h2 className='user-create-invoice-subtitle'>COMPANY DETAILS</h2>
+      <select className='user-create-invoice-select' 
       id="companyid"
       name='companyid'
       value={selectedCompany.companyid}
@@ -402,10 +402,10 @@ const AdminCreateInvoice = () => {
         ))}
       </select>
       </div>
-      <form className='admin-create-invoice-form'>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Company Name</label>
-        <input className='admin-create-invoice-form-input'
+      <form className='user-create-invoice-form'>
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Company Name</label>
+        <input className='user-create-invoice-form-input'
          type="text"
          id="companyname"
             name='companyname'
@@ -413,9 +413,9 @@ const AdminCreateInvoice = () => {
             onChange={(e) => handleChange(e, "companydetails", "companyname")}
          />
         </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Company Registration type</label>
-        <input className='admin-create-invoice-form-input' 
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Company Registration type</label>
+        <input className='user-create-invoice-form-input' 
         type="text"
         id="companyregistrationtype"
             name='companyregistrationtype'
@@ -424,18 +424,18 @@ const AdminCreateInvoice = () => {
         
         />
         </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Company GST No.</label>
-        <input className='admin-create-invoice-form-input' type="text"
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Company GST No.</label>
+        <input className='user-create-invoice-form-input' type="text"
         id='companygstno'
         name='companygstno'
         value={selectedCompany.companygstno}
         onChange={(e) => handleChange(e, "companydetails", "companygstno")}      
         />
         </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Company Contact</label>
-        <input className='admin-create-invoice-form-input'
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Company Contact</label>
+        <input className='user-create-invoice-form-input'
          type="text"
          id='companycontact'
             name='companycontact'
@@ -443,27 +443,27 @@ const AdminCreateInvoice = () => {
             onChange={(e) => handleChange(e, "companydetails", "companycontact")}
          />
         </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Company country</label>
-        <input className='admin-create-invoice-form-input' type="text"
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Company country</label>
+        <input className='user-create-invoice-form-input' type="text"
         id='companycountry'
         name='companycountry'
         value={selectedCompany.companycountry}
         onChange={(e) => handleChange(e, "companydetails", "companycountry")}
         />
         </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Company State</label>
-        <input className='admin-create-invoice-form-input' type="text"
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Company State</label>
+        <input className='user-create-invoice-form-input' type="text"
         id='companystate'
         name='companystate'
         value={selectedCompany.companystate}
         onChange={(e) => handleChange(e, "companydetails", "companystate")}
         />
         </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Company Office Address</label>
-        <input className='admin-create-invoice-form-input' type="text"
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Company Office Address</label>
+        <input className='user-create-invoice-form-input' type="text"
         id='companyofficeaddress'
         name='companyofficeaddress'
         value={selectedCompany.companyofficeaddress}
@@ -471,9 +471,9 @@ const AdminCreateInvoice = () => {
         
         />
         </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Company  pincode</label>
-        <input className='admin-create-invoice-form-input' type="text"
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Company  pincode</label>
+        <input className='user-create-invoice-form-input' type="text"
         id='companypincode'
         name='companypincode'
         value={selectedCompany.companypincode}
@@ -481,9 +481,9 @@ const AdminCreateInvoice = () => {
         />
         </div>
         </form>
-        <div className='admin-create-invoice-data'>
-      <h2 className='admin-create-invoice-subtitle'>SELLER DETAILS</h2>
-      <select className='admin-create-invoice-select'
+        <div className='user-create-invoice-data'>
+      <h2 className='user-create-invoice-subtitle'>SELLER DETAILS</h2>
+      <select className='user-create-invoice-select'
       id='sellerid'
         name='sellerid'
         value={selectedSeller.sellerid}
@@ -497,46 +497,46 @@ const AdminCreateInvoice = () => {
         ))}
       </select>
       </div>
-      <form className='admin-create-invoice-form'>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Seller Company Name</label>
-        <input className='admin-create-invoice-form-input' type="text"
+      <form className='user-create-invoice-form'>
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Seller Company Name</label>
+        <input className='user-create-invoice-form-input' type="text"
         id='sellercompanyname'
         name='sellercompanyname'
         value={selectedSeller.sellercompanyname}
         onChange={(e) => handleChange(e, "sellerdetails", "sellercompanyname")}
         />
         </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Seller Company GST No.</label>
-        <input className='admin-create-invoice-form-input' type="text"
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Seller Company GST No.</label>
+        <input className='user-create-invoice-form-input' type="text"
         id='sellercompanygstno'
         name='sellercompanygstno'
         value={selectedSeller.sellercompanygstno}
         onChange={(e) => handleChange(e, "sellerdetails", "sellercompanygstno")}
         />
         </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Seller Company Address</label>
-        <input className='admin-create-invoice-form-input' type="text"
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Seller Company Address</label>
+        <input className='user-create-invoice-form-input' type="text"
         id='sellercompanyaddress'
         name='sellercompanyaddress'
         value={selectedSeller.sellercompanyaddress}
         onChange={(e) => handleChange(e, "sellerdetails", "sellercompanyaddress")}
         />
         </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Seller Company State Name</label>
-        <input className='admin-create-invoice-form-input' type="text"
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Seller Company State Name</label>
+        <input className='user-create-invoice-form-input' type="text"
         id='sellercompanystatename'
         name='sellercompanystatename'
         value={selectedSeller.sellercompanystatename}
         onChange={(e) => handleChange(e, "sellerdetails", "sellercompanystatename")}
         />
         </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Seller Company State Code</label>    
-        <input className='admin-create-invoice-form-input' type="text"
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Seller Company State Code</label>    
+        <input className='user-create-invoice-form-input' type="text"
         id='sellercompanystatecode'
         name='sellercompanystatecode'
         value={selectedSeller.sellercompanystatecode}
@@ -544,9 +544,9 @@ const AdminCreateInvoice = () => {
         />
         </div>
         </form>
-        <div className='admin-create-invoice-data'>
-      <h2 className='admin-create-invoice-subtitle'>BUYER DETAILS</h2>
-      <select className='admin-create-invoice-select'
+        <div className='user-create-invoice-data'>
+      <h2 className='user-create-invoice-subtitle'>BUYER DETAILS</h2>
+      <select className='user-create-invoice-select'
       id='buyerid'
         name='buyerid'
         value={selectedBuyer.buyerid}
@@ -560,46 +560,46 @@ const AdminCreateInvoice = () => {
         ))}
       </select>
       </div>
-      <form className='admin-create-invoice-form'>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Buyer Company Name</label>
-        <input className='admin-create-invoice-form-input' type="text"
+      <form className='user-create-invoice-form'>
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Buyer Company Name</label>
+        <input className='user-create-invoice-form-input' type="text"
         id='buyercompanyname' 
         name='buyercompanyname'
         value={selectedBuyer.buyercompanyname}
         onChange={(e) => handleChange(e, "buyerdetails", "buyercompanyname")}
         />
         </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Buyer Company GST No.</label>
-        <input className='admin-create-invoice-form-input' type="text"
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Buyer Company GST No.</label>
+        <input className='user-create-invoice-form-input' type="text"
         id='buyercompanygstno'
         name='buyercompanygstno'
         value={selectedBuyer.buyercompanygstno}
         onChange={(e) => handleChange(e, "buyerdetails", "buyercompanygstno")}
         />
         </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Buyer Company Address</label>
-        <input className='admin-create-invoice-form-input' type="text"
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Buyer Company Address</label>
+        <input className='user-create-invoice-form-input' type="text"
         id='buyercopmanyaddress'
         name='buyercopmanyaddress'
         value={selectedBuyer.buyercompanyaddress}
         onChange={(e) => handleChange(e, "buyerdetails", "buyercompanyaddress")}
         />
         </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Buyer Company State Name</label>
-        <input className='admin-create-invoice-form-input' type="text"
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Buyer Company State Name</label>
+        <input className='user-create-invoice-form-input' type="text"
         id='buyercompanystatename'
         name='buyercompanystatename'
         value={selectedBuyer.buyercompanystatename}
         onChange={(e) => handleChange(e, "buyerdetails", "buyercompanystatename")}
         />
         </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Buyer Company State Code</label>
-        <input className='admin-create-invoice-form-input' type="text"
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Buyer Company State Code</label>
+        <input className='user-create-invoice-form-input' type="text"
         id='buyercompanystatecode'
         name='buyercompanystatecode'
         value={selectedBuyer.buyercompanystatecode}
@@ -607,9 +607,9 @@ const AdminCreateInvoice = () => {
         />
         </div>
         </form>
-        <div className='admin-create-invoice-data'>
-      <h2 className='admin-create-invoice-subtitle'>VECHICLE DETAILS</h2>
-      <select className='admin-create-invoice-select'
+        <div className='user-create-invoice-data'>
+      <h2 className='user-create-invoice-subtitle'>VECHICLE DETAILS</h2>
+      <select className='user-create-invoice-select'
       id='vehicleid'
         name='vehicleid'
         value={selectedVehicle.vehicleid}
@@ -623,73 +623,73 @@ const AdminCreateInvoice = () => {
         ))}
       </select>
       </div>
-      <form className='admin-create-invoice-form'>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Driver Name</label>
-        <input className='admin-create-invoice-form-input' type="text"
+      <form className='user-create-invoice-form'>
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Driver Name</label>
+        <input className='user-create-invoice-form-input' type="text"
         id='drivername'
         name='drivername'
         value={selectedVehicle.drivername}
         onChange={(e) => handleChange(e, "vehicledetails", "drivername")}
         />
         </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Driver Number</label>
-        <input className='admin-create-invoice-form-input' type="text"
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Driver Number</label>
+        <input className='user-create-invoice-form-input' type="text"
         id='drivernumber'
         name='drivernumber'
         value={selectedVehicle.drivernumber}
         onChange={(e) => handleChange(e, "vehicledetails", "drivernumber")}
         />
         </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Driver Address</label>
-        <input className='admin-create-invoice-form-input' type="text"
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Driver Address</label>
+        <input className='user-create-invoice-form-input' type="text"
         id='driveraddress'
         name='driveraddress'
         value={selectedVehicle.driveraddress}
         onChange={(e) => handleChange(e, "vehicledetails", "driveraddress")}
         />
         </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Driver Id Proof</label>
-        <input className='admin-create-invoice-form-input' type="text"
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Driver Id Proof</label>
+        <input className='user-create-invoice-form-input' type="text"
         id='driveridproof'
         name='driveridproof'
         value={selectedVehicle.driveridproof}
         onChange={(e) => handleChange(e, "vehicledetails", "driveridproof")}
         />
         </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Driver License No.</label>
-        <input className='admin-create-invoice-form-input' type="text"
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Driver License No.</label>
+        <input className='user-create-invoice-form-input' type="text"
         id='driverlicenseno'
         name='driverlicenseno'
         value={selectedVehicle.driverlicenseno}
         onChange={(e) => handleChange(e, "vehicledetails", "driverlicenseno")}
         />
         </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Vechicle Number</label>
-        <input className='admin-create-invoice-form-input' type="text"
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Vechicle Number</label>
+        <input className='user-create-invoice-form-input' type="text"
         id='vehiclenumber'
         name='vehiclenumber'
         value={selectedVehicle.vehiclenumber}
         onChange={(e) => handleChange(e, "vehicledetails", "vehiclenumber")}
         />
         </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Vechicle Model</label>
-        <input className='admin-create-invoice-form-input' type="text"
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Vechicle Model</label>
+        <input className='user-create-invoice-form-input' type="text"
         id='vehiclemodel'
         name='vehiclemodel'
         value={selectedVehicle.vehiclemodel}
         onChange={(e) => handleChange(e, "vehicledetails", "vehiclemodel")}
         />
         </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Vechicle office branch</label>
-        <input className='admin-create-invoice-form-input' type="text"
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Vechicle office branch</label>
+        <input className='user-create-invoice-form-input' type="text"
         id='vehicleofficebranch'
         name='vehicleofficebranch'
         value={selectedVehicle.vehicleofficebranch}
@@ -697,9 +697,9 @@ const AdminCreateInvoice = () => {
         />
         </div>
         </form>
-        <div className='admin-create-invoice-data'>
-      <h2 className='admin-create-invoice-subtitle'>CONSIGNMENT DETAILS</h2>
-      <select className='admin-create-invoice-select'
+        <div className='user-create-invoice-data'>
+      <h2 className='user-create-invoice-subtitle'>CONSIGNMENT DETAILS</h2>
+      <select className='user-create-invoice-select'
       id='consignmentid'
         name='consignmentid'
         value={selectedConsignment.consignmentid}
@@ -708,216 +708,216 @@ const AdminCreateInvoice = () => {
         <option value="">Select Consignment ID</option>
       </select>
       </div>
-      <table className='admin-create-invoice-table-consigment'>
-        <tr className='admin-create-invoice-table-row-head'>
-          <th className='admin-create-invoice-table-row-th'>ITEM NAME</th>
-          <th className='admin-create-invoice-table-row-th'>ITEM QUANTITY</th>
-          <th className='admin-create-invoice-table-row-th'>ITEM HSN</th>
-          <th className='admin-create-invoice-table-row-th'>ITEM PRICE</th>
-          <th className='admin-create-invoice-table-row-th'>ITEM TAX RATE</th>
-          <th className='admin-create-invoice-table-row-th'>ACTION</th>
+      <table className='user-create-invoice-table-consigment'>
+        <tr className='user-create-invoice-table-row-head'>
+          <th className='user-create-invoice-table-row-th'>ITEM NAME</th>
+          <th className='user-create-invoice-table-row-th'>ITEM QUANTITY</th>
+          <th className='user-create-invoice-table-row-th'>ITEM HSN</th>
+          <th className='user-create-invoice-table-row-th'>ITEM PRICE</th>
+          <th className='user-create-invoice-table-row-th'>ITEM TAX RATE</th>
+          <th className='user-create-invoice-table-row-th'>ACTION</th>
         </tr>
         <br />
-        <tr className='admin-create-invoice-table-row-body'>
-          <td><input className='admin-create-invoice-table-consigment-input' type="text"/></td>
-          <td><input className='admin-create-invoice-table-consigment-input' type="number"/></td>
-          <td><input className='admin-create-invoice-table-consigment-input' type="text"/></td>
-          <td><input className='admin-create-invoice-table-consigment-input' type="number"/></td>
-          <td><input className='admin-create-invoice-table-consigment-input' type="text"/></td>
+        <tr className='user-create-invoice-table-row-body'>
+          <td><input className='user-create-invoice-table-consigment-input' type="text"/></td>
+          <td><input className='user-create-invoice-table-consigment-input' type="number"/></td>
+          <td><input className='user-create-invoice-table-consigment-input' type="text"/></td>
+          <td><input className='user-create-invoice-table-consigment-input' type="number"/></td>
+          <td><input className='user-create-invoice-table-consigment-input' type="text"/></td>
           <td>
-            <button className='admin-create-invoice-table-consigment-button'>
-            <img className='admin-create-invoice-table-consigment-icon' src={A} alt='add'/>
+            <button className='user-create-invoice-table-consigment-button'>
+            <img className='user-create-invoice-table-consigment-icon' src={A} alt='add'/>
             </button>
           </td>
         </tr>
         <br />
-        <tr className='admin-create-invoice-table-row-body'>
-          <td className='admin-create-invoice-table-consigment-value'>srcap</td>
-          <td className='admin-create-invoice-table-consigment-value'>450</td>
-          <td className='admin-create-invoice-table-consigment-value'>087099</td>
-          <td className='admin-create-invoice-table-consigment-value'>907980</td>
-          <td className='admin-create-invoice-table-consigment-value'>18</td>
+        <tr className='user-create-invoice-table-row-body'>
+          <td className='user-create-invoice-table-consigment-value'>srcap</td>
+          <td className='user-create-invoice-table-consigment-value'>450</td>
+          <td className='user-create-invoice-table-consigment-value'>087099</td>
+          <td className='user-create-invoice-table-consigment-value'>907980</td>
+          <td className='user-create-invoice-table-consigment-value'>18</td>
           <td>
-          <button className='admin-create-invoice-table-consigment-button'>
-            <img className='admin-create-invoice-table-consigment-icon-low' src={E} alt='edit'/>
+          <button className='user-create-invoice-table-consigment-button'>
+            <img className='user-create-invoice-table-consigment-icon-low' src={E} alt='edit'/>
             </button>
-            <button className='admin-create-invoice-table-consigment-button'>
-            <img className='admin-create-invoice-table-consigment-icon-low' src={D} alt='delete'/>
+            <button className='user-create-invoice-table-consigment-button'>
+            <img className='user-create-invoice-table-consigment-icon-low' src={D} alt='delete'/>
             </button>
           </td>
         </tr>
       </table>
-      <div className='admin-create-invoice-data'>
-      <h2 className='admin-create-invoice-subtitle'>INVOICE DETAILS</h2>
+      <div className='user-create-invoice-data'>
+      <h2 className='user-create-invoice-subtitle'>INVOICE DETAILS</h2>
       </div>
-      <form className='admin-create-invoice-form'>
-      <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Invoice No.</label>
+      <form className='user-create-invoice-form'>
+      <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Invoice No.</label>
         <br />
-        <input className='admin-create-invoice-form-input'
+        <input className='user-create-invoice-form-input'
          type="text"
          id='invoiceno'
             name='invoiceno'
             onChange={(e) => handleChange(e, "invoicedetails", "invoiceno")}
          />
         </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Invoice Date</label>
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Invoice Date</label>
         <br />
-        <input className='admin-create-invoice-form-input' type="date"
+        <input className='user-create-invoice-form-input' type="date"
         id='invoicedate'
         name='invoicedate'
         onChange={(e) => handleChange(e, "invoicedetails", "invoicedate")}
         />
         </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>E Way Bill No</label>
-        <input className='admin-create-invoice-form-input' type="text"
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>E Way Bill No</label>
+        <input className='user-create-invoice-form-input' type="text"
         id='ewaybillno'
         name='ewaybillno'
         onChange={(e) => handleChange(e, "invoicedetails", "ewaybillno")}
 
         />
         </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Delivery Note</label>
-        <input className='admin-create-invoice-form-input' type="text"
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Delivery Note</label>
+        <input className='user-create-invoice-form-input' type="text"
         id='deliverynote'
         name='deliverynote'
         onChange={(e) => handleChange(e, "invoicedetails", "deliverynote")}
         />
         </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Supplier Ref.</label>
-        <input className='admin-create-invoice-form-input' type="text"
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Supplier Ref.</label>
+        <input className='user-create-invoice-form-input' type="text"
         id='supplierref'
         name='supplierref'
         onChange={(e) => handleChange(e, "invoicedetails", "supplierref")}
         />
         </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Other Ref.</label>
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Other Ref.</label>
         <br />
-        <input className='admin-create-invoice-form-input' type="text"
+        <input className='user-create-invoice-form-input' type="text"
         id='otherref'
         name='otherref'
         onChange={(e) => handleChange(e, "invoicedetails", "otherref")}
         />
         </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Buyer's Order No.</label>
-        <input className='admin-create-invoice-form-input' type="text"
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Buyer's Order No.</label>
+        <input className='user-create-invoice-form-input' type="text"
         id='buyersorder'
         name='buyersorder'
         onChange={(e) => handleChange(e, "invoicedetails", "buyersorder")}
         />
         </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Buyer's Order Date</label>
-        <input className='admin-create-invoice-form-input' type="date"
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Buyer's Order Date</label>
+        <input className='user-create-invoice-form-input' type="date"
         id='ordereddate'
         name='ordereddate'
         onChange={(e) => handleChange(e, "invoicedetails", "ordereddate")}
         />
         </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Dispatch Document No.</label>
-        <input className='admin-create-invoice-form-input' type="text"
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Dispatch Document No.</label>
+        <input className='user-create-invoice-form-input' type="text"
         id='dispatchdocumentno'
         name='dispatchdocumentno'
         onChange={(e) => handleChange(e, "invoicedetails", "dispatchdocumentno")}
         />
         </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Delivery Note Date</label>
-        <input className='admin-create-invoice-form-input' type="date"
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Delivery Note Date</label>
+        <input className='user-create-invoice-form-input' type="date"
         id='deliverynotedate'
         name='deliverynotedate'
         onChange={(e) => handleChange(e, "invoicedetails", "deliverynotedate")}
         />
         </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Dispatch Through</label>
-        <input className='admin-create-invoice-form-input' type="text"
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Dispatch Through</label>
+        <input className='user-create-invoice-form-input' type="text"
         id='dispatchthrough'
         name='dispatchthrough'
         onChange={(e) => handleChange(e, "invoicedetails", "dispatchthrough")}
         />
         </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Destination</label>
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Destination</label>
         <br />
-        <input className='admin-create-invoice-form-input' type="text"
+        <input className='user-create-invoice-form-input' type="text"
         id='destination'
         name='destination'
         onChange={(e) => handleChange(e, "invoicedetails", "destination")}
         />
         </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Terms and Conditions</label>
-        <input className='admin-create-invoice-form-input' type="text"
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Terms and Conditions</label>
+        <input className='user-create-invoice-form-input' type="text"
         id='termsandcondition'
         name='termsandcondition'
         onChange={(e) => handleChange(e, "invoicedetails", "termsandcondition")}
         />
         </div>
         </form>
-        <div className='admin-create-invoice-data'>
-      <h2 className='admin-create-invoice-subtitle'>BOARDING DETAILS</h2>
+        <div className='user-create-invoice-data'>
+      <h2 className='user-create-invoice-subtitle'>BOARDING DETAILS</h2>
       </div>
-      <form className='admin-create-invoice-form'>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Weight of Load</label>
-        <input className='admin-create-invoice-form-input' type="Number"
+      <form className='user-create-invoice-form'>
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Weight of Load</label>
+        <input className='user-create-invoice-form-input' type="Number"
         id='weight'
         name='weight'
         onChange={(e) => handleChange(e, "boardingdetails", "weight")}
         />
         </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Transportation Cost</label>
-        <input className='admin-create-invoice-form-input' type="number"
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Transportation Cost</label>
+        <input className='user-create-invoice-form-input' type="number"
         id='transportationcost'
         name='transportationcost'
         onChange={(e) => handleChange(e, "boardingdetails", "transportationcost")}
         />
         </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Total Transportation Cost</label>
-        <input className='admin-create-invoice-form-input' type="number"
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Total Transportation Cost</label>
+        <input className='user-create-invoice-form-input' type="number"
         id='totalcost'
         name='totalcost'
         onChange={(e) => handleChange(e, "boardingdetails", "totalcost")}
         />
         </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Date of Loading</label>
-        <input className='admin-create-invoice-form-input' type="date"
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Date of Loading</label>
+        <input className='user-create-invoice-form-input' type="date"
         id='dateofloading'
         name='dateofloading'
         onChange={(e) => handleChange(e, "boardingdetails", "dateofloading")}
         />
         </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Starting Point</label>
-        <input className='admin-create-invoice-form-input' type="text"
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Starting Point</label>
+        <input className='user-create-invoice-form-input' type="text"
         id='startingpoint'
         name='startingpoint'
         onChange={(e) => handleChange(e, "boardingdetails", "startingpoint")}
         />
         </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'>Ending Point</label>
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'>Ending Point</label>
         <br />
-        <input className='admin-create-invoice-form-input' type="text"
+        <input className='user-create-invoice-form-input' type="text"
         id='endingpoint'
         name='endingpoint'
         onChange={(e) => handleChange(e, "boardingdetails", "endingpoint")}
         />
         </div>
         </form>
-        <div className='admin-create-invoice-data-submit'>
-      <button className='admin-create-invoice-button'
+        <div className='user-create-invoice-data-submit'>
+      <button className='user-create-invoice-button'
       >CREATE INVOICE</button>
     </div>
     </div>
@@ -926,4 +926,4 @@ const AdminCreateInvoice = () => {
     )
 }
 
-export default AdminCreateInvoice;
+export default UserCreateInvoice;

@@ -47,43 +47,39 @@ function Admindashboard() {
               <button className='admin-dashboard-button' onClick={() => navigate('/admingenrep')}>
                 <img src={gr} alt='gr' className='admin-dashboard-button-icon' />
                 GENERATE REPORTS
-                </button>
+              </button>
               <button className='admin-dashboard-button' onClick={() => navigate('/adminuserman')}>
                 <img src={mu} alt='mu' className='admin-dashboard-button-icon' />
                 MANAGE USERS
-                </button>
+              </button>
               <button className='admin-dashboard-button' onClick={() => navigate('/admininvdash')}>
                 <img src={mi} alt='ms' className='admin-dashboard-button-icon' />
                 MANAGE INVOICE
-                </button>
-            </div>
-            <div className='admin-dashboard-buttons-row'>
+              </button> 
               <button className='admin-dashboard-button'  onClick={() => navigate('/adminvecman')}>
                 <img src={vs} alt='' className='admin-dashboard-button-icon' />
                 MANAGE VECHICLES
-                </button>
+              </button>
               <button className='admin-dashboard-button'  onClick={() => navigate('/admincomman')}>
                 <img src={mc} alt='mc' className='admin-dashboard-button-icon' />
                 MANAGE COMPANY
-                </button> 
-                <button className='admin-dashboard-button'  onClick={() => navigate('/adminstaffman')}>
+              </button> 
+              <button className='admin-dashboard-button'  onClick={() => navigate('/adminstaffman')}>
                 <img src={mu} alt='mi' className='admin-dashboard-button-icon' />
                 MANAGE STAFF
-                </button>
-            </div>
-            <div className='admin-dashboard-buttons-row'>
+              </button>
               <button className='admin-dashboard-button'  onClick={() => navigate('/adminsellman')}>
                 <img src={mv} alt='mv' className='admin-dashboard-button-icon' />
                 MANAGE SELLERS
-                </button>
+              </button>
               <button className='admin-dashboard-button'  onClick={() => navigate('/adminbuyman')}>
                 <img src={ms} alt='mi' className='admin-dashboard-button-icon' />
                 MANAGE BUYERS
-                </button>
+              </button>
               <button className='admin-dashboard-button'  onClick={() => navigate('/adminconman')}>
                 <img src={ad} alt='mc' className='admin-dashboard-button-icon' />
                 MANAGE CONSIGNMENT
-                </button>
+              </button>
             </div>
           </div>
         </div>

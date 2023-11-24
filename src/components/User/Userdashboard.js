@@ -45,29 +45,27 @@ function UserDashboard() {
               <button className='user-dashboard-button' onClick={() => navigate('/usercomman')}>
                 <img src={gr} alt='gr' className='user-dashboard-button-icon' />
                 MANAGE COMPANY
-                </button>
+              </button>
               <button className='user-dashboard-button' onClick={() => navigate('/usersellman')}>
                 <img src={mu} alt='mu' className='user-dashboard-button-icon' />
                 MANAGE SELLERS
-                </button>
+              </button>
               <button className='user-dashboard-button' onClick={() => navigate('/userbuyman')}>
                 <img src={ms} alt='ms' className='user-dashboard-button-icon' />
                 MANAGE BUYERS
-                </button>
-            </div>
-            <div className='user-dashboard-buttons-row'>
+              </button>
               <button className='user-dashboard-button' onClick={() => navigate('/uservecman')}>
                 <img src={mv} alt='mv' className='user-dashboard-button-icon' />
                 MANAGE VECHICLES
-                </button>
+              </button>
               <button className='user-dashboard-button' onClick={() => navigate('/userinvdash')}>
                 <img src={mi} alt='mi' className='user-dashboard-button-icon' />
                 MANAGE INVOICE
-                </button>
+              </button>
               <button className='user-dashboard-button'onClick={() => navigate('/userconman')}>
                 <img src={mc} alt='mc' className='user-dashboard-button-icon' />
                 MANAGE CONSIGNMENT
-                </button>
+              </button>
             </div>
           </div>
         </div>

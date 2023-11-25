@@ -1,13 +1,26 @@
-import React, {  useContext, useEffect, useState } from "react";
+// UserAuth.js
+import React, { useContext, useEffect, useState } from "react";
 import axios from 'axios';
 
 const UserAuthContext = React.createContext(null);
 
 const UserAuthProvider = (props) => {
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState(() => {
+        const storedUser = localStorage.getItem("user");
+        return storedUser ? JSON.parse(storedUser) : null;
+    });
+
     const [userlist, setUserlist] = useState([]);
-    const [access, setAccess] = useState('');
-    const API = process.env.REACT_APP_API || 'https://octopus-app-2s9og.ondigitalocean.app';
+    const [access, setAccess] = useState(localStorage.getItem("userAccess") || '');
+    const API = process.env.REACT_APP_API;
+
+    const saveUserToLocalStorage = (user) => {
+        localStorage.setItem("user", JSON.stringify(user));
+    };
+
+    const saveUserAccessToLocalStorage = (newAccess) => {
+        localStorage.setItem("userAccess", newAccess);
+    };
 
     const userlogin = (
         username,
@@ -18,7 +31,7 @@ const UserAuthProvider = (props) => {
         useridproof,
         useraddress,
     ) => {
-        setUser({
+        const newUser = {
             username,
             useremail,
             userpassword,
@@ -26,13 +39,18 @@ const UserAuthProvider = (props) => {
             useraccess,
             useridproof,
             useraddress,
-        });
+        };
+
+        setUser(newUser);
+        saveUserToLocalStorage(newUser);
 
         setAccess(useraccess);
+        saveUserAccessToLocalStorage(useraccess);
     };
 
     const setUserAccess = (newAccess) => {
         setAccess(newAccess);
+        saveUserAccessToLocalStorage(newAccess);
     };
 
     useEffect(() => {
@@ -43,11 +61,13 @@ const UserAuthProvider = (props) => {
             .catch(err => {
                 console.log(err);
             });
-    }, [API]); 
+    }, [API]);
 
     const userlogout = () => {
         setUser(null);
         setAccess('');
+        localStorage.removeItem("user");
+        localStorage.removeItem("userAccess");
     };
 
     return (

@@ -1,13 +1,28 @@
+// StaffAuth.js
 import React, { useContext, useEffect, useState } from "react";
 import axios from 'axios';
 
 const StaffAuthContext = React.createContext(null);
 
 const StaffAuthProvider = (props) => {
-  const [staff, setStaff] = useState(null);
+  const [staff, setStaff] = useState(() => {
+    const storedStaff = localStorage.getItem("staff");
+    return storedStaff ? JSON.parse(storedStaff) : null;
+  });
+
   const [stafflist, setStafflist] = useState([]);
-  const API = process.env.REACT_APP_API || 'https://octopus-app-2s9og.ondigitalocean.app';
-  const [access, setAccess] = useState('');
+  const API = process.env.REACT_APP_API;
+  
+  // Initialize access state from localStorage or set to an empty string
+  const [access, setAccess] = useState(localStorage.getItem("access") || '');
+
+  const saveStaffToLocalStorage = (staff) => {
+    localStorage.setItem("staff", JSON.stringify(staff));
+  };
+
+  const saveAccessToLocalStorage = (newAccess) => {
+    localStorage.setItem("access", newAccess);
+  };
 
   const stafflogin = (
     staffname,
@@ -18,7 +33,7 @@ const StaffAuthProvider = (props) => {
     staffidproof,
     staffofficebranch,
   ) => {
-    setStaff({
+    const newStaff = {
       staffname,
       staffemail,
       staffpassword,
@@ -26,13 +41,18 @@ const StaffAuthProvider = (props) => {
       staffaccess,
       staffidproof,
       staffofficebranch,
-    });
+    };
+
+    setStaff(newStaff);
+    saveStaffToLocalStorage(newStaff);
 
     setAccess(staffaccess);
+    saveAccessToLocalStorage(staffaccess);
   };
 
   const setStaffAccess = (newAccess) => {
     setAccess(newAccess);
+    saveAccessToLocalStorage(newAccess);
   };
 
   useEffect(() => {
@@ -48,6 +68,8 @@ const StaffAuthProvider = (props) => {
   const stafflogout = () => {
     setStaff(null);
     setAccess('');
+    localStorage.removeItem("staff");
+    localStorage.removeItem("access");
   };
 
   return (

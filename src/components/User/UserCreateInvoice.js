@@ -3,13 +3,10 @@ import './UserCreateInvoice.css';
 import background from '../images/Desktop.png'
 import A from '../images/A.png';
 import D from '../images/D.png';
-import E from '../images/E.png';
 import UserNavbar from './UserNavbar';
 
-
-const UserCreateInvoice = () => {
-
-    const [companies, setCompanies] = useState([]);
+function UserCreateInvoice() {
+  const [companies, setCompanies] = useState([]);
     const [selectedCompany, setSelectedCompany] = useState({});
 
     const [sellers, setSellers] = useState([]);
@@ -26,7 +23,6 @@ const UserCreateInvoice = () => {
 
     const [dataToSend, setDataToSend] = useState({
         companydetails: {
-          companyid: '',
           companyname: '',
           companyregistrationtype: '',
           companygstno: '',
@@ -37,7 +33,6 @@ const UserCreateInvoice = () => {
           companypincode: '',
         },
         sellerdetails: {
-          sellerid: '',
           sellercompanyname: '',
           sellercompanygstno: '',
           sellercompanyaddress: '',
@@ -45,7 +40,6 @@ const UserCreateInvoice = () => {
           sellercompanystatecode: '',
         },
         buyerdetails: {
-          buyerid: '',
           buyercompanyname: '',
           buyercompanygstno: '',
           buyercompanyaddress: '',
@@ -53,25 +47,17 @@ const UserCreateInvoice = () => {
           buyercompanystatecode: '',
         },
         vehicledetails: {
-            vehicleid: '',
             drivername: '',
             drivernumber: '',
             driveraddress: '',
             driveridproof: '',
             driverlicenseno: '',
-            vehiclenumber: '',
-            vehiclemodel: '',
-            vehicleofficebranch: '',
+            vechiclenuumber: '',
+            vechiclemodel: '',
+            vechicleofficebranch: '',
         },
         consignmentdetails: {
             itemdetails: [
-              {
-                itemname: '',
-                itemquantity: 0,
-                itemhsn: '',
-                itemprice: 0,
-                itemtaxrate: '',
-              },
             ],
           },
           invoicedetails: {
@@ -79,6 +65,7 @@ const UserCreateInvoice = () => {
             ewaybillno: '',
             invoicedate: '',
             deliverynote: '',
+            termsofpayment: '',
             supplierref: '',
             otherref: '',
             buyersorder: '',
@@ -90,12 +77,15 @@ const UserCreateInvoice = () => {
             termsandcondition: '',
         },
         boardingdetails: {
+            lrno: '',
             weight: 0,
             transportationcost: 0,
             totalcost: 0,
             dateofloading: '',
             startingpoint: '',
             endingpoint: '',
+            watermark: '',
+
         },
 
       });
@@ -270,90 +260,89 @@ const UserCreateInvoice = () => {
                             driveraddress: selectedVehicle.driveraddress,
                             driveridproof: selectedVehicle.driveridproof,
                             driverlicenseno: selectedVehicle.driverlicenseno,
-                            vehiclenumber: selectedVehicle.vehiclenumber,
-                            vehiclemodel: selectedVehicle.vehiclemodel,
-                            vehicleofficebranch: selectedVehicle.vehicleofficebranch,
+                            vechiclenuumber: selectedVehicle.vechiclenuumber,
+                            vechiclemodel: selectedVehicle.vechiclemodel,
+                            vechicleofficebranch: selectedVehicle.vechicleofficebranch,
                           },
                         }));
                         setSelectedVehicle(selectedVehicle);
                       };
-                        const handleSelectChangeConsignment = (e) => {
-                            const selectedConsignmentId = e.target.value;
-                            const selectedConsignment = consignments.find((consignment) => consignment._id === selectedConsignmentId);
+                      const handleSelectChangeConsignment = (e) => {
+                        const selectedConsignmentId = e.target.value;
+                        const selectedConsignment = consignments.find(
+                          (consignment) => consignment._id === selectedConsignmentId
+                        );
                     
-                            setDataToSend((prevData) => ({
-                              ...prevData,
-                              consignmentdetails: {
-                                ...prevData.consignmentdetails,
-                                itemname: selectedConsignment.itemname,
-                                itemquantity: selectedConsignment.itemquantity,
-                                itemhsn: selectedConsignment.itemhsn,
-                                itemprice: selectedConsignment.itemprice,
-                                itemtaxrate: selectedConsignment.itemtaxrate,
-
-                              },
-                            }));
-
-                            setSelectedConsignment(selectedConsignment);
-                          };
-                          
-            const handleChange = (e, section, field) => {
-                const value = e.target.value;
-                setDataToSend((prevData) => ({
-                  ...prevData,
-                  [section]: {
-                    ...prevData[section],
-                    [field]: value,
-                  },
-                }));
-            }
+                        setDataToSend((prevData) => ({
+                          ...prevData,
+                          consignmentdetails: {
+                            ...prevData.consignmentdetails,
+                            itemdetails: prevData.consignmentdetails.itemdetails.map(
+                              (item, index) =>
+                                index === -1 ? { ...item, ...selectedConsignment } : item
+                            )
+                          }
+                        }));
+                    
+                        setSelectedConsignment(selectedConsignment);
+                      };
+                    
             const ConsignmentsAdd = () => {
-                setDataToSend((prevData) => ({
-                    ...prevData,
-                    consignmentdetails: {
-                        ...prevData.consignmentdetails,
-                        itemdetails: [
-                            ...prevData.consignmentdetails.itemdetails,
-                            {
-                                itemname: '',
-                                itemquantity: 0,
-                                itemhsn: '',
-                                itemprice: 0,
-                                itemtaxrate: '',
-                            },
-                        ],
-                    },
-                }));
+              setDataToSend((prevData) => ({
+                ...prevData,
+                consignmentdetails: {
+                  ...prevData.consignmentdetails,
+                  itemdetails: [
+                    ...prevData.consignmentdetails.itemdetails,
+                    selectedConsignment
+                  ]
+                }
+              }));
+              setSelectedConsignment(selectedConsignment);
             };
+          
             const ConsignmentsRemove = (index) => {
-                setDataToSend((prevData) => ({
-                    ...prevData,
-                    consignmentdetails: {
-                        ...prevData.consignmentdetails,
-                        itemdetails: prevData.consignmentdetails.itemdetails.filter((item, i) => i !== index),
-                    },
-                }));
+              setDataToSend((prevData) => ({
+                ...prevData,
+                consignmentdetails: {
+                  ...prevData.consignmentdetails,
+                  itemdetails: prevData.consignmentdetails.itemdetails.filter(
+                    (item, i) => i !== index
+                  )
+                }
+              }));
             };
-
-            const handleConsignmentChange = (e, index, field) => {
-                const value = e.target.value;
-                setDataToSend((prevData) => ({
-                    ...prevData,
-                    consignmentdetails: {
-                        ...prevData.consignmentdetails,
-                        itemdetails: prevData.consignmentdetails.itemdetails.map((item, i) => {
-                            if (i === index) {
-                                return {
-                                    ...item,
-                                    [field]: value,
-                                };
-                            }
-                            return item;
-                        }),
-                    },
-                }));
+          
+            const handleConsignmentChange = (e, field) => {
+              const value = e.target.value;
+              setDataToSend((prevData) => ({
+                ...prevData,
+                consignmentdetails: {
+                  ...prevData.consignmentdetails,
+                  itemdetails: prevData.consignmentdetails.itemdetails.map(
+                    (item, index) => {
+                      if (index === 0) {
+                        return {
+                          ...item,
+                          [field]: value
+                        };
+                      }
+                      return item;
+                    }
+                  )
+                }
+              }));
             };
-
+            const handleChange = (e, section, field) => {
+              const value = e.target.value;
+              setDataToSend((prevData) => ({
+                ...prevData,
+                [section]: {
+                  ...prevData[section],
+                  [field]: value,
+                },
+              }));
+          }
 
             const handleSubmit = async (e) => {
                 e.preventDefault();
@@ -383,482 +372,797 @@ const UserCreateInvoice = () => {
         }}
         >
           <UserNavbar/>
-            <form onSubmit={handleSubmit}>
-            <h1 className='user-create-invoice-title'>CREATE INVOICE</h1>
-            <div className='user-create-invoice-container'>
+
+      <h1 className='user-create-invoice-title'>CREATE INVOICE</h1>
+      <form className="user-create-invoice-form-all" onSubmit={handleSubmit}>
+      <div className='user-create-invoice-container'>
         <div className='user-create-invoice-data'>
       <h2 className='user-create-invoice-subtitle'>COMPANY DETAILS</h2>
-      <select className='user-create-invoice-select' 
-      id="companyid"
-      name='companyid'
-      value={selectedCompany.companyid}
-        onChange={handleSelectChangeCompany}
-      >
-        <option value="">Select Company ID</option>
-        {companies.map((company) => (
+      <select
+        className='user-create-invoice-select'
+          id="companyid"
+          name="companyid"
+          value={selectedCompany.companyid}
+          onChange={handleSelectChangeCompany}
+        >
+          <option value="">Select Company ID</option>
+          {companies.map((company) => (
             <option key={company._id} value={company._id}>
-                {company.companyname}
+              {company.companyname}
             </option>
-        ))}
-      </select>
+          ))}
+        </select>
       </div>
       <form className='user-create-invoice-form'>
-        <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Company Name</label>
-        <input className='user-create-invoice-form-input'
-         type="text"
-         id="companyname"
-            name='companyname'
-            value={selectedCompany.companyname}
-            onChange={(e) => handleChange(e, "companydetails", "companyname")}
-         />
-        </div>
-        <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Company Registration type</label>
+      <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'
+        htmlFor="companyname"
+        >Company Name</label>
         <input className='user-create-invoice-form-input' 
+        id="companyname"
+        name="companyname"
         type="text"
+        value={selectedCompany.companyname}
+        onChange={(e) =>
+          handleChange(e, "companydetails", "companyname")
+        }
+        />
+        </div>
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'
+        htmlFor="companyregistrationtype"
+        >Company Registration type</label>
+        <input className='user-create-invoice-form-input' 
         id="companyregistrationtype"
-            name='companyregistrationtype'
-            value={selectedCompany.companyregistrationtype}
-            onChange={(e) => handleChange(e, "companydetails", "companyregistrationtype")}
-        
+        name="companyregistrationtype"
+        type="text"
+        value={selectedCompany.companyregistrationtype}
+        onChange={(e) =>
+          handleChange(
+            e,
+            "companydetails",
+            "companyregistrationtype"
+          )
+        }
         />
         </div>
         <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Company GST No.</label>
-        <input className='user-create-invoice-form-input' type="text"
-        id='companygstno'
-        name='companygstno'
-        value={selectedCompany.companygstno}
-        onChange={(e) => handleChange(e, "companydetails", "companygstno")}      
-        />
-        </div>
-        <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Company Contact</label>
+        <label className='user-create-invoice-form-label'
+        htmlFor="companygstno"
+        >Company GST No.</label>
         <input className='user-create-invoice-form-input'
-         type="text"
-         id='companycontact'
-            name='companycontact'
-            value={selectedCompany.companycontact}
-            onChange={(e) => handleChange(e, "companydetails", "companycontact")}
-         />
+            id="companygstno"
+            name="companygstno"
+            type="text"
+            value={selectedCompany.companygstno}
+            onChange={(e) =>
+              handleChange(e, "companydetails", "companygstno")
+            }
+        />
         </div>
         <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Company country</label>
-        <input className='user-create-invoice-form-input' type="text"
-        id='companycountry'
-        name='companycountry'
+        <label className='user-create-invoice-form-label'
+        htmlFor="companycontact"
+        >Company Contact</label>
+        <input className='user-create-invoice-form-input' 
+        id="companycontact"
+        name="companycontact"
+        type="tel"
+        value={selectedCompany.companycontact}
+        onChange={(e) =>
+          handleChange(e, "companydetails", "companycontact")
+        }
+        />
+        </div>
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'
+        htmlFor="companycountry"
+        >Company country</label>
+        <input className='user-create-invoice-form-input'
+        id="companycountry"
+        name="companycountry"
+        type="text"
         value={selectedCompany.companycountry}
-        onChange={(e) => handleChange(e, "companydetails", "companycountry")}
+        onChange={(e) =>
+          handleChange(e, "companydetails", "companycountry")
+        }
         />
         </div>
         <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Company State</label>
-        <input className='user-create-invoice-form-input' type="text"
-        id='companystate'
-        name='companystate'
+        <label className='user-create-invoice-form-label'
+        htmlFor="companystate"
+        >Company State</label>
+        <input className='user-create-invoice-form-input'
+        id="companystate"
+        name="companystate"
+        type="text"
         value={selectedCompany.companystate}
-        onChange={(e) => handleChange(e, "companydetails", "companystate")}
+        onChange={(e) =>
+          handleChange(e, "companydetails", "companystate")
+        }
         />
         </div>
         <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Company Office Address</label>
-        <input className='user-create-invoice-form-input' type="text"
-        id='companyofficeaddress'
-        name='companyofficeaddress'
+        <label className='user-create-invoice-form-label'
+        htmlFor="companyofficeaddress"
+        >Company Office Address</label>
+        <input className='user-create-invoice-form-input' 
+        id="companyofficeaddress"
+        name="companyofficeaddress"
+        type="text"
         value={selectedCompany.companyofficeaddress}
-        onChange={(e) => handleChange(e, "companydetails", "companyofficeaddress")}
-        
+        onChange={(e) =>
+          handleChange(e, "companydetails", "companyofficeaddress")
+        }
         />
         </div>
         <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Company  pincode</label>
-        <input className='user-create-invoice-form-input' type="text"
-        id='companypincode'
-        name='companypincode'
+        <label className='user-create-invoice-form-label'
+        htmlFor="companypincode"
+        >Company  pincode</label>
+        <input className='user-create-invoice-form-input' 
+        id="companypincode"
+        name="companypincode"
+        type="text"
         value={selectedCompany.companypincode}
-        onChange={(e) => handleChange(e, "companydetails", "companypincode")}
+        onChange={(e) =>
+          handleChange(e, "companydetails", "companypincode")
+        }
         />
         </div>
         </form>
         <div className='user-create-invoice-data'>
       <h2 className='user-create-invoice-subtitle'>SELLER DETAILS</h2>
       <select className='user-create-invoice-select'
-      id='sellerid'
-        name='sellerid'
-        value={selectedSeller.sellerid}
-        onChange={handleSelectChangeSeller}
+      id="sellerid"
+      name="sellerid"
+      value={selectedSeller.sellerid}
+      onChange={handleSelectChangeSeller}
       >
         <option value="">Select Seller ID</option>
         {sellers.map((seller) => (
-            <option key={seller._id} value={seller._id}>
-                {seller.sellercompanyname}
-            </option>
+          <option key={seller._id} value={seller._id}>
+            {seller.sellerid}
+          </option>
         ))}
       </select>
       </div>
       <form className='user-create-invoice-form'>
         <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Seller Company Name</label>
-        <input className='user-create-invoice-form-input' type="text"
-        id='sellercompanyname'
-        name='sellercompanyname'
+        <label className='user-create-invoice-form-label'
+        htmlFor="sellercompanyname"
+        >Seller Company Name</label>
+        <input className='user-create-invoice-form-input' 
+        id="sellercompanyname"
+        name="sellercompanyname"
+        type="text"
         value={selectedSeller.sellercompanyname}
-        onChange={(e) => handleChange(e, "sellerdetails", "sellercompanyname")}
+        onChange={(e) =>
+          handleChange(e, "sellerdetails", "sellercompanyname")
+        }
         />
         </div>
         <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Seller Company GST No.</label>
-        <input className='user-create-invoice-form-input' type="text"
-        id='sellercompanygstno'
-        name='sellercompanygstno'
+        <label className='user-create-invoice-form-label'
+        htmlFor="sellercompanygstno"
+        >Seller Company GST No.</label>
+        <input className='user-create-invoice-form-input' 
+        id="sellercompanygstno"
+        name="sellercompanygstno"
+        type="text"
         value={selectedSeller.sellercompanygstno}
-        onChange={(e) => handleChange(e, "sellerdetails", "sellercompanygstno")}
+        onChange={(e) =>
+          handleChange(e, "sellerdetails", "sellercompanygstno")
+        }
         />
         </div>
         <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Seller Company Address</label>
-        <input className='user-create-invoice-form-input' type="text"
-        id='sellercompanyaddress'
-        name='sellercompanyaddress'
+        <label className='user-create-invoice-form-label'
+         htmlFor="sellercompanyaddress"
+        >Seller Company Address</label>
+        <input className='user-create-invoice-form-input' 
+        id="sellercompanyaddress"
+        name="sellercompanyaddress"
+        type="text"
         value={selectedSeller.sellercompanyaddress}
-        onChange={(e) => handleChange(e, "sellerdetails", "sellercompanyaddress")}
+        onChange={(e) =>
+          handleChange(e, "sellerdetails", "sellercompanyaddress")
+        }
         />
         </div>
         <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Seller Company State Name</label>
-        <input className='user-create-invoice-form-input' type="text"
-        id='sellercompanystatename'
-        name='sellercompanystatename'
+        <label className='user-create-invoice-form-label'
+        htmlFor="sellercompanystatename"
+        >Seller Company State Name</label>
+        <input className='user-create-invoice-form-input' 
+        id="sellercompanystatename"
+        name="sellercompanystatename"
+        type="text"
         value={selectedSeller.sellercompanystatename}
-        onChange={(e) => handleChange(e, "sellerdetails", "sellercompanystatename")}
+        onChange={(e) =>
+          handleChange(e, "sellerdetails", "sellercompanystatename")
+        }
         />
         </div>
         <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Seller Company State Code</label>    
-        <input className='user-create-invoice-form-input' type="text"
-        id='sellercompanystatecode'
-        name='sellercompanystatecode'
+        <label className='user-create-invoice-form-label'
+        htmlFor="sellercompanystatecode"
+        >Seller Company State Code</label>    
+        <input className='user-create-invoice-form-input'
+        id="sellercompanystatecode"
+        name="sellercompanystatecode"
+        type="text"
         value={selectedSeller.sellercompanystatecode}
-        onChange={(e) => handleChange(e, "sellerdetails", "sellercompanystatecode")}
+        onChange={(e) =>
+          handleChange(e, "sellerdetails", "sellercompanystatecode")
+        }
         />
         </div>
         </form>
         <div className='user-create-invoice-data'>
       <h2 className='user-create-invoice-subtitle'>BUYER DETAILS</h2>
       <select className='user-create-invoice-select'
-      id='buyerid'
-        name='buyerid'
-        value={selectedBuyer.buyerid}
-        onChange={handleSelectChangeBuyer}
+      htmlFor="buyerid"
+      id="buyerid"
+      name="buyerid"
+      value={selectedBuyer.buyerid}
+      onChange={handleSelectChangeBuyer}
       >
         <option value="">Select Buyer ID</option>
         {buyers.map((buyer) => (
-            <option key={buyer._id} value={buyer._id}>
-                {buyer.buyercompanyname}
-            </option>
+          <option key={buyer._id} value={buyer._id}>
+            {buyer.buyerid}
+          </option>
         ))}
       </select>
       </div>
       <form className='user-create-invoice-form'>
         <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Buyer Company Name</label>
-        <input className='user-create-invoice-form-input' type="text"
-        id='buyercompanyname' 
-        name='buyercompanyname'
+        <label className='user-create-invoice-form-label'
+        htmlFor="buyercompanyname"
+        >Buyer Company Name</label>
+        <input className='user-create-invoice-form-input' 
+        id="buyercompanyname"
+        name="buyercompanyname"
+        type="text"
         value={selectedBuyer.buyercompanyname}
-        onChange={(e) => handleChange(e, "buyerdetails", "buyercompanyname")}
+        onChange={(e) =>
+          handleChange(e, "buyerdetails", "buyercompanyname")
+        }
         />
         </div>
         <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Buyer Company GST No.</label>
-        <input className='user-create-invoice-form-input' type="text"
-        id='buyercompanygstno'
-        name='buyercompanygstno'
+        <label className='user-create-invoice-form-label'
+        htmlFor="buyercompanygstno"
+        >Buyer Company GST No.</label>
+        <input className='user-create-invoice-form-input' 
+        id="buyercompanygstno"
+        name="buyercompanygstno"
+        type="text"
         value={selectedBuyer.buyercompanygstno}
-        onChange={(e) => handleChange(e, "buyerdetails", "buyercompanygstno")}
+        onChange={(e) =>
+          handleChange(e, "buyerdetails", "buyercompanygstno")
+        }
         />
         </div>
         <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Buyer Company Address</label>
-        <input className='user-create-invoice-form-input' type="text"
-        id='buyercopmanyaddress'
-        name='buyercopmanyaddress'
+        <label className='user-create-invoice-form-label'
+        htmlFor="buyercompanyaddress"
+        >Buyer Company Address</label>
+        <input className='user-create-invoice-form-input' 
+        id="buyercompanyaddress"
+        name="buyercompanyaddress"
+        type="text"
         value={selectedBuyer.buyercompanyaddress}
-        onChange={(e) => handleChange(e, "buyerdetails", "buyercompanyaddress")}
+        onChange={(e) =>
+          handleChange(e, "buyerdetails", "buyercompanyaddress")
+        }
         />
         </div>
         <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Buyer Company State Name</label>
-        <input className='user-create-invoice-form-input' type="text"
-        id='buyercompanystatename'
-        name='buyercompanystatename'
+        <label className='user-create-invoice-form-label'
+        htmlFor="buyercompanystatename"
+        >Buyer Company State Name</label>
+        <input className='user-create-invoice-form-input'
+        id="buyercompanystatename"
+        name="buyercompanystatename"
+        type="text"
         value={selectedBuyer.buyercompanystatename}
-        onChange={(e) => handleChange(e, "buyerdetails", "buyercompanystatename")}
+        onChange={(e) =>
+          handleChange(e, "buyerdetails", "buyercompanystatename")
+        }
         />
         </div>
         <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Buyer Company State Code</label>
-        <input className='user-create-invoice-form-input' type="text"
-        id='buyercompanystatecode'
-        name='buyercompanystatecode'
+        <label className='user-create-invoice-form-label'
+        htmlFor="buyercompanystatecode"
+        >Buyer Company State Code</label>
+        <input className='user-create-invoice-form-input' 
+        id="buyercompanystatecode"
+        name="buyercompanystatecode"
+        type="text"
         value={selectedBuyer.buyercompanystatecode}
-        onChange={(e) => handleChange(e, "buyerdetails", "buyercompanystatecode")}
+        onChange={(e) =>
+          handleChange(e, "buyerdetails", "buyercompanystatecode")
+        }
         />
         </div>
         </form>
         <div className='user-create-invoice-data'>
       <h2 className='user-create-invoice-subtitle'>VECHICLE DETAILS</h2>
-      <select className='user-create-invoice-select'
-      id='vehicleid'
-        name='vehicleid'
-        value={selectedVehicle.vehicleid}
-        onChange={handleSelectChangeVehicle}
-      >
-        <option value="">Select Vehicle ID</option>
-        {vehicles.map((vehicle) => (
-            <option key={vehicle._id} value={vehicle._id}>
-                {vehicle.drivername}
-            </option>
-        ))}
-      </select>
+      <select
+  className='user-create-invoice-select'
+  id="vehicleid"
+  name="vehicleid"
+  value={selectedVehicle.vehicleid || ''}
+  onChange={handleSelectChangeVehicle}
+>
+  <option value=''>Select Vehicle ID</option>
+  {vehicles.map((vehicle) => (
+    <option key={vehicle._id} value={vehicle._id}>
+      {vehicle.drivername}
+    </option>
+  ))}
+</select>
+
       </div>
       <form className='user-create-invoice-form'>
         <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Driver Name</label>
-        <input className='user-create-invoice-form-input' type="text"
-        id='drivername'
-        name='drivername'
-        value={selectedVehicle.drivername}
-        onChange={(e) => handleChange(e, "vehicledetails", "drivername")}
+        <label className='user-create-invoice-form-label'
+        htmlFor="drivername"
+        >Driver Name</label>
+        <input className='user-create-invoice-form-input'
+         id="drivername"
+         name="drivername"
+         type="text"
+         value={selectedVehicle.drivername}
+         onChange={(e) =>
+           handleChange(e, "vehicledetails", "drivername")
+         }  
         />
         </div>
         <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Driver Number</label>
-        <input className='user-create-invoice-form-input' type="text"
-        id='drivernumber'
-        name='drivernumber'
+        <label className='user-create-invoice-form-label'
+        htmlFor="drivernumber"
+        >Driver Number</label>
+        <input className='user-create-invoice-form-input'
+        id="drivernumber"
+        name="drivernumber"
+        type="tel"
         value={selectedVehicle.drivernumber}
-        onChange={(e) => handleChange(e, "vehicledetails", "drivernumber")}
+        onChange={(e) =>
+          handleChange(e, "vehicledetails", "drivernumber")
+        }
         />
         </div>
         <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Driver Address</label>
-        <input className='user-create-invoice-form-input' type="text"
-        id='driveraddress'
-        name='driveraddress'
+        <label className='user-create-invoice-form-label'
+        htmlFor="driveraddress"
+        >Driver Address</label>
+        <input className='user-create-invoice-form-input' 
+        id="driveraddress"
+        name="driveraddress"
+        type="text"
         value={selectedVehicle.driveraddress}
-        onChange={(e) => handleChange(e, "vehicledetails", "driveraddress")}
+        onChange={(e) =>
+          handleChange(e, "vehicledetails", "driveraddress")
+        }
         />
         </div>
         <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Driver Id Proof</label>
-        <input className='user-create-invoice-form-input' type="text"
-        id='driveridproof'
-        name='driveridproof'
-        value={selectedVehicle.driveridproof}
-        onChange={(e) => handleChange(e, "vehicledetails", "driveridproof")}
+        <label className='user-create-invoice-form-label'
+        htmlFor="driveridproof"
+        >Driver Id Proof</label>
+        <input className='user-create-invoice-form-input'
+         id="driveridproof"
+         name="driveridproof"
+         type="text"
+         value={selectedVehicle.driveridproof}
+         onChange={(e) =>
+           handleChange(e, "vehicledetails", "driveridproof")
+         }
         />
         </div>
         <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Driver License No.</label>
-        <input className='user-create-invoice-form-input' type="text"
-        id='driverlicenseno'
-        name='driverlicenseno'
+        <label className='user-create-invoice-form-label'
+        htmlFor="driverlicenseno"
+        >Driver License No.</label>
+        <input className='user-create-invoice-form-input'
+        id="driverlicenseno"
+        name="driverlicenseno"
+        type="text"
         value={selectedVehicle.driverlicenseno}
-        onChange={(e) => handleChange(e, "vehicledetails", "driverlicenseno")}
+        onChange={(e) =>
+          handleChange(e, "vehicledetails", "driverlicenseno")
+        }
         />
         </div>
         <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Vechicle Number</label>
-        <input className='user-create-invoice-form-input' type="text"
-        id='vehiclenumber'
-        name='vehiclenumber'
-        value={selectedVehicle.vehiclenumber}
-        onChange={(e) => handleChange(e, "vehicledetails", "vehiclenumber")}
+        <label className='user-create-invoice-form-label'
+        htmlFor="vehiclenumber"
+        >Vechicle Number</label>
+        <input className='user-create-invoice-form-input' 
+        id="vechiclenuumber"
+        name="vechiclenuumber"
+        type="text"
+        value={selectedVehicle.vechiclenuumber}
+        onChange={(e) =>
+          handleChange(e, "vehicledetails", "vechiclenuumber")
+        }
         />
         </div>
         <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Vechicle Model</label>
-        <input className='user-create-invoice-form-input' type="text"
-        id='vehiclemodel'
-        name='vehiclemodel'
-        value={selectedVehicle.vehiclemodel}
-        onChange={(e) => handleChange(e, "vehicledetails", "vehiclemodel")}
+        <label className='user-create-invoice-form-label'
+        htmlFor="vehiclemodel"
+        >Vechicle Model</label>
+        <input className='user-create-invoice-form-input'
+        id="vechiclemodel"
+        name="vechiclemodel"
+        type="text"
+        value={selectedVehicle.vechiclemodel}
+        onChange={(e) =>
+          handleChange(e, "vehicledetails", "vechiclemodel")
+        }
         />
         </div>
         <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Vechicle office branch</label>
-        <input className='user-create-invoice-form-input' type="text"
-        id='vehicleofficebranch'
-        name='vehicleofficebranch'
-        value={selectedVehicle.vehicleofficebranch}
-        onChange={(e) => handleChange(e, "vehicledetails", "vehicleofficebranch")}
+        <label className='user-create-invoice-form-label'
+        htmlFor="vehicleofficebranch"
+        >Vechicle office branch</label>
+        <input className='user-create-invoice-form-input'  
+        id="vechicleofficebranch"
+        name="vechicleofficebranch"
+        type="text"
+        value={selectedVehicle.vechicleofficebranch}
+        onChange={(e) =>
+          handleChange(e, "vehicledetails", "vechicleofficebranch")
+        }
         />
         </div>
         </form>
         <div className='user-create-invoice-data'>
       <h2 className='user-create-invoice-subtitle'>CONSIGNMENT DETAILS</h2>
       <select className='user-create-invoice-select'
-      id='consignmentid'
-        name='consignmentid'
-        value={selectedConsignment.consignmentid}
-        onChange={handleSelectChangeConsignment}
+       id="consignmentid"
+       name="consignmentid"
+       value={selectedConsignment.consignmentid}
+       onChange={handleSelectChangeConsignment}
       >
         <option value="">Select Consignment ID</option>
+          {consignments.map((consignment) => (
+            <option key={consignment._id} value={consignment._id}>
+              {consignment.itemname}
+            </option>
+          ))}
       </select>
       </div>
-      <table className='user-create-invoice-table-consigment'>
-        <tr className='user-create-invoice-table-row-head'>
-          <th className='user-create-invoice-table-row-th'>ITEM NAME</th>
-          <th className='user-create-invoice-table-row-th'>ITEM QUANTITY</th>
-          <th className='user-create-invoice-table-row-th'>ITEM HSN</th>
-          <th className='user-create-invoice-table-row-th'>ITEM PRICE</th>
-          <th className='user-create-invoice-table-row-th'>ITEM TAX RATE</th>
-          <th className='user-create-invoice-table-row-th'>ACTION</th>
-        </tr>
-        <br />
-        <tr className='user-create-invoice-table-row-body'>
-          <td><input className='user-create-invoice-table-consigment-input' type="text"/></td>
-          <td><input className='user-create-invoice-table-consigment-input' type="number"/></td>
-          <td><input className='user-create-invoice-table-consigment-input' type="text"/></td>
-          <td><input className='user-create-invoice-table-consigment-input' type="number"/></td>
-          <td><input className='user-create-invoice-table-consigment-input' type="text"/></td>
-          <td>
-            <button className='user-create-invoice-table-consigment-button'>
-            <img className='user-create-invoice-table-consigment-icon' src={A} alt='add'/>
-            </button>
-          </td>
-        </tr>
-        <br />
-        <tr className='user-create-invoice-table-row-body'>
-          <td className='user-create-invoice-table-consigment-value'>srcap</td>
-          <td className='user-create-invoice-table-consigment-value'>450</td>
-          <td className='user-create-invoice-table-consigment-value'>087099</td>
-          <td className='user-create-invoice-table-consigment-value'>907980</td>
-          <td className='user-create-invoice-table-consigment-value'>18</td>
-          <td>
-          <button className='user-create-invoice-table-consigment-button'>
-            <img className='user-create-invoice-table-consigment-icon-low' src={E} alt='edit'/>
-            </button>
-            <button className='user-create-invoice-table-consigment-button'>
-            <img className='user-create-invoice-table-consigment-icon-low' src={D} alt='delete'/>
-            </button>
-          </td>
-        </tr>
-      </table>
+      <table className="user-create-invoice-table-consigment">
+                  <thead className="user-create-invoice-table-thead">
+                    <tr className="user-create-invoice-table-row-head">
+                      <th className="user-create-invoice-table-row-th">
+                        Item Name
+                      </th>
+                      <th className="user-create-invoice-table-row-th">
+                        Item Quantity
+                      </th>
+                      <th className="user-create-invoice-table-row-th">
+                        Item HSN
+                      </th>
+                      <th className="user-create-invoice-table-row-th">
+                        Item Price
+                      </th>
+                      <th className="user-create-invoice-table-row-th">
+                        Item Tax Rate
+                      </th>
+                      <th className="user-create-invoice-table-row-th">
+                        Action
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="user-create-invoice-table-tbody">
+                    <tr className="user-create-invoice-table-row-body">
+                      <td className="user-create-invoice-table-row-body-td">
+                        <input
+                        className='user-create-invoice-table-consigment-input'
+                          type="text"
+                          disabled
+                          value={selectedConsignment.itemname}
+                          onChange={(e) =>
+                            handleConsignmentChange(e, "itemname")
+                          }
+                        />
+                      </td>
+                      <td className="user-create-invoice-table-row-body-td">
+                        <input
+                         className='user-create-invoice-table-consigment-input'
+                          type="number"
+                          disabled
+                          value={selectedConsignment.itemquantity}
+                          onChange={(e) =>
+                            handleConsignmentChange(e, "itemquantity")
+                          }
+                        />
+                      </td>
+                      <td className="user-create-invoice-table-row-body-td">
+                        <input
+                         className='user-create-invoice-table-consigment-input'
+                          type="text"
+                          disabled
+                          value={selectedConsignment.itemhsn}
+                          onChange={(e) =>
+                            handleConsignmentChange(e, "itemhsn")
+                          }
+                        />
+                      </td>
+                      <td className="user-create-invoice-table-row-body-td">
+                        <input
+                         className='user-create-invoice-table-consigment-input'
+                          type="number"
+                          disabled
+                          value={selectedConsignment.itemprice}
+                          onChange={(e) =>
+                            handleConsignmentChange(e, "itemprice")
+                          }
+                        />
+                      </td>
+                      <td className="user-create-invoice-table-row-body-td">
+                        <input
+                         className='user-create-invoice-table-consigment-input'
+                          type="number"
+                          disabled
+                          value={selectedConsignment.itemtaxrate}
+                          onChange={(e) =>
+                            handleConsignmentChange(e, "itemtaxrate")
+                          }
+                        />
+                      </td>
+                      <td className="user-create-invoice-table-row-body-td">
+                        <button type="button" 
+                        className='user-create-invoice-table-consigment-button'
+                        onClick={() => ConsignmentsAdd()}>
+                        <img className='user-create-invoice-table-consigment-icon' src={A} alt='add'/>
+                        </button>
+                      </td>
+                    </tr>
+                    <tr className='user-create-invoice-table-row-subtitle'>
+                    <h3 className='user-create-invoice-subtitle-table'>ADDED ITEMS</h3>
+                      </tr>
+                    {dataToSend.consignmentdetails.itemdetails.map(
+                      (item, index) => (
+                        <tr
+                          key={index}
+                          className="user-create-invoice-table-row-body"
+                        >
+                          <td className="user-create-invoice-table-consigment-value">
+                            {item.itemname}
+                          </td>
+                          <td className="user-create-invoice-table-consigment-value">
+                            {item.itemquantity}
+                          </td>
+                          <td className="user-create-invoice-table-consigment-value">
+                            {item.itemhsn}
+                          </td>
+                          <td className="user-create-invoice-table-consigment-value">
+                            {item.itemprice}
+                          </td>
+                          <td className="user-create-invoice-table-consigment-value">
+                            {item.itemtaxrate}
+                          </td>
+                          <td className="user-create-invoice-table-consigment-value">
+                            <button
+                            className='user-create-invoice-table-consigment-button'
+                              type="button"
+                              onClick={() => ConsignmentsRemove(index)}
+                            >
+                              <img className='user-create-invoice-table-consigment-icon-low' src={D} alt='delete'/>
+                            </button>
+                          </td>
+                        </tr>
+                      )
+                    )}
+                  </tbody>
+                </table>
       <div className='user-create-invoice-data'>
       <h2 className='user-create-invoice-subtitle'>INVOICE DETAILS</h2>
       </div>
       <form className='user-create-invoice-form'>
-      <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Invoice No.</label>
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'
+        htmlFor="invoiceno"
+        >Invoice Number</label>
+
+        <input className='user-create-invoice-form-input' 
+         id="invoiceno"
+         name="invoiceno"
+         type="text"
+         onChange={(e) =>
+           handleChange(e, "invoicedetails", "invoiceno")
+         }
+        />
+        </div>
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'
+        htmlFor="ewaybillno"
+        >E Way Bill No</label>
+        <input className='user-create-invoice-form-input' 
+        id="ewaybillno"
+        name="ewaybillno"
+        type="text"
+        value={selectedConsignment.ewaybillno}
+        onChange={(e) =>
+          handleChange(e, "invoicedetails", "ewaybillno")
+        }
+        />
+        </div>
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'
+        htmlFor="invoicedate">
+        Invoice Date</label>
+        <br />
+        <input className='user-create-invoice-form-input' 
+         id="invoicedate"
+         name="invoicedate"
+         type="date"
+         value={selectedConsignment.invoicedate}
+         onChange={(e) =>
+           handleChange(e, "invoicedetails", "invoicedate")
+         }
+        />
+        </div>
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'
+        htmlFor="deliverynote"
+        >Delivery Note</label>
+        <input className='user-create-invoice-form-input' 
+        id="deliverynote"
+        name="deliverynote"
+        type="text"
+        value={selectedConsignment.deliverynote}
+        onChange={(e) =>
+          handleChange(e, "invoicedetails", "deliverynote")
+        }
+        />
+        </div>
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'
+        htmlFor='termsofpayment'
+        >Terms of Payment</label>
+        <input className='user-create-invoice-form-input' 
+        id="termsofpayment"
+        name="termsofpayment"
+        type="text"
+        value={selectedConsignment.termsofpayment}
+        onChange={(e) =>
+          handleChange(e, "invoicedetails", "termsofpayment")
+        }
+        />
+        </div>
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'
+        htmlFor="supplierref"
+        >Supplier Ref.</label>
+        <input className='user-create-invoice-form-input' 
+        id="supplierref"
+        name="supplierref"
+        type="text"
+        value={selectedConsignment.supplierref}
+        onChange={(e) =>
+          handleChange(e, "invoicedetails", "supplierref")
+        }
+        />
+        </div>
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'
+        htmlFor="otherref"
+        >Other Ref.</label>
+        <br />
+        <input className='user-create-invoice-form-input' 
+        id="otherref"
+        name="otherref"
+        type="text"
+        value={selectedConsignment.otherref}
+        onChange={(e) =>
+          handleChange(e, "invoicedetails", "otherref")
+        }
+        />
+        </div>
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'
+        htmlFor="buyersorder"
+        >Buyer's Order No.</label>
+        <input className='user-create-invoice-form-input' 
+        id="buyersorder"
+        name="buyersorder"
+        type="text"
+        value={selectedConsignment.buyersorder}
+        onChange={(e) =>
+          handleChange(e, "invoicedetails", "buyersorder")
+        }
+        />
+        </div>
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'
+        htmlFor="ordereddate"
+        >Buyer's Order Date</label>
+        <input className='user-create-invoice-form-input' 
+        id="ordereddate"
+        name="ordereddate"
+        type="date"
+        value={selectedConsignment.ordereddate}
+        onChange={(e) =>
+          handleChange(e, "invoicedetails", "ordereddate")
+        }
+        />
+        </div>
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'
+        htmlFor="dispatchdocumentno"
+        >Dispatch Document No.</label>
+        <input className='user-create-invoice-form-input' 
+        id="dispatchdocumentno"
+        name="dispatchdocumentno"
+        type="text"
+        value={selectedConsignment.dispatchdocumentno}
+        onChange={(e) =>
+          handleChange(e, "invoicedetails", "dispatchdocumentno")
+        }
+        />
+        </div>
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'
+        htmlFor="deliverynotedate"
+        >Delivery Note Date</label>
+        <input className='user-create-invoice-form-input' 
+         id="deliverynotedate"
+         name="deliverynotedate"
+         type="date"
+         value={selectedConsignment.deliverynotedate}
+         onChange={(e) =>
+           handleChange(e, "invoicedetails", "deliverynotedate")
+         }
+        />
+        </div>
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'
+        htmlFor="dispatchthrough"
+        >Dispatch Through</label>
+        <input className='user-create-invoice-form-input' 
+        id="dispatchthrough"
+        name="dispatchthrough"
+        type="text"
+        value={selectedConsignment.dispatchthrough}
+        onChange={(e) =>
+          handleChange(e, "invoicedetails", "dispatchthrough")
+        }
+        />
+        </div>
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'
+        htmlFor="destination"
+        >Destination</label>
         <br />
         <input className='user-create-invoice-form-input'
-         type="text"
-         id='invoiceno'
-            name='invoiceno'
-            onChange={(e) => handleChange(e, "invoicedetails", "invoiceno")}
-         />
-        </div>
-        <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Invoice Date</label>
-        <br />
-        <input className='user-create-invoice-form-input' type="date"
-        id='invoicedate'
-        name='invoicedate'
-        onChange={(e) => handleChange(e, "invoicedetails", "invoicedate")}
+        id="destination"
+        name="destination"
+        type="text"
+        value={selectedConsignment.destination}
+        onChange={(e) =>
+          handleChange(e, "invoicedetails", "destination")
+        }
         />
         </div>
         <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>E Way Bill No</label>
-        <input className='user-create-invoice-form-input' type="text"
-        id='ewaybillno'
-        name='ewaybillno'
-        onChange={(e) => handleChange(e, "invoicedetails", "ewaybillno")}
-
-        />
-        </div>
-        <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Delivery Note</label>
-        <input className='user-create-invoice-form-input' type="text"
-        id='deliverynote'
-        name='deliverynote'
-        onChange={(e) => handleChange(e, "invoicedetails", "deliverynote")}
-        />
-        </div>
-        <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Supplier Ref.</label>
-        <input className='user-create-invoice-form-input' type="text"
-        id='supplierref'
-        name='supplierref'
-        onChange={(e) => handleChange(e, "invoicedetails", "supplierref")}
-        />
-        </div>
-        <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Other Ref.</label>
-        <br />
-        <input className='user-create-invoice-form-input' type="text"
-        id='otherref'
-        name='otherref'
-        onChange={(e) => handleChange(e, "invoicedetails", "otherref")}
-        />
-        </div>
-        <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Buyer's Order No.</label>
-        <input className='user-create-invoice-form-input' type="text"
-        id='buyersorder'
-        name='buyersorder'
-        onChange={(e) => handleChange(e, "invoicedetails", "buyersorder")}
-        />
-        </div>
-        <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Buyer's Order Date</label>
-        <input className='user-create-invoice-form-input' type="date"
-        id='ordereddate'
-        name='ordereddate'
-        onChange={(e) => handleChange(e, "invoicedetails", "ordereddate")}
-        />
-        </div>
-        <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Dispatch Document No.</label>
-        <input className='user-create-invoice-form-input' type="text"
-        id='dispatchdocumentno'
-        name='dispatchdocumentno'
-        onChange={(e) => handleChange(e, "invoicedetails", "dispatchdocumentno")}
-        />
-        </div>
-        <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Delivery Note Date</label>
-        <input className='user-create-invoice-form-input' type="date"
-        id='deliverynotedate'
-        name='deliverynotedate'
-        onChange={(e) => handleChange(e, "invoicedetails", "deliverynotedate")}
-        />
-        </div>
-        <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Dispatch Through</label>
-        <input className='user-create-invoice-form-input' type="text"
-        id='dispatchthrough'
-        name='dispatchthrough'
-        onChange={(e) => handleChange(e, "invoicedetails", "dispatchthrough")}
-        />
-        </div>
-        <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Destination</label>
-        <br />
-        <input className='user-create-invoice-form-input' type="text"
-        id='destination'
-        name='destination'
-        onChange={(e) => handleChange(e, "invoicedetails", "destination")}
-        />
-        </div>
-        <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Terms and Conditions</label>
-        <input className='user-create-invoice-form-input' type="text"
-        id='termsandcondition'
-        name='termsandcondition'
-        onChange={(e) => handleChange(e, "invoicedetails", "termsandcondition")}
+        <label className='user-create-invoice-form-label'
+        htmlFor="termsandcondition"
+        >Terms and Conditions</label>
+        <input className='user-create-invoice-form-input' 
+        id="termsandcondition"
+        name="termsandcondition"
+        type="text"
+        value={selectedConsignment.termsandcondition}
+        onChange={(e) =>
+          handleChange(e, "invoicedetails", "termsandcondition")
+        }
         />
         </div>
         </form>
@@ -866,64 +1170,130 @@ const UserCreateInvoice = () => {
       <h2 className='user-create-invoice-subtitle'>BOARDING DETAILS</h2>
       </div>
       <form className='user-create-invoice-form'>
-        <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Weight of Load</label>
-        <input className='user-create-invoice-form-input' type="Number"
-        id='weight'
-        name='weight'
-        onChange={(e) => handleChange(e, "boardingdetails", "weight")}
-        />
-        </div>
-        <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Transportation Cost</label>
-        <input className='user-create-invoice-form-input' type="number"
-        id='transportationcost'
-        name='transportationcost'
-        onChange={(e) => handleChange(e, "boardingdetails", "transportationcost")}
-        />
-        </div>
-        <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Total Transportation Cost</label>
-        <input className='user-create-invoice-form-input' type="number"
-        id='totalcost'
-        name='totalcost'
-        onChange={(e) => handleChange(e, "boardingdetails", "totalcost")}
-        />
-        </div>
-        <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Date of Loading</label>
-        <input className='user-create-invoice-form-input' type="date"
-        id='dateofloading'
-        name='dateofloading'
-        onChange={(e) => handleChange(e, "boardingdetails", "dateofloading")}
-        />
-        </div>
-        <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Starting Point</label>
-        <input className='user-create-invoice-form-input' type="text"
-        id='startingpoint'
-        name='startingpoint'
-        onChange={(e) => handleChange(e, "boardingdetails", "startingpoint")}
-        />
-        </div>
-        <div className='user-create-invoice-form-div'>
-        <label className='user-create-invoice-form-label'>Ending Point</label>
+      <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'
+        htmlFor="lrno"
+        >LR Number</label>
         <br />
-        <input className='user-create-invoice-form-input' type="text"
-        id='endingpoint'
-        name='endingpoint'
-        onChange={(e) => handleChange(e, "boardingdetails", "endingpoint")}
+        <input className='user-create-invoice-form-input' 
+         id="lrno"
+         name="lrno"
+         type="text"
+         value={selectedConsignment.lrno}
+         onChange={(e) =>
+           handleChange(e, "boardingdetails", "lrno")
+         }
+        />
+        </div>
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'
+        htmlFor="weight"
+        >Weight of Load</label>
+        <input className='user-create-invoice-form-input'
+         id="weight"
+         name="weight"
+         type="number"
+         value={selectedConsignment.weight}
+         onChange={(e) =>
+           handleChange(e, "boardingdetails", "weight")
+         }
+        />
+        </div>
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'
+        htmlFor="transportationcost"
+        >Transportation Cost</label>
+        <input className='user-create-invoice-form-input' 
+        id="transportationcost"
+        name="transportationcost"
+        type="number"
+        value={selectedConsignment.transportationcost}
+        onChange={(e) =>
+          handleChange(e, "boardingdetails", "transportationcost")
+        }
+        />
+        </div>
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'
+        htmlFor="totalcost"
+        >Total Transportation Cost</label>
+        <input className='user-create-invoice-form-input' 
+        id="totalcost"
+        name="totalcost"
+        type="number"
+        value={selectedConsignment.totalcost}
+        onChange={(e) =>
+          handleChange(e, "boardingdetails", "totalcost")
+        }
+        />
+        </div>
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'
+        htmlFor="dateofloading"
+        >Date of Loading</label>
+        <input className='user-create-invoice-form-input' 
+        id="dateofloading"
+        name="dateofloading"
+        type="date"
+        value={selectedConsignment.dateofloading}
+        onChange={(e) =>
+          handleChange(e, "boardingdetails", "dateofloading")
+        }
+        />
+        </div>
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'
+        htmlFor="startingpoint"
+        >Starting Point</label>
+        <input className='user-create-invoice-form-input' 
+        id="startingpoint"
+        name="startingpoint"
+        type="text"
+        value={selectedConsignment.startingpoint}
+        onChange={(e) =>
+          handleChange(e, "boardingdetails", "startingpoint")
+        }
+        />
+        </div>
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'
+        htmlFor="endingpoint"
+        >Ending Point</label>
+        <br />
+        <input className='user-create-invoice-form-input'
+         id="endingpoint"
+         name="endingpoint"
+         type="text"
+         value={selectedConsignment.endingpoint}
+         onChange={(e) =>
+           handleChange(e, "boardingdetails", "endingpoint")
+         }
+        />
+        </div>
+        <div className='user-create-invoice-form-div'>
+        <label className='user-create-invoice-form-label'
+        htmlFor="watermark"
+        >Water Mark</label>
+        <br />
+        <input className='user-create-invoice-form-input' 
+         id="watermark"
+         name="watermark"
+         type="text"
+         value={selectedConsignment.watermark}
+         onChange={(e) =>
+           handleChange(e, "boardingdetails", "watermark")
+         }
         />
         </div>
         </form>
         <div className='user-create-invoice-data-submit'>
-      <button className='user-create-invoice-button'
-      >CREATE INVOICE</button>
+      <button className='user-create-invoice-button'>CREATE INVOICE</button>
     </div>
+    
     </div>
     </form>
     </div>
-    )
+  )
 }
 
-export default UserCreateInvoice;
+export default UserCreateInvoice

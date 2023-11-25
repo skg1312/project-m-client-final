@@ -169,3 +169,135 @@
     color: #ada9a9;
     cursor: not-allowed;
 }
+
+/* Mobile styles - 768px width and below */
+@media only screen and (max-width: 1024px) {
+  .admin-seller-manage {
+    display: grid;
+    grid-template-columns: 1fr;
+    text-align: center;
+    align-items: center;
+  }
+  .admin-logout-button-nav {
+    margin-top: 10px;
+    margin-left: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    grid-gap: 15px;
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .admin-seller-manage-data {
+    margin-left: 50px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    margin-right: 50px;
+    border-radius: 15px;
+    border: 2px solid #D2D2D2;
+  }
+  .admin-seller-manage-form {
+    margin-left: 50px;
+    margin-top: 100px;
+    margin-right: 50px;
+    margin-bottom: 100px;
+    border-radius: 15px;
+    border: 2px solid #D2D2D2;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .admin-seller-manage-data-title {
+    font-family: Calibri;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 38px;
+    letter-spacing: -0.578px;
+    text-align: left;
+    padding-left: 50px;
+  }
+  .admin-seller-manage-data-table-head {
+    color: #1A1A1A;
+    font-family: Calibri;
+    font-size: 15px;
+    font-style: bold;
+  }
+  .admin-seller-manage-data-table-body {
+    color: #767676;
+    font-family: Calibri;
+    font-size: 12px;
+    font-style: bold;
+    font-weight: 400;
+    line-height: 28px;
+    letter-spacing: -0.289px;
+  }
+  .admin-user-manage-form-input {
+    border-radius: 6px;
+    border: 1px solid #ededed;
+    background: #EDEDED;
+    height: 35px;
+    width: 75%;
+    margin-bottom: 20px;
+    color: var(--color-grey-60, #767676);
+    font-family: Calibri;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 26px;
+    letter-spacing: -0.289px;
+  }
+  .admin-seller-manage-form-input {
+    border-radius: 6px;
+    border: 1px solid #ededed;
+    background: #EDEDED;
+    height: 35px;
+    width: 75%;
+    margin-bottom: 20px;
+    color: #767676;
+    font-family: Calibri;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 26px;
+    letter-spacing: -0.289px;
+  }
+  .admin-seller-manage-form-title {
+    font-family: Calibri;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 38px;
+    letter-spacing: -0.578px;
+    text-align: left;
+    padding-left: 50px;
+  }
+  .admin-seller-manage-form-input-checkbox-label {
+    color: #1A1A1A;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Calibri;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 26px;
+    letter-spacing: -0.289px;
+  }
+  .admin-seller-manage-form-button {
+    color: #FEFEFE;
+    text-align: center;
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: Calibri;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 26px;
+    letter-spacing: -0.289px;
+    width: 170px;
+    height: 45px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    border: 1px solid #5925DC;
+    background: #5925DC;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+}

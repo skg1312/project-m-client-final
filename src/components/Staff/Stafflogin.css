@@ -120,3 +120,119 @@
     text-transform: uppercase;
     margin-left: 20px;
 }
+
+@media only screen and (max-width: 768px) {
+    .staff-login {
+        width: 350px;
+        height: 350px;
+        border-radius: 40px;
+        background: #FFF;   
+    } 
+    .staff-login-container{
+        display: grid;
+        grid-template-columns: 1fr;
+        width: 350px;
+        height: 532px;
+        border-radius: 40px;
+        background: linear-gradient(142deg, rgba(89, 37, 220, 0.58) 28.73%, rgba(37, 209, 220, 0.35) 99.55%);
+    }
+    .staff-login-head{
+        color: #030303;
+        font-family: "Poppins-SemiBold", Helvetica;
+        font-size: 20px;
+        font-weight: 600;
+        letter-spacing: 1.2px;
+        line-height: normal;
+        text-align: center;
+    }
+    .staff-label {
+        color: #000000;
+        font-family: "Poppins-Medium", Helvetica;
+        font-size: 15px;
+        font-weight: 500;
+        letter-spacing: 0.48px;
+        line-height: normal;
+        text-align: left;
+        margin-left: 25px;
+    }
+    .staff-login-input {
+        width: 295.872px;
+        height: 40.746px;
+        flex-shrink: 0;
+        border-radius: 12px;
+        border: 1px solid rgba(0, 0, 0, 0.75);
+        background: rgba(196, 196, 196, 0.00);
+        box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
+        color: #636364;
+        text-align: center;
+        font-family: Poppins;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 300;
+        line-height: normal;
+        letter-spacing: 0.42px;
+        margin-left: 25px;
+    }
+    .staff-login-content-head {
+        color: #fff;
+        font-family: "Poppins-Black", Helvetica;
+        font-size: 20px;
+        font-weight: 500;
+        text-transform: uppercase;
+    }
+    .staff-login-content-body {
+        color: #000;
+        font-family: "Poppins-Medium", Helvetica;
+        font-size: 20px;
+        font-weight: 500;
+        text-transform: uppercase;
+    }
+    .staff-login-button {
+        margin-top: 20px;
+        margin-left: 115px;
+    }
+    .staff-login-button-value {
+        background-color: #5925DC;
+        border-radius: 6px;
+        height: 45px;
+        position: relative;
+        width: 134px;
+        color: #FFF;
+        text-align: center;
+        font-family: Poppins;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        letter-spacing: 0.72px;
+    }
+    .staff-login-not-req {
+        color: #000;
+        font-family: "Poppins-Medium", Helvetica;
+        font-size: 15px;
+        font-weight: 500;
+        text-transform: uppercase;
+        text-align: center;
+        margin-right: 13px;
+    }
+    .staff-a {
+        text-decoration: none;
+        color: #5925DC;
+        font-family: "Poppins-Medium", Helvetica;
+        font-size: 15px;
+        font-weight: 500;
+        text-transform: uppercase;
+        margin-left: 20px;
+    }
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1024px) { 
+    .staff-login-container{
+        display: grid;
+        grid-template-columns: 1fr;
+        width: 596px;
+        height: 732px;
+        border-radius: 40px;
+        background: linear-gradient(142deg, rgba(89, 37, 220, 0.58) 28.73%, rgba(37, 209, 220, 0.35) 99.55%);
+    }
+}

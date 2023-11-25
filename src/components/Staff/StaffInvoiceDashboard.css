@@ -11,8 +11,8 @@
 .admin-in-dashboard-buttons-row{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    margin-left: 100px;
-    margin-right: 100px;
+    margin-left: 50px;
+    margin-right: 50px;
 }
 .admin-in-dashboard-button{
     width: 300px;
@@ -20,7 +20,7 @@
     border-radius: 15px;
     border: 2px solid #D2D2D2;
     background: none;
-    margin: auto;
+    margin: 30px auto;
     margin-top: 50px;
     margin-bottom: 50px;
     color: #1A1A1A;
@@ -53,4 +53,11 @@
     background-color: #fff;
     color: #000;
     padding-top: 10px;
+}
+
+/* Mobile styles - 768px width and below */
+@media only screen and (max-width: 900px) {
+    .admin-in-dashboard-buttons-row{
+        grid-template-columns: 1fr;
+    }
 }

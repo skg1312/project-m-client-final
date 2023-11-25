@@ -19,6 +19,18 @@
     text-align: left;
     margin-left: 5%;
 }
+.admin-create-invoice-subtitle-table{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+    color: #1A1A1A;
+    text-align: left;
+}
+.admin-create-invoice-subtitle-table{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20px;
+    color: #1A1A1A;
+    text-align: left;
+}
 .admin-create-invoice-select{
     margin-top: 2%;
     border-radius: 6px;
@@ -104,6 +116,13 @@
     font-weight: bold;
     text-align: center;
 }
+.admin-create-invoice-table-row-body{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
 .admin-create-invoice-table-consigment-button{
     border: none;
     background: none;

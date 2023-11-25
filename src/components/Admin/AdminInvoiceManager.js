@@ -88,7 +88,7 @@ function AdminInvoiceManagement() {
                                     <tr key={invoice._id} className='invoice-management-data-body-table-row'>
                                         <td className='invoice-management-data-body-table-data'>{invoice.invoicedetails.invoiceno}</td>
                                         <td className='invoice-management-data-body-table-data'>{invoice.companydetails.companyname}</td>
-                                        <td className='invoice-management-data-body-table-data'>{invoice.invoicedetails.invoicedate.substring(0,10)}</td>
+                                        <td className='invoice-management-data-body-table-data'>{invoice.invoicedetails.invoicedate.format(DD/MM/YYYY)}</td>
                                         <td className='invoice-management-data-body-table-data'>{invoice.vehicledetails.vehiclenumber}</td>
                                         <td className='invoice-management-data-body-table-data'>{invoice.boardingdetails.totalcost}</td>
                                         <td className='invoice-management-data-body-table-data'>

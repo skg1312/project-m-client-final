@@ -192,6 +192,16 @@ function AdminCompanyManage() {
           {selectedCompanyId ? 'UPDATE COMPANY' : 'ADD COMPANY'}
         </h1>
         <form className='admin-company-manager-form-form' onSubmit={handleFormSubmit}>
+        <input
+    type='text'
+    required
+    className='admin-company-manager-form-input-high'
+    placeholder='Company ID'
+    value={selectedCompanyData.companyid || ''}
+    onChange={(e) =>
+      setSelectedCompanyData({ ...selectedCompanyData, companyid: e.target.value })
+    }
+  />
   <input
     type='text'
     required

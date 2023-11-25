@@ -88,7 +88,15 @@ function AdminInvoiceManagement() {
                                     <tr key={invoice._id} className='invoice-management-data-body-table-row'>
                                         <td className='invoice-management-data-body-table-data'>{invoice.invoicedetails.invoiceno}</td>
                                         <td className='invoice-management-data-body-table-data'>{invoice.companydetails.companyname}</td>
-                                        <td className='invoice-management-data-body-table-data'>{invoice.invoicedetails.invoicedate.format(DD/MM/YYYY)}</td>
+                                        <td className='invoice-management-data-body-table-data'>
+  {invoice.invoicedetails.invoicedate ?
+    new Date(invoice.invoicedetails.invoicedate).toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    }) : 'N/A'}
+</td>
+
                                         <td className='invoice-management-data-body-table-data'>{invoice.vehicledetails.vehiclenumber}</td>
                                         <td className='invoice-management-data-body-table-data'>{invoice.boardingdetails.totalcost}</td>
                                         <td className='invoice-management-data-body-table-data'>

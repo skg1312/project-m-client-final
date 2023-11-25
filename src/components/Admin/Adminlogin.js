@@ -10,25 +10,22 @@ function AdminLogin() {
   const [Email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [userlist, setUserlist] = useState(true);
-
+  
   const login = (event) => {
-    let matchFound = false;
-    auth.adminlist.forEach((item) => {
-      if (item.adminemail === Email && item.adminpassword === password) {
-        matchFound = true;
-        return;
-      }
+    const matchFound = auth.adminlist && auth.adminlist.some((item) => {
+      return item.adminemail === Email && item.adminpassword === password;
     });
-
+  
     if (matchFound) {
       auth.adminlogin(Email, password);
       navigate('/admindashboard');
     } else {
       setUserlist(false);
     }
+  
     event.preventDefault();
   };
-
+  
   
   return (
     <div

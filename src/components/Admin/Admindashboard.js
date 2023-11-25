@@ -18,7 +18,7 @@ function Admindashboard() {
 
   const handleLogout = () => {
     auth.adminlogout();
-  }
+}
   return (
     <div
       style={{

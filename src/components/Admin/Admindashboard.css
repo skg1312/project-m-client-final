@@ -1,7 +1,7 @@
 
 .admin-dashboard-title {
     color: #1A1A1A;
-    font-family: Calibri;
+    font-family: Arial;
     font-size: 30px;
     font-style: normal;
     font-weight: 600;
@@ -22,7 +22,7 @@
     color: #1A1A1A;
     margin: auto;
     margin-bottom: 20px;
-    font-family: Calibri;
+    font-family: Arial;
     font-size: 25px;
     font-style: normal;
     font-weight: 500;
@@ -56,9 +56,30 @@
     width: 200px;
     border-radius: 15px;
     border: 2px solid #D2D2D2;
-    font-family: Calibri;
+    font-family: Arial;
     font-size: 24px;
     background-color: #fff;
     color: #000;
     padding-top: 10px;
+}
+
+/* Tablet styles - 1600px width and below */
+@media only screen and (max-width: 1600px) {
+    .admin-dashboard-buttons-row {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+/* Mobile styles - 1200px width and below */
+@media only screen and (max-width: 1200px) {
+    .admin-dashboard-buttons-row {
+        grid-template-columns: 1fr 1fr ;
+    }
+}
+
+/* Mobile styles - 768px width and below */
+@media only screen and (max-width: 768px) {
+    .admin-dashboard-buttons-row {
+        grid-template-columns: 1fr;
+    }
 }

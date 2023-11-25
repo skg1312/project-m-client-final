@@ -47,37 +47,35 @@ function StaffDashboard() {
               <button className='staff-dashboard-button' onClick={() => navigate('/staffgenrep')}>
                 <img src={gr} alt='gr' className='staff-dashboard-button-icon' />
                 GENERATE REPORTS
-                </button>
+              </button>
               <button className='staff-dashboard-button' onClick={() => navigate('/staffsellman')}>
                 <img src={ms} alt='mu' className='staff-dashboard-button-icon' />
                 MANAGE SELLERS
-                </button>
+              </button>
               <button className='staff-dashboard-button' onClick={() => navigate('/staffbuyman')}>
                 <img src={ms} alt='ms' className='staff-dashboard-button-icon' />
                 MANAGE BUYERS
-                </button>
-                <button className='staff-dashboard-button' onClick={() => navigate('/staffconman')}>
+              </button>
+              <button className='staff-dashboard-button' onClick={() => navigate('/staffconman')}>
                 <img src={mu} alt='ms' className='staff-dashboard-button-icon' />
                 MANAGE COMPANY
-                </button>
-            </div>
-            <div className='staff-dashboard-buttons-row'>
+              </button>
               <button className='staff-dashboard-button' onClick={() => navigate('/staffvecman')}>
                 <img src={vs} alt='mv' className='staff-dashboard-button-icon' />
                 MANAGE VECHICLES
-                </button>
+              </button>
               <button className='staff-dashboard-button' onClick={() => navigate('/staffinvdash')}>
                 <img src={mi} alt='mi' className='staff-dashboard-button-icon' />
                 MANAGE INVOICE
-                </button>
+              </button>
               <button className='staff-dashboard-button' onClick={() => navigate('/staffcomman')}>
                 <img src={mc} alt='mc' className='staff-dashboard-button-icon' />
                 MANAGE CLIENT
-                </button>
-                <button className='staff-dashboard-button' onClick={() => navigate('/staffconman')}>
+              </button>
+              <button className='staff-dashboard-button' onClick={() => navigate('/staffconman')}>
                 <img src={mv} alt='mc' className='staff-dashboard-button-icon' />
                 MANAGE CONSIGNMENT
-                </button>
+              </button>
             </div>
           </div>
         </div>

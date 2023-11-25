@@ -13,8 +13,6 @@
     grid-template-columns: 1fr 1fr;
     margin-top: 50px;
     margin-bottom: 50px;
-    margin-left: 200px;
-    margin-right: 200px;
 
 }
 .user-dashboard-button-HO{
@@ -23,7 +21,7 @@
     border-radius: 15px;
     border: 2px solid #D2D2D2;
     background: none;
-    margin: auto;
+    margin: 30px auto;
     color: #1A1A1A;
     font-family: Calibri;
     font-size: 25px;
@@ -63,4 +61,18 @@
     background-color: #fff;
     color: #000;
     padding-top: 10px;
+}
+
+/* Mobile styles - 1200px width and below */
+@media only screen and (max-width: 1200px) {
+    .user-dashboard-buttons-row-HO {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Mobile styles - 768px width and below */
+@media only screen and (max-width: 768px) {
+    .user-dashboard-buttons-row-HO {
+        grid-template-columns: 1fr;
+    }
 }

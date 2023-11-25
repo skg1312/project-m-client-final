@@ -51,12 +51,11 @@ function StaffInvoiceDashboard() {
               <button className='admin-in-dashboard-button' onClick={() => navigate('/staffinman')}>
                 <img src={gr} alt='gr' className='admin-in-dashboard-button-icon' />
                 INOVICE MANAGEMENT
-                </button>
+              </button>
               <button className='admin-in-dashboard-button' onClick={() => navigate('/staffcrein')}>
                 <img src={ad} alt='mu' className='admin-in-dashboard-button-icon' />
                 CREATE INVOICE
                 </button>
-
             </div>
           </div>
         </div>

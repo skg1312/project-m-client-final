@@ -42,21 +42,19 @@ function StaffDashboardGeneral() {
               <button className='staff-dashboard-button-general' onClick={() => navigate('/staffsellman')}>
                 <img src={mu} alt='mu' className='staff-dashboard-button-icon-general' />
                 MANAGE SELLERS
-                </button>
+              </button>
               <button className='staff-dashboard-button-general' onClick={() => navigate('/staffbuyman')}>
                 <img src={ms} alt='ms' className='staff-dashboard-button-icon-general' />
                 MANAGE BUYERS
-                </button>
-            </div>
-            <div className='staff-dashboard-buttons-row-general'>
+              </button>
               <button className='staff-dashboard-button-general' onClick={() => navigate('/staffinvdash')}>
                 <img src={mi} alt='mi' className='staff-dashboard-button-icon-general' />
                 MANAGE INVOICE
-                </button>
-                <button className='staff-dashboard-button-general' onClick={() => navigate('/staffconman')}>
+              </button>
+              <button className='staff-dashboard-button-general' onClick={() => navigate('/staffconman')}>
                 <img src={mc} alt='mc' className='staff-dashboard-button-icon-general' />
                 MANAGE CONSIGNMENT
-                </button>
+              </button>
             </div>
           </div>
         </div>

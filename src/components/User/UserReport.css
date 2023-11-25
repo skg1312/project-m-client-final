@@ -2,7 +2,7 @@
     margin-left: 100px;
     margin-top: 100px;
     margin-bottom: 100px;
-    margin-right: 50px;
+    margin-right: 100px;
     border-radius: 15px;
     border: 2px solid #D2D2D2;
 }
@@ -235,7 +235,7 @@
 
 .export-button{
     margin-left: 50px;
-    margin-right: 100px;
+    margin-right: 50px;
     border-radius: 15px;
     border: 2px solid #5925DC;
     width: 100px;
@@ -297,4 +297,90 @@
 .pagination-container .disabled{
     color: #ada9a9;
     cursor: not-allowed;
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+    .reports {
+        margin-left: 100px;
+        margin-top: 100px;
+        margin-bottom: 100px;
+        margin-right: 100px;
+        border-radius: 15px;
+        border: 2px solid #D2D2D2;
+    }
+    .export-button {
+        margin-left: 50px;
+        margin-right: 50px;
+        border-radius: 15px;
+        border: 2px solid #5925DC;
+        width: 100px;
+        height: 35px;
+        font-family: Calibri;
+        text-decoration: none !important;
+        font-size: 30px;
+        font-style: normal;
+        text-align: center;
+        font-weight: 600;
+        line-height: 28px;
+        letter-spacing: -0.289px;
+        color: #ffffff;
+        background-color: #5925DC;
+    }
+    .reports-search-input {
+        margin-left: 50px;
+        margin-right: 50px;
+        border-radius: 15px;
+        border: 2px solid #D2D2D2;
+        width: 300px;
+        height: 50px;
+        font-family: Calibri;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 28px;
+        letter-spacing: -0.289px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .reports {
+        margin-left: 50px;
+        margin-top: 100px;
+        margin-bottom: 100px;
+        margin-right: 50px;
+        border-radius: 15px;
+        border: 2px solid #D2D2D2;
+    }
+    .export-button {
+        margin-left: 25px;
+        margin-right: 50px;
+        border-radius: 15px;
+        border: 2px solid #5925DC;
+        width: 100px;
+        height: 35px;
+        font-family: Calibri;
+        text-decoration: none !important;
+        font-size: 20px;
+        font-style: normal;
+        text-align: center;
+        font-weight: 600;
+        line-height: 28px;
+        letter-spacing: -0.289px;
+        color: #ffffff;
+        background-color: #5925DC;
+    }
+    .reports-search-input {
+        margin-left: 50px;
+        margin-right: 25px;
+        border-radius: 15px;
+        border: 2px solid #D2D2D2;
+        width: 200px;
+        height: 50px;
+        font-family: Calibri;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 28px;
+        letter-spacing: -0.289px;
+    }
 }

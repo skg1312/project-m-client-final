@@ -41,25 +41,22 @@ function UserDashboardHO() {
         <h1 className='user-dashboard-title-HO'>MAIN MENU</h1>
           <div className='user-dashboard-buttons-HO'>
             <div className='user-dashboard-buttons-row-HO'>
-              
               <button className='user-dashboard-button-HO' onClick={() => navigate('/usersellman')}>
                 <img src={mu} alt='mu' className='user-dashboard-button-icon-HO' />
                 MANAGE SELLERS
-                </button>
+              </button>
               <button className='user-dashboard-button-HO' onClick={() => navigate('/userbuyman')}>
                 <img src={ms} alt='ms' className='user-dashboard-button-icon-HO' />
                 MANAGE BUYERS
-                </button>
-            </div>
-            <div className='user-dashboard-buttons-row-HO'>
-            <button className='user-dashboard-button-HO' onClick={() => navigate('/usercomman')}>
+              </button>
+              <button className='user-dashboard-button-HO' onClick={() => navigate('/usercomman')}>
                 <img src={gr} alt='gr' className='user-dashboard-button-icon-HO' />
                 MANAGE COMPANY
-                </button>
+              </button>
               <button className='user-dashboard-button-HO' onClick={() => navigate('/userconman')}>
                 <img src={mc} alt='mc' className='user-dashboard-button-icon-HO' />
                 MANAGE CONSIGNMENT
-                </button>
+              </button>
             </div>
           </div>
         </div>

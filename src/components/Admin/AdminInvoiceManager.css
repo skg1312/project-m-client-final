@@ -199,7 +199,7 @@
     background: #5925DC;
     color: #FEFEFE;
     font-family: "Urbanist";
-    font-size: 12px;
+    font-size: 10px;
     font-style: normal;
     font-weight: 600;
     line-height: 28px;
@@ -208,7 +208,7 @@
     border: 1px solid #5925DC;
     width: 40px;
     height: 30px;
-    margin-left: 10px;
+    margin-left: 5px;
   }
 }
 
@@ -222,7 +222,7 @@
     background: #5925DC;
     color: #FEFEFE;
     font-family: "Urbanist";
-    font-size: 12px;
+    font-size: 8px;
     font-style: normal;
     font-weight: 600;
     line-height: 28px;
@@ -231,7 +231,7 @@
     border: 1px solid #5925DC;
     width: 40px;
     height: 30px;
-    margin-left: 10px;
+    margin-left: 5px;
   }
   .invoice-management-data-header {
     text-align: left;

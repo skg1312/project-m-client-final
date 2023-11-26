@@ -19,17 +19,33 @@ function AdminReports() {
     }
     const itemsPerPage = 15;
     const sortedInvoice = [...invoice].reverse();
+    
     const displayedInvoiceSearch = sortedInvoice
-        .filter(
-            (item) =>
-                item.invoicedetails.invoiceno.toLowerCase().includes(searchInput.toLowerCase()) ||
-                item.companydetails.companyname.toLowerCase().includes(searchInput.toLowerCase()) ||
-                item.invoicedetails.invoicedate.toLowerCase().includes(searchInput.toLowerCase()) ||
-                item.vehicledetails.vehiclenumber.toLowerCase().includes(searchInput.toLowerCase()) ||
-                item.vehicledetails.drivername.toLowerCase().includes(searchInput.toLowerCase()) ||
-                item.consignmentdetails.itemdetails[0].itemname.toLowerCase().includes(searchInput.toLowerCase())
-        )
-        .slice(pageNumber * itemsPerPage, (pageNumber + 1) * itemsPerPage);
+  .filter((item) => {
+    const invoiceNo = item.invoicedetails.invoiceno || '';
+    const companyName = item.companydetails.companyname || '';
+    const invoiceDate = item.invoicedetails.invoicedate || '';
+    const vehicleNumber = item.vehicledetails.vehiclenumber || '';
+    const driverName = item.vehicledetails.drivername || '';
+    const itemName =
+      (item.consignmentdetails.itemdetails[0] && item.consignmentdetails.itemdetails[0].itemname) || '';
+
+    // Check if any of the search criteria is null or cannot be converted to lowercase
+    if (
+      invoiceNo.toLowerCase().includes(searchInput?.toLowerCase()) ||
+      companyName.toLowerCase().includes(searchInput?.toLowerCase()) ||
+      invoiceDate.toLowerCase().includes(searchInput?.toLowerCase()) ||
+      vehicleNumber.toLowerCase().includes(searchInput?.toLowerCase()) ||
+      driverName.toLowerCase().includes(searchInput?.toLowerCase()) ||
+      itemName.toLowerCase().includes(searchInput?.toLowerCase())
+    ) {
+      return true;
+    }
+
+    return false;
+  })
+  .slice(pageNumber * itemsPerPage, (pageNumber + 1) * itemsPerPage);
+
     const pageCount = Math.ceil(sortedInvoice.length / itemsPerPage);
     const changePage = ({ selected }) => {
         setPageNumber(selected);

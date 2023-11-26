@@ -20,16 +20,31 @@ function StaffReports() {
     const itemsPerPage = 15;
     const sortedInvoice = [...invoice].reverse();
     const displayedInvoiceSearch = sortedInvoice
-        .filter(
-            (item) =>
-                item.invoicedetails.invoiceno.toLowerCase().includes(searchInput.toLowerCase()) ||
-                item.companydetails.companyname.toLowerCase().includes(searchInput.toLowerCase()) ||
-                item.invoicedetails.invoicedate.toLowerCase().includes(searchInput.toLowerCase()) ||
-                item.vehicledetails.vehiclenumber.toLowerCase().includes(searchInput.toLowerCase()) ||
-                item.vehicledetails.drivername.toLowerCase().includes(searchInput.toLowerCase()) ||
-                item.consignmentdetails.itemdetails[0].itemname.toLowerCase().includes(searchInput.toLowerCase())
-        )
-        .slice(pageNumber * itemsPerPage, (pageNumber + 1) * itemsPerPage);
+    .filter((item) => {
+      const invoiceNo = item.invoicedetails.invoiceno || '';
+      const companyName = item.companydetails.companyname || '';
+      const invoiceDate = item.invoicedetails.invoicedate || '';
+      const vehicleNumber = item.vehicledetails.vehiclenumber || '';
+      const driverName = item.vehicledetails.drivername || '';
+      const itemName =
+        (item.consignmentdetails.itemdetails[0] && item.consignmentdetails.itemdetails[0].itemname) || '';
+  
+      // Check if any of the search criteria is null or cannot be converted to lowercase
+      if (
+        invoiceNo.toLowerCase().includes(searchInput?.toLowerCase()) ||
+        companyName.toLowerCase().includes(searchInput?.toLowerCase()) ||
+        invoiceDate.toLowerCase().includes(searchInput?.toLowerCase()) ||
+        vehicleNumber.toLowerCase().includes(searchInput?.toLowerCase()) ||
+        driverName.toLowerCase().includes(searchInput?.toLowerCase()) ||
+        itemName.toLowerCase().includes(searchInput?.toLowerCase())
+      ) {
+        return true;
+      }
+  
+      return false;
+    })
+    .slice(pageNumber * itemsPerPage, (pageNumber + 1) * itemsPerPage);
+  
     const pageCount = Math.ceil(sortedInvoice.length / itemsPerPage);
     const changePage = ({ selected }) => {
         setPageNumber(selected);
@@ -158,7 +173,14 @@ function StaffReports() {
                                     { displayedInvoiceSearch.map((invoice) => (
                                     <tr key={invoice._id} className="reports-data-body-table-load-body-row">
                                         <td className="reports-data-body-table-load-body-row-item">{invoice.invoicedetails.invoiceno}</td>
-                                        <td className="reports-data-body-table-load-body-row-item">{invoice.invoicedetails.invoicedate}</td>
+                                        <td className="reports-data-body-table-load-body-row-item">
+                                        {invoice.invoicedetails.invoicedate ?
+    new Date(invoice.invoicedetails.invoicedate).toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    }) : 'N/A'}
+                                        </td>
                                         <td className="reports-data-body-table-load-body-row-item">{invoice.boardingdetails.totalcost}</td>
                                         <td className="reports-data-body-table-load-body-row-item">{invoice.companydetails.companyname}</td>
                                         <td className="reports-data-body-table-load-body-row-item">{invoice.consignmentdetails.itemdetails.length}</td>
@@ -183,11 +205,26 @@ function StaffReports() {
                                 <tbody className="reports-data-body-table-day-body">
                                     {displayedInvoiceSearch.map((invoice) => (
                                         <tr key={invoice._id} className="reports-data-body-table-day-body-row">
-                                        <td className="reports-data-body-table-day-body-row-item">{invoice.invoicedetails.invoicedate}</td>
+                                        <td className="reports-data-body-table-day-body-row-item">{invoice.invoicedetails.invoicedate ?
+    new Date(invoice.invoicedetails.invoicedate).toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    }) : 'N/A'}</td>
                                         <td className="reports-data-body-table-day-body-row-item">{invoice.invoicedetails.invoiceno}</td>
-                                        <td className="reports-data-body-table-day-body-row-item">{invoice.invoicedetails.ordereddate}</td>
+                                        <td className="reports-data-body-table-day-body-row-item">{invoice.invoicedetails.ordereddate ?
+    new Date(invoice.invoicedetails.ordereddate).toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    }) : 'N/A'}</td>
                                         <td className="reports-data-body-table-day-body-row-item">{invoice.boardingdetails.totalcost}</td>
-                                        <td className="reports-data-body-table-day-body-row-item">{invoice.invoicedetails.deliverynotedate}</td>
+                                        <td className="reports-data-body-table-day-body-row-item">{invoice.invoicedetails.deliverynotedate ?
+    new Date(invoice.invoicedetails.deliverynotedate).toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    }) : 'N/A'}</td>
                                     </tr>
                                     ))}
                                 </tbody>

@@ -7,26 +7,26 @@
     border: 2px solid #5925DC;
 }
 .admin-create-invoice-title{
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-family: "Urbanist";
     font-size: 50px;
     color: #1A1A1A;
     text-align: center;
 }
 .admin-create-invoice-subtitle{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: "Urbanist";
     font-size: 35px;
     color: #1A1A1A;
     text-align: left;
     margin-left: 5%;
 }
 .admin-create-invoice-subtitle-table{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: "Urbanist";
     font-size: 30px;
     color: #1A1A1A;
     text-align: left;
 }
 .admin-create-invoice-subtitle-table{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: "Urbanist";
     font-size: 20px;
     color: #1A1A1A;
     text-align: left;
@@ -38,7 +38,7 @@
     width: 85%;
     height: 50px;
     text-align: center;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: "Urbanist";
     font-size: 24px;
     color: #1A1A1A;
     margin-top: 30px;
@@ -61,7 +61,7 @@
 
 }
 .admin-create-invoice-form-label{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: "Urbanist";
     font-size: 24px;
     color:#767676;
 }
@@ -72,7 +72,7 @@
     height: 40px;
     background: #EDEDED;
     color: #767676;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: "Urbanist";
     font-size: 24px;
     margin-top:1%;
 }
@@ -90,7 +90,7 @@
     border-radius: 6px;
     border: 1px solid #D2D2D2;
     text-align: center;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: "Urbanist";
     font-size: 16px;
     color: #1A1A1A;
 }
@@ -98,7 +98,7 @@
     border-radius: 6px;
     border: 1px solid #D2D2D2;
     text-align: center;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: "Urbanist";
     font-size: 20px;
     color: #767676;
     font-weight: bold;
@@ -111,13 +111,13 @@
     height: 40px;
 }
 .admin-create-invoice-table-row-head{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: "Urbanist";
     font-size: 20px;
     font-weight: bold;
     text-align: center;
 }
 .admin-create-invoice-table-row-body{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: "Urbanist";
     font-size: 20px;
     font-weight: bold;
     text-align: center;
@@ -128,7 +128,7 @@
     background: none;
 }
 .admin-create-invoice-table-consigment-value{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: "Urbanist";
     font-size: 20px;
     text-align: center;
     font-weight: bold;
@@ -144,7 +144,7 @@
     border: 2px solid #5925DC;
     background: #5925DC;
     color: #FFFFFF;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: "Urbanist";
     font-size: 24px;
     width: 20%;
     height: 60px;
@@ -156,13 +156,13 @@
 /* Tablet Styles */
 @media only screen and (max-width: 768px) {
     .admin-create-invoice-title{
-        font-family:Verdana, Geneva, Tahoma, sans-serif;
+        font-family: "Urbanist";
         font-size: 20px;
         color: #1A1A1A;
         text-align: center;
     }
     .admin-create-invoice-subtitle{
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-family: "Urbanist";
         font-size: 20px;
         color: #1A1A1A;
         text-align: left;
@@ -175,7 +175,7 @@
         width: 85%;
         height: 50px;
         text-align: center;
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-family: "Urbanist";
         font-size: 10px;
         color: #1A1A1A;
         margin-top: 30px;
@@ -198,7 +198,7 @@
     
     }
     .admin-create-invoice-form-label{
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-family: "Urbanist";
         font-size: 10px;
         color:#767676;
         margin-left: 30px;
@@ -210,7 +210,7 @@
         height: 40px;
         background: #EDEDED;
         color: #767676;
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-family: "Urbanist";
         font-size: 10px;
         margin-top:1%;
         margin-left: 30px;
@@ -229,7 +229,7 @@
         border-radius: 6px;
         border: 1px solid #D2D2D2;
         text-align: center;
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-family: "Urbanist";
         font-size: 10px;
         color: #1A1A1A;
     }
@@ -237,7 +237,7 @@
         border-radius: 6px;
         border: 1px solid #D2D2D2;
         text-align: center;
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-family: "Urbanist";
         font-size: 10px;
         color: #767676;
         font-weight: bold;
@@ -250,7 +250,7 @@
         height: 40px;
     }
     .admin-create-invoice-table-row-head{
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-family: "Urbanist";
         font-size: 10px;
         font-weight: bold;
         text-align: center;
@@ -260,7 +260,7 @@
         background: none;
     }
     .admin-create-invoice-table-consigment-value{
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-family: "Urbanist";
         font-size: 10px;
         text-align: center;
         font-weight: bold;
@@ -276,7 +276,7 @@
         border: 2px solid #5925DC;
         background: #5925DC;
         color: #FFFFFF;
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-family: "Urbanist";
         font-size: 10px;
         width: 30%;
         height: 60px;

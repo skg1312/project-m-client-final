@@ -6,7 +6,7 @@
   .invoice-management-data-header{
     text-align: left;
     padding-left: 50px;
-    font-family: Calibri;
+    font-family: "Urbanist";
     font-size: 32px;
     font-style: normal;
     font-weight: 600;
@@ -23,7 +23,7 @@
   }
   .invoice-management-data-body-table-row-head{
     color: #1A1A1A;
-    font-family: Calibri;
+    font-family: "Urbanist";
     font-size: 24px;
     font-style: bold;
     text-transform: uppercase;
@@ -35,7 +35,7 @@
     border: 2px solid #D2D2D2;
     width: 300px;
     height: 50px;
-    font-family: Calibri;
+    font-family: "Urbanist";
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -44,7 +44,7 @@
   }
   .invoice-management-data-body-table-row-body{
     color: #767676;
-    font-family: Calibri;
+    font-family: "Urbanist";
     font-size: 20px;
     font-style: bold;
     font-weight: 400;
@@ -54,7 +54,7 @@
   .invoice-management-data-body-table-data-button{
     background: #5925DC;
     color: #FEFEFE;
-    font-family: Calibri;
+    font-family: "Urbanist";
     font-size: 18px;
     font-style: normal;
     font-weight: 600;
@@ -78,7 +78,7 @@
     border: 1px solid #5925DC;
     border-radius: 3px;
     color: #fff;
-    font-family: Calibri;
+    font-family: "Urbanist";
     font-size: 15px;
     font-style: normal;
     font-weight: 600;
@@ -108,7 +108,7 @@
     .invoice-management-data-header {
       text-align: left;
       padding-left: 50px;
-      font-family: Calibri;
+      font-family: "Urbanist";
       font-size: 24px;
       font-style: normal;
       font-weight: 600;
@@ -118,14 +118,14 @@
   }
     .invoice-management-data-body-table-row-head {
       color: #1A1A1A;
-      font-family: Calibri;
+      font-family: "Urbanist";
       font-size: 18px;
       font-style: bold;
       text-transform: uppercase;
     }
     .invoice-management-data-body-table-row-body{
       color: #767676;
-      font-family: Calibri;
+      font-family: "Urbanist";
       font-size: 15px;
       font-style: bold;
       font-weight: 400;
@@ -139,7 +139,7 @@
       border: 2px solid #D2D2D2;
       width: 200px;
       height: 30px;
-      font-family: Calibri;
+      font-family: "Urbanist";
       font-size: 15px;
       font-style: normal;
       font-weight: 400;
@@ -157,7 +157,7 @@
     .invoice-management-data-header {
       text-align: left;
       padding-left: 50px;
-      font-family: Calibri;
+      font-family: "Urbanist";
       font-size: 20px;
       font-style: normal;
       font-weight: 600;
@@ -167,14 +167,14 @@
   }
     .invoice-management-data-body-table-row-head {
       color: #1A1A1A;
-      font-family: Calibri;
+      font-family: "Urbanist";
       font-size: 15px;
       font-style: bold;
       text-transform: uppercase;
     }
     .invoice-management-data-body-table-row-body{
       color: #767676;
-      font-family: Calibri;
+      font-family: "Urbanist";
       font-size: 15px;
       font-style: bold;
       font-weight: 400;
@@ -188,7 +188,7 @@
       border: 2px solid #D2D2D2;
       width: 150px;
       height: 30px;
-      font-family: Calibri;
+      font-family: "Urbanist";
       font-size: 15px;
       font-style: normal;
       font-weight: 400;
@@ -198,7 +198,7 @@
     .invoice-management-data-body-table-data-button {
       background: #5925DC;
       color: #FEFEFE;
-      font-family: Calibri;
+      font-family: "Urbanist";
       font-size: 12px;
       font-style: normal;
       font-weight: 600;
@@ -221,7 +221,7 @@
     .invoice-management-data-body-table-data-button {
       background: #5925DC;
       color: #FEFEFE;
-      font-family: Calibri;
+      font-family: "Urbanist";
       font-size: 12px;
       font-style: normal;
       font-weight: 600;
@@ -236,7 +236,7 @@
     .invoice-management-data-header {
       text-align: left;
       padding-left: 50px;
-      font-family: Calibri;
+      font-family: "Urbanist";
       font-size: 15px;
       font-style: normal;
       font-weight: 600;
@@ -246,7 +246,7 @@
     }
     .invoice-management-data-body-table-row-head {
       color: #1A1A1A;
-      font-family: Calibri;
+      font-family: "Urbanist";
       font-size: 12px;
       font-style: bold;
       text-transform: uppercase;
@@ -258,7 +258,7 @@
       border: 2px solid #D2D2D2;
       width: 100px;
       height: 25px;
-      font-family: Calibri;
+      font-family: "Urbanist";
       font-size: 15px;
       font-style: normal;
       font-weight: 400;

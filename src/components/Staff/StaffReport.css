@@ -17,7 +17,7 @@
     width: 60%;
     height: 40px;
     margin: auto;
-    font-family: Calibri;
+   font-family: "Urbanist";
     font-size: 20px;
     font-style: bold;
     font-weight: 600;
@@ -61,7 +61,7 @@
 }
 .reports-data-body-table-load-head-row{
 
-    font-family: Calibri;
+   font-family: "Urbanist";
     font-size: 20px;
     font-style: bold;
     font-weight: 600;
@@ -75,7 +75,7 @@
     border-collapse: collapse;
 }
 .reports-data-body-table-load-body{
-    font-family: Calibri;
+   font-family: "Urbanist";
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -95,7 +95,7 @@
 }
 .reports-data-body-table-day-head-row{
 
-    font-family: Calibri;
+   font-family: "Urbanist";
     font-size: 20px;
     font-style: bold;
     font-weight: 600;
@@ -109,7 +109,7 @@
     border-collapse: collapse;
 }
 .reports-data-body-table-day-body{
-    font-family: Calibri;
+   font-family: "Urbanist";
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -131,7 +131,7 @@
 }
 .reports-data-body-table-item-head-row{
 
-    font-family: Calibri;
+   font-family: "Urbanist";
     font-size: 20px;
     font-style: bold;
     font-weight: 600;
@@ -145,7 +145,7 @@
     border-collapse: collapse;
 }
 .reports-data-body-table-item-body{
-    font-family: Calibri;
+   font-family: "Urbanist";
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -165,7 +165,7 @@
 }
 .reports-data-body-table-vechicle-head-row{
 
-    font-family: Calibri;
+   font-family: "Urbanist";
     font-size: 20px;
     font-style: bold;
     font-weight: 600;
@@ -179,7 +179,7 @@
     border-collapse: collapse;
 }
 .reports-data-body-table-vechicle-body{
-    font-family: Calibri;
+   font-family: "Urbanist";
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -201,7 +201,7 @@
 }
 .reports-data-body-table-driver-head-row{
 
-    font-family: Calibri;
+   font-family: "Urbanist";
     font-size: 20px;
     font-style: bold;
     font-weight: 600;
@@ -215,7 +215,7 @@
     border-collapse: collapse;
 }
 .reports-data-body-table-driver-body{
-    font-family: Calibri;
+   font-family: "Urbanist";
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -240,7 +240,7 @@
     border: 2px solid #5925DC;
     width: 100px;
     height: 35px;
-    font-family: Calibri;
+   font-family: "Urbanist";
     text-decoration: none !important;
     font-size: 30px;
     font-style: normal;
@@ -259,7 +259,7 @@
     border: 2px solid #D2D2D2;
     width: 600px;
     height: 50px;
-    font-family: Calibri;
+   font-family: "Urbanist";
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -278,7 +278,7 @@
     border: 1px solid #5925DC;
     border-radius: 3px;
     color: #fff;
-    font-family: Calibri;
+   font-family: "Urbanist";
     font-size: 15px;
     font-style: normal;
     font-weight: 600;
@@ -315,7 +315,7 @@
         border: 2px solid #5925DC;
         width: 100px;
         height: 35px;
-        font-family: Calibri;
+       font-family: "Urbanist";
         text-decoration: none !important;
         font-size: 30px;
         font-style: normal;
@@ -333,7 +333,7 @@
         border: 2px solid #D2D2D2;
         width: 300px;
         height: 50px;
-        font-family: Calibri;
+       font-family: "Urbanist";
         font-size: 20px;
         font-style: normal;
         font-weight: 400;
@@ -359,7 +359,7 @@
         width: 83%;
         height: 52px;
         margin: auto 30px;
-        font-family: Calibri;
+       font-family: "Urbanist";
         font-size: 20px;
         font-style: bold;
         font-weight: 600;
@@ -373,7 +373,7 @@
         border: 2px solid #5925DC;
         width: 100px;
         height: 30px;
-        font-family: Calibri;
+       font-family: "Urbanist";
         text-decoration: none !important;
         font-size: 20px;
         font-style: normal;
@@ -391,7 +391,7 @@
         border: 2px solid #D2D2D2;
         width: 150px;
         height: 30px;
-        font-family: Calibri;
+       font-family: "Urbanist";
         font-size: 12px;
         font-style: normal;
         font-weight: 400;

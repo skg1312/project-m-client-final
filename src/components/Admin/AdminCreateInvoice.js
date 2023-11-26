@@ -711,6 +711,7 @@ function AdminCreateInvoice() {
         <label className='admin-create-invoice-form-label'
         htmlFor="drivername"
         >Driver Name</label>
+        <br />
         <input className='admin-create-invoice-form-input'
          id="drivername"
          name="drivername"
@@ -753,6 +754,7 @@ function AdminCreateInvoice() {
         <label className='admin-create-invoice-form-label'
         htmlFor="driveridproof"
         >Driver Id Proof</label>
+        <br />
         <input className='admin-create-invoice-form-input'
          id="driveridproof"
          name="driveridproof"
@@ -984,6 +986,7 @@ function AdminCreateInvoice() {
         <label className='admin-create-invoice-form-label'
         htmlFor="ewaybillno"
         >E Way Bill No</label>
+        <br />
         <input className='admin-create-invoice-form-input' 
         id="ewaybillno"
         name="ewaybillno"
@@ -1013,6 +1016,7 @@ function AdminCreateInvoice() {
         <label className='admin-create-invoice-form-label'
         htmlFor="deliverynote"
         >Delivery Note</label>
+        <br />
         <input className='admin-create-invoice-form-input' 
         id="deliverynote"
         name="deliverynote"
@@ -1041,6 +1045,7 @@ function AdminCreateInvoice() {
         <label className='admin-create-invoice-form-label'
         htmlFor="supplierref"
         >Supplier Ref.</label>
+        <br />
         <input className='admin-create-invoice-form-input' 
         id="supplierref"
         name="supplierref"
@@ -1245,6 +1250,7 @@ function AdminCreateInvoice() {
         <label className='admin-create-invoice-form-label'
         htmlFor="startingpoint"
         >Starting Point</label>
+        <br />
         <input className='admin-create-invoice-form-input' 
         id="startingpoint"
         name="startingpoint"

@@ -15,7 +15,7 @@
   }
   
   .admin-staff-manager-data-title {
-    font-family: Calibri;
+    font-family: "Urbanist";
     font-size: 32px;
     font-style: normal;
     font-weight: 600;
@@ -27,7 +27,7 @@
   
   .admin-staff-manager-data-table-head {
     color: #1A1A1A;
-    font-family: Calibri;
+    font-family: "Urbanist";
     font-size: 20px;
     font-style: bold;
   }
@@ -41,7 +41,7 @@
   
   .admin-staff-manager-data-table-body {
     color: #767676;
-    font-family: Calibri;
+    font-family: "Urbanist";
     font-size: 20px;
     font-style: bold;
     font-weight: 400;
@@ -51,7 +51,7 @@
   
   .admin-staff-manager-data-table-button {
     color: #FEFEFE;
-    font-family: Calibri;
+    font-family: "Urbanist";
     font-size: 15px;
     font-style: normal;
     font-weight: 600;
@@ -74,7 +74,7 @@
     border: 1px solid #5925DC;
     border-radius: 3px;
     color: #fff;
-    font-family: Calibri;
+    font-family: "Urbanist";
     font-size: 15px;
     font-style: normal;
     font-weight: 600;
@@ -108,7 +108,7 @@
   }
   
   .admin-staff-manager-form-title {
-    font-family: Calibri;
+    font-family: "Urbanist";
     font-size: 32px;
     font-style: normal;
     font-weight: 600;
@@ -126,7 +126,7 @@
     width: 86%;
     margin-bottom: 20px;
     color: var(--color-grey-60, #767676);
-    font-family: Calibri;
+    font-family: "Urbanist";
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -138,7 +138,7 @@
     color: var(--color-white-100, #FEFEFE);
     text-align: center;
     font-feature-settings: 'clig' off, 'liga' off;
-    font-family: Calibri;
+    font-family: "Urbanist";
     font-size: 16px;
     font-style: normal;
     font-weight: 600;
@@ -160,7 +160,7 @@
 .admin-staff-manage-form-input-checkbox-label{
     color: var(--color-grey-100, #1A1A1A);
     font-feature-settings: 'clig' off, 'liga' off;
-    font-family: Calibri;
+    font-family: "Urbanist";
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -215,7 +215,7 @@
     border: 2px solid #D2D2D2;
   }
   .admin-staff-manager-data-title {
-    font-family: Calibri;
+    font-family: "Urbanist";
     font-size: 26px;
     font-style: normal;
     font-weight: 600;
@@ -226,13 +226,13 @@
   }
   .admin-staff-manager-data-table-head {
     color: #1A1A1A;
-    font-family: Calibri;
+    font-family: "Urbanist";
     font-size: 15px;
     font-style: bold;
   }
   .admin-staff-manager-data-table-body {
     color: #767676;
-    font-family: Calibri;
+    font-family: "Urbanist";
     font-size: 12px;
     font-style: bold;
     font-weight: 400;
@@ -247,7 +247,7 @@
     width: 75%;
     margin-bottom: 20px;
     color: var(--color-grey-60, #767676);
-    font-family: Calibri;
+    font-family: "Urbanist";
     font-size: 15px;
     font-style: normal;
     font-weight: 400;
@@ -262,7 +262,7 @@
     width: 75%;
     margin-bottom: 20px;
     color: #767676;
-    font-family: Calibri;
+    font-family: "Urbanist";
     font-size: 15px;
     font-style: normal;
     font-weight: 400;
@@ -270,7 +270,7 @@
     letter-spacing: -0.289px;
   }
   .admin-staff-manager-form-title {
-    font-family: Calibri;
+    font-family: "Urbanist";
     font-size: 26px;
     font-style: normal;
     font-weight: 600;
@@ -282,7 +282,7 @@
   .admin-staff-manager-form-input-checkbox-label {
     color: #1A1A1A;
     font-feature-settings: 'clig' off, 'liga' off;
-    font-family: Calibri;
+    font-family: "Urbanist";
     font-size: 13px;
     font-style: normal;
     font-weight: 400;
@@ -293,7 +293,7 @@
     color: #FEFEFE;
     text-align: center;
     font-feature-settings: 'clig' off, 'liga' off;
-    font-family: Calibri;
+    font-family: "Urbanist";
     font-size: 16px;
     font-style: normal;
     font-weight: 600;

@@ -1,6 +1,6 @@
 .user-dashboard-title {
     color: #1A1A1A;
-    font-family: Calibri;
+   font-family: "Urbanist";
     font-size: 30px;
     font-style: normal;
     font-weight: 600;
@@ -24,7 +24,7 @@
     margin-top: 50px;
     margin-bottom: 50px;
     color: #1A1A1A;
-    font-family: Calibri;
+   font-family: "Urbanist";
     font-size: 25px;
     font-style: normal;
     font-weight: 500;
@@ -57,7 +57,7 @@
     width: 200px;
     border-radius: 15px;
     border: 2px solid #D2D2D2;
-    font-family: Calibri;
+   font-family: "Urbanist";
     font-size: 24px;
     background-color: #fff;
     color: #000;
@@ -85,7 +85,7 @@
         color: #1A1A1A;
         margin: auto;
         margin-bottom: 20px;
-        font-family: Arial;
+        font-family: "Urbanist";
         font-size: 14px;
         font-style: normal;
         font-weight: 500;
@@ -110,7 +110,7 @@
         width: 115px;
         border-radius: 15px;
         border: 2px solid #D2D2D2;
-        font-family: Arial;
+        font-family: "Urbanist";
         font-size: 14px;
         background-color: #fff;
         color: #000;

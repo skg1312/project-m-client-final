@@ -158,7 +158,12 @@ function AdminReports() {
                                     { displayedInvoiceSearch.map((invoice) => (
                                     <tr key={invoice._id} className="reports-data-body-table-load-body-row">
                                         <td className="reports-data-body-table-load-body-row-item">{invoice.invoicedetails.invoiceno}</td>
-                                        <td className="reports-data-body-table-load-body-row-item">{invoice.invoicedetails.invoicedate}</td>
+                                        <td className="reports-data-body-table-load-body-row-item">{invoice.invoicedetails.invoicedate ?
+    new Date(invoice.invoicedetails.invoicedate).toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    }) : 'N/A'}</td>
                                         <td className="reports-data-body-table-load-body-row-item">{invoice.boardingdetails.totalcost}</td>
                                         <td className="reports-data-body-table-load-body-row-item">{invoice.companydetails.companyname}</td>
                                         <td className="reports-data-body-table-load-body-row-item">{invoice.consignmentdetails.itemdetails.length}</td>

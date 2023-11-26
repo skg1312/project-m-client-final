@@ -45,6 +45,7 @@ import UserInvoiceDashboard from './components/User/UserInvoiceDashboard';
 import UserInvoiceManagement from './components/User/UserInvoiceManage';
 import UserReports from './components/User/UserReport';
 import UserCreateInvoice from './components/User/UserCreateInvoice';
+import PdfViewer from './components/Admin/AdminInvoiceView';
 
 
 function App() {
@@ -125,6 +126,12 @@ function App() {
               <ReqAdminAuth>
                 {/* responsive */}
                 <AdminCreateInvoice />
+                </ReqAdminAuth>
+            } />
+            <Route path='/admininvview' element={
+              <ReqAdminAuth>
+                {/* responsive */}
+                <PdfViewer />
                 </ReqAdminAuth>
             } />
           </Routes>

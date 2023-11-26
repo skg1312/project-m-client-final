@@ -4,6 +4,7 @@ import './AdminInvoiceManager.css';
 import background from '../images/Desktop.png';
 import ReactPaginate from 'react-paginate';
 import AdminNavbar from './AdminNavbar';
+import PdfViewer from './AdminInvoiceView';
 
 function AdminInvoiceManagement() {
     const [invoice, setInvoice] = useState([]);
@@ -31,6 +32,26 @@ function AdminInvoiceManagement() {
     };
 
     const ViewInvoice = () => {
+        if (selectedInvoiceId) {
+            const pdfUrl = `${API}download/${selectedInvoiceId}`;
+
+    const newWindow = window.open('', '_blank');
+    newWindow.document.write('<html><head><title>PDF Viewer</title></head><body><div id="pdf-viewer-container"></div></body></html>');
+
+    const iframeCode = `
+      <div style="width: 100%; height: ;">
+        <iframe
+          title="PDF Viewer"
+          src="https://docs.google.com/viewer?url=${encodeURIComponent(pdfUrl)}&embedded=true"
+          style="width: 100%; height: 100%; border: none;"
+        />
+      </div>
+    `;
+
+    newWindow.document.write(iframeCode);
+        }
+    };
+    const PrintInvoice = () => {
         if (selectedInvoiceId) {
             window.location = `${API}download/${selectedInvoiceId}`;
         }
@@ -100,8 +121,8 @@ function AdminInvoiceManagement() {
                                         <td className='invoice-management-data-body-table-data'>{invoice.vehicledetails.vehiclenumber}</td>
                                         <td className='invoice-management-data-body-table-data'>{invoice.boardingdetails.totalcost}</td>
                                         <td className='invoice-management-data-body-table-data'>
-                                            <button onClick={() => setSelectedInvoiceId(invoice._id)} className='invoice-management-data-body-table-data-button'>View</button>
-                                            <button onClick={ViewInvoice} className='invoice-management-data-body-table-data-button'>Print</button>
+                                            <button onClick={() => { setSelectedInvoiceId(invoice._id); ViewInvoice();}} className='invoice-management-data-body-table-data-button'>View</button>
+                                            <button onClick={() => { setSelectedInvoiceId(invoice._id); PrintInvoice(); }} className='invoice-management-data-body-table-data-button'>Print</button>
                                         </td>
                                     </tr>
                                 ))}

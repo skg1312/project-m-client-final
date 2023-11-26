@@ -344,20 +344,35 @@
 
 @media only screen and (max-width: 768px) {
     .reports {
-        margin-left: 50px;
+        margin-left: 10px;
         margin-top: 100px;
         margin-bottom: 100px;
-        margin-right: 50px;
+        margin-right: 10px;
         border-radius: 15px;
         border: 2px solid #D2D2D2;
     }
+    .reports-data-header {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        border-radius: 100px;
+        border: 1px solid #5925DC;
+        width: 60%;
+        height: 40px;
+        margin: auto 30px;
+        font-family: Calibri;
+        font-size: 20px;
+        font-style: bold;
+        font-weight: 600;
+        line-height: 28px;
+        letter-spacing: -0.289px;
+    }
     .export-button {
         margin-left: 25px;
-        margin-right: 50px;
+        margin-right: 25px;
         border-radius: 15px;
         border: 2px solid #5925DC;
         width: 100px;
-        height: 35px;
+        height: 30px;
         font-family: Calibri;
         text-decoration: none !important;
         font-size: 20px;
@@ -370,14 +385,14 @@
         background-color: #5925DC;
     }
     .reports-search-input {
-        margin-left: 50px;
+        margin-left: 30px;
         margin-right: 25px;
         border-radius: 15px;
         border: 2px solid #D2D2D2;
-        width: 200px;
-        height: 50px;
+        width: 150px;
+        height: 30px;
         font-family: Calibri;
-        font-size: 15px;
+        font-size: 12px;
         font-style: normal;
         font-weight: 400;
         line-height: 28px;

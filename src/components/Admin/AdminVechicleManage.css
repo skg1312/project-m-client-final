@@ -319,4 +319,16 @@
       margin-bottom: 20px;
       margin-top: 20px;
     }
+    .admin-vechicle-manage-data-table-button{
+      color: #FEFEFE;
+      font-family: Calibri;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 28px;
+      letter-spacing: -0.325px;
+      background-color: #5925DC;
+      border-radius: 3px;
+      border: 1px solid #5925DC;
+  }
   }

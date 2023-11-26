@@ -375,4 +375,16 @@
     line-height: 26px;
     letter-spacing: -0.289px;
   }
+  .user-company-manager-data-table-button {
+    color: #FEFEFE;
+    font-family: Urbanist;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 28px;
+    letter-spacing: -0.325px;
+    background-color: #5925DC;
+    border-radius: 3px;
+    border: 1px solid #5925DC;
+  }
 }

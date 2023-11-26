@@ -45,40 +45,58 @@ function Admindashboard() {
           <div className='admin-dashboard-buttons'>
             <div className='admin-dashboard-buttons-row'>
               <button className='admin-dashboard-button' onClick={() => navigate('/admingenrep')}>
-                <img src={gr} alt='gr' className='admin-dashboard-button-icon' />
-                GENERATE REPORTS
+                <div className='admin-card-box'>
+                  <img src={gr} alt='gr' className='admin-dashboard-button-icon' />
+                  <span>GENERATE REPORTS</span>
+                </div>
               </button>
               <button className='admin-dashboard-button' onClick={() => navigate('/adminuserman')}>
-                <img src={mu} alt='mu' className='admin-dashboard-button-icon' />
-                MANAGE USERS
+                <div className='admin-card-box'>
+                  <img src={mu} alt='mu' className='admin-dashboard-button-icon' />
+                  <span>MANAGE USERS</span>
+                </div>
               </button>
               <button className='admin-dashboard-button' onClick={() => navigate('/admininvdash')}>
-                <img src={mi} alt='ms' className='admin-dashboard-button-icon' />
-                MANAGE INVOICE
+                <div className='admin-card-box'>
+                  <img src={mi} alt='ms' className='admin-dashboard-button-icon' />
+                  <span>MANAGE INVOICE</span>
+                </div>
               </button> 
               <button className='admin-dashboard-button'  onClick={() => navigate('/adminvecman')}>
-                <img src={vs} alt='' className='admin-dashboard-button-icon' />
-                MANAGE VECHICLES
+                <div className='admin-card-box'>
+                  <img src={vs} alt='' className='admin-dashboard-button-icon' />
+                  <span>MANAGE VECHICLES</span>
+                </div>
               </button>
               <button className='admin-dashboard-button'  onClick={() => navigate('/admincomman')}>
-                <img src={mc} alt='mc' className='admin-dashboard-button-icon' />
-                MANAGE COMPANY
+                <div className='admin-card-box'>
+                  <img src={mc} alt='mc' className='admin-dashboard-button-icon' />
+                  <span>MANAGE COMPANY</span>
+                </div>
               </button> 
               <button className='admin-dashboard-button'  onClick={() => navigate('/adminstaffman')}>
-                <img src={mu} alt='mi' className='admin-dashboard-button-icon' />
-                MANAGE STAFF
+                <div className='admin-card-box'>
+                  <img src={mu} alt='mi' className='admin-dashboard-button-icon' />
+                  <span>MANAGE STAFF</span>
+                </div>
               </button>
               <button className='admin-dashboard-button'  onClick={() => navigate('/adminsellman')}>
-                <img src={mv} alt='mv' className='admin-dashboard-button-icon' />
-                MANAGE SELLERS
+                <div className='admin-card-box'>
+                  <img src={mv} alt='mv' className='admin-dashboard-button-icon' />
+                  <span>MANAGE SELLERS</span>
+                </div>
               </button>
               <button className='admin-dashboard-button'  onClick={() => navigate('/adminbuyman')}>
-                <img src={ms} alt='mi' className='admin-dashboard-button-icon' />
-                MANAGE BUYERS
+                <div className='admin-card-box'>
+                  <img src={ms} alt='mi' className='admin-dashboard-button-icon' />
+                  <span>MANAGE BUYERS</span>
+                </div>
               </button>
               <button className='admin-dashboard-button'  onClick={() => navigate('/adminconman')}>
-                <img src={ad} alt='mc' className='admin-dashboard-button-icon' />
-                MANAGE CONSIGNMENT
+                <div className='admin-card-box'>
+                  <img src={ad} alt='mc' className='admin-dashboard-button-icon' />
+                  <span>MANAGE CONSIGNMENT</span>
+                </div>
               </button>
             </div>
           </div>

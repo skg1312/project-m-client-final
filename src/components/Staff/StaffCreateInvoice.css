@@ -181,7 +181,7 @@
         font-size: 10px;
         color: #1A1A1A;
         margin-top: 30px;
-        margin-left: 60px;
+        margin-left: 30px;
     }
     .staff-create-invoice-data{
         display: grid;
@@ -204,6 +204,7 @@
         font-family: Verdana, Geneva, Tahoma, sans-serif;
         font-size: 10px;
         color:#767676;
+        margin-left: 30px;
     }
     .staff-create-invoice-form-input{
         border-radius: 6px;
@@ -215,6 +216,7 @@
         font-family: Verdana, Geneva, Tahoma, sans-serif;
         font-size: 10px;
         margin-top:1%;
+        margin-left: 30px;
     }
     .staff-create-invoice-form-div{
         margin-top: 2%;

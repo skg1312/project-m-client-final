@@ -43,28 +43,40 @@ function UserDashboard() {
           <div className='user-dashboard-buttons'>
             <div className='user-dashboard-buttons-row'>
               <button className='user-dashboard-button' onClick={() => navigate('/usercomman')}>
-                <img src={gr} alt='gr' className='user-dashboard-button-icon' />
-                MANAGE COMPANY
+                <div className='user-card-box'>
+                  <img src={gr} alt='gr' className='user-dashboard-button-icon' />
+                  <span>MANAGE COMPANY</span>
+                </div>
               </button>
               <button className='user-dashboard-button' onClick={() => navigate('/usersellman')}>
-                <img src={mu} alt='mu' className='user-dashboard-button-icon' />
-                MANAGE SELLERS
+                <div className='user-card-box'>
+                  <img src={mu} alt='mu' className='user-dashboard-button-icon' />
+                  <span>MANAGE SELLERS</span>
+                </div>
               </button>
               <button className='user-dashboard-button' onClick={() => navigate('/userbuyman')}>
-                <img src={ms} alt='ms' className='user-dashboard-button-icon' />
-                MANAGE BUYERS
+                <div className='user-card-box'>
+                  <img src={ms} alt='ms' className='user-dashboard-button-icon' />
+                  <span>MANAGE BUYERS</span>
+                </div>
               </button>
               <button className='user-dashboard-button' onClick={() => navigate('/uservecman')}>
-                <img src={mv} alt='mv' className='user-dashboard-button-icon' />
-                MANAGE VECHICLES
+                <div className='user-card-box'>
+                  <img src={mv} alt='mv' className='user-dashboard-button-icon' />
+                  <span>MANAGE VECHICLES</span>
+                </div>
               </button>
               <button className='user-dashboard-button' onClick={() => navigate('/userinvdash')}>
-                <img src={mi} alt='mi' className='user-dashboard-button-icon' />
-                MANAGE INVOICE
+                <div className='user-card-box'>
+                  <img src={mi} alt='mi' className='user-dashboard-button-icon' />
+                  <span>MANAGE INVOICE</span>
+                </div>
               </button>
               <button className='user-dashboard-button'onClick={() => navigate('/userconman')}>
-                <img src={mc} alt='mc' className='user-dashboard-button-icon' />
-                MANAGE CONSIGNMENT
+                <div className='user-card-box'>
+                  <img src={mc} alt='mc' className='user-dashboard-button-icon' />
+                  <span>MANAGE CONSIGNMENT</span>
+                </div>
               </button>
             </div>
           </div>

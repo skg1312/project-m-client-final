@@ -82,19 +82,19 @@
 @media only screen and (max-width: 768px) {
     .staff-dashboard-buttons-row-HO{
         grid-template-columns: 1fr;
-        margin-left: 25px;
-        margin-right: 25px;
+        margin-left: 20px;
+        margin-right: 20px;
     }
     .staff-dashboard-button-HO {
-        width: 300px;
-        height: 70px;
+        width: 250px;
+        height: 50px;
         border-radius: 15px;
         border: 2px solid #D2D2D2;
         background: none;
-        margin: 30px auto;
         color: #1A1A1A;
-       font-family: "Urbanist";
-        font-size: 15px;
+        margin: 15px auto;
+        font-family: "Urbanist";
+        font-size: 12px;
         font-style: normal;
         font-weight: 500;
         line-height: normal;
@@ -106,9 +106,9 @@
         align-items: center;
     }
     .staff-dashboard-button-icon-HO {
-        padding-left: 40px;
-        padding-right: 40px;
-        width: 50px;
-        height: 50px;
+        padding-left: 30px;
+        padding-right: 30px;
+        width: 30px;
+        height: 30px;
     }
 }

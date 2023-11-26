@@ -39,9 +39,11 @@ function UserDashboardGeneral() {
           <div className='user-dashboard-buttons-general'>
             <div className='user-dashboard-buttons-row-general'>
               <button className='user-dashboard-button-general' onClick={() => navigate('/userconman')}>
-                <img src={mc} alt='mc' className='user-dashboard-button-icon-general' />
-                MANAGE CONSIGNMENT
-                </button>
+                <div className='user-card-box-general'>
+                  <img src={mc} alt='mc' className='user-dashboard-button-icon-general' />
+                  <span>MANAGE CONSIGNMENT</span>
+                </div>
+              </button>
             </div>
           </div>
         </div>

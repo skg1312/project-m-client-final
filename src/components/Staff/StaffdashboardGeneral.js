@@ -40,20 +40,28 @@ function StaffDashboardGeneral() {
           <div className='staff-dashboard-buttons-general'>
             <div className='staff-dashboard-buttons-row-general'>
               <button className='staff-dashboard-button-general' onClick={() => navigate('/staffsellman')}>
-                <img src={mu} alt='mu' className='staff-dashboard-button-icon-general' />
-                MANAGE SELLERS
+                <div className='staff-card-box-general'>
+                  <img src={mu} alt='mu' className='staff-dashboard-button-icon-general' />
+                  <span>MANAGE SELLERS</span>
+                </div>
               </button>
               <button className='staff-dashboard-button-general' onClick={() => navigate('/staffbuyman')}>
-                <img src={ms} alt='ms' className='staff-dashboard-button-icon-general' />
-                MANAGE BUYERS
+                <div className='staff-card-box-general'>
+                  <img src={ms} alt='ms' className='staff-dashboard-button-icon-general' />
+                  <span>MANAGE BUYERS</span>
+                </div>
               </button>
               <button className='staff-dashboard-button-general' onClick={() => navigate('/staffinvdash')}>
-                <img src={mi} alt='mi' className='staff-dashboard-button-icon-general' />
-                MANAGE INVOICE
+                <div className='staff-card-box-general'>
+                  <img src={mi} alt='mi' className='staff-dashboard-button-icon-general' />
+                  <span>MANAGE INVOICE</span>
+                </div>
               </button>
               <button className='staff-dashboard-button-general' onClick={() => navigate('/staffconman')}>
-                <img src={mc} alt='mc' className='staff-dashboard-button-icon-general' />
-                MANAGE CONSIGNMENT
+                <div className='staff-card-box-general'>
+                  <img src={mc} alt='mc' className='staff-dashboard-button-icon-general' />
+                  <span>MANAGE CONSIGNMENT</span>
+                </div>
               </button>
             </div>
           </div>

@@ -32,7 +32,7 @@ function UserInvoiceManagement() {
 
     const ViewInvoice = () => {
         if (selectedInvoiceId) {
-            window.location = `/invoice/${selectedInvoiceId}`;
+            window.location = `${API}download/${selectedInvoiceId}`;
         }
     };
 

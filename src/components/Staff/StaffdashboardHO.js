@@ -40,31 +40,41 @@ function StaffDashboardHO() {
           <div className='staff-dashboard-buttons-HO'>
             <div className='staff-dashboard-buttons-row-HO'>
               <button className='staff-dashboard-button-HO' onClick={() => navigate('/staffsellman')}>
-                <img src={mu} alt='mu' className='staff-dashboard-button-icon-HO' />
-                MANAGE SELLERS
-                </button>
+                <div className='staff-card-box-HO'>
+                  <img src={mu} alt='mu' className='staff-dashboard-button-icon-HO' />
+                  <span>MANAGE SELLERS</span>
+                </div>
+              </button>
               <button className='staff-dashboard-button-HO' onClick={() => navigate('/staffbuyman')}>
-                <img src={ms} alt='ms' className='staff-dashboard-button-icon-HO' />
-                MANAGE BUYERS
-                </button>
-                <button className='staff-dashboard-button-HO' onClick={() => navigate('/staffcomman')}>
-                <img src={ms} alt='ms' className='staff-dashboard-button-icon-HO' />
-                MANAGE COMPANY
-                </button>
-            </div>
-            <div className='staff-dashboard-buttons-row-HO'>
+                <div className='staff-card-box-HO'>
+                  <img src={ms} alt='ms' className='staff-dashboard-button-icon-HO' />
+                  <span>MANAGE BUYERS</span>
+                </div>
+              </button>
+              <button className='staff-dashboard-button-HO' onClick={() => navigate('/staffcomman')}>
+                <div className='staff-card-box-HO'>
+                  <img src={ms} alt='ms' className='staff-dashboard-button-icon-HO' />
+                  <span>MANAGE COMPANY</span>
+                </div>
+              </button>
               <button className='staff-dashboard-button-HO' onClick={() => navigate('/staffvecman')}>
-                <img src={mv} alt='mv' className='staff-dashboard-button-icon-HO' />
-                MANAGE VECHICLES
-                </button>
+                <div className='staff-card-box-HO'>
+                  <img src={mv} alt='mv' className='staff-dashboard-button-icon-HO' />
+                  <span>MANAGE VECHICLES</span>
+                </div>
+              </button>
               <button className='staff-dashboard-button-HO' onClick={() => navigate('/staffinvdash')}>
-                <img src={mi} alt='mi' className='staff-dashboard-button-icon-HO' />
-                MANAGE INVOICE
-                </button>
-                <button className='staff-dashboard-button-HO' onClick={() => navigate('/staffconman')}>
-                <img src={mc} alt='mc' className='staff-dashboard-button-icon-HO' />
-                MANAGE CONSIGNMENT
-                </button>
+                <div className='staff-card-box-HO'>
+                  <img src={mi} alt='mi' className='staff-dashboard-button-icon-HO' />
+                  <span>MANAGE INVOICE</span>
+                </div>
+              </button>
+              <button className='staff-dashboard-button-HO' onClick={() => navigate('/staffconman')}>
+                <div className='staff-card-box-HO'>
+                  <img src={mc} alt='mc' className='staff-dashboard-button-icon-HO' />
+                  <span>MANAGE CONSIGNMENT</span>
+                </div>
+              </button>
             </div>
           </div>
         </div>

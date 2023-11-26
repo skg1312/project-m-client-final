@@ -41,25 +41,30 @@ function UserDashboardHO() {
         <h1 className='user-dashboard-title-HO'>MAIN MENU</h1>
           <div className='user-dashboard-buttons-HO'>
             <div className='user-dashboard-buttons-row-HO'>
-              
               <button className='user-dashboard-button-HO' onClick={() => navigate('/usersellman')}>
-                <img src={mu} alt='mu' className='user-dashboard-button-icon-HO' />
-                MANAGE SELLERS
-                </button>
+                <div className='user-card-box-HO'>
+                  <img src={mu} alt='mu' className='user-dashboard-button-icon-HO' />
+                  <span>MANAGE SELLERS</span>
+                </div> 
+              </button>
               <button className='user-dashboard-button-HO' onClick={() => navigate('/userbuyman')}>
-                <img src={ms} alt='ms' className='user-dashboard-button-icon-HO' />
-                MANAGE BUYERS
-                </button>
-            </div>
-            <div className='user-dashboard-buttons-row-HO'>
-            <button className='user-dashboard-button-HO' onClick={() => navigate('/usercomman')}>
-                <img src={gr} alt='gr' className='user-dashboard-button-icon-HO' />
-                MANAGE COMPANY
-                </button>
+                <div className='user-card-box-HO'>
+                  <img src={ms} alt='ms' className='user-dashboard-button-icon-HO' />
+                  <span>MANAGE BUYERS</span>
+                </div>
+              </button>
+              <button className='user-dashboard-button-HO' onClick={() => navigate('/usercomman')}>
+                <div className='user-card-box-HO'>
+                  <img src={gr} alt='gr' className='user-dashboard-button-icon-HO' />
+                  <span>MANAGE COMPANY</span>
+                </div>
+              </button>
               <button className='user-dashboard-button-HO' onClick={() => navigate('/userconman')}>
-                <img src={mc} alt='mc' className='user-dashboard-button-icon-HO' />
-                MANAGE CONSIGNMENT
-                </button>
+                <div className='user-card-box-HO'>
+                  <img src={mc} alt='mc' className='user-dashboard-button-icon-HO' />
+                  <span>MANAGE CONSIGNMENT</span>
+                </div>
+              </button>
             </div>
           </div>
         </div>

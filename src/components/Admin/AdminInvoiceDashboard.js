@@ -32,14 +32,17 @@ function AdminInvoiceDashboard() {
           <div className='admin-in-dashboard-buttons'>
             <div className='admin-in-dashboard-buttons-row'>
               <button className='admin-in-dashboard-button' onClick={() => navigate('/admininman')}>
-                <img src={gr} alt='gr' className='admin-in-dashboard-button-icon' />
-                INOVICE MANAGEMENT
-                </button>
+                <div className='admin-in-card-box'>
+                  <img src={gr} alt='gr' className='admin-in-dashboard-button-icon' />
+                  <span>INOVICE MANAGEMENT</span>
+                </div>
+              </button>
               <button className='admin-in-dashboard-button' onClick={() => navigate('/admincreinv')}>
-                <img src={ad} alt='mu' className='admin-in-dashboard-button-icon' />
-                CREATE INVOICE
-                </button>
-
+                <div className='admin-in-card-box'>
+                  <img src={ad} alt='mu' className='admin-in-dashboard-button-icon' />
+                  <span>CREATE INVOICE</span>
+                </div>
+              </button>
             </div>
           </div>
         </div>

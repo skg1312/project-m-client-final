@@ -46,7 +46,8 @@ import UserInvoiceManagement from './components/User/UserInvoiceManage';
 import UserReports from './components/User/UserReport';
 import UserCreateInvoice from './components/User/UserCreateInvoice';
 import PdfViewer from './components/Admin/AdminInvoiceView';
-
+import StaffPdfViewer from './components/Staff/StaffInvoiceView';
+import UserPdfViewer from './components/User/UserInvoiceView';
 
 function App() {
   return (
@@ -212,7 +213,12 @@ function App() {
               <StaffVechicleManage />
             </ReqStaffAuth>
           } />
-
+            <Route path='/staffinvview' element={
+            <ReqStaffAuth>
+              {/* responsive */}
+              <StaffPdfViewer />
+            </ReqStaffAuth>
+          } />
           </Routes>
           
 
@@ -291,6 +297,12 @@ function App() {
             <ReqUserAuth>
               {/* responsive */}
               <UserCreateInvoice />
+            </ReqUserAuth>
+           } />
+            <Route path='/userinvview' element={
+            <ReqUserAuth>
+              {/* responsive */}
+              <UserPdfViewer />
             </ReqUserAuth>
            } />
           </Routes>

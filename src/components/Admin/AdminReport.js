@@ -183,11 +183,26 @@ function AdminReports() {
                                 <tbody className="reports-data-body-table-day-body">
                                     {displayedInvoiceSearch.map((invoice) => (
                                         <tr key={invoice._id} className="reports-data-body-table-day-body-row">
-                                        <td className="reports-data-body-table-day-body-row-item">{invoice.invoicedetails.invoicedate}</td>
+                                        <td className="reports-data-body-table-day-body-row-item">{invoice.invoicedetails.invoicedate ?
+    new Date(invoice.invoicedetails.invoicedate).toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    }) : 'N/A'}</td>
                                         <td className="reports-data-body-table-day-body-row-item">{invoice.invoicedetails.invoiceno}</td>
-                                        <td className="reports-data-body-table-day-body-row-item">{invoice.invoicedetails.ordereddate}</td>
+                                        <td className="reports-data-body-table-day-body-row-item">{invoice.invoicedetails.ordereddate ?
+    new Date(invoice.invoicedetails.ordereddate).toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    }) : 'N/A'}</td>
                                         <td className="reports-data-body-table-day-body-row-item">{invoice.boardingdetails.totalcost}</td>
-                                        <td className="reports-data-body-table-day-body-row-item">{invoice.invoicedetails.deliverynotedate}</td>
+                                        <td className="reports-data-body-table-day-body-row-item">{invoice.invoicedetails.deliverynotedate ?
+    new Date(invoice.invoicedetails.deliverynotedate).toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    }) : 'N/A'}</td>
                                     </tr>
                                     ))}
                                 </tbody>

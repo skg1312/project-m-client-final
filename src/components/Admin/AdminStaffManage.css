@@ -197,7 +197,7 @@
   }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (min-width: 451px) and (max-width: 768px) {
   .admin-staff-manager-data {
     margin-left: 15px;
     margin-top: 100px;
@@ -295,6 +295,116 @@
     font-feature-settings: 'clig' off, 'liga' off;
     font-family: "Urbanist";
     font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 26px;
+    letter-spacing: -0.289px;
+    width: 170px;
+    height: 45px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    border: 1px solid #5925DC;
+    background: #5925DC;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .admin-staff-manager-data {
+    margin-left: 10px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    margin-right: 10px;
+    border-radius: 12px;
+    border: 2px solid #D2D2D2;
+  }
+  .admin-staff-manager-form {
+    margin-left: 10px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    margin-right: 10px;
+    border-radius: 12px;
+    border: 2px solid #D2D2D2;
+  }
+  .admin-staff-manager-data-title {
+    font-family: "Urbanist";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 38px;
+    letter-spacing: -0.578px;
+    text-align: left;
+    padding-left: 50px;
+  }
+  .admin-staff-manager-data-table-head {
+    color: #1A1A1A;
+   font-family: "Urbanist";
+    font-size: 10px;
+    font-style: bold;
+  }
+  .admin-staff-manager-data-table-body {
+    color: #767676;
+    font-family: "Urbanist";
+     font-size: 8px;
+     font-style: bold;
+     font-weight: 400;
+     line-height: 28px;
+     letter-spacing: -0.289px;
+  }
+  .admin-staff-manager-data-table-button {
+    color: #FEFEFE;
+    font-family: "Urbanist";
+    font-size: 8px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 28px;
+    letter-spacing: -0.325px;
+    background-color: #5925DC;
+    border-radius: 3px;
+    border: 1px solid #5925DC;
+  }
+  .admin-staff-manager-form-input {
+    border-radius: 6px;
+    border: 1px solid #ededed;
+    background: #EDEDED;
+    height: 35px;
+    width: 75%;
+    margin-bottom: 20px;
+    color: var(--color-grey-60, #767676);
+   font-family: "Urbanist";
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 26px;
+    letter-spacing: -0.289px;
+  }
+  .admin-staff-manager-form-title {
+    font-family: "Urbanist";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 38px;
+    letter-spacing: -0.578px;
+    text-align: left;
+    padding-left: 50px;
+  }
+  .admin-staff-manager-form-input-checkbox-label {
+    color: #1A1A1A;
+    font-feature-settings: 'clig' off, 'liga' off;
+   font-family: "Urbanist";
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 26px;
+    letter-spacing: -0.289px;
+  }
+  .admin-staff-manager-form-button {
+    color: #FEFEFE;
+    text-align: center;
+    font-feature-settings: 'clig' off, 'liga' off;
+   font-family: "Urbanist";
+    font-size: 10px;
     font-style: normal;
     font-weight: 600;
     line-height: 26px;

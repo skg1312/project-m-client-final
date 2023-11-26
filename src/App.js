@@ -58,79 +58,79 @@ function App() {
             <Route path='/' element={<AdminLogin />} />
             <Route path='/admindashboard' element={
               <ReqAdminAuth>
-                {/* responsive */}
+                
                 <AdminDashboard />
               </ReqAdminAuth>
             } />
             <Route path='/admininvdash' element={
               <ReqAdminAuth>
-                {/* responsive */}
+                
                 <AdminInvoiceDashboard />
               </ReqAdminAuth>
             } />
             <Route path='/adminbuyman' element={
               <ReqAdminAuth>
-                {/* responsive */}
+                
                 <AdminBuyerManage />
               </ReqAdminAuth>
             } />
             <Route path='/adminsellman' element={
               <ReqAdminAuth>
-                {/* responsive */}
+                
                 <AdminSellerManage />
               </ReqAdminAuth>
             } />
             <Route path='/admincomman' element={
               <ReqAdminAuth>
-                {/* responsive */}
+                
                 <AdminCompanyManage />
               </ReqAdminAuth>
             } />
             <Route path='/adminconman' element={
               <ReqAdminAuth>
-                {/* responsive */}
+                
                 <AdminConsignmentManage />
               </ReqAdminAuth>
             } />
             <Route path='/adminstaffman' element={
               <ReqAdminAuth>
-                {/* responsive */}
+                
                 <AdminStaffManage />
               </ReqAdminAuth>
             } />
             <Route path='/adminuserman' element={
               <ReqAdminAuth>
-                {/* responsive */}
+                
                 <AdminUserManage />
               </ReqAdminAuth>
             } />
             <Route path='/adminvecman' element={
               <ReqAdminAuth>
-                {/* responsive */}
+                
                 <AdminVechicleManage />
               </ReqAdminAuth>
             } />
             <Route path='/admingenrep' element={
               <ReqAdminAuth>
-                {/* responsive */}
+                
                 <AdminReports />
               </ReqAdminAuth>
             } />
             <Route path='/admininman' element={
               <ReqAdminAuth>
-                {/* responsive */}
+                
                 <AdminInvoiceManagement />
                 </ReqAdminAuth>
             } />
             <Route path='/admincreinv' element={
               <ReqAdminAuth>
-                {/* responsive */}
+                
                 <AdminCreateInvoice />
                 </ReqAdminAuth>
             } />
             <Route path='/admininvview' element={
               <ReqAdminAuth>
-                {/* responsive */}
+                
                 <PdfViewer />
                 </ReqAdminAuth>
             } />
@@ -143,72 +143,73 @@ function App() {
             <Route path='/staff' element={<StaffLogin />} />
             <Route path='/staffinvdash' element={
             <ReqStaffAuth>
-              {/* responsive */}
+              
               <StaffInvoiceDashboard />
             </ReqStaffAuth>
           } />
             <Route path='/staffsuperdash' element={
             <ReqStaffAuth>
-              {/* responsive */}
+              
               <StaffDashboard />
             </ReqStaffAuth>
           } />
             <Route path='/staffhodash' element={
             <ReqStaffAuth>
-              {/* responsive */}
+              
               <StaffDashboardHO />
             </ReqStaffAuth>
           } />
             <Route path='/staffgendash' element={
             <ReqStaffAuth>
+              
               <StaffDashboardGeneral />
             </ReqStaffAuth>
           } />
             <Route path='/staffbuyman' element={
             <ReqStaffAuth>
-              {/* responsive */}
+              
               <StaffBuyerManage />
             </ReqStaffAuth>
           } />
             <Route path='/staffcrein' element={
             <ReqStaffAuth>
-              {/* responsive */}
+              
               <StaffCreateInvoice />
             </ReqStaffAuth>
           } />
             <Route path='/staffinman' element={
             <ReqStaffAuth>
-              {/* responsive */}
+              
               <StaffInvoiceManagement />
             </ReqStaffAuth>
           } />
             <Route path='/staffgenrep' element={
             <ReqStaffAuth>
-              {/* responsive */}
+              
               <StaffReports />
             </ReqStaffAuth>
           } />
             <Route path='/staffsellman' element={
             <ReqStaffAuth>
-              {/* responsive */}
+              
               <StaffSellerManage />
             </ReqStaffAuth>
           } />
             <Route path='/staffcomman' element={
             <ReqStaffAuth>
-              {/* responsive */}
+              
               <StaffCompanyManage />
             </ReqStaffAuth>
           } />
             <Route path='/staffconman' element={
             <ReqStaffAuth>
-              {/* responsive */}
+              
               <StaffConsignmentManage />
             </ReqStaffAuth>
           } />
             <Route path='/staffvecman' element={
             <ReqStaffAuth>
-              {/* responsive */}
+              
               <StaffVechicleManage />
             </ReqStaffAuth>
           } />
@@ -224,72 +225,73 @@ function App() {
             <Route path='/user' element={<UserLogin />} />
             <Route path='/userinvdash' element={
             <ReqUserAuth>
-              {/* responsive */}
+              
               <UserInvoiceDashboard />
             </ReqUserAuth>
             } />
             <Route path='/usersuperdash' element={
             <ReqUserAuth>
-              {/* responsive */}
+              
               <UserDashboard />
             </ReqUserAuth>
           } />
             <Route path='/userhodash' element={
             <ReqUserAuth>
-              {/* responsive */}
+              
               <UserDashboardHO />
             </ReqUserAuth>
           } />
             <Route path='/usergendash' element={
             <ReqUserAuth>
+              
               <UserDashboardGeneral />
             </ReqUserAuth>
           } />
             <Route path='/userbuyman' element={
             <ReqUserAuth>
-              {/* responsive */}
+              
               <UserBuyerManage />
             </ReqUserAuth>
           } />
             <Route path='/usersellman' element={
             <ReqUserAuth>
-              {/* responsive */}
+              
               <UserSellerManage />
             </ReqUserAuth>
           } />
             <Route path='/usercomman' element={
             <ReqUserAuth>
-              {/* responsive */}
+              
               <UserCompanyManage />
             </ReqUserAuth>
           } />
             <Route path='/userconman' element={
             <ReqUserAuth>
-              {/* responsive */}
+              
               <UserConsignmentManage />
             </ReqUserAuth>
           } />
             <Route path='/uservecman' element={
             <ReqUserAuth>
-              {/* responsive */}
+              
               <UserVechicleManage />
             </ReqUserAuth>
           } />
             <Route path='/userinman' element={
             <ReqUserAuth>
-              {/* responsive */}
+              
               <UserInvoiceManagement />
             </ReqUserAuth> 
           } />
             <Route path='/usergenrep' element={
             <ReqUserAuth>
-              {/* responsive */}
+              
               <UserReports />
             </ReqUserAuth>
            } />
             <Route path='/usercrein' element={
             <ReqUserAuth>
-              {/* responsive */}
+              
               <UserCreateInvoice />
             </ReqUserAuth>
            } />

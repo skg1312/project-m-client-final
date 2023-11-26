@@ -356,15 +356,21 @@
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
         border-radius: 100px;
         border: 1px solid #5925DC;
-        width: 83%;
+        width: 95%;
         height: 52px;
-        margin: auto 30px;
+        margin: auto 5px;
        font-family: "Urbanist";
-        font-size: 20px;
+        font-size: 15px;
         font-style: bold;
         font-weight: 600;
         line-height: 28px;
         letter-spacing: -0.289px;
+    }
+    .reports-data-header-button{
+        background-color: #fff;
+        color: #5925DC;
+        border: 1px solid #5925DC;
+        font-size: 9px;
     }
     .export-button {
         margin-left: 25px;
@@ -372,10 +378,11 @@
         border-radius: 15px;
         border: 2px solid #5925DC;
         width: 100px;
-        height: 30px;
-       font-family: "Urbanist";
+        height: 25px;
+        font-family: "Urbanist";
         text-decoration: none !important;
-        font-size: 20px;
+        font-size: 15px;
+        padding: 5px;
         font-style: normal;
         text-align: center;
         font-weight: 600;

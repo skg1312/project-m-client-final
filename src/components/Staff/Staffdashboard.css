@@ -82,8 +82,8 @@
         grid-template-columns: 1fr;
     }
     .staff-dashboard-button{
-        width: 300px;
-        height: 70px;
+        width: 250px;
+        height: 50px;
         border-radius: 15px;
         border: 2px solid #D2D2D2;
         background: none;
@@ -91,7 +91,7 @@
         margin: auto;
         margin-bottom: 20px;
         font-family: "Urbanist";
-        font-size: 14px;
+        font-size: 12px;
         font-style: normal;
         font-weight: 500;
         line-height: normal;
@@ -105,8 +105,8 @@
     .staff-dashboard-button-icon {
         padding-left: 30px;
         padding-right: 30px;
-        width: 50px;
-        height: 50px;
+        width: 30px;
+        height: 30px;
     }
     .staff-logout-button-value {
         display: grid;

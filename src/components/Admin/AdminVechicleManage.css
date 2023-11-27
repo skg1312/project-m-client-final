@@ -115,6 +115,9 @@
     margin-bottom: 20px;
     margin-top: 20px;
 }
+.admin-vechicle-manage-form-button:hover{
+  cursor: pointer;
+}
 .admin-vechicle-manage-form-input-checkbox{
     width: 16px;
     height: 16px;
@@ -140,6 +143,9 @@
     background-color: #5925DC;
     border-radius: 3px;
     border: 1px solid #5925DC;
+}
+.admin-vechicle-manage-data-table-button:hover{
+  cursor: pointer;
 }
 .pagination-container{
     display: flex;
@@ -171,6 +177,24 @@
 .pagination-container .disabled{
     color: #ada9a9;
     cursor: not-allowed;
+}
+
+@media only screen and (min-width: 1025px) and (max-width: 1218px){
+  .admin-vechicle-manage-form-input-low{
+    border-radius: 6px;
+    border: 1px solid #ededed;
+    background: #EDEDED;
+    height: 50px;
+    width: 86%;
+    margin-bottom: 20px;
+    color: var(--color-grey-60, #767676);
+   font-family: "Urbanist";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 26px; 
+    letter-spacing: -0.289px;
+  }
 }
 
 /* Mobile styles - 768px width and below */

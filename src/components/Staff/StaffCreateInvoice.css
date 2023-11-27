@@ -154,6 +154,9 @@
     margin-left: 40%;
     
 }
+.staff-create-invoice-button:hover{
+    cursor: pointer;
+  }
 
 /* Tablet Styles */
 @media only screen and (max-width: 768px) {

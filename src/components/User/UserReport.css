@@ -35,6 +35,10 @@
     color: #5925DC;
     border: 1px solid #5925DC;
 }
+.reports-data-header-button:hover{
+    cursor: pointer;
+    background-color: #f1eaff;
+}
 .reports-data-header-button:active{
     background-color: #5925DC;
     color: #fff;

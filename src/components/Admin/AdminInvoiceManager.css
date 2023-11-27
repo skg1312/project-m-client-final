@@ -66,6 +66,9 @@
   height: 30px;
   margin-left: 10px;
 }
+.invoice-management-data-body-table-data-button:hover{
+  cursor: pointer;
+}
 
 .pagination-container{
   display: flex;

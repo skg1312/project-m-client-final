@@ -689,7 +689,7 @@ function UserCreateInvoice() {
         </div>
         </form>
         <div className='user-create-invoice-data'>
-      <h2 className='user-create-invoice-subtitle'>VECHICLE DETAILS</h2>
+      <h2 className='user-create-invoice-subtitle'>VEHICLE DETAILS</h2>
       <select
   className='user-create-invoice-select'
   id="vehicleid"
@@ -780,7 +780,7 @@ function UserCreateInvoice() {
         <div className='user-create-invoice-form-div'>
         <label className='user-create-invoice-form-label'
         htmlFor="vehiclenumber"
-        >Vechicle Number</label>
+        >Vehicle Number</label>
         <input className='user-create-invoice-form-input' 
         id="vechiclenuumber"
         name="vechiclenuumber"
@@ -794,7 +794,7 @@ function UserCreateInvoice() {
         <div className='user-create-invoice-form-div'>
         <label className='user-create-invoice-form-label'
         htmlFor="vehiclemodel"
-        >Vechicle Model</label>
+        >Vehicle Model</label>
         <input className='user-create-invoice-form-input'
         id="vechiclemodel"
         name="vechiclemodel"
@@ -808,7 +808,7 @@ function UserCreateInvoice() {
         <div className='user-create-invoice-form-div'>
         <label className='user-create-invoice-form-label'
         htmlFor="vehicleofficebranch"
-        >Vechicle office branch</label>
+        >Vehicle office branch</label>
         <input className='user-create-invoice-form-input'  
         id="vechicleofficebranch"
         name="vechicleofficebranch"

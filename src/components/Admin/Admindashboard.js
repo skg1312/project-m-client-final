@@ -65,7 +65,7 @@ function Admindashboard() {
               <button className='admin-dashboard-button'  onClick={() => navigate('/adminvecman')}>
                 <div className='admin-card-box'>
                   <img src={vs} alt='' className='admin-dashboard-button-icon' />
-                  <span>MANAGE VECHICLES</span>
+                  <span>MANAGE VEHICLES</span>
                 </div>
               </button>
               <button className='admin-dashboard-button'  onClick={() => navigate('/admincomman')}>

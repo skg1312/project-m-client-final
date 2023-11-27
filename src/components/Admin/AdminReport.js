@@ -132,7 +132,7 @@ function AdminReports() {
                         </button>
                         <button className="reports-data-header-button" value="day" onClick={() =>{ changeTable('day'); exportDayWiseReport(); }}>Day Wise Report</button>
                         <button className="reports-data-header-button" value="item" onClick={() =>{ changeTable('item'); exportItemWiseReport();}}>Item Wise Report</button>
-                        <button className="reports-data-header-button" value="vechicle" onClick={() =>{ changeTable('vechicle'); exportVehicleWiseReport();}}>Vechicle Wise Report</button>
+                        <button className="reports-data-header-button" value="vechicle" onClick={() =>{ changeTable('vechicle'); exportVehicleWiseReport();}}>Vehicle Wise Report</button>
                         <button className="reports-data-header-button end" value="driver" onClick={() =>{ changeTable('driver'); exportDriverWiseReport();}}>Driver Wise Report</button>
                     </div>
                     <div className="reports-data-top">
@@ -263,7 +263,7 @@ function AdminReports() {
                             <table className="reports-data-body-table-vechicle">
                                 <thead className="reports-data-body-table-vechicle-head">
                                     <tr className="reports-data-body-table-vechicle-head-row">
-                                        <th className="reports-data-body-table-vechicle-head-row-item">Vechicle</th>
+                                        <th className="reports-data-body-table-vechicle-head-row-item">Vehicle</th>
                                         <th className="reports-data-body-table-vechicle-head-row-item">Transportation Cost</th>
                                         <th className="reports-data-body-table-vechicle-head-row-item">Total Cost</th>
                                         <th className="reports-data-body-table-vechicle-head-row-item">Driver</th>

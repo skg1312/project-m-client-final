@@ -688,7 +688,7 @@ function StaffCreateInvoice() {
         </div>
         </form>
         <div className='staff-create-invoice-data'>
-      <h2 className='staff-create-invoice-subtitle'>VECHICLE DETAILS</h2>
+      <h2 className='staff-create-invoice-subtitle'>VEHICLE DETAILS</h2>
       <select
   className='staff-create-invoice-select'
   id="vehicleid"
@@ -779,7 +779,7 @@ function StaffCreateInvoice() {
         <div className='staff-create-invoice-form-div'>
         <label className='staff-create-invoice-form-label'
         htmlFor="vehiclenumber"
-        >Vechicle Number</label>
+        >Vehicle Number</label>
         <input className='staff-create-invoice-form-input' 
         id="vechiclenuumber"
         name="vechiclenuumber"
@@ -793,7 +793,7 @@ function StaffCreateInvoice() {
         <div className='staff-create-invoice-form-div'>
         <label className='staff-create-invoice-form-label'
         htmlFor="vehiclemodel"
-        >Vechicle Model</label>
+        >Vehicle Model</label>
         <input className='staff-create-invoice-form-input'
         id="vechiclemodel"
         name="vechiclemodel"
@@ -807,7 +807,7 @@ function StaffCreateInvoice() {
         <div className='staff-create-invoice-form-div'>
         <label className='staff-create-invoice-form-label'
         htmlFor="vehicleofficebranch"
-        >Vechicle office branch</label>
+        >Vehicle office branch</label>
         <input className='staff-create-invoice-form-input'  
         id="vechicleofficebranch"
         name="vechicleofficebranch"

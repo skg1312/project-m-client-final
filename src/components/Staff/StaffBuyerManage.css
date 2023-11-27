@@ -327,4 +327,8 @@
     border-radius: 3px;
     border: 1px solid #5925DC;
   }
+  .staff-buyer-manage-form-input-checkbox {
+    width: 12px;
+    height: 12px;
+  }
 }

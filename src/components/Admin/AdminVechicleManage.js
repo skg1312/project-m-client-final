@@ -119,7 +119,7 @@ function AdminVechicleManage() {
       <AdminNavbar />
       <div className='admin-vechicle-manage'>
         <div className='admin-vechicle-manage-data'>
-          <h1 className='admin-vechicle-manage-data-title'>ALL VECHICLE</h1>
+          <h1 className='admin-vechicle-manage-data-title'>ALL VEHICLES</h1>
           <input
               type='text'
               placeholder='Search User...'
@@ -131,8 +131,8 @@ function AdminVechicleManage() {
             <thead className='admin-vechicle-manage-data-table-head'>
               <tr className='admin-vechicle-manage-data-table-row-head'>
                 <th className='admin-vechicle-manage-data-table-header'>Driver Name</th>
-                <th className='admin-vechicle-manage-data-table-header'>vechicle Number</th>
-                <th className='admin-vechicle-manage-data-table-header'>vechicle Model</th>
+                <th className='admin-vechicle-manage-data-table-header'>Vechicle Number</th>
+                <th className='admin-vechicle-manage-data-table-header'>Vechicle Model</th>
                 <th className='admin-vechicle-manage-data-table-header'>Driver Number</th>
                 <th className='admin-vechicle-manage-data-table-header'>Action</th>
               </tr>

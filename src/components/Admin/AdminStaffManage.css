@@ -404,8 +404,8 @@
     margin-top: 20px;
   }
   .admin-staff-manage-form-input-checkbox {
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
   }
   .admin-staff-manage-form-input-checkbox-label{
     color: var(--color-grey-100, #1A1A1A);

@@ -25,6 +25,14 @@
     font-size: 20px;
     background-color: #fff;
     color: #000;
+    transition: background-color 0.3s, box-shadow 0.3s; /* Add a smooth transition for a better visual effect */
+  }
+  .admin-logout-button-value-no-img:hover{
+    background-color: #f1eaff;
+    color: #333;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add a box shadow for a subtle elevation effect */
+    z-index: 1; /* Adjust the z-index as needed to control the stacking order */
   }
 
   @media only screen and (max-width: 768px) {

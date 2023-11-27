@@ -802,7 +802,7 @@ function AdminCreateInvoice() {
                         <input
                          className='admin-create-invoice-table-consigment-input'
                           type="number"
-disabled
+
 value={selectedConsignment.itemquantity}
                           onChange={(e) =>
                             handleConsignmentChange(e, "itemquantity")
@@ -835,7 +835,7 @@ value={selectedConsignment.itemquantity}
                         <input
                          className='admin-create-invoice-table-consigment-input'
                           type="number"
-disabled
+
 value={selectedConsignment.itemtaxrate}
                           onChange={(e) =>
                            handleConsignmentChange(e, "itemtaxrate")

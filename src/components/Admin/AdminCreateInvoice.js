@@ -805,7 +805,7 @@ function AdminCreateInvoice() {
 disabled
 value={selectedConsignment.itemquantity}
                           onChange={(e) =>
-                            handleChange(e, "itemquantity")
+                            handleConsignmentChange(e, "itemquantity")
                           }
                         />
                       </td>
@@ -838,7 +838,7 @@ value={selectedConsignment.itemquantity}
 disabled
 value={selectedConsignment.itemtaxrate}
                           onChange={(e) =>
-                            handleChange(e, "itemtaxrate")
+                           handleConsignmentChange(e, "itemtaxrate")
                           }
                         />
                       </td>

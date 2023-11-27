@@ -217,14 +217,6 @@ function AdminUserManage() {
               type='text'
               required
               className='admin-user-manage-form-input'
-              placeholder='ID Proof'
-              value={selectedUserData.useridproof || ''}
-              onChange={(e) => setSelectedUserData({ ...selectedUserData, useridproof: e.target.value })}
-            />
-            <input
-              type='text'
-              required
-              className='admin-user-manage-form-input'
               placeholder='Address'
               value={selectedUserData.useraddress || ''}
               onChange={(e) => setSelectedUserData({ ...selectedUserData, useraddress: e.target.value })}

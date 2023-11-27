@@ -351,6 +351,108 @@
         border-radius: 15px;
         border: 2px solid #D2D2D2;
     }
+    .reports-data-body {
+        display: flex;
+        width: 100%;
+        border-radius: 15px;
+        background: #F4F3FF;
+        margin: 5px;
+    }
+    .reports-data-body-table-load-head-row {
+        font-family: "Urbanist";
+        font-size: 15px;
+        font-style: bold;
+        font-weight: 600;
+        line-height: 28px;
+        letter-spacing: -0.289px;
+        color: #767676;
+    }
+    .reports-data-body-table-load-body {
+        font-family: "Urbanist";
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 28px;
+        letter-spacing: -0.289px;
+        color: #767676;
+        text-align: center;
+    }
+    .reports-data-body-table-day-head-row {
+        font-family: "Urbanist";
+        font-size: 15px;
+        font-style: bold;
+        font-weight: 600;
+        line-height: 28px;
+        letter-spacing: -0.289px;
+        color: #767676;
+    }
+    .reports-data-body-table-day-body {
+        font-family: "Urbanist";
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 28px;
+        letter-spacing: -0.289px;
+        color: #767676;
+        text-align: center;
+    }
+    .reports-data-body-table-item-head-row {
+        font-family: "Urbanist";
+        font-size: 15px;
+        font-style: bold;
+        font-weight: 600;
+        line-height: 28px;
+        letter-spacing: -0.289px;
+        color: #767676;
+    }
+    .reports-data-body-table-item-body {
+        font-family: "Urbanist";
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 28px;
+        letter-spacing: -0.289px;
+        color: #767676;
+        text-align: center;
+    }
+    .reports-data-body-table-vechicle-head-row {
+        font-family: "Urbanist";
+        font-size: 15px;
+        font-style: bold;
+        font-weight: 600;
+        line-height: 28px;
+        letter-spacing: -0.289px;
+        color: #767676;
+    }
+    .reports-data-body-table-vechicle-body {
+        font-family: "Urbanist";
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 28px;
+        letter-spacing: -0.289px;
+        color: #767676;
+        text-align: center;
+    }
+    .reports-data-body-table-driver-head-row {
+        font-family: "Urbanist";
+        font-size: 15px;
+        font-style: bold;
+        font-weight: 600;
+        line-height: 28px;
+        letter-spacing: -0.289px;
+        color: #767676;
+    }
+    .reports-data-body-table-driver-body {
+        font-family: "Urbanist";
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 28px;
+        letter-spacing: -0.289px;
+        color: #767676;
+        text-align: center;
+    }
     .reports-data-header {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -404,5 +506,12 @@
         font-weight: 400;
         line-height: 28px;
         letter-spacing: -0.289px;
+    }
+    .pagination-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        list-style-type: none;
+        margin-right: 30px;
     }
 }

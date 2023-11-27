@@ -56,7 +56,7 @@ function App() {
         {/* Admin Routes */}
         <AdminAuthProvider>
           <Routes>
-            <Route path='/' element={<AdminLogin />} />
+            {/* <Route path='/' element={<AdminLogin />} /> */}
             <Route path='/admindashboard' element={
               <ReqAdminAuth>
                 
@@ -216,7 +216,7 @@ function App() {
           } />
             <Route path='/staffinvview' element={
             <ReqStaffAuth>
-              {/* responsive */}
+              
               <StaffPdfViewer />
             </ReqStaffAuth>
           } />
@@ -303,7 +303,7 @@ function App() {
            } />
             <Route path='/userinvview' element={
             <ReqUserAuth>
-              {/* responsive */}
+              
               <UserPdfViewer />
             </ReqUserAuth>
            } />

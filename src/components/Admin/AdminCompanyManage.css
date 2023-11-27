@@ -553,4 +553,8 @@
     border-radius: 3px;
     border: 1px solid #5925DC;
   }
+  .admin-company-manage-form-input-checkbox {
+    width: 10px;
+    height: 10px;
+  }
 }

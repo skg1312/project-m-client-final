@@ -61,6 +61,9 @@
     border-radius: 3px;
     border: 1px solid #5925DC;
   }
+  .staff-company-manager-data-table-button:hover{
+    cursor: pointer;
+  }
   
   .pagination-container {
     display: flex;
@@ -168,6 +171,9 @@
     background: var(--color-primary-1, #5925DC);
     margin-bottom: 20px;
     margin-top: 20px;
+  }
+  .staff-company-manager-form-button:hover{
+    cursor: pointer;
   }
   .highlight{
     color: green !important;

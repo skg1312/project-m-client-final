@@ -743,6 +743,7 @@ function AdminCreateInvoice() {
           handleChange(e, "vehicledetails", "vechiclemodel")
         }
         />
+          </div>
         </form>
         <div className='admin-create-invoice-data'>
       <h2 className='admin-create-invoice-subtitle'>CONSIGNMENT DETAILS</h2>

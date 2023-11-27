@@ -314,7 +314,7 @@
   }
   .admin-staff-manager-data-title {
     font-family: "Urbanist";
-    font-size: 20px;
+    font-size: 15px;
     font-style: normal;
     font-weight: 600;
     line-height: 38px;
@@ -366,7 +366,7 @@
   }
   .admin-staff-manager-form-title {
     font-family: "Urbanist";
-    font-size: 20px;
+    font-size: 15px;
     font-style: normal;
     font-weight: 600;
     line-height: 38px;
@@ -403,4 +403,18 @@
     margin-bottom: 20px;
     margin-top: 20px;
   }
+  .admin-staff-manage-form-input-checkbox {
+    width: 10px;
+    height: 10px;
+  }
+  .admin-staff-manage-form-input-checkbox-label{
+    color: var(--color-grey-100, #1A1A1A);
+    font-feature-settings: 'clig' off, 'liga' off;
+    font-family: "Urbanist";
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 26px;
+    letter-spacing: -0.289px;
+}
 }

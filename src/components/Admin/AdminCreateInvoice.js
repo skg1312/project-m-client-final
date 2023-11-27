@@ -377,7 +377,7 @@ function AdminCreateInvoice() {
           value={selectedCompany.companyid}
           onChange={handleSelectChangeCompany}
         >
-          <option value="">Select Company ID</option>
+          <option value="">Select Company</option>
           {companies.map((company) => (
             <option key={company._id} value={company._id}>
               {company.companyname}
@@ -511,7 +511,7 @@ function AdminCreateInvoice() {
       value={selectedSeller.sellerid}
       onChange={handleSelectChangeSeller}
       >
-        <option value="">Select Seller ID</option>
+        <option value="">Select Agent</option>
         {sellers.map((seller) => (
           <option key={seller._id} value={seller._id}>
             {seller.sellerid}
@@ -600,7 +600,7 @@ function AdminCreateInvoice() {
       value={selectedBuyer.buyerid}
       onChange={handleSelectChangeBuyer}
       >
-        <option value="">Select Buyer ID</option>
+        <option value="">Select Buyer</option>
         {buyers.map((buyer) => (
           <option key={buyer._id} value={buyer._id}>
             {buyer.buyerid}
@@ -802,8 +802,6 @@ function AdminCreateInvoice() {
                         <input
                          className='admin-create-invoice-table-consigment-input'
                           type="number"
-                          
-                          value={selectedConsignment.itemquantity}
                           onChange={(e) =>
                             handleChange(e, "itemquantity")
                           }
@@ -835,8 +833,6 @@ function AdminCreateInvoice() {
                         <input
                          className='admin-create-invoice-table-consigment-input'
                           type="number"
-                          
-                          value={selectedConsignment.itemtaxrate}
                           onChange={(e) =>
                             handleChange(e, "itemtaxrate")
                           }

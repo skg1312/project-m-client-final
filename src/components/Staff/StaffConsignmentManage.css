@@ -349,7 +349,7 @@
   }
   .staff-consignment-manage-data-title {
    font-family: "Urbanist";
-    font-size: 20px;
+    font-size: 15px;
     font-style: normal;
     font-weight: 600;
     line-height: 38px;
@@ -404,7 +404,7 @@
   }
   .staff-consignment-manage-form-title {
    font-family: "Urbanist";
-    font-size: 20px;
+    font-size: 15px;
     font-style: normal;
     font-weight: 600;
     line-height: 38px;
@@ -453,4 +453,8 @@
     border-radius: 3px;
     border: 1px solid #5925DC;
   }
+  .staff-consignment-manage-form-input-checkbox {
+    width: 10px;
+    height: 10px;
+}
 }

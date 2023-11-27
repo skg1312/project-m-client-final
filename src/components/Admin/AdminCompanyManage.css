@@ -409,7 +409,7 @@
   }
   .admin-company-manager-data-title {
     font-family: "Urbanist";
-    font-size: 20px;
+    font-size: 15px;
     font-style: normal;
     font-weight: 600;
     line-height: 38px;
@@ -464,7 +464,7 @@
   }
   .admin-company-manager-form-title {
     font-family: "Urbanist";
-    font-size: 20px;
+    font-size: 15px;
     font-style: normal;
     font-weight: 600;
     line-height: 38px;
@@ -521,10 +521,8 @@
     border: 1px solid #ededed;
     background: #EDEDED;
     height: 40px;
-    width: 35%;
-    margin-bottom: 20px;
-    margin-left: 20px;
-    margin-right: 20px;
+    width: 75%;
+    margin-bottom: 12px;
     color: var(--color-grey-60, #767676);
     font-family: "Urbanist";
     font-size: 10px;

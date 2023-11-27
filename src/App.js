@@ -56,7 +56,7 @@ function App() {
         {/* Admin Routes */}
         <AdminAuthProvider>
           <Routes>
-            {/* <Route path='/' element={<AdminLogin />} /> */}
+            <Route path='/' element={<AdminLogin />} />
             <Route path='/admindashboard' element={
               <ReqAdminAuth>
                 

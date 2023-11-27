@@ -117,7 +117,7 @@ function StaffVechicleManage() {
       <StaffNavbar />
       <div className='staff-vechicle-manage'>
         <div className='staff-vechicle-manage-data'>
-          <h1 className='staff-vechicle-manage-data-title'>ALL VECHICLE</h1>
+          <h1 className='staff-vechicle-manage-data-title'>ALL VEHICLES</h1>
           <input
               type='text'
               placeholder='Search Vechicle...'
@@ -129,9 +129,9 @@ function StaffVechicleManage() {
             <thead className='staff-vechicle-manage-data-table-head'>
               <tr className='staff-vechicle-manage-data-table-row-head'>
                 <th className='staff-vechicle-manage-data-table-header'>Driver Name</th>
-                <th className='staff-vechicle-manage-data-table-header'>vechicle Number</th>
-                <th className='staff-vechicle-manage-data-table-header'>vechicle Model</th>
-                <th className='staff-vechicle-manage-data-table-header'>driver Number</th>
+                <th className='staff-vechicle-manage-data-table-header'>Vehicle Number</th>
+                <th className='staff-vechicle-manage-data-table-header'>Vehicle Model</th>
+                <th className='staff-vechicle-manage-data-table-header'>Driver Number</th>
                 <th className='staff-vechicle-manage-data-table-header'>Action</th>
               </tr>
             </thead>

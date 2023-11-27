@@ -63,7 +63,7 @@ function UserDashboard() {
               <button className='user-dashboard-button' onClick={() => navigate('/uservecman')}>
                 <div className='user-card-box'>
                   <img src={mv} alt='mv' className='user-dashboard-button-icon' />
-                  <span>MANAGE VECHICLES</span>
+                  <span>MANAGE VEHICLES</span>
                 </div>
               </button>
               <button className='user-dashboard-button' onClick={() => navigate('/userinvdash')}>

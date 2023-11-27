@@ -320,4 +320,8 @@
     border-radius: 3px;
     border: 1px solid #5925DC;
   }
+  .user-seller-manage-form-input-checkbox{
+    width: 12px;
+    height: 12px;
+}
 }

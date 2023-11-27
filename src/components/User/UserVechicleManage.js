@@ -118,7 +118,7 @@ function UserVechicleManage() {
       <UserNavbar />
       <div className='user-vechicle-manage'>
         <div className='user-vechicle-manage-data'>
-          <h1 className='user-vechicle-manage-data-title'>ALL VECHICLE</h1>
+          <h1 className='user-vechicle-manage-data-title'>ALL VEHICLES</h1>
           <input
               type='text'
               placeholder='Search Vechicle...'
@@ -130,8 +130,8 @@ function UserVechicleManage() {
             <thead className='user-vechicle-manage-data-table-head'>
               <tr className='user-vechicle-manage-data-table-row-head'>
                 <th className='user-vechicle-manage-data-table-header'>Driver Name</th>
-                <th className='user-vechicle-manage-data-table-header'>Vechicle Number</th>
-                <th className='user-vechicle-manage-data-table-header'>Vechicle Model</th>
+                <th className='user-vechicle-manage-data-table-header'>Vehicle Number</th>
+                <th className='user-vechicle-manage-data-table-header'>Vehicle Model</th>
                 <th className='user-vechicle-manage-data-table-header'>Driver Number</th>
                 <th className='user-vechicle-manage-data-table-header'>Action</th>
               </tr>

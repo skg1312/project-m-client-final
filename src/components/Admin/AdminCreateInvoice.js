@@ -734,6 +734,7 @@ function AdminCreateInvoice() {
         <label className='admin-create-invoice-form-label'
         htmlFor="vehiclemodel"
         >Vehicle Model</label>
+          <br />
         <input className='admin-create-invoice-form-input'
         id="vechiclemodel"
         name="vechiclemodel"

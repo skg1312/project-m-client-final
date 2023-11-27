@@ -47,14 +47,10 @@ function AdminCreateInvoice() {
           buyercompanystatecode: '',
         },
         vehicledetails: {
-            drivername: '',
+            
             drivernumber: '',
-            driveraddress: '',
-            driveridproof: '',
-            driverlicenseno: '',
             vechiclenuumber: '',
             vechiclemodel: '',
-            vechicleofficebranch: '',
         },
         consignmentdetails: {
             itemdetails: [
@@ -77,10 +73,6 @@ function AdminCreateInvoice() {
             termsandcondition: '',
         },
         boardingdetails: {
-            lrno: '',
-            weight: 0,
-            transportationcost: 0,
-            totalcost: 0,
             dateofloading: '',
             startingpoint: '',
             endingpoint: '',
@@ -692,36 +684,22 @@ function AdminCreateInvoice() {
       <h2 className='admin-create-invoice-subtitle'>VEHICLE DETAILS</h2>
       <select
   className='admin-create-invoice-select'
-  id="vehicleid"
-  name="vehicleid"
-  value={selectedVehicle.vehicleid || ''}
+  id="vechiclenuumber"
+  name="vechiclenuumber"
+  value={selectedVehicle.vechiclenuumber || ''}
   onChange={handleSelectChangeVehicle}
 >
-  <option value=''>Select Vehicle ID</option>
+  <option value=''>Select Vehicle</option>
   {vehicles.map((vehicle) => (
     <option key={vehicle._id} value={vehicle._id}>
-      {vehicle.drivername}
+      {vehicle.vechiclenuumber}
     </option>
   ))}
 </select>
 
       </div>
       <form className='admin-create-invoice-form'>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'
-        htmlFor="drivername"
-        >Driver Name</label>
-        <br />
-        <input className='admin-create-invoice-form-input'
-         id="drivername"
-         name="drivername"
-         type="text"
-         value={selectedVehicle.drivername}
-         onChange={(e) =>
-           handleChange(e, "vehicledetails", "drivername")
-         }  
-        />
-        </div>
+       
         <div className='admin-create-invoice-form-div'>
         <label className='admin-create-invoice-form-label'
         htmlFor="drivernumber"
@@ -736,49 +714,8 @@ function AdminCreateInvoice() {
         }
         />
         </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'
-        htmlFor="driveraddress"
-        >Driver Address</label>
-        <input className='admin-create-invoice-form-input' 
-        id="driveraddress"
-        name="driveraddress"
-        type="text"
-        value={selectedVehicle.driveraddress}
-        onChange={(e) =>
-          handleChange(e, "vehicledetails", "driveraddress")
-        }
-        />
-        </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'
-        htmlFor="driveridproof"
-        >Driver Id Proof</label>
-        <br />
-        <input className='admin-create-invoice-form-input'
-         id="driveridproof"
-         name="driveridproof"
-         type="text"
-         value={selectedVehicle.driveridproof}
-         onChange={(e) =>
-           handleChange(e, "vehicledetails", "driveridproof")
-         }
-        />
-        </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'
-        htmlFor="driverlicenseno"
-        >Driver License No.</label>
-        <input className='admin-create-invoice-form-input'
-        id="driverlicenseno"
-        name="driverlicenseno"
-        type="text"
-        value={selectedVehicle.driverlicenseno}
-        onChange={(e) =>
-          handleChange(e, "vehicledetails", "driverlicenseno")
-        }
-        />
-        </div>
+        
+       
         <div className='admin-create-invoice-form-div'>
         <label className='admin-create-invoice-form-label'
         htmlFor="vehiclenumber"
@@ -806,21 +743,6 @@ function AdminCreateInvoice() {
           handleChange(e, "vehicledetails", "vechiclemodel")
         }
         />
-        </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'
-        htmlFor="vehicleofficebranch"
-        >Vehicle office branch</label>
-        <input className='admin-create-invoice-form-input'  
-        id="vechicleofficebranch"
-        name="vechicleofficebranch"
-        type="text"
-        value={selectedVehicle.vechicleofficebranch}
-        onChange={(e) =>
-          handleChange(e, "vehicledetails", "vechicleofficebranch")
-        }
-        />
-        </div>
         </form>
         <div className='admin-create-invoice-data'>
       <h2 className='admin-create-invoice-subtitle'>CONSIGNMENT DETAILS</h2>
@@ -1174,64 +1096,7 @@ function AdminCreateInvoice() {
         <div className='admin-create-invoice-data'>
       <h2 className='admin-create-invoice-subtitle'>BOARDING DETAILS</h2>
       </div>
-      <form className='admin-create-invoice-form'>
-      <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'
-        htmlFor="lrno"
-        >LR Number</label>
-        <br />
-        <input className='admin-create-invoice-form-input' 
-         id="lrno"
-         name="lrno"
-         type="text"
-         value={selectedConsignment.lrno}
-         onChange={(e) =>
-           handleChange(e, "boardingdetails", "lrno")
-         }
-        />
-        </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'
-        htmlFor="weight"
-        >Weight of Load</label>
-        <input className='admin-create-invoice-form-input'
-         id="weight"
-         name="weight"
-         type="number"
-         value={selectedConsignment.weight}
-         onChange={(e) =>
-           handleChange(e, "boardingdetails", "weight")
-         }
-        />
-        </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'
-        htmlFor="transportationcost"
-        >Transportation Cost</label>
-        <input className='admin-create-invoice-form-input' 
-        id="transportationcost"
-        name="transportationcost"
-        type="number"
-        value={selectedConsignment.transportationcost}
-        onChange={(e) =>
-          handleChange(e, "boardingdetails", "transportationcost")
-        }
-        />
-        </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'
-        htmlFor="totalcost"
-        >Total Transportation Cost</label>
-        <input className='admin-create-invoice-form-input' 
-        id="totalcost"
-        name="totalcost"
-        type="number"
-        value={selectedConsignment.totalcost}
-        onChange={(e) =>
-          handleChange(e, "boardingdetails", "totalcost")
-        }
-        />
-        </div>
+      <form className='admin-create-invoice-form'> 
         <div className='admin-create-invoice-form-div'>
         <label className='admin-create-invoice-form-label'
         htmlFor="dateofloading"

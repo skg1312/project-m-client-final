@@ -61,6 +61,9 @@
     border-radius: 3px;
     border: 1px solid #5925DC;
   }
+  .staff-buyer-manage-data-table-button:hover{
+    cursor: pointer;
+  }
   
   .staff-buyer-manage-form {
     margin-left: 50px;
@@ -119,6 +122,9 @@
     background: #5925DC;
     margin-bottom: 20px;
     margin-top: 20px;
+  }
+  .staff-buyer-manage-form-button:hover{
+    cursor: pointer;
   }
   
   .staff-buyer-manage-form-input-checkbox {

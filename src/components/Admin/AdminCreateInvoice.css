@@ -152,6 +152,9 @@
     margin-top:5%;
     margin-bottom: 2%;
 }
+.admin-create-invoice-button:hover{
+    cursor: pointer;
+  }
 
 /* Tablet Styles */
 @media only screen and (max-width: 768px) {

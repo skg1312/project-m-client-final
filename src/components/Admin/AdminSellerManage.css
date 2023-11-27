@@ -111,6 +111,9 @@
     margin-bottom: 20px;
     margin-top: 20px;
   }
+  .admin-seller-manage-form-button:hover{
+    cursor: pointer;
+  }
   
 .admin-seller-manage-form-input-checkbox{
     width: 16px;
@@ -137,6 +140,9 @@
     background-color: #5925DC;
     border-radius: 3px;
     border: 1px solid #5925DC;
+}
+.admin-seller-manage-data-table-button:hover{
+  cursor: pointer;
 }
 .pagination-container{
     display: flex;

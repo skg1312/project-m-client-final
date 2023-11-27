@@ -313,7 +313,7 @@ function AdminCreateInvoice() {
                   ...prevData.consignmentdetails,
                   itemdetails: prevData.consignmentdetails.itemdetails.map(
                     (item, index) => {
-                      if (index === -1) {
+                      if (index === 1) {
                         return {
                           ...item,
                           [field]: value

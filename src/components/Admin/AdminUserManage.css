@@ -359,7 +359,7 @@
 }
   .admin-user-manage-data-title {
    font-family: "Urbanist";
-    font-size: 20px;
+    font-size: 15px;
     font-style: normal;
     font-weight: 600;
     line-height: 38px;
@@ -411,7 +411,7 @@
   }
   .admin-user-manage-form-title {
    font-family: "Urbanist";
-    font-size: 20px;
+    font-size: 15px;
     font-style: normal;
     font-weight: 600;
     line-height: 38px;
@@ -447,5 +447,9 @@
     background: #5925DC;
     margin-bottom: 20px;
     margin-top: 20px;
+  }
+  .admin-user-manage-form-input-checkbox {
+    width: 10px;
+    height: 10px;
   }
 }

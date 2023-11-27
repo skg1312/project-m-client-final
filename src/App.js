@@ -216,7 +216,7 @@ function App() {
           } />
             <Route path='/staffinvview' element={
             <ReqStaffAuth>
-              {/* responsive */}
+              
               <StaffPdfViewer />
             </ReqStaffAuth>
           } />
@@ -303,7 +303,7 @@ function App() {
            } />
             <Route path='/userinvview' element={
             <ReqUserAuth>
-              {/* responsive */}
+              
               <UserPdfViewer />
             </ReqUserAuth>
            } />

@@ -504,7 +504,7 @@ function AdminCreateInvoice() {
         </div>
         </form>
         <div className='admin-create-invoice-data'>
-      <h2 className='admin-create-invoice-subtitle'>SELLER DETAILS</h2>
+      <h2 className='admin-create-invoice-subtitle'>AGENT DETAILS</h2>
       <select className='admin-create-invoice-select'
       id="sellerid"
       name="sellerid"
@@ -523,7 +523,7 @@ function AdminCreateInvoice() {
         <div className='admin-create-invoice-form-div'>
         <label className='admin-create-invoice-form-label'
         htmlFor="sellercompanyname"
-        >Seller Company Name</label>
+        >Agent Company Name</label>
         <input className='admin-create-invoice-form-input' 
         id="sellercompanyname"
         name="sellercompanyname"
@@ -537,7 +537,7 @@ function AdminCreateInvoice() {
         <div className='admin-create-invoice-form-div'>
         <label className='admin-create-invoice-form-label'
         htmlFor="sellercompanygstno"
-        >Seller Company GST No.</label>
+        >Agent Company GST No.</label>
         <input className='admin-create-invoice-form-input' 
         id="sellercompanygstno"
         name="sellercompanygstno"
@@ -551,7 +551,7 @@ function AdminCreateInvoice() {
         <div className='admin-create-invoice-form-div'>
         <label className='admin-create-invoice-form-label'
          htmlFor="sellercompanyaddress"
-        >Seller Company Address</label>
+        >Agent Company Address</label>
         <input className='admin-create-invoice-form-input' 
         id="sellercompanyaddress"
         name="sellercompanyaddress"
@@ -565,7 +565,7 @@ function AdminCreateInvoice() {
         <div className='admin-create-invoice-form-div'>
         <label className='admin-create-invoice-form-label'
         htmlFor="sellercompanystatename"
-        >Seller Company State Name</label>
+        >Agent Company State Name</label>
         <input className='admin-create-invoice-form-input' 
         id="sellercompanystatename"
         name="sellercompanystatename"
@@ -579,7 +579,7 @@ function AdminCreateInvoice() {
         <div className='admin-create-invoice-form-div'>
         <label className='admin-create-invoice-form-label'
         htmlFor="sellercompanystatecode"
-        >Seller Company State Code</label>    
+        >Agent Company State Code</label>    
         <input className='admin-create-invoice-form-input'
         id="sellercompanystatecode"
         name="sellercompanystatecode"
@@ -805,7 +805,7 @@ function AdminCreateInvoice() {
                           disabled
                           value={selectedConsignment.itemquantity}
                           onChange={(e) =>
-                            handleConsignmentChange(e, "itemquantity")
+                            handleChange(e, "itemquantity")
                           }
                         />
                       </td>
@@ -838,7 +838,7 @@ function AdminCreateInvoice() {
                           disabled
                           value={selectedConsignment.itemtaxrate}
                           onChange={(e) =>
-                            handleConsignmentChange(e, "itemtaxrate")
+                            handleChange(e, "itemtaxrate")
                           }
                         />
                       </td>

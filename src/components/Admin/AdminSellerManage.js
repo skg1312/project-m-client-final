@@ -112,10 +112,10 @@ function AdminSellerManage() {
 
       <div className='admin-seller-manage'>
         <div className='admin-seller-manage-data'>
-          <h1 className='admin-seller-manage-data-title'>ALL SELLERS</h1>
+          <h1 className='admin-seller-manage-data-title'>ALL AGENTS</h1>
           <input
               type='text'
-              placeholder='Search Seller...'
+              placeholder='Search Agents...'
               className='admin-user-manage-form-input' // Search input placeholder
               value={searchInput} // Bind the input value to the state
               onChange={(e) => setSearchInput(e.target.value)} // Update the searchInput state as the user types
@@ -123,7 +123,7 @@ function AdminSellerManage() {
           <table className='admin-seller-manage-data-table'>
   <thead className='admin-seller-manage-data-table-head'>
     <tr className='admin-seller-manage-data-table-row-head'>
-      <th className='admin-seller-manage-data-table-header'>Sellers Id</th>
+      <th className='admin-seller-manage-data-table-header'>Agents Id</th>
       <th className='admin-seller-manage-data-table-header'>Company Name</th>
       <th className='admin-seller-manage-data-table-header'>GST NO</th>
       <th className='admin-seller-manage-data-table-header'>State Name</th>
@@ -169,14 +169,14 @@ function AdminSellerManage() {
         </div>
         <div className='admin-seller-manage-form'>
           <h1 className='admin-seller-manage-form-title'>
-            {selectedSellerId ? 'UPDATE SELLER' : 'ADD SELLER'}
+            {selectedSellerId ? 'UPDATE AGENT' : 'ADD AGENT'}
           </h1>
           <form className='admin-seller-manage-form-form' onSubmit={handleFormSubmit}>
             <input
               type='text'
               required
               className='admin-seller-manage-form-input'
-              placeholder='Seller ID'
+              placeholder='Agent ID'
               value={selectedSellerData.sellerid || ''}
               onChange={(e) => setSelectedSellerData({ ...selectedSellerData, sellerid: e.target.value })}
             />

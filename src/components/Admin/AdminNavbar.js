@@ -22,7 +22,7 @@ function AdminNavbar() {
                 COMPANY
               </button>
               <button className='admin-logout-button-value-no-img'  onClick={() => navigate('/adminsellman')}>
-                SELLER
+                AGENT
               </button>
               <button className='admin-logout-button-value-no-img'  onClick={() => navigate('/adminbuyman')}>
                 BUYER

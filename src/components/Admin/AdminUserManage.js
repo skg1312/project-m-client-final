@@ -16,7 +16,6 @@ function AdminUserManage() {
     userpassword: '',
     userphone: '',
     useraccess: '',
-    useridproof: '',
     useraddress: '',
   });
 
@@ -94,7 +93,6 @@ function AdminUserManage() {
       userpassword: '',
       userphone: '',
       useraccess: '',
-      useridproof: '',
       useraddress: '',
     });
 
@@ -125,7 +123,6 @@ function AdminUserManage() {
           <table className='admin-user-manage-data-table'>
             <thead className='admin-user-manage-data-table-head'>
               <tr className='admin-user-manage-data-table-row-head'>
-                <th className='admin-user-manage-data-table-header'>User ID</th>
                 <th className='admin-user-manage-data-table-header'>Username</th>
                 <th className='admin-user-manage-data-table-header'>Email</th>
                 <th className='admin-user-manage-data-table-header'>Phone</th>
@@ -140,7 +137,6 @@ function AdminUserManage() {
                   <td className='admin-user-manage-data-table-data'>{user.useremail.substring(0, 18)}</td>
                   <td className='admin-user-manage-data-table-data'>{user.userphone}</td>
                   <td className='admin-user-manage-data-table-data'>{user.useraccess.substring(0, 12)}</td>
-                  <td className='admin-user-manage-data-table-data'>{user.useridproof.substring(0, 12)}</td>
                   <td className='admin-user-manage-data-table-data'>
                     <button
                       className='admin-user-manage-data-table-button'

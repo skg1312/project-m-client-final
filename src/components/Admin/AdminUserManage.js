@@ -16,7 +16,6 @@ function AdminUserManage() {
     userpassword: '',
     userphone: '',
     useraccess: '',
-    useraddress: '',
   });
 
   const itemsPerPage = 12;
@@ -93,7 +92,6 @@ function AdminUserManage() {
       userpassword: '',
       userphone: '',
       useraccess: '',
-      useraddress: '',
     });
 
     setSelectedUserId(null);
@@ -212,15 +210,6 @@ function AdminUserManage() {
             <option value='HO-User'>HO-User</option>
             <option value='User'>User</option>
           </select>
-          
-            <input
-              type='text'
-              required
-              className='admin-user-manage-form-input'
-              placeholder='Address'
-              value={selectedUserData.useraddress || ''}
-              onChange={(e) => setSelectedUserData({ ...selectedUserData, useraddress: e.target.value })}
-            />
             <br />
             <input type='checkbox' required className='admin-user-manage-form-input-checkbox' />
           <label className='admin-user-manage-form-input-checkbox-label'>

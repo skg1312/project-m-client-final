@@ -311,7 +311,7 @@ function AdminCreateInvoice() {
                   ...prevData.consignmentdetails,
                   itemdetails: prevData.consignmentdetails.itemdetails.map(
                     (item, index) => {
-                      if (index === 1) {
+                      if (index === -1) {
                         return {
                           ...item,
                           [field]: value
@@ -772,15 +772,16 @@ function AdminCreateInvoice() {
                         <input
                          className='admin-create-invoice-table-consigment-input'
                           type="number"
-onChange={(e) =>
-           handleChange(e, "consignmentdetails.itemdetails", "itemquantity")
-         }
+ onChange={(e) =>
+                            handleConsignmentChange(e, "itemquantity")
+                          }
                         />
                       </td>
                       <td className="admin-create-invoice-table-row-body-td">
                         <input
                          className='admin-create-invoice-table-consigment-input'
                           type="text"
+value={selectedConsignment.itemhsn}
                           onChange={(e) =>
                             handleConsignmentChange(e, "itemhsn")
                           }
@@ -802,9 +803,9 @@ onChange={(e) =>
                          className='admin-create-invoice-table-consigment-input'
                           type="number"
                            onChange={(e) =>
-           handleChange(e, "consignmentdetails.itemdetails", "itemtaxrate")
-         }
-                        />
+                            handleConsignmentChange(e, "itemtaxrate")
+                          }
+                            />
                       </td>
                       <td className="admin-create-invoice-table-row-body-td">
                         <button type="button" 

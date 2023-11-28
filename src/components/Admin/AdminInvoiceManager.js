@@ -4,7 +4,7 @@ import './AdminInvoiceManager.css';
 import background from '../images/Desktop.png';
 import ReactPaginate from 'react-paginate';
 import AdminNavbar from './AdminNavbar';
-import AdminPdfViewer from './AdminPdfViewer';
+import PdfViewer from './AdminInvoiceView';
 
 function AdminInvoiceManagement() {
     const [invoice, setInvoice] = useState([]);

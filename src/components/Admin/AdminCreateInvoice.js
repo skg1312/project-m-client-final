@@ -764,6 +764,7 @@ function AdminCreateInvoice() {
                         <input
                          className='admin-create-invoice-table-consigment-input'
                           type="text"
+disabled
 value={selectedConsignment.itemhsn}
                           onChange={(e) =>
                             handleConsignmentChange(e, "itemhsn")

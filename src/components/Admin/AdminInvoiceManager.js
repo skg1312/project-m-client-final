@@ -4,7 +4,7 @@ import './AdminInvoiceManager.css';
 import background from '../images/Desktop.png';
 import ReactPaginate from 'react-paginate';
 import AdminNavbar from './AdminNavbar';
-import PdfViewer from './AdminInvoiceView';
+import AdminPdfViewer from './AdminPdfViewer';
 
 function AdminInvoiceManagement() {
     const [invoice, setInvoice] = useState([]);
@@ -17,21 +17,33 @@ function AdminInvoiceManagement() {
 
     const sortedInvoice = [...invoice].reverse();
     const displayedInvoiceSearch = sortedInvoice
-        .filter(
-            (item) =>
-                item.invoicedetails.invoiceno.toLowerCase().includes(searchInput.toLowerCase()) ||
-                item.companydetails.companyname.toLowerCase().includes(searchInput.toLowerCase()) ||
-                item.vehicledetails.vehiclenumber.toLowerCase().includes(searchInput.toLowerCase()) 
-        )
-        .slice(pageNumber * itemsPerPage, (pageNumber + 1) * itemsPerPage);
+  .filter((item) => {
+    const invoiceNo = item.invoicedetails.invoiceno || '';
+    const companyName = item.companydetails.companyname || '';
+    const vehicleNumber = item.vehicledetails.vehiclenumber || '';
 
+    // Check if the search criteria is null or cannot be converted to lowercase
+    if (
+      (invoiceNo && invoiceNo.toLowerCase().includes(searchInput?.toLowerCase())) ||
+      (companyName && companyName.toLowerCase().includes(searchInput?.toLowerCase())) ||
+      (vehicleNumber && vehicleNumber.toLowerCase().includes(searchInput?.toLowerCase()))
+    ) {
+      return true;
+    }
+
+    return false;
+  })
+  .slice(pageNumber * itemsPerPage, (pageNumber + 1) * itemsPerPage);
+
+  
     const pageCount = Math.ceil(sortedInvoice.length / itemsPerPage);
 
     const changePage = ({ selected }) => {
         setPageNumber(selected);
     };
 
-    const ViewInvoice = () => {
+    const ViewInvoice = (invoiceid) => {
+        setSelectedInvoiceId(invoiceid);
         if (selectedInvoiceId) {
             const pdfUrl = `${API}download/${selectedInvoiceId}`;
 
@@ -51,7 +63,8 @@ function AdminInvoiceManagement() {
     newWindow.document.write(iframeCode);
         }
     };
-    const PrintInvoice = () => {
+    const PrintInvoice = (invoiceid) => {
+        setSelectedInvoiceId(invoiceid);
         if (selectedInvoiceId) {
             window.location = `${API}download/${selectedInvoiceId}`;
         }
@@ -107,8 +120,9 @@ function AdminInvoiceManagement() {
                             <tbody className='invoice-management-data-body-table-row-body'>
                                 {displayedInvoiceSearch.map((invoice) => (
                                     <tr key={invoice._id} className='invoice-management-data-body-table-row'>
-                                        <td className='invoice-management-data-body-table-data'>{invoice.invoicedetails.invoiceno}</td>
-                                        <td className='invoice-management-data-body-table-data'>{invoice.companydetails.companyname}</td>
+                                        <td className='invoice-management-data-body-table-data'>{invoice.invoicedetails.invoiceno?.substring(0, 12) ?? 'N/A'}
+</td>
+                                        <td className='invoice-management-data-body-table-data'>{invoice.companydetails.companyname?.substring(0,12) ?? 'N/A'}</td>
                                         <td className='invoice-management-data-body-table-data'>
   {invoice.invoicedetails.invoicedate ?
     new Date(invoice.invoicedetails.invoicedate).toLocaleDateString('en-GB', {
@@ -118,11 +132,11 @@ function AdminInvoiceManagement() {
     }) : 'N/A'}
 </td>
 
-                                        <td className='invoice-management-data-body-table-data'>{invoice.vehicledetails.vehiclenumber}</td>
-                                        <td className='invoice-management-data-body-table-data'>{invoice.boardingdetails.totalcost}</td>
+                                        <td className='invoice-management-data-body-table-data'>{invoice.vehicledetails.vehiclenumber?.substring(0,12) ?? 'N/A'}</td>
+                                        <td className='invoice-management-data-body-table-data'>{invoice.boardingdetails.totalcost?.substring(0,12) ?? 'N/A'}</td>
                                         <td className='invoice-management-data-body-table-data'>
-                                            <button onClick={() => { setSelectedInvoiceId(invoice._id); ViewInvoice();}} className='invoice-management-data-body-table-data-button'>View</button>
-                                            <button onClick={() => { setSelectedInvoiceId(invoice._id); PrintInvoice(); }} className='invoice-management-data-body-table-data-button'>Print</button>
+                                            <button onClick={() => ViewInvoice(invoice._id)}  className='invoice-management-data-body-table-data-button'>View</button>
+                                            <button onClick={() => PrintInvoice(invoice._id)} className='invoice-management-data-body-table-data-button'>Print</button>
                                         </td>
                                     </tr>
                                 ))}

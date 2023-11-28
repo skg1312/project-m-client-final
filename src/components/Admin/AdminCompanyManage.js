@@ -17,7 +17,6 @@ function AdminCompanyManage() {
     companypartytype: '',
     companygstno: '',
     companycontact: '',
-    companycountry: '',
     companystate: '',
     companyofficeaddress: '',
     companypincode: '',
@@ -101,7 +100,6 @@ function AdminCompanyManage() {
       companypartytype: '',
       companygstno: '',
       companycontact: '',
-      companycountry: '',
       companystate: '',
       companyofficeaddress: '',
       companypincode: '',
@@ -266,17 +264,6 @@ function AdminCompanyManage() {
     value={selectedCompanyData.companypartytype || ''}
     onChange={(e) =>
       setSelectedCompanyData({ ...selectedCompanyData, companypartytype: e.target.value })
-    }
-  />
-
-  <input
-    type='text'
-    required
-    className='admin-company-manager-form-input-low'
-    placeholder='Country'
-    value={selectedCompanyData.companycountry || ''}
-    onChange={(e) =>
-      setSelectedCompanyData({ ...selectedCompanyData, companycountry: e.target.value })
     }
   />
 

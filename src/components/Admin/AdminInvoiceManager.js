@@ -16,17 +16,17 @@ function AdminInvoiceManagement() {
     const itemsPerPage = 10;
 
     const sortedInvoice = [...invoice].reverse();
-    const displayedInvoiceSearch = sortedInvoice
+   const displayedInvoiceSearch = sortedInvoice
   .filter((item) => {
-  
+    const invoiceNo = item.invoicedetails.invoiceno || '';
     const companyName = item.companydetails.companyname || '';
     const vehicleNumber = item.vehicledetails.vehiclenumber || '';
 
     // Check if the search criteria is null or cannot be converted to lowercase
     if (
-
-      (companyName && companyName.toLowerCase().includes(searchInput?.toLowerCase())) ||
-      (vehicleNumber && vehicleNumber.toLowerCase().includes(searchInput?.toLowerCase()))
+      (invoiceNo && invoiceNo.toLowerCase().includes(searchInput?.toLowerCase() ?? '')) ||
+      (companyName && companyName.toLowerCase().includes(searchInput?.toLowerCase() ?? '')) ||
+      (vehicleNumber && vehicleNumber.toLowerCase().includes(searchInput?.toLowerCase() ?? ''))
     ) {
       return true;
     }
@@ -34,6 +34,7 @@ function AdminInvoiceManagement() {
     return false;
   })
   .slice(pageNumber * itemsPerPage, (pageNumber + 1) * itemsPerPage);
+
 
   
     const pageCount = Math.ceil(sortedInvoice.length / itemsPerPage);

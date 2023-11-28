@@ -18,8 +18,8 @@ function AdminCreateInvoice() {
     const [vehicles, setVehicles] = useState([]);
     const [selectedVehicle, setSelectedVehicle] = useState({});
 
-    const [consignments, setConsignments] = useState([]);
-    const [selectedConsignment, setSelectedConsignment] = useState({});
+  const [consignments, setConsignments] = useState([]);
+  const [addedConsignment, setAddedConsignment] = useState({});
 
     const [dataToSend, setDataToSend] = useState({
         companydetails: {
@@ -55,19 +55,7 @@ function AdminCreateInvoice() {
           },
           invoicedetails: {
             invoiceno: '',
-            ewaybillno: '',
             invoicedate: '',
-            deliverynote: '',
-            termsofpayment: '',
-            supplierref: '',
-            otherref: '',
-            buyersorder: '',
-            ordereddate: '',
-            dispatchdocumentno: '',
-            deliverynotedate: '',
-            dispatchthrough: '',
-            destination: '',
-            termsandcondition: '',
         },
         boardingdetails: {
             dateofloading: '',
@@ -254,82 +242,61 @@ function AdminCreateInvoice() {
                         setSelectedVehicle(selectedVehicle);
                       };
                       const handleSelectChangeConsignment = (e) => {
-                        const selectedConsignmentId = e.target.value;
-                        const selectedConsignment = consignments.find(
-                          (consignment) => consignment._id === selectedConsignmentId
-                        );
-                    
-                        setDataToSend((prevData) => ({
-                          ...prevData,
-                          consignmentdetails: {
-                            ...prevData.consignmentdetails,
-                            itemdetails: prevData.consignmentdetails.itemdetails.map(
-                              (item, index) =>
-                                index === 0 ? { ...item, ...selectedConsignment } : item
-                            )
-                          }
-                        }));
-                    
-                        setSelectedConsignment(selectedConsignment);
-                      };
-                    
-            const ConsignmentsAdd = () => {
-              setDataToSend((prevData) => ({
-                ...prevData,
-                consignmentdetails: {
-                  ...prevData.consignmentdetails,
-                  itemdetails: [
-                    ...prevData.consignmentdetails.itemdetails,
-                    selectedConsignment
-                  ]
-                }
-              }));
-              setSelectedConsignment(selectedConsignment);
-            };
-          
-            const ConsignmentsRemove = (index) => {
-              setDataToSend((prevData) => ({
-                ...prevData,
-                consignmentdetails: {
-                  ...prevData.consignmentdetails,
-                  itemdetails: prevData.consignmentdetails.itemdetails.filter(
-                    (item, i) => i !== index
-                  )
-                }
-              }));
-            };
-          
-            const handleConsignmentChange = (e, field) => {
-              const value = e.target.value;
-              setDataToSend((prevData) => ({
-                ...prevData,
-                consignmentdetails: {
-                  ...prevData.consignmentdetails,
-                  itemdetails: prevData.consignmentdetails.itemdetails.map(
-                    (item, index) => {
-                      if (index === -1) {
-                        return {
-                          ...item,
-                          [field]: value
-                        };
-                      }
-                      return item;
-                    }
-                  )
-                }
-              }));
-            };
-            const handleChange = (e, section, field) => {
-              const value = e.target.value;
-              setDataToSend((prevData) => ({
-                ...prevData,
-                [section]: {
-                  ...prevData[section],
-                  [field]: value,
-                },
-              }));
-          }
+    const selectedConsignmentId = e.target.value;
+    const selectedConsignment = consignments.find(
+      (consignment) => consignment._id === selectedConsignmentId
+    );
 
+    setAddedConsignment(selectedConsignment);
+  };
+
+  const ConsignmentsAdd = () => {
+    if (
+      !addedConsignment.itemname ||
+      !addedConsignment.itemquantity ||
+      !addedConsignment.itemhsn ||
+      !addedConsignment.itemprice ||
+      !addedConsignment.itemtaxrate
+    ) {
+      return;
+    }
+
+    setDataToSend((prevData) => ({
+      ...prevData,
+      consignmentdetails: {
+        ...prevData.consignmentdetails,
+        itemdetails: [
+          ...prevData.consignmentdetails.itemdetails,
+          {
+            itemname: addedConsignment.itemname,
+            itemquantity: addedConsignment.itemquantity,
+            itemhsn: addedConsignment.itemhsn,
+            itemprice: addedConsignment.itemprice,
+            itemtaxrate: addedConsignment.itemtaxrate,
+          },
+        ],
+      },
+    }));
+    setAddedConsignment({});
+  };
+
+  const ConsignmentsRemove = (index) => {
+    setDataToSend((prevData) => ({
+      ...prevData,
+      consignmentdetails: {
+        ...prevData.consignmentdetails,
+        itemdetails: prevData.consignmentdetails.itemdetails.filter((item, i) => i !== index),
+      },
+    }));
+  };
+
+  const handleConsignmentChange = (e) => {
+    const value = e.target.value;
+    setAddedConsignment((prevAdded) => ({
+      ...prevAdded,
+      [e.target.name]: value,
+    }));
+  };
             const handleSubmit = async (e) => {
                 e.preventDefault();
                 try {
@@ -701,142 +668,119 @@ function AdminCreateInvoice() {
         </form>
         <div className='admin-create-invoice-data'>
       <h2 className='admin-create-invoice-subtitle'>CONSIGNMENT DETAILS</h2>
-      <select className='admin-create-invoice-select'
-       id="consignmentid"
-       name="consignmentid"
-       value={selectedConsignment.consignmentid}
-       onChange={handleSelectChangeConsignment}
-      >
-        <option value="">Select Consignment ID</option>
-          {consignments.map((consignment) => (
-            <option key={consignment._id} value={consignment._id}>
-              {consignment.itemname}
-            </option>
-          ))}
-      </select>
+      <select
+            className="admin-create-invoice-select"
+            id="consignmentid"
+            name="consignmentid"
+            value={addedConsignment._id || ""}
+            onChange={handleSelectChangeConsignment}
+          >
+            <option value="">Select Consignment ID</option>
+            {consignments.map((consignment) => (
+              <option key={consignment._id} value={consignment._id}>
+                {consignment.itemname}
+              </option>
+            ))}
+          </select>
       </div>
-      <table className="admin-create-invoice-table-consigment">
-                  <thead className="admin-create-invoice-table-thead">
-                    <tr className="admin-create-invoice-table-row-head">
-                      <th className="admin-create-invoice-table-row-th">
-                        Item Name
-                      </th>
-                      <th className="admin-create-invoice-table-row-th">
-                        Item Quantity
-                      </th>
-                      <th className="admin-create-invoice-table-row-th">
-                        Item HSN
-                      </th>
-                      <th className="admin-create-invoice-table-row-th">
-                        Item Price
-                      </th>
-                      <th className="admin-create-invoice-table-row-th">
-                        Item Tax Rate
-                      </th>
-                      <th className="admin-create-invoice-table-row-th">
-                        Action
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="admin-create-invoice-table-tbody">
-                    <tr className="admin-create-invoice-table-row-body">
-                      <td className="admin-create-invoice-table-row-body-td">
-                        <input
-                        className='admin-create-invoice-table-consigment-input'
-                          type="text"
-                          disabled
-                          value={selectedConsignment.itemname}
-                          onChange={(e) =>
-                            handleConsignmentChange(e, "itemname")
-                          }
-                        />
-                      </td>
-                      <td className="admin-create-invoice-table-row-body-td">
-                        <input
-                         className='admin-create-invoice-table-consigment-input'
-                          type="number"
- onChange={(e) =>
-                            handleConsignmentChange(e, "itemquantity")
-                          }
-                        />
-                      </td>
-                      <td className="admin-create-invoice-table-row-body-td">
-                        <input
-                         className='admin-create-invoice-table-consigment-input'
-                          type="text"
-disabled
-value={selectedConsignment.itemhsn}
-                          onChange={(e) =>
-                            handleConsignmentChange(e, "itemhsn")
-                          }
-                        />
-                      </td>
-                      <td className="admin-create-invoice-table-row-body-td">
-                        <input
-                         className='admin-create-invoice-table-consigment-input'
-                          type="number"
-                          disabled
-                          value={selectedConsignment.itemprice}
-                          onChange={(e) =>
-                            handleConsignmentChange(e, "itemprice")
-                          }
-                        />
-                      </td>
-                      <td className="admin-create-invoice-table-row-body-td">
-                        <input
-                         className='admin-create-invoice-table-consigment-input'
-                          type="number"
-                           onChange={(e) =>
-                            handleConsignmentChange(e, "itemtaxrate")
-                          }
-                            />
-                      </td>
-                      <td className="admin-create-invoice-table-row-body-td">
-                        <button type="button" 
-                        className='admin-create-invoice-table-consigment-button'
-                        onClick={() => ConsignmentsAdd()}>
-                        <img className='admin-create-invoice-table-consigment-icon' src={A} alt='add'/>
-                        </button>
-                      </td>
-                    </tr>
-                    <tr className='admin-create-invoice-table-row-subtitle'>
-                    <h3 className='admin-create-invoice-subtitle-table'>ADDED ITEMS</h3>
-                      </tr>
-                    {dataToSend.consignmentdetails.itemdetails.map(
-                      (item, index) => (
-                        <tr
-                          key={index}
-                          className="admin-create-invoice-table-row-body"
-                        >
-                          <td className="admin-create-invoice-table-consigment-value">
-                            {item.itemname}
-                          </td>
-                          <td className="admin-create-invoice-table-consigment-value">
-                            {item.itemquantity}
-                          </td>
-                          <td className="admin-create-invoice-table-consigment-value">
-                            {item.itemhsn}
-                          </td>
-                          <td className="admin-create-invoice-table-consigment-value">
-                            {item.itemprice}
-                          </td>
-                          <td className="admin-create-invoice-table-consigment-value">
-                            {item.itemtaxrate}
-                          </td>
-                          <td className="admin-create-invoice-table-consigment-value">
-                            <button
-                            className='admin-create-invoice-table-consigment-button'
-                              type="button"
-                              onClick={() => ConsignmentsRemove(index)}
-                            >
-                              <img className='admin-create-invoice-table-consigment-icon-low' src={D} alt='delete'/>
-                            </button>
-                          </td>
-                        </tr>
-                      )
-                    )}
-                  </tbody>
-                </table>
+     <table className="admin-create-invoice-table-consigment">
+          <thead className="admin-create-invoice-table-thead">
+            <tr className="admin-create-invoice-table-row-head">
+              <th className="admin-create-invoice-table-row-th">Item Name</th>
+              <th className="admin-create-invoice-table-row-th">Item Quantity</th>
+              <th className="admin-create-invoice-table-row-th">Item HSN</th>
+              <th className="admin-create-invoice-table-row-th">Item Price</th>
+              <th className="admin-create-invoice-table-row-th">Item Tax Rate</th>
+              <th className="admin-create-invoice-table-row-th">Action</th>
+            </tr>
+          </thead>
+          <tbody className="admin-create-invoice-table-tbody">
+            <tr className="admin-create-invoice-table-row-body">
+              <td className="admin-create-invoice-table-row-body-td">
+                <input
+                  className="admin-create-invoice-table-consigment-input"
+                  type="text"
+                  value={addedConsignment.itemname || ""}
+                  onChange={handleConsignmentChange}
+                  name="itemname"
+                />
+              </td>
+              <td className="admin-create-invoice-table-row-body-td">
+                <input
+                  className="admin-create-invoice-table-consigment-input"
+                  type="number"
+                  value={addedConsignment.itemquantity || ""}
+                  onChange={handleConsignmentChange}
+                  name="itemquantity"
+                />
+              </td>
+              <td className="admin-create-invoice-table-row-body-td">
+                <input
+                  className="admin-create-invoice-table-consigment-input"
+                  type="text"
+                  value={addedConsignment.itemhsn || ""}
+                  onChange={handleConsignmentChange}
+                  name="itemhsn"
+                />
+              </td>
+              <td className="admin-create-invoice-table-row-body-td">
+                <input
+                  className="admin-create-invoice-table-consigment-input"
+                  type="number"
+                  value={addedConsignment.itemprice || ""}
+                  onChange={handleConsignmentChange}
+                  name="itemprice"
+                />
+              </td>
+              <td className="admin-create-invoice-table-row-body-td">
+                <input
+                  className="admin-create-invoice-table-consigment-input"
+                  type="number"
+                  value={addedConsignment.itemtaxrate || ""}
+                  onChange={handleConsignmentChange}
+                  name="itemtaxrate"
+                />
+              </td>
+              <td className="admin-create-invoice-table-row-body-td">
+                <button
+                  type="button"
+                  className="admin-create-invoice-table-consigment-button"
+                  onClick={ConsignmentsAdd}
+                  disabled={
+                    !addedConsignment.itemname ||
+                    !addedConsignment.itemquantity ||
+                    !addedConsignment.itemhsn ||
+                    !addedConsignment.itemprice ||
+                    !addedConsignment.itemtaxrate
+                  }
+                >
+                   <img className='admin-create-invoice-table-consigment-icon' src={A} alt='add'/>
+                </button>
+              </td>
+            </tr>
+            <tr className="admin-create-invoice-table-row-subtitle">
+              <h3 className="admin-create-invoice-subtitle-table">ADDED ITEMS</h3>
+            </tr>
+            {dataToSend.consignmentdetails.itemdetails.map((item, index) => (
+              <tr key={index} className="admin-create-invoice-table-row-body">
+                <td className="admin-create-invoice-table-consigment-value">{item.itemname}</td>
+                <td className="admin-create-invoice-table-consigment-value">{item.itemquantity}</td>
+                <td className="admin-create-invoice-table-consigment-value">{item.itemhsn}</td>
+                <td className="admin-create-invoice-table-consigment-value">{item.itemprice}</td>
+                <td className="admin-create-invoice-table-consigment-value">{item.itemtaxrate}</td>
+                <td className="admin-create-invoice-table-consigment-value">
+                  <button
+                    className="admin-create-invoice-table-consigment-button"
+                    type="button"
+                    onClick={() => ConsignmentsRemove(index)}
+                  >
+                     <img className='admin-create-invoice-table-consigment-icon-low' src={D} alt='delete'/>
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       <div className='admin-create-invoice-data'>
       <h2 className='admin-create-invoice-subtitle'>INVOICE DETAILS</h2>
       </div>

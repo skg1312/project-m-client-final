@@ -51,7 +51,7 @@ function UserDashboard() {
               <button className='user-dashboard-button' onClick={() => navigate('/usersellman')}>
                 <div className='user-card-box'>
                   <img src={mu} alt='mu' className='user-dashboard-button-icon' />
-                  <span>MANAGE SELLERS</span>
+                  <span>MANAGE AGENTS</span>
                 </div>
               </button>
               <button className='user-dashboard-button' onClick={() => navigate('/userbuyman')}>

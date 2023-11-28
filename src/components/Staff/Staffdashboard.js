@@ -53,7 +53,7 @@ function StaffDashboard() {
               <button className='staff-dashboard-button' onClick={() => navigate('/staffsellman')}>
                 <div className='staff-card-box'>
                   <img src={ms} alt='mu' className='staff-dashboard-button-icon' />
-                  <span>MANAGE SELLERS</span>
+                  <span>MANAGE AGENTS</span>
                 </div>
               </button>
               <button className='staff-dashboard-button' onClick={() => navigate('/staffbuyman')}>

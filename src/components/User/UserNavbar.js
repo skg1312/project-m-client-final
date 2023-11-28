@@ -32,7 +32,7 @@ function UserNavbar() {
               </button> : <button className="disabled" disabled></button> }
               {(auth.access === 'Super-User' || auth.access === 'HO-User') ?
               <button className='user-logout-button-value-no-img'  onClick={() => navigate('/usersellman')}>
-                SELLER
+                AGENT
               </button>: <button className="disabled" disabled></button> }
               {(auth.access === 'Super-User' || auth.access === 'HO-User') ?
               <button className='user-logout-button-value-no-img'  onClick={() => navigate('/userbuyman')}>

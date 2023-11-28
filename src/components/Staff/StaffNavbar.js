@@ -35,7 +35,7 @@ function StaffNavbar() {
                 COMPANY
               </button> : <button className="disabled" disabled></button> }
               <button className='staff-logout-button-value-no-img'  onClick={() => navigate('/staffsellman')}>
-                SELLER
+                AGENT
               </button>
               <button className='staff-logout-button-value-no-img'  onClick={() => navigate('/staffbuyman')}>
                 BUYER

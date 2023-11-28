@@ -265,7 +265,7 @@ function AdminCreateInvoice() {
                             ...prevData.consignmentdetails,
                             itemdetails: prevData.consignmentdetails.itemdetails.map(
                               (item, index) =>
-                                index === -1 ? { ...item, ...selectedConsignment } : item
+                                index === 0 ? { ...item, ...selectedConsignment } : item
                             )
                           }
                         }));

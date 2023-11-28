@@ -18,8 +18,9 @@ function AdminCreateInvoice() {
     const [vehicles, setVehicles] = useState([]);
     const [selectedVehicle, setSelectedVehicle] = useState({});
 
-  const [consignments, setConsignments] = useState([]);
-  const [addedConsignment, setAddedConsignment] = useState({});
+    const [consignments, setConsignments] = useState([]);
+    const [addedConsignment, setAddedConsignment] = useState({});
+    const [selectedConsignment, setSelectedConsignment] = useState({});
 
     const [dataToSend, setDataToSend] = useState({
         companydetails: {
@@ -56,6 +57,7 @@ function AdminCreateInvoice() {
           invoicedetails: {
             invoiceno: '',
             invoicedate: '',
+           
         },
         boardingdetails: {
             dateofloading: '',
@@ -242,61 +244,73 @@ function AdminCreateInvoice() {
                         setSelectedVehicle(selectedVehicle);
                       };
                       const handleSelectChangeConsignment = (e) => {
-    const selectedConsignmentId = e.target.value;
-    const selectedConsignment = consignments.find(
-      (consignment) => consignment._id === selectedConsignmentId
-    );
+                        const selectedConsignmentId = e.target.value;
+                        const selectedConsignment = consignments.find(
+                          (consignment) => consignment._id === selectedConsignmentId
+                        );
+                    
+                        setAddedConsignment(selectedConsignment);
+                      };
+                    
+                      const ConsignmentsAdd = () => {
+                        if (
+                          !addedConsignment.itemname ||
+                          !addedConsignment.itemquantity ||
+                          !addedConsignment.itemhsn ||
+                          !addedConsignment.itemprice ||
+                          !addedConsignment.itemtaxrate
+                        ) {
+                          return;
+                        }
+                    
+                        setDataToSend((prevData) => ({
+                          ...prevData,
+                          consignmentdetails: {
+                            ...prevData.consignmentdetails,
+                            itemdetails: [
+                              ...prevData.consignmentdetails.itemdetails,
+                              {
+                                itemname: addedConsignment.itemname,
+                                itemquantity: addedConsignment.itemquantity,
+                                itemhsn: addedConsignment.itemhsn,
+                                itemprice: addedConsignment.itemprice,
+                                itemtaxrate: addedConsignment.itemtaxrate,
+                              },
+                            ],
+                          },
+                        }));
+                        setAddedConsignment({});
+                      };
+                    
+                      const ConsignmentsRemove = (index) => {
+                        setDataToSend((prevData) => ({
+                          ...prevData,
+                          consignmentdetails: {
+                            ...prevData.consignmentdetails,
+                            itemdetails: prevData.consignmentdetails.itemdetails.filter((item, i) => i !== index),
+                          },
+                        }));
+                      };
+                    
+                      const handleConsignmentChange = (e) => {
+                        const value = e.target.value;
+                        setAddedConsignment((prevAdded) => ({
+                          ...prevAdded,
+                          [e.target.name]: value,
+                        }));
+                      };
+                    
+            const handleChange = (e, section, field) => {
+              const value = e.target.value;
+              setDataToSend((prevData) => ({
+                ...prevData,
+                [section]: {
+                  ...prevData[section],
+                  [field]: value,
+                },
+              }));
+          }
 
-    setAddedConsignment(selectedConsignment);
-  };
-
-  const ConsignmentsAdd = () => {
-    if (
-      !addedConsignment.itemname ||
-      !addedConsignment.itemquantity ||
-      !addedConsignment.itemhsn ||
-      !addedConsignment.itemprice ||
-      !addedConsignment.itemtaxrate
-    ) {
-      return;
-    }
-
-    setDataToSend((prevData) => ({
-      ...prevData,
-      consignmentdetails: {
-        ...prevData.consignmentdetails,
-        itemdetails: [
-          ...prevData.consignmentdetails.itemdetails,
-          {
-            itemname: addedConsignment.itemname,
-            itemquantity: addedConsignment.itemquantity,
-            itemhsn: addedConsignment.itemhsn,
-            itemprice: addedConsignment.itemprice,
-            itemtaxrate: addedConsignment.itemtaxrate,
-          },
-        ],
-      },
-    }));
-    setAddedConsignment({});
-  };
-
-  const ConsignmentsRemove = (index) => {
-    setDataToSend((prevData) => ({
-      ...prevData,
-      consignmentdetails: {
-        ...prevData.consignmentdetails,
-        itemdetails: prevData.consignmentdetails.itemdetails.filter((item, i) => i !== index),
-      },
-    }));
-  };
-
-  const handleConsignmentChange = (e) => {
-    const value = e.target.value;
-    setAddedConsignment((prevAdded) => ({
-      ...prevAdded,
-      [e.target.name]: value,
-    }));
-  };
             const handleSubmit = async (e) => {
                 e.preventDefault();
                 try {
@@ -683,7 +697,7 @@ function AdminCreateInvoice() {
             ))}
           </select>
       </div>
-     <table className="admin-create-invoice-table-consigment">
+      <table className="admin-create-invoice-table-consigment">
           <thead className="admin-create-invoice-table-thead">
             <tr className="admin-create-invoice-table-row-head">
               <th className="admin-create-invoice-table-row-th">Item Name</th>
@@ -774,7 +788,7 @@ function AdminCreateInvoice() {
                     type="button"
                     onClick={() => ConsignmentsRemove(index)}
                   >
-                     <img className='admin-create-invoice-table-consigment-icon-low' src={D} alt='delete'/>
+                    <img className='admin-create-invoice-table-consigment-icon-low' src={D} alt='delete'/>
                   </button>
                 </td>
               </tr>

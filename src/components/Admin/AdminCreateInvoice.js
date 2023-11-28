@@ -33,14 +33,12 @@ function AdminCreateInvoice() {
         },
         sellerdetails: {
           sellercompanyname: '',
-          sellercompanygstno: '',
           sellercompanyaddress: '',
           sellercompanystatename: '',
           sellercompanystatecode: '',
         },
         buyerdetails: {
           buyercompanyname: '',
-          buyercompanygstno: '',
           buyercompanyaddress: '',
           buyercompanystatename: '',
           buyercompanystatecode: '',
@@ -208,7 +206,6 @@ function AdminCreateInvoice() {
                     ...prevData.sellerdetails,
                     sellerid: selectedSeller.sellerid,
                     sellercompanyname: selectedSeller.sellercompanyname,
-                    sellercompanygstno: selectedSeller.sellercompanygstno,
                     sellercompanyaddress: selectedSeller.sellercompanyaddress,
                     sellercompanystatename: selectedSeller.sellercompanystatename,
                     sellercompanystatecode: selectedSeller.sellercompanystatecode,
@@ -227,7 +224,6 @@ function AdminCreateInvoice() {
                         ...prevData.buyerdetails,
                         buyerid: selectedBuyer.buyerid,
                         buyercompanyname: selectedBuyer.buyercompanyname,
-                        buyercompanygstno: selectedBuyer.buyercompanygstno,
                         buyercompanyaddress: selectedBuyer.buyercompanyaddress,
                         buyercompanystatename: selectedBuyer.buyercompanystatename,
                         buyercompanystatecode: selectedBuyer.buyercompanystatecode,
@@ -311,7 +307,7 @@ function AdminCreateInvoice() {
                   ...prevData.consignmentdetails,
                   itemdetails: prevData.consignmentdetails.itemdetails.map(
                     (item, index) => {
-                      if (index === -1) {
+                      if (index === 0) {
                         return {
                           ...item,
                           [field]: value
@@ -593,20 +589,7 @@ function AdminCreateInvoice() {
         }
         />
         </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'
-        htmlFor="buyercompanygstno"
-        >Buyer Company GST No.</label>
-        <input className='admin-create-invoice-form-input' 
-        id="buyercompanygstno"
-        name="buyercompanygstno"
-        type="text"
-        value={selectedBuyer.buyercompanygstno}
-        onChange={(e) =>
-          handleChange(e, "buyerdetails", "buyercompanygstno")
-        }
-        />
-        </div>
+        
         <div className='admin-create-invoice-form-div'>
         <label className='admin-create-invoice-form-label'
         htmlFor="buyercompanyaddress"

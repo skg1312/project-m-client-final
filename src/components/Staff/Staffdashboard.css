@@ -28,13 +28,13 @@
     font-weight: 500;
     line-height: normal;
     letter-spacing: -0.361px;
-    transition: background-color 0.3s, box-shadow 0.3s; /* Add a smooth transition for a better visual effect */
+    transition: background-color 0.3s; /* Add a smooth transition for a better visual effect */
 }
 .staff-dashboard-button:hover {
     background-color: #f1eaff;
     color: #333;
     cursor: pointer;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add a box shadow for a subtle elevation effect */
+    border-color: #7a5af8;
     z-index: 1; /* Adjust the z-index as needed to control the stacking order */
 }
 

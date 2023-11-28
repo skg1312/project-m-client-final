@@ -27,7 +27,6 @@ function AdminCreateInvoice() {
           companyregistrationtype: '',
           companygstno: '',
           companycontact: '',
-          companycountry: '',
           companystate: '',
           companyofficeaddress: '',
           companypincode: '',
@@ -191,7 +190,6 @@ function AdminCreateInvoice() {
                   companyregistrationtype: selectedCompany.companyregistrationtype,
                   companygstno: selectedCompany.companygstno,
                   companycontact: selectedCompany.companycontact,
-                  companycountry: selectedCompany.companycountry,
                   companystate: selectedCompany.companystate,
                   companyofficeaddress: selectedCompany.companyofficeaddress,
                   companypincode: selectedCompany.companypincode,
@@ -448,20 +446,6 @@ function AdminCreateInvoice() {
         </div>
         <div className='admin-create-invoice-form-div'>
         <label className='admin-create-invoice-form-label'
-        htmlFor="companycountry"
-        >Company country</label>
-        <input className='admin-create-invoice-form-input'
-        id="companycountry"
-        name="companycountry"
-        type="text"
-        value={selectedCompany.companycountry}
-        onChange={(e) =>
-          handleChange(e, "companydetails", "companycountry")
-        }
-        />
-        </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'
         htmlFor="companystate"
         >Company State</label>
         <input className='admin-create-invoice-form-input'
@@ -531,20 +515,6 @@ function AdminCreateInvoice() {
         value={selectedSeller.sellercompanyname}
         onChange={(e) =>
           handleChange(e, "sellerdetails", "sellercompanyname")
-        }
-        />
-        </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'
-        htmlFor="sellercompanygstno"
-        >Agent Company GST No.</label>
-        <input className='admin-create-invoice-form-input' 
-        id="sellercompanygstno"
-        name="sellercompanygstno"
-        type="text"
-        value={selectedSeller.sellercompanygstno}
-        onChange={(e) =>
-          handleChange(e, "sellerdetails", "sellercompanygstno")
         }
         />
         </div>
@@ -802,19 +772,15 @@ function AdminCreateInvoice() {
                         <input
                          className='admin-create-invoice-table-consigment-input'
                           type="number"
-
-value={selectedConsignment.itemquantity}
-                          onChange={(e) =>
-                            handleConsignmentChange(e, "itemquantity")
-                          }
+onChange={(e) =>
+           handleChange(e, "consignmentdetails.itemdetails", "itemquantity")
+         }
                         />
                       </td>
                       <td className="admin-create-invoice-table-row-body-td">
                         <input
                          className='admin-create-invoice-table-consigment-input'
                           type="text"
-                          disabled
-                          value={selectedConsignment.itemhsn}
                           onChange={(e) =>
                             handleConsignmentChange(e, "itemhsn")
                           }
@@ -835,11 +801,9 @@ value={selectedConsignment.itemquantity}
                         <input
                          className='admin-create-invoice-table-consigment-input'
                           type="number"
-
-value={selectedConsignment.itemtaxrate}
-                          onChange={(e) =>
-                           handleConsignmentChange(e, "itemtaxrate")
-                          }
+                           onChange={(e) =>
+           handleChange(e, "consignmentdetails.itemdetails", "itemtaxrate")
+         }
                         />
                       </td>
                       <td className="admin-create-invoice-table-row-body-td">
@@ -896,7 +860,6 @@ value={selectedConsignment.itemtaxrate}
         <label className='admin-create-invoice-form-label'
         htmlFor="invoiceno"
         >Invoice Number</label>
-
         <input className='admin-create-invoice-form-input' 
          id="invoiceno"
          name="invoiceno"
@@ -906,21 +869,7 @@ value={selectedConsignment.itemtaxrate}
          }
         />
         </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'
-        htmlFor="ewaybillno"
-        >E Way Bill No</label>
-        <br />
-        <input className='admin-create-invoice-form-input' 
-        id="ewaybillno"
-        name="ewaybillno"
-        type="text"
-        value={selectedConsignment.ewaybillno}
-        onChange={(e) =>
-          handleChange(e, "invoicedetails", "ewaybillno")
-        }
-        />
-        </div>
+        
         <div className='admin-create-invoice-form-div'>
         <label className='admin-create-invoice-form-label'
         htmlFor="invoicedate">
@@ -930,170 +879,13 @@ value={selectedConsignment.itemtaxrate}
          id="invoicedate"
          name="invoicedate"
          type="date"
-         value={selectedConsignment.invoicedate}
          onChange={(e) =>
            handleChange(e, "invoicedetails", "invoicedate")
          }
         />
         </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'
-        htmlFor="deliverynote"
-        >Delivery Note</label>
-        <br />
-        <input className='admin-create-invoice-form-input' 
-        id="deliverynote"
-        name="deliverynote"
-        type="text"
-        value={selectedConsignment.deliverynote}
-        onChange={(e) =>
-          handleChange(e, "invoicedetails", "deliverynote")
-        }
-        />
-        </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'
-        htmlFor='termsofpayment'
-        >Terms of Payment</label>
-        <input className='admin-create-invoice-form-input' 
-        id="termsofpayment"
-        name="termsofpayment"
-        type="text"
-        value={selectedConsignment.termsofpayment}
-        onChange={(e) =>
-          handleChange(e, "invoicedetails", "termsofpayment")
-        }
-        />
-        </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'
-        htmlFor="supplierref"
-        >Supplier Ref.</label>
-        <br />
-        <input className='admin-create-invoice-form-input' 
-        id="supplierref"
-        name="supplierref"
-        type="text"
-        value={selectedConsignment.supplierref}
-        onChange={(e) =>
-          handleChange(e, "invoicedetails", "supplierref")
-        }
-        />
-        </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'
-        htmlFor="otherref"
-        >Other Ref.</label>
-        <br />
-        <input className='admin-create-invoice-form-input' 
-        id="otherref"
-        name="otherref"
-        type="text"
-        value={selectedConsignment.otherref}
-        onChange={(e) =>
-          handleChange(e, "invoicedetails", "otherref")
-        }
-        />
-        </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'
-        htmlFor="buyersorder"
-        >Buyer's Order No.</label>
-        <input className='admin-create-invoice-form-input' 
-        id="buyersorder"
-        name="buyersorder"
-        type="text"
-        value={selectedConsignment.buyersorder}
-        onChange={(e) =>
-          handleChange(e, "invoicedetails", "buyersorder")
-        }
-        />
-        </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'
-        htmlFor="ordereddate"
-        >Buyer's Order Date</label>
-        <input className='admin-create-invoice-form-input' 
-        id="ordereddate"
-        name="ordereddate"
-        type="date"
-        value={selectedConsignment.ordereddate}
-        onChange={(e) =>
-          handleChange(e, "invoicedetails", "ordereddate")
-        }
-        />
-        </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'
-        htmlFor="dispatchdocumentno"
-        >Dispatch Document No.</label>
-        <input className='admin-create-invoice-form-input' 
-        id="dispatchdocumentno"
-        name="dispatchdocumentno"
-        type="text"
-        value={selectedConsignment.dispatchdocumentno}
-        onChange={(e) =>
-          handleChange(e, "invoicedetails", "dispatchdocumentno")
-        }
-        />
-        </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'
-        htmlFor="deliverynotedate"
-        >Delivery Note Date</label>
-        <input className='admin-create-invoice-form-input' 
-         id="deliverynotedate"
-         name="deliverynotedate"
-         type="date"
-         value={selectedConsignment.deliverynotedate}
-         onChange={(e) =>
-           handleChange(e, "invoicedetails", "deliverynotedate")
-         }
-        />
-        </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'
-        htmlFor="dispatchthrough"
-        >Dispatch Through</label>
-        <input className='admin-create-invoice-form-input' 
-        id="dispatchthrough"
-        name="dispatchthrough"
-        type="text"
-        value={selectedConsignment.dispatchthrough}
-        onChange={(e) =>
-          handleChange(e, "invoicedetails", "dispatchthrough")
-        }
-        />
-        </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'
-        htmlFor="destination"
-        >Destination</label>
-        <br />
-        <input className='admin-create-invoice-form-input'
-        id="destination"
-        name="destination"
-        type="text"
-        value={selectedConsignment.destination}
-        onChange={(e) =>
-          handleChange(e, "invoicedetails", "destination")
-        }
-        />
-        </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'
-        htmlFor="termsandcondition"
-        >Terms and Conditions</label>
-        <input className='admin-create-invoice-form-input' 
-        id="termsandcondition"
-        name="termsandcondition"
-        type="text"
-        value={selectedConsignment.termsandcondition}
-        onChange={(e) =>
-          handleChange(e, "invoicedetails", "termsandcondition")
-        }
-        />
-        </div>
+        
+       
         </form>
         <div className='admin-create-invoice-data'>
       <h2 className='admin-create-invoice-subtitle'>BOARDING DETAILS</h2>

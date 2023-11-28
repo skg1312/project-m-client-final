@@ -134,7 +134,7 @@ function AdminInvoiceManagement() {
 </td>
 
                                         <td className='invoice-management-data-body-table-data'>{invoice.vehicledetails.vehiclenumber?.substring(0,12) ?? 'N/A'}</td>
-                                        <td className='invoice-management-data-body-table-data'>{invoice.boardingdetails.totalcost?.substring(0,12) ?? 'N/A'}</td>
+                                        <td className='invoice-management-data-body-table-data'>{invoice.boardingdetails.totalcost? invoice.boardingdetails.totalcost :'N/A'}</td>
                                         <td className='invoice-management-data-body-table-data'>
                                             <button onClick={() => ViewInvoice(invoice._id)}  className='invoice-management-data-body-table-data-button'>View</button>
                                             <button onClick={() => PrintInvoice(invoice._id)} className='invoice-management-data-body-table-data-button'>Print</button>

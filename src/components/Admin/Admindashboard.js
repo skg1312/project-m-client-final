@@ -83,7 +83,7 @@ function Admindashboard() {
               <button className='admin-dashboard-button'  onClick={() => navigate('/adminsellman')}>
                 <div className='admin-card-box'>
                   <img src={mv} alt='mv' className='admin-dashboard-button-icon' />
-                  <span>MANAGE SELLERS</span>
+                  <span>MANAGE AGENTS</span>
                 </div>
               </button>
               <button className='admin-dashboard-button'  onClick={() => navigate('/adminbuyman')}>

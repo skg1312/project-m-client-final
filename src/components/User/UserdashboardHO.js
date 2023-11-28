@@ -44,7 +44,7 @@ function UserDashboardHO() {
               <button className='user-dashboard-button-HO' onClick={() => navigate('/usersellman')}>
                 <div className='user-card-box-HO'>
                   <img src={mu} alt='mu' className='user-dashboard-button-icon-HO' />
-                  <span>MANAGE SELLERS</span>
+                  <span>MANAGE AGENTS</span>
                 </div> 
               </button>
               <button className='user-dashboard-button-HO' onClick={() => navigate('/userbuyman')}>

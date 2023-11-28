@@ -18,9 +18,9 @@ function AdminInvoiceManagement() {
     const sortedInvoice = [...invoice].reverse();
    const displayedInvoiceSearch = sortedInvoice
   .filter((item) => {
-    const invoiceNo = item.invoicedetails.invoiceno || '';
-    const companyName = item.companydetails.companyname || '';
-    const vehicleNumber = item.vehicledetails.vehiclenumber || '';
+   const invoiceNo = item.invoicedetails?.invoiceno || '';
+    const companyName = item.companydetails?.companyname || '';
+    const vehicleNumber = item.vehicledetails?.vehiclenumber || '';
 
     // Check if the search criteria is null or cannot be converted to lowercase
     if (

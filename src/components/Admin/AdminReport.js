@@ -62,21 +62,21 @@ const itemName = (item.consignmentdetails?.itemdetails[0]?.itemname) || '';
     }, [API]);
     const exportLoadReport = () => {
         setExportedData(sortedInvoice.map((invoice) => ({
-            'Invoice No': invoice.invoicedetails.invoiceno,
-            'Date': invoice.invoicedetails.invoicedate,
-            'Total Cost': invoice.boardingdetails.totalcost,
-            'Company Name': invoice.companydetails.companyname,
-            'No of Items': invoice.consignmentdetails.itemdetails.length,
+            'Invoice No': invoice.invoicedetails?.invoiceno || "N/A,
+            'Date': invoice.invoicedetails?.invoicedate || "N/A",
+            'Total Cost': invoice.boardingdetails?.totalcost || "N/A,
+            'Company Name': invoice.companydetails?.companyname || "N/A,
+            'No of Items': invoice.consignmentdetails?.itemdetails.length || "0",
         })));
     };
     
     const exportDayWiseReport = () => {
         setExportedData(displayedInvoiceSearch.map((invoice) => ({
             'Date': invoice.invoicedetails.invoicedate,
-            'Invoice no': invoice.invoicedetails.invoiceno,
-            'Order Date': invoice.invoicedetails.ordereddate,
-            'Total Cost': invoice.boardingdetails.totalcost,
-            'Delivery Note Date': invoice.invoicedetails.deliverynotedate,
+            'Invoice no': invoice.invoicedetails>.invoiceno || "N/A",
+            'Order Date': invoice.invoicedetails?.ordereddate|| "N/A",
+            'Total Cost': invoice.boardingdetails?.totalcost|| "N/A",
+            'Delivery Note Date': invoice.invoicedetails?.deliverynotedate|| "N/A",
         })));
     };
     
@@ -94,21 +94,21 @@ const itemName = (item.consignmentdetails?.itemdetails[0]?.itemname) || '';
     
     const exportVehicleWiseReport = () => {
         setExportedData(displayedInvoiceSearch.map((invoice) => ({
-            'Vehicle': invoice.vehicledetails.vehiclenumber,
-            'Transportation Cost': invoice.boardingdetails.transportationcost,
-            'Total Cost': invoice.boardingdetails.totalcost,
-            'Driver': invoice.vehicledetails.drivername,
-            'Weight': invoice.boardingdetails.weight,
+            'Vehicle': invoice.vehicledetails?.vehiclenumber || "N/A",
+            'Transportation Cost': invoice.boardingdetails?.transportationcost|| "N/A",
+            'Total Cost': invoice.boardingdetails?.totalcost|| "N/A",
+            'Driver': invoice.vehicledetails?.drivername|| "N/A",
+            'Weight': invoice.boardingdetails?.weight|| "N/A",
         })));
     };
     
     const exportDriverWiseReport = () => {
         setExportedData(displayedInvoiceSearch.map((invoice) => ({
-            'Driver': invoice.vehicledetails.drivername,
-            'Vehicle': invoice.vehicledetails.vehiclenumber,
-            'Invoice No': invoice.invoicedetails.invoiceno,
-            'Total Cost': invoice.boardingdetails.totalcost,
-            'Driver License No': invoice.vehicledetails.driverlicenseno,
+            'Driver': invoice.vehicledetails?.drivername|| "N/A",
+            'Vehicle': invoice.vehicledetails?.vehiclenumber|| "N/A",
+            'Invoice No': invoice.invoicedetails?.invoiceno|| "N/A",
+            'Total Cost': invoice.boardingdetails?.totalcost|| "N/A",
+            'Driver License No': invoice.vehicledetails?.driverlicenseno|| "N/A",
         })));
     };
     

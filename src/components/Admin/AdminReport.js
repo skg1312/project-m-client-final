@@ -7,45 +7,43 @@ import { CSVLink } from 'react-csv';
 import AdminNavbar from './AdminNavbar';
 
 function AdminReports() {
-    const [invoice,setInvoice] = useState([]);
+    const [invoice, setInvoice] = useState([]);
     const [pageNumber, setPageNumber] = useState(0);
     const [searchInput, setSearchInput] = useState('');
     const [value, setValue] = useState('');
     const [exportedData, setExportedData] = useState([]);
 
     const API = process.env.REACT_APP_API;
+
     const changeTable = (newValue) => {
         setValue(newValue);
-    }
+    };
+
     const itemsPerPage = 15;
     const sortedInvoice = [...invoice].reverse();
-    
+
     const displayedInvoiceSearch = sortedInvoice
-  .filter((item) => {
-    const invoiceNo = item.invoicedetails?.invoiceno || '';
-const companyName = item.companydetails?.companyname || '';
-const invoiceDate = item.invoicedetails?.invoicedate || '';
-const vehicleNumber = item.vehicledetails?.vehiclenumber || '';
-const driverName = item.vehicledetails?.drivername || '';
-const itemName = (item.consignmentdetails?.itemdetails[0]?.itemname) || '';
+        .filter((item) => {
+            const invoiceNo = item.invoicedetails?.invoiceno || '';
+            const companyName = item.companydetails?.companyname || '';
+            const invoiceDate = item.invoicedetails?.invoicedate || '';
+            const vehicleNumber = item.vehicledetails?.vehiclenumber || '';
+            const driverName = item.vehicledetails?.drivername || '';
+            const itemName = (item.consignmentdetails?.itemdetails[0]?.itemname) || '';
 
-    // Check if any of the search criteria is null or cannot be converted to lowercase
-    if (
-      invoiceNo.toLowerCase().includes(searchInput?.toLowerCase()) ||
-      companyName.toLowerCase().includes(searchInput?.toLowerCase()) ||
-      invoiceDate.toLowerCase().includes(searchInput?.toLowerCase()) ||
-      vehicleNumber.toLowerCase().includes(searchInput?.toLowerCase()) ||
-      driverName.toLowerCase().includes(searchInput?.toLowerCase()) ||
-      itemName.toLowerCase().includes(searchInput?.toLowerCase())
-    ) {
-      return true;
-    }
-
-    return false;
-  })
-  .slice(pageNumber * itemsPerPage, (pageNumber + 1) * itemsPerPage);
+            return (
+                invoiceNo.toLowerCase().includes(searchInput?.toLowerCase()) ||
+                companyName.toLowerCase().includes(searchInput?.toLowerCase()) ||
+                invoiceDate.toLowerCase().includes(searchInput?.toLowerCase()) ||
+                vehicleNumber.toLowerCase().includes(searchInput?.toLowerCase()) ||
+                driverName.toLowerCase().includes(searchInput?.toLowerCase()) ||
+                itemName.toLowerCase().includes(searchInput?.toLowerCase())
+            );
+        })
+        .slice(pageNumber * itemsPerPage, (pageNumber + 1) * itemsPerPage);
 
     const pageCount = Math.ceil(sortedInvoice.length / itemsPerPage);
+
     const changePage = ({ selected }) => {
         setPageNumber(selected);
     };
@@ -60,30 +58,33 @@ const itemName = (item.consignmentdetails?.itemdetails[0]?.itemname) || '';
                 console.error('Error fetching Invoice data:', error);
             });
     }, [API]);
-   const exportLoadReport = () => {
-    setExportedData(sortedInvoice.map((invoice) => ({
-        'Invoice No': invoice.invoicedetails?.invoiceno || "N/A",
-        'Date': invoice.invoicedetails?.invoicedate || "N/A",
-        'Total Cost': invoice.boardingdetails?.totalcost || "N/A",
-        'Company Name': invoice.companydetails?.companyname || "N/A",
-        'No of Items': invoice.consignmentdetails?.itemdetails.length || "0",
-    })));
-};
 
-    
+    const exportReport = (exportFunction) => {
+        setExportedData(exportFunction(displayedInvoiceSearch));
+    };
+
+    const exportLoadReport = () => {
+        return sortedInvoice.map((invoice) => ({
+            'Invoice No': invoice.invoicedetails.invoiceno || "N/A",
+            'Date': formatDate(invoice.invoicedetails.invoicedate),
+            'Total Cost': invoice.boardingdetails.totalcost || "N/A",
+            'Company Name': invoice.companydetails.companyname || "N/A",
+            'No of Items': invoice.consignmentdetails.itemdetails.length || "0",
+        }));
+    };
+
     const exportDayWiseReport = () => {
-    setExportedData(displayedInvoiceSearch.map((invoice) => ({
-        'Date': invoice.invoicedetails.invoicedate,
-        'Invoice no': invoice.invoicedetails?.invoiceno || "N/A",
-        'Order Date': invoice.invoicedetails?.ordereddate || "N/A",
-        'Total Cost': invoice.boardingdetails?.totalcost || "N/A",
-        'Delivery Note Date': invoice.invoicedetails?.deliverynotedate || "N/A",
-    })));
-};
+        return displayedInvoiceSearch.map((invoice) => ({
+            'Date': formatDate(invoice.invoicedetails.invoicedate),
+            'Invoice no': invoice.invoicedetails.invoiceno || "N/A",
+            'Order Date': formatDate(invoice.invoicedetails.ordereddate),
+            'Total Cost': invoice.boardingdetails.totalcost || "N/A",
+            'Delivery Note Date': formatDate(invoice.invoicedetails.deliverynotedate),
+        }));
+    };
 
-    
     const exportItemWiseReport = () => {
-        setExportedData(displayedInvoiceSearch.flatMap((invoice) =>
+        return displayedInvoiceSearch.flatMap((invoice) =>
             invoice.consignmentdetails.itemdetails.map((item) => ({
                 'Item Name': item.itemname,
                 'Item Amount': item.itemprice,
@@ -91,29 +92,28 @@ const itemName = (item.consignmentdetails?.itemdetails[0]?.itemname) || '';
                 'Item Quantity': item.itemquantity,
                 'Invoice No': invoice.invoicedetails.invoiceno,
             }))
-        ));
+        );
     };
-    
+
     const exportVehicleWiseReport = () => {
-        setExportedData(displayedInvoiceSearch.map((invoice) => ({
-            'Vehicle': invoice.vehicledetails?.vehiclenumber || "N/A",
-            'Transportation Cost': invoice.boardingdetails?.transportationcost|| "N/A",
-            'Total Cost': invoice.boardingdetails?.totalcost|| "N/A",
-            'Driver': invoice.vehicledetails?.drivername|| "N/A",
-            'Weight': invoice.boardingdetails?.weight|| "N/A",
-        })));
+        return displayedInvoiceSearch.map((invoice) => ({
+            'Vehicle': invoice.vehicledetails.vehiclenumber || "N/A",
+            'Transportation Cost': invoice.boardingdetails.transportationcost || "N/A",
+            'Total Cost': invoice.boardingdetails.totalcost || "N/A",
+            'Driver': invoice.vehicledetails.drivername || "N/A",
+            'Weight': invoice.boardingdetails.weight || "N/A",
+        }));
     };
-    
+
     const exportDriverWiseReport = () => {
-        setExportedData(displayedInvoiceSearch.map((invoice) => ({
-            'Driver': invoice.vehicledetails?.drivername|| "N/A",
-            'Vehicle': invoice.vehicledetails?.vehiclenumber|| "N/A",
-            'Invoice No': invoice.invoicedetails?.invoiceno|| "N/A",
-            'Total Cost': invoice.boardingdetails?.totalcost|| "N/A",
-            'Driver License No': invoice.vehicledetails?.driverlicenseno|| "N/A",
-        })));
+        return displayedInvoiceSearch.map((invoice) => ({
+            'Driver': invoice.vehicledetails.drivername || "N/A",
+            'Vehicle': invoice.vehicledetails.vehiclenumber || "N/A",
+            'Invoice No': invoice.invoicedetails.invoiceno || "N/A",
+            'Total Cost': invoice.boardingdetails.totalcost || "N/A",
+            'Driver License No': invoice.vehicledetails.driverlicenseno || "N/A",
+        }));
     };
-    
 
     return (
         <div

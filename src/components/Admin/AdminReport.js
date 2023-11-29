@@ -185,9 +185,9 @@ const itemName =
         year: 'numeric'
     })
     : 'N/A'}</td>
-                                        <td className="reports-data-body-table-load-body-row-item">{invoice.boardingdetails.totalcost? invoice.boardingdetails.totalcost : 'N/A'}</td>
-                                        <td className="reports-data-body-table-load-body-row-item">{invoice.companydetails.companyname?.substring(0,12) ?? 'N/A'}</td>
-                                        <td className="reports-data-body-table-load-body-row-item">{invoice.consignmentdetails.itemdetails.length ? invoice.consignmentdetails.itemdetails.length : 'N/A'}</td>
+                                        <td className="reports-data-body-table-load-body-row-item">{(invoice.boardingdetails && invoice.boardingdetails.totalcost)? invoice.boardingdetails.totalcost : 'N/A'}</td>
+                                        <td className="reports-data-body-table-load-body-row-item">{(invoice.companydetails && invoice.companydetails.companyname) ? invoice.companydetails.companyname.substring(0,12) : 'N/A'}</td>
+                                        <td className="reports-data-body-table-load-body-row-item">{(invoice.consignmentdetails && invoice.consignmentdetails.itemdetails && invoice.consignmentdetails.itemdetails.length) ? invoice.consignmentdetails.itemdetails.length : 'N/A'}</td>
                                     </tr>
                                     ))}
                                 </tbody>

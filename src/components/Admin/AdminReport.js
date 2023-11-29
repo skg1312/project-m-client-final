@@ -22,13 +22,12 @@ function AdminReports() {
     
     const displayedInvoiceSearch = sortedInvoice
   .filter((item) => {
-    const invoiceNo = item.invoicedetails.invoiceno || '';
-    const companyName = item.companydetails.companyname || '';
-    const invoiceDate = item.invoicedetails.invoicedate || '';
-    const vehicleNumber = item.vehicledetails.vehiclenumber || '';
-    const driverName = item.vehicledetails.drivername || '';
-    const itemName =
-      (item.consignmentdetails.itemdetails[0] && item.consignmentdetails.itemdetails[0].itemname) || '';
+    const invoiceNo = item.invoicedetails?.invoiceno || '';
+const companyName = item.companydetails?.companyname || '';
+const invoiceDate = item.invoicedetails?.invoicedate || '';
+const vehicleNumber = item.vehicledetails?.vehiclenumber || '';
+const driverName = item.vehicledetails?.drivername || '';
+const itemName = (item.consignmentdetails?.itemdetails[0]?.itemname) || '';
 
     // Check if any of the search criteria is null or cannot be converted to lowercase
     if (

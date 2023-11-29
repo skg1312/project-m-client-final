@@ -12,7 +12,15 @@ function AdminReports() {
     const [searchInput, setSearchInput] = useState('');
     const [value, setValue] = useState('');
     const [exportedData, setExportedData] = useState([]);
-
+const formatDate = (dateString) => {
+    return dateString
+        ? new Date(dateString).toLocaleDateString('en-GB', {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric'
+          })
+        : 'N/A';
+};
     const API = process.env.REACT_APP_API;
 
     const changeTable = (newValue) => {

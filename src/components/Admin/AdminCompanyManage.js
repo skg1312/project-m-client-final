@@ -11,7 +11,6 @@ function AdminCompanyManage() {
   const [selectedCompanyId, setSelectedCompanyId] = useState(null);
   const API = process.env.REACT_APP_API;
   const [selectedCompanyData, setSelectedCompanyData] = useState({
-    companyid: '',
     companyname: '',
     companyregistrationtype: '',
     companypartytype: '',
@@ -94,7 +93,6 @@ function AdminCompanyManage() {
     }
 
     setSelectedCompanyData({
-      companyid: '',
       companyname: '',
       companyregistrationtype: '',
       companypartytype: '',
@@ -190,20 +188,10 @@ function AdminCompanyManage() {
           {selectedCompanyId ? 'UPDATE COMPANY' : 'ADD COMPANY'}
         </h1>
         <form className='admin-company-manager-form-form' onSubmit={handleFormSubmit}>
-        <input
-    type='text'
-    required
-    className='admin-company-manager-form-input-high'
-    placeholder='Company ID'
-    value={selectedCompanyData.companyid || ''}
-    onChange={(e) =>
-      setSelectedCompanyData({ ...selectedCompanyData, companyid: e.target.value })
-    }
-  />
   <input
     type='text'
     required
-    className='admin-company-manager-form-input-high'
+    className='admin-company-manager-form-input-low'
     placeholder='Company Name'
     value={selectedCompanyData.companyname || ''}
     onChange={(e) =>
@@ -226,7 +214,7 @@ function AdminCompanyManage() {
     type='tel'
     required
     maxLength='10'
-    className='admin-company-manager-form-input-low'
+    className='admin-company-manager-form-input-high'
     placeholder='Contact'
     value={selectedCompanyData.companycontact || ''}
     onChange={(e) =>

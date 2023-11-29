@@ -62,7 +62,7 @@ const itemName =
     }, [API]);
     const exportLoadReport = () => {
         setExportedData(sortedInvoice.map((invoice) => ({
-            'Invoice No': invoice.invoicedetails.invoiceno,
+            'Invoice No': (invoice.invoicedetails && invoice.invoicedetails.invoiceno) ? invoice.invoicedetails.invoiceno.substring(0, 12) : 'N/A',
             'Date': invoice.invoicedetails.invoicedate,
             'Total Cost': invoice.boardingdetails.totalcost,
             'Company Name': invoice.companydetails.companyname,
@@ -72,7 +72,7 @@ const itemName =
     
     const exportDayWiseReport = () => {
         setExportedData(displayedInvoiceSearch.map((invoice) => ({
-            'Date': invoice.invoicedetails.invoicedate,
+            'Date': (invoice.invoicedetails && invoice.invoicedetails.invoiceno) ? invoice.invoicedetails.invoiceno.substring(0, 12) : 'N/A',
             'Invoice no': invoice.invoicedetails.invoiceno,
             'Order Date': invoice.invoicedetails.ordereddate,
             'Total Cost': invoice.boardingdetails.totalcost,
@@ -87,7 +87,7 @@ const itemName =
                 'Item Amount': item.itemprice,
                 'Item Tax': item.itemtaxrate,
                 'Item Quantity': item.itemquantity,
-                'Invoice No': invoice.invoicedetails.invoiceno,
+                'Invoice No': (invoice.invoicedetails && invoice.invoicedetails.invoiceno) ? invoice.invoicedetails.invoiceno.substring(0, 12) : 'N/A',
             }))
         ));
     };
@@ -106,7 +106,7 @@ const itemName =
         setExportedData(displayedInvoiceSearch.map((invoice) => ({
             'Driver': invoice.vehicledetails.drivername,
             'Vehicle': invoice.vehicledetails.vehiclenumber,
-            'Invoice No': invoice.invoicedetails.invoiceno,
+            'Invoice No': (invoice.invoicedetails && invoice.invoicedetails.invoiceno) ? invoice.invoicedetails.invoiceno.substring(0, 12) : 'N/A',
             'Total Cost': invoice.boardingdetails.totalcost,
             'Driver License No': invoice.vehicledetails.driverlicenseno,
         })));

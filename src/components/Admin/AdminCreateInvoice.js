@@ -14,10 +14,7 @@ function AdminCreateInvoice() {
 
     const [buyers, setBuyers] = useState([]);
     const [selectedBuyer, setSelectedBuyer] = useState({});
-
-    const [vehicles, setVehicles] = useState([]);
-    const [selectedVehicle, setSelectedVehicle] = useState({});
-
+  
     const [consignments, setConsignments] = useState([]);
     const [addedConsignment, setAddedConsignment] = useState({});
     const [selectedConsignment, setSelectedConsignment] = useState({});
@@ -127,24 +124,7 @@ function AdminCreateInvoice() {
         fetchBuyers();
         }, [API]);
 
-        useEffect(() => {
-            const fetchVehicles = async () => {
-            try {
-                const response = await fetch(`${API}vechicle`);
-                if (response.ok) {
-                const data = await response.json();
-                setVehicles(data);
-                }
-                else{
-                console.error('Failed to fetch vehicles data');
-                }
-            }
-            catch (error) {
-                console.error('Error fetching vehicles data:', error);
-            }
-        };
-        fetchVehicles();
-        }, [API]);
+       
 
         useEffect(() => {
             const fetchConsignments = async () => {
@@ -221,28 +201,6 @@ function AdminCreateInvoice() {
                     }));
                     setSelectedBuyer(selectedBuyer);
                   };
-
-                    const handleSelectChangeVehicle = (e) => {
-                        const selectedVehicleId = e.target.value;
-                        const selectedVehicle = vehicles.find((vehicle) => vehicle._id === selectedVehicleId);
-                
-                        setDataToSend((prevData) => ({
-                          ...prevData,
-                          vehicledetails: {
-                            ...prevData.vehicledetails,
-                            vehicleid: selectedVehicle.vehicleid,                    
-                            drivername: selectedVehicle.drivername,
-                            drivernumber: selectedVehicle.drivernumber,
-                            driveraddress: selectedVehicle.driveraddress,
-                            driveridproof: selectedVehicle.driveridproof,
-                            driverlicenseno: selectedVehicle.driverlicenseno,
-                            vechiclenuumber: selectedVehicle.vechiclenuumber,
-                            vechiclemodel: selectedVehicle.vechiclemodel,
-                            vechicleofficebranch: selectedVehicle.vechicleofficebranch,
-                          },
-                        }));
-                        setSelectedVehicle(selectedVehicle);
-                      };
                       const handleSelectChangeConsignment = (e) => {
                         const selectedConsignmentId = e.target.value;
                         const selectedConsignment = consignments.find(
@@ -616,21 +574,6 @@ function AdminCreateInvoice() {
         </form>
         <div className='admin-create-invoice-data'>
       <h2 className='admin-create-invoice-subtitle'>VEHICLE DETAILS</h2>
-      <select
-  className='admin-create-invoice-select'
-  id="vechiclenuumber"
-  name="vechiclenuumber"
-  value={selectedVehicle.vechiclenuumber || ''}
-  onChange={handleSelectChangeVehicle}
->
-  <option value=''>Select Vehicle</option>
-  {vehicles.map((vehicle) => (
-    <option key={vehicle._id} value={vehicle._id}>
-      {vehicle.vechiclenuumber}
-    </option>
-  ))}
-</select>
-
       </div>
       <form className='admin-create-invoice-form'>
        
@@ -642,7 +585,6 @@ function AdminCreateInvoice() {
         id="drivernumber"
         name="drivernumber"
         type="tel"
-        value={selectedVehicle.drivernumber}
         onChange={(e) =>
           handleChange(e, "vehicledetails", "drivernumber")
         }
@@ -658,7 +600,6 @@ function AdminCreateInvoice() {
         id="vechiclenuumber"
         name="vechiclenuumber"
         type="text"
-        value={selectedVehicle.vechiclenuumber}
         onChange={(e) =>
           handleChange(e, "vehicledetails", "vechiclenuumber")
         }
@@ -673,7 +614,6 @@ function AdminCreateInvoice() {
         id="vechiclemodel"
         name="vechiclemodel"
         type="text"
-        value={selectedVehicle.vechiclemodel}
         onChange={(e) =>
           handleChange(e, "vehicledetails", "vechiclemodel")
         }
@@ -842,7 +782,6 @@ function AdminCreateInvoice() {
         id="dateofloading"
         name="dateofloading"
         type="date"
-        value={selectedConsignment.dateofloading}
         onChange={(e) =>
           handleChange(e, "boardingdetails", "dateofloading")
         }
@@ -857,7 +796,6 @@ function AdminCreateInvoice() {
         id="startingpoint"
         name="startingpoint"
         type="text"
-        value={selectedConsignment.startingpoint}
         onChange={(e) =>
           handleChange(e, "boardingdetails", "startingpoint")
         }
@@ -872,7 +810,6 @@ function AdminCreateInvoice() {
          id="endingpoint"
          name="endingpoint"
          type="text"
-         value={selectedConsignment.endingpoint}
          onChange={(e) =>
            handleChange(e, "boardingdetails", "endingpoint")
          }
@@ -887,7 +824,6 @@ function AdminCreateInvoice() {
          id="watermark"
          name="watermark"
          type="text"
-         value={selectedConsignment.watermark}
          onChange={(e) =>
            handleChange(e, "boardingdetails", "watermark")
          }

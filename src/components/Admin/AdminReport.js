@@ -172,7 +172,7 @@ const itemName =
                                 <tbody className="reports-data-body-table-load-body">
                                     { displayedInvoiceSearch.map((invoice) => (
                                     <tr key={invoice._id} className="reports-data-body-table-load-body-row">
-                                        <td className="reports-data-body-table-load-body-row-item">{invoice.invoicedetails.invoiceno?.substring(0, 12) ?? 'N/A'}</td>
+                                        <td className="reports-data-body-table-load-body-row-item">{(invoice.invoicedetails && invoice.invoicedetails.invoiceno) ? invoice.invoicedetails.invoiceno.substring(0, 12) : 'N/A'}</td>
                                         <td className="reports-data-body-table-load-body-row-item">{invoice.invoicedetails.invoicedate ?
     new Date(invoice.invoicedetails.invoicedate).toLocaleDateString('en-GB', {
       day: '2-digit',
@@ -249,7 +249,8 @@ const itemName =
                                                 <td className="reports-data-body-table-item-body-row-item">{item.itemprice?.substring(0,12) ?? 'N/A'}</td>
                                                 <td className="reports-data-body-table-item-body-row-item">{item.itemtaxrate?.substring(0,12) ?? 'N/A'}</td>
                                                 <td className="reports-data-body-table-item-body-row-item">{item.itemquantity?.substring(0,12) ?? 'N/A'}</td>
-                                                <td className="reports-data-body-table-item-body-row-item">{invoice.invoicedetails.invoiceno?.substring(0, 12) ?? 'N/A'}</td>
+                                               <td className="reports-data-body-table-load-body-row-item">{(invoice.invoicedetails && invoice.invoicedetails.invoiceno) ? invoice.invoicedetails.invoiceno.substring(0, 12) : 'N/A'}</td>
+
                                                 </tr>
                                             ))
                                             )}
@@ -303,7 +304,7 @@ const itemName =
                                     <tr key={invoice._id} className="reports-data-body-table-driver-body-row">
                                         <td className="reports-data-body-table-driver-body-row-item">{invoice.vehicledetails.drivername?.substring(0,12) ?? '<N/A'}</td>
                                         <td className="reports-data-body-table-driver-body-row-item">{invoice.vehicledetails.vehiclenumber?.substring(0,12) ?? '<N/A'}</td>
-                                        <td className="reports-data-body-table-driver-body-row-item">{invoice.invoicedetails.invoiceno?.substring(0,12) ?? '<N/A'}</td>
+                                       <td className="reports-data-body-table-load-body-row-item">{(invoice.invoicedetails && invoice.invoicedetails.invoiceno) ? invoice.invoicedetails.invoiceno.substring(0, 12) : 'N/A'}</td>
                                         <td className="reports-data-body-table-driver-body-row-item">{invoice.boardingdetails.totalcost?.substring(0,12) ?? '<N/A'}</td>
                                         <td className="reports-data-body-table-driver-body-row-item">{invoice.vehicledetails.driverlicenseno?.substring(0,12) ?? '<N/A'}</td>
                                     </tr>

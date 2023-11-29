@@ -179,7 +179,7 @@ const itemName =
       month: '2-digit',
       year: 'numeric'
     }) : 'N/A'}</td>
-                                        <td className="reports-data-body-table-load-body-row-item">{invoice.boardingdetails.totalcost?.substring(0,12) ?? 'N/A'}</td>
+                                        <td className="reports-data-body-table-load-body-row-item">{invoice.boardingdetails.totalcost? invoice.boardingdetails.totalcost : 'N/A'}</td>
                                         <td className="reports-data-body-table-load-body-row-item">{invoice.companydetails.companyname?.substring(0,12) ?? 'N/A'}</td>
                                         <td className="reports-data-body-table-load-body-row-item">{invoice.consignmentdetails.itemdetails.length ? invoice.consignmentdetails.itemdetails.length : 'N/A'}</td>
                                     </tr>
@@ -209,14 +209,14 @@ const itemName =
       month: '2-digit',
       year: 'numeric'
     }) : 'N/A'}</td>
-                                        <td className="reports-data-body-table-day-body-row-item">{invoice.invoicedetails.invoiceno?.substring(0, 12) ?? 'N/A'}</td>
+                                        <td className="reports-data-body-table-day-body-row-item">{(invoice.invoicedetails && invoice.invoicedetails.invoiceno) ? invoice.invoicedetails.invoiceno.substring(0, 12) : 'N/A'}</td>
                                         <td className="reports-data-body-table-day-body-row-item">{invoice.invoicedetails.ordereddate ?
     new Date(invoice.invoicedetails.ordereddate).toLocaleDateString('en-GB', {
       day: '2-digit',
       month: '2-digit',
       year: 'numeric'
     }) : 'N/A'}</td>
-                                        <td className="reports-data-body-table-day-body-row-item">{invoice.boardingdetails.totalcost?.substring(0,12) ?? 'N/A'}</td>
+                                        <td className="reports-data-body-table-day-body-row-item">{invoice.boardingdetails.totalcost? invoice.boardingdetails.totalcost : 'N/A'}</td>
                                         <td className="reports-data-body-table-day-body-row-item">{invoice.invoicedetails.deliverynotedate ?
     new Date(invoice.invoicedetails.deliverynotedate).toLocaleDateString('en-GB', {
       day: '2-digit',
@@ -245,10 +245,10 @@ const itemName =
                                 {displayedInvoiceSearch.map((invoice) =>
                                             invoice.consignmentdetails.itemdetails.map((item, index) => (
                                                 <tr key={index} className="reports-data-body-table-item-body-row">
-                                                <td className="reports-data-body-table-item-body-row-item">{item.itemname?.substring(0,12) ?? 'N/A'}</td>
-                                                <td className="reports-data-body-table-item-body-row-item">{item.itemprice?.substring(0,12) ?? 'N/A'}</td>
-                                                <td className="reports-data-body-table-item-body-row-item">{item.itemtaxrate?.substring(0,12) ?? 'N/A'}</td>
-                                                <td className="reports-data-body-table-item-body-row-item">{item.itemquantity?.substring(0,12) ?? 'N/A'}</td>
+                                                <td className="reports-data-body-table-item-body-row-item">{item.itemname? item.itemname :  'N/A'}</td>
+                                                <td className="reports-data-body-table-item-body-row-item">{item.itemprice? item.itemprice : 'N/A'}</td>
+                                                <td className="reports-data-body-table-item-body-row-item">{item.itemtaxrate? item.itemtaxrate  : 'N/A'}</td>
+                                                <td className="reports-data-body-table-item-body-row-item">{item.itemquantity? item.itemquantity : 'N/A'}</td>
                                                <td className="reports-data-body-table-load-body-row-item">{(invoice.invoicedetails && invoice.invoicedetails.invoiceno) ? invoice.invoicedetails.invoiceno.substring(0, 12) : 'N/A'}</td>
 
                                                 </tr>

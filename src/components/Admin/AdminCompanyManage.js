@@ -214,7 +214,7 @@ function AdminCompanyManage() {
     type='tel'
     required
     maxLength='10'
-    className='admin-company-manager-form-input-high'
+    className='admin-company-manager-form-input-low'
     placeholder='Contact'
     value={selectedCompanyData.companycontact || ''}
     onChange={(e) =>

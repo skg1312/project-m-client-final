@@ -60,25 +60,27 @@ const itemName = (item.consignmentdetails?.itemdetails[0]?.itemname) || '';
                 console.error('Error fetching Invoice data:', error);
             });
     }, [API]);
-    const exportLoadReport = () => {
-        setExportedData(sortedInvoice.map((invoice) => ({
-            'Invoice No': invoice.invoicedetails?.invoiceno || "N/A,
-            'Date': invoice.invoicedetails?.invoicedate || "N/A",
-            'Total Cost': invoice.boardingdetails?.totalcost || "N/A,
-            'Company Name': invoice.companydetails?.companyname || "N/A,
-            'No of Items': invoice.consignmentdetails?.itemdetails.length || "0",
-        })));
-    };
+   const exportLoadReport = () => {
+    setExportedData(sortedInvoice.map((invoice) => ({
+        'Invoice No': invoice.invoicedetails?.invoiceno || "N/A",
+        'Date': invoice.invoicedetails?.invoicedate || "N/A",
+        'Total Cost': invoice.boardingdetails?.totalcost || "N/A",
+        'Company Name': invoice.companydetails?.companyname || "N/A",
+        'No of Items': invoice.consignmentdetails?.itemdetails.length || "0",
+    })));
+};
+
     
     const exportDayWiseReport = () => {
-        setExportedData(displayedInvoiceSearch.map((invoice) => ({
-            'Date': invoice.invoicedetails.invoicedate,
-            'Invoice no': invoice.invoicedetails>.invoiceno || "N/A",
-            'Order Date': invoice.invoicedetails?.ordereddate|| "N/A",
-            'Total Cost': invoice.boardingdetails?.totalcost|| "N/A",
-            'Delivery Note Date': invoice.invoicedetails?.deliverynotedate|| "N/A",
-        })));
-    };
+    setExportedData(displayedInvoiceSearch.map((invoice) => ({
+        'Date': invoice.invoicedetails.invoicedate,
+        'Invoice no': invoice.invoicedetails?.invoiceno || "N/A",
+        'Order Date': invoice.invoicedetails?.ordereddate || "N/A",
+        'Total Cost': invoice.boardingdetails?.totalcost || "N/A",
+        'Delivery Note Date': invoice.invoicedetails?.deliverynotedate || "N/A",
+    })));
+};
+
     
     const exportItemWiseReport = () => {
         setExportedData(displayedInvoiceSearch.flatMap((invoice) =>

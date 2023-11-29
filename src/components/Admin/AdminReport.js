@@ -60,19 +60,20 @@ const itemName =
                 console.error('Error fetching Invoice data:', error);
             });
     }, [API]);
-    const exportLoadReport = () => {
-        setExportedData(sortedInvoice.map((invoice) => ({
-            'Invoice No': (invoice.invoicedetails && invoice.invoicedetails.invoiceno) ? invoice.invoicedetails.invoiceno : 'N/A',
-            'Date': (invoice.invoicedetails && invoice.invoicedetails.invoicedate) ? invoice.invoicedetails.invoicedate.toLocaleDateString('en-GB', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric'
-    }) : 'N/A'},
-            'Total Cost': (invoice.boardingdetails && invoice.boardingdetails.totalcost) ? invoice.boardingdetails.totalcost : 'N/A',
-            'Company Name': (invoice.companydetails && invoice.companydetails.companyname) ? invoice.companydetails.companyname :'N/A',
-            'No of Items': (invoice.consignmentdetails && invoice.consignmentdetails.itemdetails.length) ? invoice.consignmentdetails.itemdetails.length : '0',
-        })));
-    };
+   const exportLoadReport = () => {
+    setExportedData(sortedInvoice.map((invoice) => ({
+        'Invoice No': (invoice.invoicedetails && invoice.invoicedetails.invoiceno) ? invoice.invoicedetails.invoiceno : 'N/A',
+        'Date': (invoice.invoicedetails && invoice.invoicedetails.invoicedate) ? new Date(invoice.invoicedetails.invoicedate).toLocaleDateString('en-GB', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+        }) : 'N/A',
+        'Total Cost': (invoice.boardingdetails && invoice.boardingdetails.totalcost) ? invoice.boardingdetails.totalcost : 'N/A',
+        'Company Name': (invoice.companydetails && invoice.companydetails.companyname) ? invoice.companydetails.companyname : 'N/A',
+        'No of Items': (invoice.consignmentdetails && invoice.consignmentdetails.itemdetails.length) ? invoice.consignmentdetails.itemdetails.length : '0',
+    })));
+};
+
     
     const exportDayWiseReport = () => {
         setExportedData(displayedInvoiceSearch.map((invoice) => ({

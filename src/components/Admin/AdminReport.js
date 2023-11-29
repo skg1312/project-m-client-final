@@ -22,7 +22,7 @@ function AdminReports() {
     
     const displayedInvoiceSearch = sortedInvoice
   .filter((item) => {
-    const invoiceNo = item.invoicedetails.invoiceno || '';
+   const invoiceNo = (item.invoicedetails && item.invoicedetails.invoiceno) || '';
     const companyName = item.companydetails.companyname || '';
     const invoiceDate = item.invoicedetails.invoicedate || '';
     const vehicleNumber = item.vehicledetails.vehiclenumber || '';

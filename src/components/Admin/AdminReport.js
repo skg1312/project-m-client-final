@@ -62,11 +62,15 @@ const itemName =
     }, [API]);
     const exportLoadReport = () => {
         setExportedData(sortedInvoice.map((invoice) => ({
-            'Invoice No': (invoice.invoicedetails && invoice.invoicedetails.invoiceno) ? invoice.invoicedetails.invoiceno.substring(0, 12) : 'N/A',
-            'Date': invoice.invoicedetails.invoicedate,
-            'Total Cost': invoice.boardingdetails.totalcost,
-            'Company Name': invoice.companydetails.companyname,
-            'No of Items': invoice.consignmentdetails.itemdetails.length,
+            'Invoice No': (invoice.invoicedetails && invoice.invoicedetails.invoiceno) ? invoice.invoicedetails.invoiceno : 'N/A',
+            'Date': (invoice.invoicedetails && invoice.invoicedetails.invoicedate) ? invoice.invoicedetails.invoicedate.toLocaleDateString('en-GB', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    }) : 'N/A'},
+            'Total Cost': (invoice.boardingdetails && invoice.boardingdetails.totalcost) ? invoice.boardingdetails.totalcost : 'N/A',
+            'Company Name': (invoice.companydetails && invoice.companydetails.companyname) ? invoice.companydetails.companyname :'N/A',
+            'No of Items': (invoice.consignmentdetails && invoice.consignmentdetails.itemdetails.length) ? invoice.consignmentdetails.itemdetails.length : '0',
         })));
     };
     

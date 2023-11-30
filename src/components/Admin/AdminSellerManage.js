@@ -25,9 +25,17 @@ function AdminSellerManage() {
 
   // Sort the seller array in reverse order (newest first)
   const sortedSellers = [...sellers].reverse();
-  const displayedSellerSearch = sortedSellers
-    .filter((item) => item.sellercompanyname.toLowerCase().includes(searchInput.toLowerCase()))
-    .slice(pageNumber * itemsPerPage, (pageNumber + 1) * itemsPerPage);
+const displayedSellerSearch = sortedSellers
+  .filter((item) => {
+    const sellerCompanyName = item.sellercompanyname || '';
+
+    if (sellerCompanyName.toLowerCase().includes(searchInput?.toLowerCase())) {
+      return true;
+    }
+
+    return false;
+  })
+  .slice(pageNumber * itemsPerPage, (pageNumber + 1) * itemsPerPage);
 
   const pageCount = Math.ceil(sortedSellers.length / itemsPerPage);
 

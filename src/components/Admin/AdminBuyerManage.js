@@ -106,21 +106,27 @@ function AdminBuyerManage() {
   };
 
   const handleFileUpload = async () => {
-    try {
-      const formData = new FormData();
-      formData.append('file', file);
-
-      const response = await axios.post(`${API}buyer/upload`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-
-      console.log('File uploaded successfully:', response.data);
-    } catch (error) {
-      console.error('Error uploading file:', error);
+  try {
+    if (!file) {
+      console.error('No file selected for upload.');
+      return;
     }
-  };
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const response = await axios.post(`${API}buyer/upload`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    console.log('File uploaded successfully:', response.data);
+  } catch (error) {
+    console.error('Error uploading file:', error);
+  }
+};
+
 
   return (
     <div

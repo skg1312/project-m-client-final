@@ -208,7 +208,7 @@ onChange={handleFileChange} />
       </td>
     </tr>
   ))}
-</tbody>
+
 
   </tbody>
 </table>

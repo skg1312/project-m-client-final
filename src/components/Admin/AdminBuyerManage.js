@@ -153,7 +153,9 @@ function AdminBuyerManage() {
           />
               <div className='admin-buyer-manage-file-upload'>
           <h1>File Upload</h1>
-          <input type='file' onChange={handleFileChange} />
+          <input type='file' 
+accept='.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel'
+onChange={handleFileChange} />
           <button onClick={handleFileUpload}>Upload File</button>
         </div>
           <table className='admin-buyer-manage-data-table'>

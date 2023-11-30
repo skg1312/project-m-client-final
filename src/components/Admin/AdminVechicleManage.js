@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './AdminLoadingManage.css';
+import './AdminVechicleManage.css';
 import axios from 'axios';
 import background from '../images/Desktop.png';
 import ReactPaginate from 'react-paginate';

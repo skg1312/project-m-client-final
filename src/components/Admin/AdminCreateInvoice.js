@@ -4,6 +4,7 @@ import background from '../images/Desktop.png'
 import A from '../images/A.png';
 import D from '../images/D.png';
 import AdminNavbar from './AdminNavbar';
+import Select from 'react-select';
 
 function AdminCreateInvoice() {
   const [companies, setCompanies] = useState([]);
@@ -166,26 +167,26 @@ function AdminCreateInvoice() {
                 setSelectedCompany(selectedCompany);
             };
 
-            const handleSelectChangeSeller = (e) => {
-                const selectedSellerId = e.target.value;
-                const selectedSeller = sellers.find((seller) => seller._id === selectedSellerId);
-        
-                setDataToSend((prevData) => ({
-                  ...prevData,
-                  sellerdetails: {
-                    ...prevData.sellerdetails,
-                    sellerid: selectedSeller.sellerid,
-                    sellercompanyname: selectedSeller.sellercompanyname,
-                    sellercompanyaddress: selectedSeller.sellercompanyaddress,
-                    sellercompanystatename: selectedSeller.sellercompanystatename,
-                    sellercompanystatecode: selectedSeller.sellercompanystatecode,
-                  },
-                }));
-                setSelectedSeller(selectedSeller);
-              };
+            const handleSelectChangeSeller = (selectedOption) => {
+              const selectedSellerId = selectedOption.value;
+              const selectedSeller = sellers.find((seller) => seller._id === selectedSellerId);
+          
+              setDataToSend((prevData) => ({
+                ...prevData,
+                sellerdetails: {
+                  ...prevData.sellerdetails,
+                  sellerid: selectedSeller.sellerid,
+                  sellercompanyname: selectedSeller.sellercompanyname,
+                  sellercompanyaddress: selectedSeller.sellercompanyaddress,
+                  sellercompanystatename: selectedSeller.sellercompanystatename,
+                  sellercompanystatecode: selectedSeller.sellercompanystatecode,
+                },
+              }));
+              setSelectedSeller(selectedSeller);
+            };
 
-                const handleSelectChangeBuyer = (e) => {
-                    const selectedBuyerId = e.target.value;
+                const handleSelectChangeBuyer = (selectedOption) => {
+                    const selectedBuyerId = selectedOption.value;
                     const selectedBuyer = buyers.find((buyer) => buyer._id === selectedBuyerId);
             
                     setDataToSend((prevData) => ({
@@ -424,19 +425,20 @@ function AdminCreateInvoice() {
         </form>
         <div className='admin-create-invoice-data'>
       <h2 className='admin-create-invoice-subtitle'>AGENT DETAILS</h2>
-      <select className='admin-create-invoice-select'
-      id="sellerid"
-      name="sellerid"
-      value={selectedSeller.sellerid}
-      onChange={handleSelectChangeSeller}
-      >
-        <option value="">Select Agent</option>
-        {sellers.map((seller) => (
-          <option key={seller._id} value={seller._id}>
-            {seller.sellerid}
-          </option>
-        ))}
-      </select>
+      <Select
+        className='admin-create-invoice-select'
+        id="sellerid"
+        name="sellerid"
+        value={{ value: selectedSeller._id, label: selectedSeller.sellerid }}
+        placeholder="Select Agent"
+        onChange={handleSelectChangeSeller}
+          options={sellers.map((seller) => ({
+            value: seller._id,
+            label: seller.sellerid,
+          })
+        )}
+      />
+      
       </div>
       <form className='admin-create-invoice-form'>
         <div className='admin-create-invoice-form-div'>
@@ -498,20 +500,19 @@ function AdminCreateInvoice() {
         </form>
         <div className='admin-create-invoice-data'>
       <h2 className='admin-create-invoice-subtitle'>BUYER DETAILS</h2>
-      <select className='admin-create-invoice-select'
-      htmlFor="buyerid"
-      id="buyerid"
-      name="buyerid"
-      value={selectedBuyer.buyerid}
-      onChange={handleSelectChangeBuyer}
-      >
-        <option value="">Select Buyer</option>
-        {buyers.map((buyer) => (
-          <option key={buyer._id} value={buyer._id}>
-            {buyer.buyerid}
-          </option>
-        ))}
-      </select>
+      <Select
+        className='admin-create-invoice-select'
+        id="buyerid"
+        name="buyerid"
+        placeholder="Select Buyer"
+        value={{ value: selectedBuyer._id, label: selectedBuyer.buyerid }}
+        onChange={handleSelectChangeBuyer}
+          options={buyers.map((buyer) => ({
+            value: buyer._id,
+            label: buyer.buyerid,
+          })
+        )}
+      />
       </div>
       <form className='admin-create-invoice-form'>
         <div className='admin-create-invoice-form-div'>

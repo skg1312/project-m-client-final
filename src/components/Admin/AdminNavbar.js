@@ -45,7 +45,7 @@ function AdminNavbar() {
               <button className='admin-logout-button-value-no-img'  onClick={() => navigate('/admindashboard')}>
                 DASHBOARD
               </button>
-                <button className='admin-logout-button-value'  onClick={handleLogout}>
+                <button className='admin-logout-button-value-no-img'  onClick={handleLogout}>
                 LOGOUT
               </button>
             </div>

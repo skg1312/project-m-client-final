@@ -23,7 +23,7 @@ function AdminBuyerManage() {
 
   const API = process.env.REACT_APP_API;
 
-  const itemsPerPage = 15;
+  const itemsPerPage = 12;
   const [searchInput, setSearchInput] = useState('');
 
   const sortedBuyers = [...buyers].reverse();

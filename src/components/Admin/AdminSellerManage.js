@@ -112,6 +112,8 @@ function AdminSellerManage() {
       });
 
       console.log('File uploaded successfully:', response.data);
+      alert("File Uploaded Successfully");
+      window.location.reload();
     } catch (error) {
       console.error('Error uploading file:', error);
     }

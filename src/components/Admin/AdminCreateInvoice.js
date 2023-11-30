@@ -20,52 +20,52 @@ function AdminCreateInvoice() {
     const [addedConsignment, setAddedConsignment] = useState({});
     const [selectedConsignment, setSelectedConsignment] = useState({});
 
-    const [dataToSend, setDataToSend] = useState({
-        companydetails: {
-          companyname: '',
-          companyregistrationtype: '',
-          companygstno: '',
-          companycontact: '',
-          companystate: '',
-          companyofficeaddress: '',
-          companypincode: '',
-        },
-        sellerdetails: {
-          sellercompanyname: '',
-          sellercompanyaddress: '',
-          sellercompanystatename: '',
-          sellercompanystatecode: '',
-        },
-        buyerdetails: {
-          buyercompanyname: '',
-          buyercompanyaddress: '',
-          buyercompanystatename: '',
-          buyercompanystatecode: '',
-        },
-        vehicledetails: {
-            
-            drivernumber: '',
-            vechiclenuumber: '',
-            vechiclemodel: '',
-        },
-        consignmentdetails: {
-            itemdetails: [
-            ],
-          },
-          invoicedetails: {
-            invoiceno: '',
-            invoicedate: '',
-           
-        },
-        boardingdetails: {
-            dateofloading: '',
-            startingpoint: '',
-            endingpoint: '',
-            watermark: '',
-
-        },
-
-      });
+   const [Loading, setLoading] = useState({});
+  const [selectedLoading, setSelectedLoading] = useState({});
+  const [dataToSend, setDataToSend] = useState({
+    companydetails: {
+      companyname: "",
+      companyregistrationtype: "",
+      companygstno: "",
+      companycontact: "",
+      companystate: "",
+      companyofficeaddress: "",
+      companypincode: "",
+    },
+    sellerdetails: {
+      sellercompanyname: "",
+      sellercompanyaddress: "",
+      sellercompanystatename: "",
+      sellercompanystatecode: "",
+    },
+    buyerdetails: {
+      buyercompanyname: "",
+      buyercompanyaddress: "",
+      buyercompanystatename: "",
+      buyercompanystatecode: "",
+    },
+    vehicledetails: {
+      drivernumber: "",
+      vechiclenuumber: "",
+      vechiclemodel: "",
+    },
+    consignmentdetails: {
+      itemdetails: [],
+    },
+    invoicedetails: {
+      invoiceno: "",
+      invoicedate: "",
+    },
+    boardingdetails: {
+      dateofloading: "",
+      watermark: "",
+    },
+    loadingdetails: {
+      startingpoint: "",
+      endingpoint: "",
+      transportationcost: "",
+    },
+  });
 
     const API = process.env.REACT_APP_API;
 
@@ -145,6 +145,25 @@ function AdminCreateInvoice() {
         };
         fetchConsignments();
         }, [API]);
+   useEffect(() => {
+    const fetchLoadingData = async () => {
+      try {
+        const response = await fetch(`${API}load`);
+        if (response.ok) {
+          const data = await response.json();
+          setLoading(data);
+          console.log(data);
+        } else {
+          console.error("Failed to fetch loading data");
+        }
+      } catch (error) {
+        console.error("Error fetching loading data:", error);
+      }
+    };
+
+    fetchLoadingData();
+  }, [API]);
+  
 
         const handleSelectChangeCompany = (e) => {
             const selectedCompanyId = e.target.value;
@@ -269,6 +288,26 @@ function AdminCreateInvoice() {
                 },
               }));
           }
+
+    const handleSelectChangeLoading = (selectedOption, field) => {
+    const [startingpoint, endingpoint, rate] = selectedOption.value.split("-");
+
+    setDataToSend((prevData) => ({
+      ...prevData,
+      loadingdetails: {
+        ...prevData.loadingdetails,
+        startingpoint: startingpoint,
+        endingpoint: endingpoint,
+        transportationcost: rate, // Set rate to transportationcost
+      },
+    }));
+
+    setSelectedLoading((prevSelected) => ({
+      ...prevSelected,
+      [field]: selectedOption,
+    }));
+  };
+
 
             const handleSubmit = async (e) => {
                 e.preventDefault();
@@ -775,6 +814,53 @@ function AdminCreateInvoice() {
       <h2 className='admin-create-invoice-subtitle'>BOARDING DETAILS</h2>
       </div>
       <form className='admin-create-invoice-form'> 
+           <div className="admin-create-invoice-form-div">
+              <label
+                className="admin-create-invoice-form-label"
+                htmlFor="loading"
+              >
+                Loading
+              </label>
+              <br />
+              <Select
+                id="loading"
+                name="loading"
+                value={selectedLoading.startingpoint}
+                onChange={(selectedOption) =>
+                  handleSelectChangeLoading(selectedOption, "startingpoint")
+                }
+                options={
+                  Array.isArray(Loading)
+                    ? Loading.map((item) => ({
+                        value: `${item.startpoint}-${item.endpoint}-${item.rate}`,
+                        label: `${item.startpoint} to ${item.endpoint}`,
+                      }))
+                    : []
+                }
+              />
+            </div>
+
+            <div className="admin-create-invoice-form-div">
+              <label
+                className="admin-create-invoice-form-label"
+                htmlFor="transportationcost"
+              >
+                Transportation Cost
+              </label>
+              <br />
+              <input
+                className="admin-create-invoice-form-input"
+                id="transportationcost"
+                name="transportationcost"
+                type="text"
+                value={dataToSend.loadingdetails.transportationcost}
+                onChange={(e) =>
+                  handleChange(e, "loadingdetails", "transportationcost")
+                }
+                readOnly
+              />
+            </div>
+
         <div className='admin-create-invoice-form-div'>
         <label className='admin-create-invoice-form-label'
         htmlFor="dateofloading"
@@ -786,34 +872,6 @@ function AdminCreateInvoice() {
         onChange={(e) =>
           handleChange(e, "boardingdetails", "dateofloading")
         }
-        />
-        </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'
-        htmlFor="startingpoint"
-        >Starting Point</label>
-        <br />
-        <input className='admin-create-invoice-form-input' 
-        id="startingpoint"
-        name="startingpoint"
-        type="text"
-        onChange={(e) =>
-          handleChange(e, "boardingdetails", "startingpoint")
-        }
-        />
-        </div>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'
-        htmlFor="endingpoint"
-        >Ending Point</label>
-        <br />
-        <input className='admin-create-invoice-form-input'
-         id="endingpoint"
-         name="endingpoint"
-         type="text"
-         onChange={(e) =>
-           handleChange(e, "boardingdetails", "endingpoint")
-         }
         />
         </div>
         <div className='admin-create-invoice-form-div'>

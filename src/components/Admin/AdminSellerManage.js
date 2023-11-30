@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './AdminSellerManage.css'
+import './AdminSellerManage.css';
 import axios from 'axios';
 import background from '../images/Desktop.png';
 import ReactPaginate from 'react-paginate';
@@ -9,7 +9,6 @@ function AdminSellerManage() {
   const [sellers, setSellers] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
   const [selectedSellerId, setSelectedSellerId] = useState(null);
-  const API = process.env.REACT_APP_API;
   const [selectedSellerData, setSelectedSellerData] = useState({
     sellerid: '',
     sellercompanyname: '',
@@ -18,18 +17,16 @@ function AdminSellerManage() {
     sellercompanystatename: '',
     sellercompanystatecode: '',
   });
-
+  const [file, setFile] = useState(null);
+  const API = process.env.REACT_APP_API;
   const itemsPerPage = 12;
   const [searchInput, setSearchInput] = useState('');
 
   // Sort the seller array in reverse order (newest first)
   const sortedSellers = [...sellers].reverse();
   const displayedSellerSearch = sortedSellers
-  .filter(
-    (item) =>
-      item.sellercompanyname.toLowerCase().includes(searchInput.toLowerCase()))
-  .slice(pageNumber * itemsPerPage, (pageNumber + 1) * itemsPerPage);
-
+    .filter((item) => item.sellercompanyname.toLowerCase().includes(searchInput.toLowerCase()))
+    .slice(pageNumber * itemsPerPage, (pageNumber + 1) * itemsPerPage);
 
   const pageCount = Math.ceil(sortedSellers.length / itemsPerPage);
 
@@ -99,6 +96,27 @@ function AdminSellerManage() {
     setSelectedSellerId(null);
   };
 
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+
+  const handleFileUpload = async () => {
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const response = await axios.post(`${API}seller/upload`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      console.log('File uploaded successfully:', response.data);
+    } catch (error) {
+      console.error('Error uploading file:', error);
+    }
+  };
+
   return (
     <div
       style={{
@@ -110,6 +128,8 @@ function AdminSellerManage() {
     >
       <AdminNavbar />
 
+
+
       <div className='admin-seller-manage'>
         <div className='admin-seller-manage-data'>
           <h1 className='admin-seller-manage-data-title'>ALL AGENTS</h1>
@@ -120,6 +140,13 @@ function AdminSellerManage() {
               value={searchInput} // Bind the input value to the state
               onChange={(e) => setSearchInput(e.target.value)} // Update the searchInput state as the user types
             />
+                      <div className='admin-seller-manage'>
+        <div className='admin-seller-manage-file-upload'>
+          <h1>File Upload</h1>
+          <input type='file' onChange={handleFileChange} />
+          <button onClick={handleFileUpload}>Upload File</button>
+        </div>
+
           <table className='admin-seller-manage-data-table'>
   <thead className='admin-seller-manage-data-table-head'>
     <tr className='admin-seller-manage-data-table-row-head'>

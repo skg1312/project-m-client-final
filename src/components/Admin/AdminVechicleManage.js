@@ -126,7 +126,7 @@ function AdminLoadingManage() {
           <input
             type='text'
             placeholder='Search Loading...'
-            className='admin-loading-manage-form-input'
+            className='admin-user-manage-form-input'
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
           />

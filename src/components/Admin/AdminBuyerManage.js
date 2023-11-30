@@ -121,7 +121,9 @@ function AdminBuyerManage() {
       },
     });
 
-    console.log('File uploaded successfully:', response.data);
+    console.log('File uploaded successfully:', response.dat);
+    alert("File is Uploaded Successfully");
+    
   } catch (error) {
     console.error('Error uploading file:', error);
   }

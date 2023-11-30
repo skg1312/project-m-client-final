@@ -5,6 +5,7 @@ import background from '../images/Desktop.png';
 import ReactPaginate from 'react-paginate';
 import AdminNavbar from './AdminNavbar';
 
+import D from '../images/D.png';
 function AdminSellerManage() {
   const [sellers, setSellers] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
@@ -118,6 +119,21 @@ function AdminSellerManage() {
       console.error('Error uploading file:', error);
     }
   };
+  const handleSellerDelete = (sellerId) => {
+    const confirmDelete = window.confirm('Are you sure you want to delete this Seller?');
+
+    if (confirmDelete) {
+      axios
+        .delete(`${API}seller/${sellerId}`)
+        .then((response) => {
+          console.log('Seller deleted successfully:', response.data);
+          setSellers((prevSellers) => prevSellers.filter((seller) => seller._id !== sellerId));
+        })
+        .catch((error) => {
+          console.error('Error deleting seller:', error);
+        });
+    }
+  };
 
   return (
     <div
@@ -179,6 +195,12 @@ onChange={handleFileChange} />
           >
             Update
           </button>
+              
+                        <button
+                      onClick={() => handleSellerDelete(seller._id)}
+                    >
+                      <img className='admin-buyer-icon' src={D} alt='delete'/>
+                    </button>
         </td>
       </tr>
     ))}

@@ -37,7 +37,7 @@ function AdminLoadingManage() {
 
   useEffect(() => {
     axios
-      .get(`${API}loading`)
+      .get(`${API}load`)
       .then((response) => {
         setLoadings(response.data);
       })
@@ -54,7 +54,7 @@ function AdminLoadingManage() {
 
   const handleLoadingDelete = (loadingDeleteId) => {
     axios
-      .delete(`${API}loading/${loadingDeleteId}`)
+      .delete(`${API}load/${loadingDeleteId}`)
       .then(() => {
         // Handle successful deletion (if needed)
         console.log('Loading deleted successfully');
@@ -72,7 +72,7 @@ function AdminLoadingManage() {
     if (selectedLoadingId) {
       // Update an existing loading
       axios
-        .put(`${API}loading/${selectedLoadingId}`, selectedLoadingData)
+        .put(`${API}load/${selectedLoadingId}`, selectedLoadingData)
         .then((response) => {
           // Handle successful update (if needed)
           console.log('Loading updated successfully:', response.data);
@@ -89,7 +89,7 @@ function AdminLoadingManage() {
     } else {
       // Create a new loading
       axios
-        .post(`${API}loading`, selectedLoadingData)
+        .post(`${API}load`, selectedLoadingData)
         .then((response) => {
           // Handle successful creation (if needed)
           console.log('Loading created successfully:', response.data);
@@ -188,6 +188,7 @@ function AdminLoadingManage() {
               type='text'
               className='admin-loading-manage-form-input-high'
               placeholder='Start Point'
+required
               value={selectedLoadingData.startpoint}
               onChange={(e) =>
                 setSelectedLoadingData({ ...selectedLoadingData, startpoint: e.target.value })
@@ -197,20 +198,27 @@ function AdminLoadingManage() {
               type='text'
               className='admin-loading-manage-form-input-high'
               placeholder='End Point'
+required
               value={selectedLoadingData.endpoint}
               onChange={(e) =>
                 setSelectedLoadingData({ ...selectedLoadingData, endpoint: e.target.value })
               }
             />
             <input
-              type='text'
-              className='admin-loading-manage-form-input-low'
+              type='number'
+              className='admin-loading-manage-form-input-high'
               placeholder='Rate'
+required
               value={selectedLoadingData.rate}
               onChange={(e) =>
                 setSelectedLoadingData({ ...selectedLoadingData, rate: e.target.value })
               }
             />
+             <br />
+            <input type='checkbox' className='admin-vechicle-manage-form-input-checkbox' />
+            <label className='admin-vechicle-manage-form-input-checkbox-label'>
+              I you agree with Terms and Conditions & Privacy Policy
+            </label>
             <br />
             <button type='submit' className='admin-loading-manage-form-button'>
               {selectedLoadingId ? 'Update' : 'Add'}

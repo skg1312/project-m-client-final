@@ -215,8 +215,8 @@ required
               }
             />
              <br />
-            <input type='checkbox' className='admin-vechicle-manage-form-input-checkbox' />
-            <label className='admin-vechicle-manage-form-input-checkbox-label'>
+            <input type='checkbox' className='admin-loading-manage-form-input-checkbox' />
+            <label className='admin-loading-manage-form-input-checkbox-label'>
               I you agree with Terms and Conditions & Privacy Policy
             </label>
             <br />

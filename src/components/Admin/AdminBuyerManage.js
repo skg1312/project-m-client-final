@@ -77,6 +77,7 @@ function AdminBuyerManage() {
         })
         .catch((error) => {
           console.error('Error updating buyer:', error);
+          alert("Error In Deleting the Buyer");
         });
     } else {
       axios

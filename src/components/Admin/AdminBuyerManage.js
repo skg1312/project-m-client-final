@@ -4,6 +4,7 @@ import axios from 'axios';
 import ReactPaginate from 'react-paginate';
 import background from '../images/Desktop.png';
 import AdminNavbar from './AdminNavbar';
+import D from '../images/D.png';
 
 function AdminBuyerManage() {
   const [buyers, setBuyers] = useState([]);
@@ -129,7 +130,21 @@ function AdminBuyerManage() {
     console.error('Error uploading file:', error);
   }
 };
+const handleBuyerDelete = (buyerId) => {
+    const confirmDelete = window.confirm('Are you sure you want to delete this buyer?');
 
+    if (confirmDelete) {
+      axios
+        .delete(`${API}buyer/${buyerId}`)
+        .then((response) => {
+          console.log('Buyer deleted successfully:', response.data);
+          setBuyers((prevBuyers) => prevBuyers.filter((buyer) => buyer._id !== buyerId));
+        })
+        .catch((error) => {
+          console.error('Error deleting buyer:', error);
+        });
+    }
+  };
 
   return (
     <div
@@ -189,6 +204,12 @@ onChange={handleFileChange} />
                       onClick={() => handleBuyerUpdate(buyer._id)}
                     >
                       Update
+                    </button>
+                        <button
+                      className='admin-buyer-manage-data-table-button'
+                      onClick={() => handleBuyerDelete(buyer._id)}
+                    >
+                      <img className='admin-create-invoice-table-consigment-icon-low' src={D} alt='delete'/>
                     </button>
                   </td>
                 </tr>

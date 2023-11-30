@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './AdminSellerManage.css';
 import axios from 'axios';
-import background from '../images/Desktop.png';
 import ReactPaginate from 'react-paginate';
 import AdminNavbar from './AdminNavbar';
-
 import D from '../images/D.png';
+import background from '../images/Desktop.png';
+
 function AdminSellerManage() {
   const [sellers, setSellers] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
@@ -23,19 +23,18 @@ function AdminSellerManage() {
   const itemsPerPage = 12;
   const [searchInput, setSearchInput] = useState('');
 
-  // Sort the seller array in reverse order (newest first)
   const sortedSellers = [...sellers].reverse();
-const displayedSellerSearch = sortedSellers
-  .filter((item) => {
-    const sellerCompanyName = item.sellercompanyname || '';
+  const displayedSellerSearch = sortedSellers
+    .filter((item) => {
+      const sellerCompanyName = item.sellercompanyname || '';
 
-    if (sellerCompanyName.toLowerCase().includes(searchInput?.toLowerCase())) {
-      return true;
-    }
+      if (sellerCompanyName.toLowerCase().includes(searchInput?.toLowerCase())) {
+        return true;
+      }
 
-    return false;
-  })
-  .slice(pageNumber * itemsPerPage, (pageNumber + 1) * itemsPerPage);
+      return false;
+    })
+    .slice(pageNumber * itemsPerPage, (pageNumber + 1) * itemsPerPage);
 
   const pageCount = Math.ceil(sortedSellers.length / itemsPerPage);
 
@@ -64,13 +63,10 @@ const displayedSellerSearch = sortedSellers
     e.preventDefault();
 
     if (selectedSellerId) {
-      // Update an existing seller
       axios
         .put(`${API}seller/${selectedSellerId}`, selectedSellerData)
         .then((response) => {
-          // Handle successful update (if needed)
           console.log('Seller updated successfully:', response.data);
-          // Optionally, you can update the local state to reflect the changes
           setSellers((prevSellers) =>
             prevSellers.map((seller) => (seller._id === selectedSellerId ? response.data : seller))
           );
@@ -80,13 +76,10 @@ const displayedSellerSearch = sortedSellers
           alert("Error In Updating the Seller");
         });
     } else {
-      // Create a new seller
       axios
         .post(`${API}seller`, selectedSellerData)
         .then((response) => {
-          // Handle successful creation (if needed)
           console.log('Seller created successfully:', response.data);
-          // Optionally, you can update the local state to include the new seller
           setSellers((prevSellers) => [...prevSellers, response.data]);
         })
         .catch((error) => {
@@ -112,6 +105,11 @@ const displayedSellerSearch = sortedSellers
 
   const handleFileUpload = async () => {
     try {
+      if (!file) {
+        console.error('No file selected for upload.');
+        return;
+      }
+
       const formData = new FormData();
       formData.append('file', file);
 
@@ -122,12 +120,13 @@ const displayedSellerSearch = sortedSellers
       });
 
       console.log('File uploaded successfully:', response.data);
-      alert("File Uploaded Successfully");
+      alert("File is Uploaded Successfully");
       window.location.reload();
     } catch (error) {
       console.error('Error uploading file:', error);
     }
   };
+
   const handleSellerDelete = (sellerId) => {
     const confirmDelete = window.confirm('Are you sure you want to delete this Seller?');
 
@@ -155,63 +154,66 @@ const displayedSellerSearch = sortedSellers
     >
       <AdminNavbar />
 
-
-
       <div className='admin-seller-manage'>
         <div className='admin-seller-manage-data'>
           <h1 className='admin-seller-manage-data-title'>ALL AGENTS</h1>
-      <input type='file' 
-accept='.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel'
-onChange={handleFileChange} />
+          <input
+            type='file'
+            accept='.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel'
+            onChange={handleFileChange}
+          />
           <button onClick={handleFileUpload}>Upload File</button>
           <input
-              type='text'
-              placeholder='Search Agents...'
-              className='admin-user-manage-form-input' // Search input placeholder
-              value={searchInput} // Bind the input value to the state
-              onChange={(e) => setSearchInput(e.target.value)} // Update the searchInput state as the user types
-            />
-            
+            type='text'
+            placeholder='Search Agents...'
+            className='admin-user-manage-form-input'
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+          />
 
           <table className='admin-seller-manage-data-table'>
-  <thead className='admin-seller-manage-data-table-head'>
-    <tr className='admin-seller-manage-data-table-row-head'>
-      <th className='admin-seller-manage-data-table-header'>Agents Id</th>
-      <th className='admin-seller-manage-data-table-header'>Company Name</th>
-      <th className='admin-seller-manage-data-table-header'>GST NO</th>
-      <th className='admin-seller-manage-data-table-header'>State Name</th>
-      
-      <th className='admin-seller-manage-data-table-header'>Action</th>
-    </tr>
-  </thead>
- <tbody className='admin-seller-manage-data-table-body'>
-  {displayedSellerSearch.map((seller) => (
-    <tr key={seller._id} className='admin-seller-manage-data-table-row-body'>
-      <td className='admin-seller-manage-data-table-data highlight'>{seller.sellerid?.substring(0, 12) ?? 'N/A'}</td>
-      <td className='admin-seller-manage-data-table-data'>{seller.sellercompanyname?.substring(0, 18) ?? 'N/A'}</td>
-      <td className='admin-seller-manage-data-table-data'>{seller.sellercompanygstno?.substring(0, 12) ?? 'N/A'}</td>
-      <td className='admin-seller-manage-data-table-data'>{seller.sellercompanystatename?.substring(0, 12) ?? 'N/A'}</td>
-      
-      <td className='admin-seller-manage-data-table-data'>
-        <button
-          className='admin-seller-manage-data-table-button'
-          onClick={() => handleSellerUpdate(seller._id)}
-        >
-          Update
-        </button>
-            
-        <button
-          onClick={() => handleSellerDelete(seller._id)}
-        >
-          <img className='admin-buyer-icon' src={D} alt='delete'/>
-        </button>
-      </td>
-    </tr>
-  ))}
+            <thead className='admin-seller-manage-data-table-head'>
+              <tr className='admin-seller-manage-data-table-row-head'>
+                <th className='admin-seller-manage-data-table-header'>Agents Id</th>
+                <th className='admin-seller-manage-data-table-header'>Company Name</th>
+                <th className='admin-seller-manage-data-table-header'>GST NO</th>
+                <th className='admin-seller-manage-data-table-header'>State Name</th>
 
+                <th className='admin-seller-manage-data-table-header'>Action</th>
+              </tr>
+            </thead>
+            <tbody className='admin-seller-manage-data-table-body'>
+              {displayedSellerSearch.map((seller) => (
+                <tr key={seller._id} className='admin-seller-manage-data-table-row-body'>
+                  <td className='admin-seller-manage-data-table-data highlight'>
+                    {seller.sellerid?.substring(0, 12) ?? 'N/A'}
+                  </td>
+                  <td className='admin-seller-manage-data-table-data'>
+                    {seller.sellercompanyname?.substring(0, 18) ?? 'N/A'}
+                  </td>
+                  <td className='admin-seller-manage-data-table-data'>
+                    {seller.sellercompanygstno?.substring(0, 12) ?? 'N/A'}
+                  </td>
+                  <td className='admin-seller-manage-data-table-data'>
+                    {seller.sellercompanystatename?.substring(0, 12) ?? 'N/A'}
+                  </td>
 
-  </tbody>
-</table>
+                  <td className='admin-seller-manage-data-table-data'>
+                    <button
+                      className='admin-seller-manage-data-table-button'
+                      onClick={() => handleSellerUpdate(seller._id)}
+                    >
+                      Update
+                    </button>
+
+                    <button onClick={() => handleSellerDelete(seller._id)}>
+                      <img className='admin-buyer-icon' src={D} alt='delete' />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
           <br />
           <ReactPaginate
             className='pagination-container'
@@ -281,7 +283,7 @@ onChange={handleFileChange} />
               value={selectedSellerData.sellercompanystatecode || ''}
               onChange={(e) => setSelectedSellerData({ ...selectedSellerData, sellercompanystatecode: e.target.value })}
             />
-             <br />
+            <br />
             <input type='checkbox' required className='admin-seller-manage-form-input-checkbox' />
             <label className='admin-seller-manage-form-input-checkbox-label'>
               I you agree with Terms and Conditions & Privacy Policy
@@ -290,9 +292,7 @@ onChange={handleFileChange} />
             <button type='submit' className='admin-seller-manage-form-button'>
               {selectedSellerId ? 'Update' : 'Add'}
             </button>
-
           </form>
-
         </div>
       </div>
     </div>
@@ -300,4 +300,3 @@ onChange={handleFileChange} />
 }
 
 export default AdminSellerManage;
-

@@ -37,7 +37,7 @@ function AdminNavbar() {
                 CONSIGNMENT
               </button>
               <button className='admin-logout-button-value-no-img'  onClick={() => navigate('/adminvecman')}>
-                VEHICLES
+                LOADING
               </button>
               <button className='admin-logout-button-value-no-img'  onClick={() => navigate('/admininvdash')}>
                 INOVICE

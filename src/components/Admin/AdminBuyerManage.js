@@ -206,7 +206,6 @@ onChange={handleFileChange} />
                       Update
                     </button>
                         <button
-                      className='admin-buyer-manage-data-table-button'
                       onClick={() => handleBuyerDelete(buyer._id)}
                     >
                       <img className='admin-create-invoice-table-consigment-icon-low' src={D} alt='delete'/>

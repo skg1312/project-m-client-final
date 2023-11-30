@@ -138,11 +138,6 @@ function AdminBuyerManage() {
       }}
     >
       <AdminNavbar />
-<div className='admin-buyer-manage-file-upload'>
-          <h1>File Upload</h1>
-          <input type='file' onChange={handleFileChange} />
-          <button onClick={handleFileUpload}>Upload File</button>
-        </div>
       <div className='admin-buyer-manage'>
         <div className='admin-buyer-manage-data'>
           <h1 className='admin-buyer-manage-data-title'>ALL BUYERS</h1>
@@ -153,6 +148,11 @@ function AdminBuyerManage() {
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
           />
+              <div className='admin-buyer-manage-file-upload'>
+          <h1>File Upload</h1>
+          <input type='file' onChange={handleFileChange} />
+          <button onClick={handleFileUpload}>Upload File</button>
+        </div>
           <table className='admin-buyer-manage-data-table'>
             <thead className='admin-buyer-manage-data-table-head'>
               <tr className='admin-buyer-manage-data-table-row-head'>

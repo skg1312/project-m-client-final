@@ -1,42 +1,35 @@
 import React, { useState, useEffect } from 'react';
-import './AdminVechicleManage.css';
+import './AdminLoadingManage.css';
 import axios from 'axios';
 import background from '../images/Desktop.png';
 import ReactPaginate from 'react-paginate';
 import AdminNavbar from './AdminNavbar';
 
-function AdminVechicleManage() {
-  const [vechicle, setVechicle] = useState([]);
+function AdminLoadingManage() {
+  const [loadings, setLoadings] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
-  const [selectedVechicleId, setSelectedVechicleId] = useState(null);
+  const [selectedLoadingId, setSelectedLoadingId] = useState(null);
   const API = process.env.REACT_APP_API;
-  const [selectedVechicleData, setSelectedVechicleData] = useState({
-    vechicleid: '',
-    drivername: '',
-    drivernumber: '',
-    driveraddress: '',
-    driveridproof: '',
-    driverlicenseno: '',
-    vechiclenuumber: '',
-    vechiclemodel: '',
-    vechicleofficebranch: '',
+  const [selectedLoadingData, setSelectedLoadingData] = useState({
+    startpoint: '',
+    endpoint: '',
+    rate: '',
   });
 
   const itemsPerPage = 12;
   const [searchInput, setSearchInput] = useState('');
-  
-  // Sort the vechicle array in reverse order (newest first)
-  const sortedVechicle = [...vechicle].reverse();
-  const displayedVechicleSearch = sortedVechicle
-  .filter(
-    (item) =>
-      item.vechiclenuumber.toLowerCase().includes(searchInput.toLowerCase()) ||
-      item.drivername.toLowerCase().includes(searchInput.toLowerCase())
-      )
 
-  .slice(pageNumber * itemsPerPage, (pageNumber + 1) * itemsPerPage);
+  // Sort the loading array in reverse order (newest first)
+  const sortedLoadings = [...loadings].reverse();
+  const displayedLoadingsSearch = sortedLoadings
+    .filter(
+      (item) =>
+        item.startpoint.toLowerCase().includes(searchInput.toLowerCase()) ||
+        item.endpoint.toLowerCase().includes(searchInput.toLowerCase())
+    )
+    .slice(pageNumber * itemsPerPage, (pageNumber + 1) * itemsPerPage);
 
-  const pageCount = Math.ceil(sortedVechicle.length / itemsPerPage);
+  const pageCount = Math.ceil(sortedLoadings.length / itemsPerPage);
 
   const changePage = ({ selected }) => {
     setPageNumber(selected);
@@ -44,67 +37,77 @@ function AdminVechicleManage() {
 
   useEffect(() => {
     axios
-      .get(`${API}vechicle`)
+      .get(`${API}loading`)
       .then((response) => {
-        setVechicle(response.data);
+        setLoadings(response.data);
       })
       .catch((error) => {
-        console.error('Error fetching vechicle data:', error);
+        console.error('Error fetching loading data:', error);
       });
   }, [API]);
 
-  const handleVechicleUpdate = (vechicleupdateid) => {
-    setSelectedVechicleId(vechicleupdateid);
-    const selectedVechicle = vechicle.find((v) => v._id === vechicleupdateid);
-    setSelectedVechicleData({ ...selectedVechicle });
+  const handleLoadingUpdate = (loadingUpdateId) => {
+    setSelectedLoadingId(loadingUpdateId);
+    const selectedLoading = loadings.find((loading) => loading._id === loadingUpdateId);
+    setSelectedLoadingData({ ...selectedLoading });
+  };
+
+  const handleLoadingDelete = (loadingDeleteId) => {
+    axios
+      .delete(`${API}loading/${loadingDeleteId}`)
+      .then(() => {
+        // Handle successful deletion (if needed)
+        console.log('Loading deleted successfully');
+        // Optionally, you can update the local state to reflect the changes
+        setLoadings((prevLoadings) => prevLoadings.filter((loading) => loading._id !== loadingDeleteId));
+      })
+      .catch((error) => {
+        console.error('Error deleting loading:', error);
+      });
   };
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    if (selectedVechicleId) {
-      // Update an existing vehicle
+    if (selectedLoadingId) {
+      // Update an existing loading
       axios
-        .put(`${API}vechicle/${selectedVechicleId}`, selectedVechicleData)
+        .put(`${API}loading/${selectedLoadingId}`, selectedLoadingData)
         .then((response) => {
           // Handle successful update (if needed)
-          console.log('Vehicle updated successfully:', response.data);
+          console.log('Loading updated successfully:', response.data);
           // Optionally, you can update the local state to reflect the changes
-          setVechicle((prevVechicle) =>
-            prevVechicle.map((v) => (v._id === selectedVechicleId ? response.data : v))
+          setLoadings((prevLoadings) =>
+            prevLoadings.map((loading) =>
+              loading._id === selectedLoadingId ? response.data : loading
+            )
           );
         })
         .catch((error) => {
-          console.error('Error updating vechicle:', error);
+          console.error('Error updating loading:', error);
         });
     } else {
-      // Create a new vehicle
+      // Create a new loading
       axios
-        .post(`${API}vechicle`, selectedVechicleData)
+        .post(`${API}loading`, selectedLoadingData)
         .then((response) => {
           // Handle successful creation (if needed)
-          console.log('Vehicle created successfully:', response.data);
-          // Optionally, you can update the local state to include the new vehicle
-          setVechicle((prevVechicle) => [...prevVechicle, response.data]);
+          console.log('Loading created successfully:', response.data);
+          // Optionally, you can update the local state to include the new loading
+          setLoadings((prevLoadings) => [...prevLoadings, response.data]);
         })
         .catch((error) => {
-          console.error('Error creating vechicle:', error);
+          console.error('Error creating loading:', error);
         });
     }
 
-    setSelectedVechicleData({
-      vechicleid: '',
-      drivername: '',
-      drivernumber: '',
-      driveraddress: '',
-      driveridproof: '',
-      driverlicenseno: '',
-      vechiclenuumber: '',
-      vechiclemodel: '',
-      vechicleofficebranch: '',
+    setSelectedLoadingData({
+      startpoint: '',
+      endpoint: '',
+      rate: '',
     });
 
-    setSelectedVechicleId(null);
+    setSelectedLoadingId(null);
   };
 
   return (
@@ -117,35 +120,44 @@ function AdminVechicleManage() {
       }}
     >
       <AdminNavbar />
-      <div className='admin-vechicle-manage'>
-        <div className='admin-vechicle-manage-data'>
-          <h1 className='admin-vechicle-manage-data-title'>ALL VEHICLES</h1>
+      <div className='admin-loading-manage'>
+        <div className='admin-loading-manage-data'>
+          <h1 className='admin-loading-manage-data-title'>ALL LOADINGS</h1>
           <input
-              type='text'
-              placeholder='Search User...'
-              className='admin-user-manage-form-input' // Search input placeholder
-              value={searchInput} // Bind the input value to the state
-              onChange={(e) => setSearchInput(e.target.value)} // Update the searchInput state as the user types
-            />
-          <table className='admin-vechicle-manage-data-table'>
-            <thead className='admin-vechicle-manage-data-table-head'>
-              <tr className='admin-vechicle-manage-data-table-row-head'>
-                <th className='admin-vechicle-manage-data-table-header'>Driver Name</th>
-                <th className='admin-vechicle-manage-data-table-header'>Vechicle Number</th>
-                <th className='admin-vechicle-manage-data-table-header'>Vechicle Model</th>
-                <th className='admin-vechicle-manage-data-table-header'>Driver Number</th>
-                <th className='admin-vechicle-manage-data-table-header'>Action</th>
+            type='text'
+            placeholder='Search Loading...'
+            className='admin-loading-manage-form-input'
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+          />
+          <table className='admin-loading-manage-data-table'>
+            <thead className='admin-loading-manage-data-table-head'>
+              <tr className='admin-loading-manage-data-table-row-head'>
+                <th className='admin-loading-manage-data-table-header'>Start Point</th>
+                <th className='admin-loading-manage-data-table-header'>End Point</th>
+                <th className='admin-loading-manage-data-table-header'>Rate</th>
+                <th className='admin-loading-manage-data-table-header'>Action</th>
               </tr>
             </thead>
-            <tbody className='admin-vechicle-manage-data-table-body'>
-              {displayedVechicleSearch.map((vechicle) => (
-                <tr key={vechicle._id} className='admin-vechicle-manage-data-table-row-body'>
-                  <td className='admin-vechicle-manage-data-table-data'>{vechicle.drivername.substring(0, 12)}</td>
-                  <td className='admin-vechicle-manage-data-table-data highlight'>{vechicle.vechiclenuumber.substring(0, 12)}</td>
-                  <td className='admin-vechicle-manage-data-table-data'>{vechicle.vechiclemodel.substring(0, 12)}</td>
-                  <td className='admin-vechicle-manage-data-table-data'>{vechicle.drivernumber}</td>
-                  <td className='admin-vechicle-manage-data-table-data'>
-                    <button className='admin-vechicle-manage-data-table-button' onClick={() => handleVechicleUpdate(vechicle._id)}>update</button>
+            <tbody className='admin-loading-manage-data-table-body'>
+              {displayedLoadingsSearch.map((loading) => (
+                <tr key={loading._id} className='admin-loading-manage-data-table-row-body'>
+                  <td className='admin-loading-manage-data-table-data'>{loading.startpoint}</td>
+                  <td className='admin-loading-manage-data-table-data'>{loading.endpoint}</td>
+                  <td className='admin-loading-manage-data-table-data'>{loading.rate}</td>
+                  <td className='admin-loading-manage-data-table-data'>
+                    <button
+                      className='admin-loading-manage-data-table-button'
+                      onClick={() => handleLoadingUpdate(loading._id)}
+                    >
+                      Update
+                    </button>
+                    <button
+                      className='admin-loading-manage-data-table-button'
+                      onClick={() => handleLoadingDelete(loading._id)}
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -153,118 +165,55 @@ function AdminVechicleManage() {
           </table>
           <br />
           <ReactPaginate
-              className='pagination-container'
-              previousLabel='Previous'
-              nextLabel='Next'
-              pageCount={pageCount}
-              onPageChange={changePage}
-              containerClassName='pagination'
-              previousLinkClassName='previous-page'
-              nextLinkClassName='next-page'
-              disabledClassName='pagination-button disabled'
-              activeClassName='pagination-button active'
-              pageClassName='pagination-button'
-              breakClassName='pagination-space'
-            />
-
+            className='pagination-container'
+            previousLabel='Previous'
+            nextLabel='Next'
+            pageCount={pageCount}
+            onPageChange={changePage}
+            containerClassName='pagination'
+            previousLinkClassName='previous-page'
+            nextLinkClassName='next-page'
+            disabledClassName='pagination-button disabled'
+            activeClassName='pagination-button active'
+            pageClassName='pagination-button'
+            breakClassName='pagination-space'
+          />
         </div>
-        <div className='admin-vechicle-manage-form'>
-          <h1 className='admin-vechicle-manage-form-title'>
-            {selectedVechicleId ? 'UPDATE VEHICLE' : 'ADD VEHICLE'}
+        <div className='admin-loading-manage-form'>
+          <h1 className='admin-loading-manage-form-title'>
+            {selectedLoadingId ? 'UPDATE LOADING' : 'ADD LOADING'}
           </h1>
-          <form className='admin-vechicle-manage-form-form' onSubmit={handleFormSubmit}>
+          <form className='admin-loading-manage-form-form' onSubmit={handleFormSubmit}>
             <input
               type='text'
-              className='admin-vechicle-manage-form-input-high'
-              placeholder='Vehicle Id'
-              value={selectedVechicleData.vechicleid || ''}
+              className='admin-loading-manage-form-input-high'
+              placeholder='Start Point'
+              value={selectedLoadingData.startpoint}
               onChange={(e) =>
-                setSelectedVechicleData({ ...selectedVechicleData, vechicleid: e.target.value })
+                setSelectedLoadingData({ ...selectedLoadingData, startpoint: e.target.value })
               }
             />
             <input
               type='text'
-              className='admin-vechicle-manage-form-input-high'
-              placeholder='Driver Name'
-              value={selectedVechicleData.drivername || ''}
+              className='admin-loading-manage-form-input-high'
+              placeholder='End Point'
+              value={selectedLoadingData.endpoint}
               onChange={(e) =>
-                setSelectedVechicleData({ ...selectedVechicleData, drivername: e.target.value })
+                setSelectedLoadingData({ ...selectedLoadingData, endpoint: e.target.value })
               }
             />
             <input
               type='text'
-              className='admin-vechicle-manage-form-input-low'
-              placeholder='Driver Number'
-              value={selectedVechicleData.drivernumber || ''}
+              className='admin-loading-manage-form-input-low'
+              placeholder='Rate'
+              value={selectedLoadingData.rate}
               onChange={(e) =>
-                setSelectedVechicleData({ ...selectedVechicleData, drivernumber: e.target.value })
-              }
-            />
-            <input
-              type='text'
-              className='admin-vechicle-manage-form-input-low'
-              placeholder='Driver Address'
-              value={selectedVechicleData.driveraddress || ''}
-              onChange={(e) =>
-                setSelectedVechicleData({ ...selectedVechicleData, driveraddress: e.target.value })
-              }
-            />
-            <input
-              type='text'
-              className='admin-vechicle-manage-form-input-low'
-              placeholder='Driver Id Proof'
-              value={selectedVechicleData.driveridproof || ''}
-              onChange={(e) =>
-                setSelectedVechicleData({ ...selectedVechicleData, driveridproof: e.target.value })
-              }
-            />
-            <input
-              type='text'
-              className='admin-vechicle-manage-form-input-low'
-              placeholder='Driver License'
-              value={selectedVechicleData.driverlicenseno || ''}
-              onChange={(e) =>
-                setSelectedVechicleData({ ...selectedVechicleData, driverlicenseno: e.target.value })
-              }
-            />
-            <input
-              type='text'
-              className='admin-vechicle-manage-form-input-low'
-              placeholder='Vehicle Number'
-              value={selectedVechicleData.vechiclenuumber || ''}
-              onChange={(e) =>
-                setSelectedVechicleData({ ...selectedVechicleData, vechiclenuumber: e.target.value })
-              }
-            />
-            <input
-              type='text'
-              className='admin-vechicle-manage-form-input-low'
-              placeholder='Vehicle Model'
-              value={selectedVechicleData.vechiclemodel || ''}
-              onChange={(e) =>
-                setSelectedVechicleData({ ...selectedVechicleData, vechiclemodel: e.target.value })
-              }
-            />
-            <input
-              type='text'
-              className='admin-vechicle-manage-form-input-high'
-              placeholder='Office Branch'
-              value={selectedVechicleData.vechicleofficebranch || ''}
-              onChange={(e) =>
-                setSelectedVechicleData({
-                  ...selectedVechicleData,
-                  vechicleofficebranch: e.target.value,
-                })
+                setSelectedLoadingData({ ...selectedLoadingData, rate: e.target.value })
               }
             />
             <br />
-            <input type='checkbox' className='admin-vechicle-manage-form-input-checkbox' />
-            <label className='admin-vechicle-manage-form-input-checkbox-label'>
-              I you agree with Terms and Conditions & Privacy Policy
-            </label>
-            <br />
-            <button type='submit' className='admin-vechicle-manage-form-button'>
-              {selectedVechicleId ? 'Update' : 'Add'}
+            <button type='submit' className='admin-loading-manage-form-button'>
+              {selectedLoadingId ? 'Update' : 'Add'}
             </button>
           </form>
         </div>
@@ -273,5 +222,4 @@ function AdminVechicleManage() {
   );
 }
 
-export default AdminVechicleManage;
-
+export default AdminLoadingManage;

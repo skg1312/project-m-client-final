@@ -152,6 +152,10 @@ function AdminSellerManage() {
       <div className='admin-seller-manage'>
         <div className='admin-seller-manage-data'>
           <h1 className='admin-seller-manage-data-title'>ALL AGENTS</h1>
+      <input type='file' 
+accept='.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel'
+onChange={handleFileChange} />
+          <button onClick={handleFileUpload}>Upload File</button>
           <input
               type='text'
               placeholder='Search Agents...'
@@ -159,16 +163,7 @@ function AdminSellerManage() {
               value={searchInput} // Bind the input value to the state
               onChange={(e) => setSearchInput(e.target.value)} // Update the searchInput state as the user types
             />
-                      <div className='admin-seller-manage'>
-        <div className='admin-seller-manage-file-upload'>
-          <h1>File Upload</h1>
-                
-          <input type='file' 
-accept='.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel'
-onChange={handleFileChange} />
-          <button onClick={handleFileUpload}>Upload File</button>
-        </div>
-                </div>
+            
 
           <table className='admin-seller-manage-data-table'>
   <thead className='admin-seller-manage-data-table-head'>

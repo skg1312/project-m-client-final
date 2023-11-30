@@ -123,6 +123,7 @@ function AdminBuyerManage() {
 
     console.log('File uploaded successfully:', response.dat);
     alert("File is Uploaded Successfully");
+     window.location.reload();
     
   } catch (error) {
     console.error('Error uploading file:', error);

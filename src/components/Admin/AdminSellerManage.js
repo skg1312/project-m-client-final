@@ -146,6 +146,7 @@ function AdminSellerManage() {
           <input type='file' onChange={handleFileChange} />
           <button onClick={handleFileUpload}>Upload File</button>
         </div>
+                </div>
 
           <table className='admin-seller-manage-data-table'>
   <thead className='admin-seller-manage-data-table-head'>

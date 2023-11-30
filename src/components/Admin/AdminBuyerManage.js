@@ -23,7 +23,7 @@ function AdminBuyerManage() {
 
   const API = process.env.REACT_APP_API;
 
-  const itemsPerPage = 12;
+  const itemsPerPage = 15;
   const [searchInput, setSearchInput] = useState('');
 
   const sortedBuyers = [...buyers].reverse();
@@ -138,13 +138,12 @@ function AdminBuyerManage() {
       }}
     >
       <AdminNavbar />
-      <div className='admin-buyer-manage'>
-        <div className='admin-buyer-manage-file-upload'>
+<div className='admin-buyer-manage-file-upload'>
           <h1>File Upload</h1>
           <input type='file' onChange={handleFileChange} />
           <button onClick={handleFileUpload}>Upload File</button>
         </div>
-
+      <div className='admin-buyer-manage'>
         <div className='admin-buyer-manage-data'>
           <h1 className='admin-buyer-manage-data-title'>ALL BUYERS</h1>
           <input

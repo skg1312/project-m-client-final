@@ -184,30 +184,32 @@ onChange={handleFileChange} />
       <th className='admin-seller-manage-data-table-header'>Action</th>
     </tr>
   </thead>
-  <tbody className='admin-seller-manage-data-table-body'>
-    {displayedSellerSearch.map((seller) => (
-      <tr key={seller._id} className='admin-seller-manage-data-table-row-body'>
-        <td className='admin-seller-manage-data-table-data highlight'>{seller.sellerid.substring(0, 12)}</td>
-        <td className='admin-seller-manage-data-table-data'>{seller.sellercompanyname.substring(0, 18)}</td>
-        <td className='admin-seller-manage-data-table-data'>{seller.sellercompanygstno.substring(0, 12)}</td>
-        <td className='admin-seller-manage-data-table-data'>{seller.sellercompanystatename.substring(0, 12)}</td>
-        
-        <td className='admin-seller-manage-data-table-data'>
-          <button
-            className='admin-seller-manage-data-table-button'
-            onClick={() => handleSellerUpdate(seller._id)}
-          >
-            Update
-          </button>
-              
-                        <button
-                      onClick={() => handleSellerDelete(seller._id)}
-                    >
-                      <img className='admin-buyer-icon' src={D} alt='delete'/>
-                    </button>
-        </td>
-      </tr>
-    ))}
+ <tbody className='admin-seller-manage-data-table-body'>
+  {displayedSellerSearch.map((seller) => (
+    <tr key={seller._id} className='admin-seller-manage-data-table-row-body'>
+      <td className='admin-seller-manage-data-table-data highlight'>{seller.sellerid?.substring(0, 12) ?? 'N/A'}</td>
+      <td className='admin-seller-manage-data-table-data'>{seller.sellercompanyname?.substring(0, 18) ?? 'N/A'}</td>
+      <td className='admin-seller-manage-data-table-data'>{seller.sellercompanygstno?.substring(0, 12) ?? 'N/A'}</td>
+      <td className='admin-seller-manage-data-table-data'>{seller.sellercompanystatename?.substring(0, 12) ?? 'N/A'}</td>
+      
+      <td className='admin-seller-manage-data-table-data'>
+        <button
+          className='admin-seller-manage-data-table-button'
+          onClick={() => handleSellerUpdate(seller._id)}
+        >
+          Update
+        </button>
+            
+        <button
+          onClick={() => handleSellerDelete(seller._id)}
+        >
+          <img className='admin-buyer-icon' src={D} alt='delete'/>
+        </button>
+      </td>
+    </tr>
+  ))}
+</tbody>
+
   </tbody>
 </table>
           <br />

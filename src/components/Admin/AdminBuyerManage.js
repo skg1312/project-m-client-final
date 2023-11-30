@@ -208,7 +208,7 @@ onChange={handleFileChange} />
                         <button
                       onClick={() => handleBuyerDelete(buyer._id)}
                     >
-                      <img className='admin-create-invoice-table-consigment-icon-low' src={D} alt='delete'/>
+                      <img className='admin-buyer-icon' src={D} alt='delete'/>
                     </button>
                   </td>
                 </tr>

@@ -69,6 +69,7 @@ function AdminSellerManage() {
         })
         .catch((error) => {
           console.error('Error updating seller:', error);
+          alert("Error In Updating the Seller");
         });
     } else {
       // Create a new seller

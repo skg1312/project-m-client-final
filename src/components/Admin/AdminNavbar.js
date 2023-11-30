@@ -1,10 +1,16 @@
 import React from "react";
 import './AdminNavbar.css';
 import { useNavigate } from 'react-router-dom';
-
+import { useAdminAuth } from './AdminAuth';
 
 function AdminNavbar() {
     const navigate = useNavigate();
+    const auth = useAdminAuth();
+
+  const handleLogout = () => {
+    auth.adminlogout();
+}
+
     return (
         <div className='admin-logout-box-nav'>
           <div className='admin-logout-container-nav'>
@@ -38,6 +44,9 @@ function AdminNavbar() {
               </button>
               <button className='admin-logout-button-value-no-img'  onClick={() => navigate('/admindashboard')}>
                 DASHBOARD
+              </button>
+                <button className='admin-logout-button-value'  onClick={handleLogout}>
+                LOGOUT
               </button>
             </div>
           </div>

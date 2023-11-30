@@ -122,7 +122,7 @@ function AdminLoadingManage() {
       <AdminNavbar />
       <div className='admin-loading-manage'>
         <div className='admin-loading-manage-data'>
-          <h1 className='admin-loading-manage-data-title'>ALL LOADING</h1>
+          <h1 className='admin-loading-manage-data-title'>ALL LOADINGS</h1>
           <input
             type='text'
             placeholder='Search Loading...'

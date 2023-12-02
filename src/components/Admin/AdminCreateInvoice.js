@@ -778,21 +778,7 @@ function AdminCreateInvoice() {
       <div className='admin-create-invoice-data'>
       <h2 className='admin-create-invoice-subtitle'>INVOICE DETAILS</h2>
       </div>
-      <form className='admin-create-invoice-form'>
-        <div className='admin-create-invoice-form-div'>
-        <label className='admin-create-invoice-form-label'
-        htmlFor="invoiceno"
-        >Invoice Number</label>
-        <input className='admin-create-invoice-form-input' 
-         id="invoiceno"
-         name="invoiceno"
-         type="text"
-         onChange={(e) =>
-           handleChange(e, "invoicedetails", "invoiceno")
-         }
-        />
-        </div>
-        
+      <form className='admin-create-invoice-form'> 
         <div className='admin-create-invoice-form-div'>
         <label className='admin-create-invoice-form-label'
         htmlFor="invoicedate">
@@ -821,7 +807,6 @@ function AdminCreateInvoice() {
               >
                 Loading
               </label>
-              <br />
               <Select
 className="admin-create-invoice-select"
                 id="loading"

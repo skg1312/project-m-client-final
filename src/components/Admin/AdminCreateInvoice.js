@@ -839,7 +839,7 @@ className="admin-create-invoice-select"
                 id="transportationcost"
                 name="transportationcost"
                 type="text"
-                value={dataToSend.loadingdetails.transportationcost}
+               value={`${dataToSend.loadingdetails.startingpoint} ${dataToSend.loadingdetails.endingpoint} ${dataToSend.loadingdetails.transportationcost}`}
                 onChange={(e) =>
                   handleChange(e, "loadingdetails", "transportationcost")
                 }

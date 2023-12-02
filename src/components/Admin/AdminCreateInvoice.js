@@ -823,6 +823,7 @@ function AdminCreateInvoice() {
               </label>
               <br />
               <Select
+className="admin-create-invoice-select"
                 id="loading"
                 name="loading"
                 value={selectedLoading.startingpoint}

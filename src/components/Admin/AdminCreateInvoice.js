@@ -58,6 +58,7 @@ function AdminCreateInvoice() {
     },
     boardingdetails: {
       dateofloading: "",
+      watermark:"",
     },
     loadingdetails: {
       startingpoint: "",
@@ -871,6 +872,20 @@ function AdminCreateInvoice() {
         onChange={(e) =>
           handleChange(e, "boardingdetails", "dateofloading")
         }
+        />
+        </div>
+          <div className='admin-create-invoice-form-div'>
+        <label className='admin-create-invoice-form-label'
+        htmlFor="watermark"
+        >Water Mark</label>
+        <br />
+        <input className='admin-create-invoice-form-input' 
+         id="watermark"
+         name="watermark"
+         type="text"
+         onChange={(e) =>
+           handleChange(e, "boardingdetails", "watermark")
+         }
         />
         </div>
         </form>

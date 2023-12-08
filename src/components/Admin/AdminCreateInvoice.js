@@ -309,28 +309,50 @@ function AdminCreateInvoice() {
   };
 
 
-            const handleSubmit = async (e) => {
-                e.preventDefault();
-                try {
-                  const response = await fetch(`${API}invoice`, {
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(dataToSend),
-                  });
-                  if (response.ok) {
-                    const data = await response.json();
-                    console.log('Invoice created successfully:', data);
-                    console.log("ID:",data._id);
-                    alert("Invoice Details are Saved Successfully");
-                  } else {
-                    console.error('Invoice creation failed');
-                  }
-                } catch (error) {
-                  console.error('Error creating invoice:', error);
-                }
-              }
+           const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    const response = await fetch(`${API}invoice`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(dataToSend),
+    });
+    if (response.ok) {
+      const data = await response.json();
+      console.log('Invoice created successfully:', data);
+      alert("Invoice Details are saved");
+
+      // Open PDF viewer after alert
+      openPdfViewer(data.invoiceId);
+    } else {
+      console.error('Invoice creation failed');
+    }
+  } catch (error) {
+    console.error('Error creating invoice:', error);
+  }
+};
+
+// Function to open PDF viewer
+const openPdfViewer = (selectedInvoiceId) => {
+  const pdfUrl = `${API}download/${selectedInvoiceId}`;
+  const newWindow = window.open('', '_blank');
+  newWindow.document.write('<html><head><title>PDF Viewer</title></head><body><div id="pdf-viewer-container"></div></body></html>');
+
+  const iframeCode = `
+    <div style="width: 100%; height: ;">
+      <iframe
+        title="PDF Viewer"
+        src="https://docs.google.com/viewer?url=${encodeURIComponent(pdfUrl)}&embedded=true"
+        style="width: 100%; height: 100%; border: none;"
+      />
+    </div>
+  `;
+
+  newWindow.document.write(iframeCode);
+};
+
     return (
         <div 
         style={{

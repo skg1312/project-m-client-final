@@ -72,6 +72,7 @@ function AdminConsignmentManage() {
               consignment._id === selectedConsignmentId ? response.data : consignment
             )
           );
+          alert("Consignment Details are Updated Successfully");
         })
         .catch((error) => {
           console.error('Error updating consignment:', error);
@@ -85,6 +86,7 @@ function AdminConsignmentManage() {
           console.log('Consignment created successfully:', response.data);
           // Optionally, you can update the local state to include the new consignment
           setConsignedItems((prevConsignedItems) => [...prevConsignedItems, response.data]);
+          alert("Consignment Details are Saved Successfully");
         })
         .catch((error) => {
           console.error('Error creating consignment:', error);
@@ -231,12 +233,13 @@ function AdminConsignmentManage() {
                 setSelectedConsignmentData({ ...selectedConsignmentData, itemtaxrate: e.target.value })
               }
             />
-          
+          {/*
             <br />
           <input type='checkbox' required className='admin-consignment-manage-form-input-checkbox' />
           <label className='admin-consignment-manage-form-input-checkbox-label'>
             I you agree with Terms and Conditions & Privacy Policy
           </label>
+          */}
           <br />
             <button type='submit' className='admin-consignment-manage-form-button'>
               {selectedConsignmentId ? 'Update' : 'Add'}

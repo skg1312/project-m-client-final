@@ -82,6 +82,7 @@ function AdminLoadingManage() {
               loading._id === selectedLoadingId ? response.data : loading
             )
           );
+          alert("Load Details are Updated Successfully");
         })
         .catch((error) => {
           console.error('Error updating loading:', error);
@@ -95,6 +96,7 @@ function AdminLoadingManage() {
           console.log('Loading created successfully:', response.data);
           // Optionally, you can update the local state to include the new loading
           setLoadings((prevLoadings) => [...prevLoadings, response.data]);
+          alert("Load details are Saved Successfully");
         })
         .catch((error) => {
           console.error('Error creating loading:', error);
@@ -214,11 +216,13 @@ required
                 setSelectedLoadingData({ ...selectedLoadingData, rate: e.target.value })
               }
             />
+                {/*
              <br />
             <input type='checkbox' className='admin-loading-manage-form-input-checkbox' />
             <label className='admin-loading-manage-form-input-checkbox-label'>
               I you agree with Terms and Conditions & Privacy Policy
             </label>
+            */}
             <br />
             <button type='submit' className='admin-loading-manage-form-button'>
               {selectedLoadingId ? 'Update' : 'Add'}

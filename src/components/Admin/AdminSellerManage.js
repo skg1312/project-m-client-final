@@ -70,6 +70,7 @@ function AdminSellerManage() {
           setSellers((prevSellers) =>
             prevSellers.map((seller) => (seller._id === selectedSellerId ? response.data : seller))
           );
+          alert("Agent Details are Updated Successfully");
         })
         .catch((error) => {
           console.error('Error updating seller:', error);
@@ -81,6 +82,7 @@ function AdminSellerManage() {
         .then((response) => {
           console.log('Seller created successfully:', response.data);
           setSellers((prevSellers) => [...prevSellers, response.data]);
+          alert("Agent Details are Saved Successfully");
         })
         .catch((error) => {
           console.error('Error creating seller:', error);
@@ -283,11 +285,13 @@ function AdminSellerManage() {
               value={selectedSellerData.sellercompanystatecode || ''}
               onChange={(e) => setSelectedSellerData({ ...selectedSellerData, sellercompanystatecode: e.target.value })}
             />
+              {/*
             <br />
             <input type='checkbox' required className='admin-seller-manage-form-input-checkbox' />
             <label className='admin-seller-manage-form-input-checkbox-label'>
               I you agree with Terms and Conditions & Privacy Policy
             </label>
+            */}
             <br />
             <button type='submit' className='admin-seller-manage-form-button'>
               {selectedSellerId ? 'Update' : 'Add'}

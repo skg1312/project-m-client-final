@@ -11,7 +11,7 @@
 }
 .reports-data-header{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     border-radius: 100px;
     border: 1px solid #5925DC;
     width: 60%;

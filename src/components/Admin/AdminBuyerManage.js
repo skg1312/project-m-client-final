@@ -287,11 +287,13 @@ onChange={handleFileChange} />
               value={selectedBuyerData.buyercompanystatecode || ''}
               onChange={(e) => setSelectedBuyerData({ ...selectedBuyerData, buyercompanystatecode: e.target.value })}
             />
+              {/*
             <br />
-            // <input type='checkbox' required className='buyer-manage-form-input-checkbox' />
-            // <label className='admin-buyer-manage-form-input-checkbox-label'>
-            //   I you agree with Terms and Conditions & Privacy Policy
-            // </label>
+             <input type='checkbox' required className='buyer-manage-form-input-checkbox' />
+             <label className='admin-buyer-manage-form-input-checkbox-label'>
+               I you agree with Terms and Conditions & Privacy Policy
+             </label>
+             */}
             <br />
             <button type='submit' className='admin-buyer-manage-form-button'>
               {selectedBuyerId ? 'Update' : 'Add'}

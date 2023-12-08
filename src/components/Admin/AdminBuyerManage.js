@@ -71,9 +71,11 @@ function AdminBuyerManage() {
         .put(`${API}buyer/${selectedBuyerId}`, selectedBuyerData)
         .then((response) => {
           console.log('Buyer updated successfully:', response.data);
+          
           setBuyers((prevBuyers) =>
             prevBuyers.map((buyer) => (buyer._id === selectedBuyerId ? response.data : buyer))
           );
+          alert("Buyer Details are Updated Successfully");
         })
         .catch((error) => {
           console.error('Error updating buyer:', error);
@@ -85,6 +87,7 @@ function AdminBuyerManage() {
         .then((response) => {
           console.log('Buyer created successfully:', response.data);
           setBuyers((prevBuyers) => [...prevBuyers, response.data]);
+          alert("Buyer Details are Saved Successfully");
         })
         .catch((error) => {
           console.error('Error creating buyer:', error);
@@ -285,10 +288,10 @@ onChange={handleFileChange} />
               onChange={(e) => setSelectedBuyerData({ ...selectedBuyerData, buyercompanystatecode: e.target.value })}
             />
             <br />
-            <input type='checkbox' required className='buyer-manage-form-input-checkbox' />
-            <label className='admin-buyer-manage-form-input-checkbox-label'>
-              I you agree with Terms and Conditions & Privacy Policy
-            </label>
+            // <input type='checkbox' required className='buyer-manage-form-input-checkbox' />
+            // <label className='admin-buyer-manage-form-input-checkbox-label'>
+            //   I you agree with Terms and Conditions & Privacy Policy
+            // </label>
             <br />
             <button type='submit' className='admin-buyer-manage-form-button'>
               {selectedBuyerId ? 'Update' : 'Add'}

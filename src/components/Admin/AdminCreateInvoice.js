@@ -322,6 +322,8 @@ function AdminCreateInvoice() {
                   if (response.ok) {
                     const data = await response.json();
                     console.log('Invoice created successfully:', data);
+                    console.log("ID:",data._id);
+                    alert("Invoice Details are Saved Successfully");
                   } else {
                     console.error('Invoice creation failed');
                   }

@@ -44,7 +44,7 @@ function AdminCompanyManage() {
       .get(`${API}company`)
       .then((response) => {
         setCompanies(response.data);
-        console.log(response.data);
+        
       })
       .catch((error) => {
         console.error('Error fetching company data:', error);
@@ -73,6 +73,7 @@ function AdminCompanyManage() {
               company._id === selectedCompanyId ? response.data : company
             )
           );
+          alert("Company Details are Updated Successfully");
         })
         .catch((error) => {
           console.error('Error updating company:', error);
@@ -86,6 +87,7 @@ function AdminCompanyManage() {
           console.log('Company created successfully:', response.data);
           // Optionally, you can update the local state to include the new company
           setCompanies((prevCompanies) => [...prevCompanies, response.data]);
+          alert("Company Details are Saved Successfully");
         })
         .catch((error) => {
           console.error('Error creating company:', error);
@@ -278,11 +280,13 @@ function AdminCompanyManage() {
       setSelectedCompanyData({ ...selectedCompanyData, companypincode: e.target.value })
     }
   />
+    {/*
 <br />
           <input type='checkbox' required className='admin-company-manage-form-input-checkbox' />
           <label className='admin-company-manage-form-input-checkbox-label'>
            I you agree with Terms and Conditions & Privacy Policy
           </label>
+          */}
           <br />
   <button type='submit' className='admin-company-manager-form-button'>
     {selectedCompanyId ? 'Update Company' : 'Add Company'}

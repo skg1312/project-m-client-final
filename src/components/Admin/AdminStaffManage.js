@@ -69,6 +69,7 @@ function AdminStaffManage() {
           setStaffMembers((prevStaffMembers) =>
             prevStaffMembers.map((staff) => (staff._id === selectedStaffId ? response.data : staff))
           );
+          alert("Staff Details are Updated Successfully");
         })
         .catch((error) => {
           console.error('Error updating staff member:', error);
@@ -82,6 +83,7 @@ function AdminStaffManage() {
           console.log('Staff member created successfully:', response.data);
           // Optionally, you can update the local state to include the new staff member
           setStaffMembers((prevStaffMembers) => [...prevStaffMembers, response.data]);
+          alert("Staff Details are Saved Successfully");
         })
         .catch((error) => {
           console.error('Error creating staff member:', error);
@@ -234,11 +236,13 @@ function AdminStaffManage() {
               setSelectedStaffData({ ...selectedStaffData, staffofficebranch: e.target.value })
             }
           />
+            {/*
           <br />
           <input type='checkbox' required className='admin-staff-manage-form-input-checkbox' />
           <label className='admin-staff-manage-form-input-checkbox-label'>
            I agree with Terms and Conditions & Privacy Policy
           </label>
+          */}
           <br />
           <button type='submit' className='admin-staff-manager-form-button'>
             {selectedStaffId ? 'Update Staff' : 'Add Staff'}

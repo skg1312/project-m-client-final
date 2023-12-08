@@ -66,6 +66,7 @@ function AdminUserManage() {
           setUsers((prevUsers) =>
             prevUsers.map((user) => (user._id === selectedUserId ? response.data : user))
           );
+          alert("User Details are Updated Successfully");
         })
         .catch((error) => {
           console.error('Error updating user:', error);
@@ -79,6 +80,7 @@ function AdminUserManage() {
           console.log('User created successfully:', response.data);
           // Optionally, you can update the local state to include the new user
           setUsers((prevUsers) => [...prevUsers, response.data]);
+          alert("User Details are Saved Successfully");
         })
         .catch((error) => {
           console.error('Error creating user:', error);
@@ -210,11 +212,13 @@ function AdminUserManage() {
             <option value='HO-User'>HO-User</option>
             <option value='User'>User</option>
           </select>
+            {/*
             <br />
             <input type='checkbox' required className='admin-user-manage-form-input-checkbox' />
           <label className='admin-user-manage-form-input-checkbox-label'>
             I agree with Terms and Conditions & Privacy Policy
           </label>
+          */}
             <br />
             <button type='submit' className='admin-user-manage-form-button'>
               {selectedUserId ? 'Update' : 'Add'}

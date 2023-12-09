@@ -36,6 +36,11 @@ function AdminReports() {
         (item.consignmentdetails.itemdetails[0] &&
           item.consignmentdetails.itemdetails[0].itemname) ||
         "";
+          const agentCompanyName =
+        (item.sellerdetails && item.sellerdetails.sellercompanyname) || ""; // **Include Agent Company Name field**
+      const agentCompanyState =
+        (item.sellerdetails && item.sellerdetails.sellercompanystatename) || ""; // **Include Agent Company State Name**
+      const searchLowerCase = searchInput?.toLowerCase();
 
       if (
         invoiceNo.toLowerCase().includes(searchInput?.toLowerCase()) ||
@@ -43,7 +48,10 @@ function AdminReports() {
         invoiceDate.toLowerCase().includes(searchInput?.toLowerCase()) ||
         vehicleNumber.toLowerCase().includes(searchInput?.toLowerCase()) ||
         driverName.toLowerCase().includes(searchInput?.toLowerCase()) ||
-        itemName.toLowerCase().includes(searchInput?.toLowerCase())
+        itemName.toLowerCase().includes(searchLowerCase) ||
+        agentCompanyName.toLowerCase().includes(searchLowerCase) || // **Check Agent Company Name**
+        agentCompanyState.toLowerCase().includes(searchLowerCase) // **Check Agent Company State Name**
+        
       ) {
         return true;
       }

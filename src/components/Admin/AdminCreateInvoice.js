@@ -7,6 +7,8 @@ import AdminNavbar from './AdminNavbar';
 import Select from 'react-select';
 
 function AdminCreateInvoice() {
+  const [view, setView] = useState(false);
+  const [url,setUrl] = useState([]);
   const [companies, setCompanies] = useState([]);
     const [selectedCompany, setSelectedCompany] = useState({});
 
@@ -323,9 +325,8 @@ function AdminCreateInvoice() {
       const data = await response.json();
       console.log('Invoice created successfully:', data);
       alert("Invoice Details are saved");
-
-      // Open PDF viewer after alert
-      openPdfViewer(data.invoiceId);
+      setUrl(data.invoiceId);
+      setView(true);
     } else {
       console.error('Invoice creation failed');
     }
@@ -334,7 +335,6 @@ function AdminCreateInvoice() {
   }
 };
 
-// Function to open PDF viewer
 const openPdfViewer = (selectedInvoiceId) => {
   const pdfUrl = `${API}download/${selectedInvoiceId}`;
   const newWindow = window.open('', '_blank');
@@ -901,6 +901,10 @@ className="admin-create-invoice-select"
         </form>
         <div className='admin-create-invoice-data-submit'>
       <button className='admin-create-invoice-button'>CREATE INVOICE</button>
+      <br />
+       {view && (
+  <button className='admin-create-invoice-button' onClick={() => openPdfViewer(url)}>VIEW INVOICE</button>
+)}
     </div>
     
     </div>

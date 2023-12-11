@@ -337,7 +337,7 @@ function AdminCreateInvoice() {
 
 const openPdfViewer = (selectedInvoiceId) => {
   const pdfUrl = `${API}download/${selectedInvoiceId}`;
-  console.log("pdfUrl");
+  console.log(pdfUrl);
   const newWindow = window.open('', '_blank');
   newWindow.document.write('<html><head><title>PDF Viewer</title></head><body><div id="pdf-viewer-container"></div></body></html>');
 

@@ -341,7 +341,7 @@ const openPdfViewer = (selectedInvoiceId) => {
   newWindow.document.write('<html><head><title>PDF Viewer</title></head><body><div id="pdf-viewer-container"></div></body></html>');
 
   const iframeCode = `
-    <div style="width: 100%; height: ;">
+    <div style="width: 100%; height:80% ;">
       <iframe
         title="PDF Viewer"
         src="https://docs.google.com/viewer?url=${encodeURIComponent(pdfUrl)}&embedded=true"

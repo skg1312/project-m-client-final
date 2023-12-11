@@ -50,268 +50,344 @@ import StaffPdfViewer from './components/Staff/StaffInvoiceView';
 import UserPdfViewer from './components/User/UserInvoiceView';
 
 function App() {
-  return (
-    <Router>
-      <div>
-        {/* Admin Routes */}
-        <AdminAuthProvider>
-          <Routes>
-            <Route path='/' element={<AdminLogin />} />
-            <Route path='/admindashboard' element={
-              <ReqAdminAuth>
-                
-                <AdminDashboard />
-              </ReqAdminAuth>
-            } />
-            <Route path='/admininvdash' element={
-              <ReqAdminAuth>
-                
-                <AdminInvoiceDashboard />
-              </ReqAdminAuth>
-            } />
-            <Route path='/adminbuyman' element={
-              <ReqAdminAuth>
-                
-                <AdminBuyerManage />
-              </ReqAdminAuth>
-            } />
-            <Route path='/adminsellman' element={
-              <ReqAdminAuth>
-                
-                <AdminSellerManage />
-              </ReqAdminAuth>
-            } />
-            <Route path='/admincomman' element={
-              <ReqAdminAuth>
-                
-                <AdminCompanyManage />
-              </ReqAdminAuth>
-            } />
-            <Route path='/adminconman' element={
-              <ReqAdminAuth>
-                
-                <AdminConsignmentManage />
-              </ReqAdminAuth>
-            } />
-            <Route path='/adminstaffman' element={
-              <ReqAdminAuth>
-                
-                <AdminStaffManage />
-              </ReqAdminAuth>
-            } />
-            <Route path='/adminuserman' element={
-              <ReqAdminAuth>
-                
-                <AdminUserManage />
-              </ReqAdminAuth>
-            } />
-            <Route path='/adminvecman' element={
-              <ReqAdminAuth>
-                
-                <AdminVechicleManage />
-              </ReqAdminAuth>
-            } />
-            <Route path='/admingenrep' element={
-              <ReqAdminAuth>
-                
-                <AdminReports />
-              </ReqAdminAuth>
-            } />
-            <Route path='/admininman' element={
-              <ReqAdminAuth>
-                
-                <AdminInvoiceManagement />
-                </ReqAdminAuth>
-            } />
-            <Route path='/admincreinv' element={
-              <ReqAdminAuth>
-                
-                <AdminCreateInvoice />
-                </ReqAdminAuth>
-            } />
-            <Route path='/admininvview' element={
-              <ReqAdminAuth>
-                
-                <PdfViewer />
-                </ReqAdminAuth>
-            } />
-          </Routes>
-        </AdminAuthProvider>
+	return (
+		<Router>
+			<div>
+				{/* Admin Routes */}
+				<AdminAuthProvider>
+					<Routes>
+						<Route path='/' element={<AdminLogin />} />
+						<Route
+							path='/admindashboard'
+							element={
+								<ReqAdminAuth>
+									<AdminDashboard />
+								</ReqAdminAuth>
+							}
+						/>
+						<Route
+							path='/admininvdash'
+							element={
+								<ReqAdminAuth>
+									<AdminInvoiceDashboard />
+								</ReqAdminAuth>
+							}
+						/>
+						<Route
+							path='/adminbuyman'
+							element={
+								<ReqAdminAuth>
+									<AdminBuyerManage />
+								</ReqAdminAuth>
+							}
+						/>
+						<Route
+							path='/adminsellman'
+							element={
+								<ReqAdminAuth>
+									<AdminSellerManage />
+								</ReqAdminAuth>
+							}
+						/>
+						<Route
+							path='/admincomman'
+							element={
+								<ReqAdminAuth>
+									<AdminCompanyManage />
+								</ReqAdminAuth>
+							}
+						/>
+						<Route
+							path='/adminconman'
+							element={
+								<ReqAdminAuth>
+									<AdminConsignmentManage />
+								</ReqAdminAuth>
+							}
+						/>
+						<Route
+							path='/adminstaffman'
+							element={
+								<ReqAdminAuth>
+									<AdminStaffManage />
+								</ReqAdminAuth>
+							}
+						/>
+						<Route
+							path='/adminuserman'
+							element={
+								<ReqAdminAuth>
+									<AdminUserManage />
+								</ReqAdminAuth>
+							}
+						/>
+						<Route
+							path='/adminvecman'
+							element={
+								<ReqAdminAuth>
+									<AdminVechicleManage />
+								</ReqAdminAuth>
+							}
+						/>
+						<Route
+							path='/admingenrep'
+							element={
+								<ReqAdminAuth>
+									<AdminReports />
+								</ReqAdminAuth>
+							}
+						/>
+						<Route
+							path='/admininman'
+							element={
+								<ReqAdminAuth>
+									<AdminInvoiceManagement />
+								</ReqAdminAuth>
+							}
+						/>
+						<Route
+							path='/admincreinv'
+							element={
+								<ReqAdminAuth>
+									<AdminCreateInvoice />
+								</ReqAdminAuth>
+							}
+						/>
+						<Route
+							path='/admininvview'
+							element={
+								<ReqAdminAuth>
+									<PdfViewer />
+								</ReqAdminAuth>
+							}
+						/>
+					</Routes>
+				</AdminAuthProvider>
 
-        {/* Staff Routes */}
-        <StaffAuthProvider>
-          <Routes>
-            <Route path='/staff' element={<StaffLogin />} />
-            <Route path='/staffinvdash' element={
-            <ReqStaffAuth>
-              
-              <StaffInvoiceDashboard />
-            </ReqStaffAuth>
-          } />
-            <Route path='/staffsuperdash' element={
-            <ReqStaffAuth>
-              
-              <StaffDashboard />
-            </ReqStaffAuth>
-          } />
-            <Route path='/staffhodash' element={
-            <ReqStaffAuth>
-              
-              <StaffDashboardHO />
-            </ReqStaffAuth>
-          } />
-            <Route path='/staffgendash' element={
-            <ReqStaffAuth>
-              
-              <StaffDashboardGeneral />
-            </ReqStaffAuth>
-          } />
-            <Route path='/staffbuyman' element={
-            <ReqStaffAuth>
-              
-              <StaffBuyerManage />
-            </ReqStaffAuth>
-          } />
-            <Route path='/staffcrein' element={
-            <ReqStaffAuth>
-              
-              <StaffCreateInvoice />
-            </ReqStaffAuth>
-          } />
-            <Route path='/staffinman' element={
-            <ReqStaffAuth>
-              
-              <StaffInvoiceManagement />
-            </ReqStaffAuth>
-          } />
-            <Route path='/staffgenrep' element={
-            <ReqStaffAuth>
-              
-              <StaffReports />
-            </ReqStaffAuth>
-          } />
-            <Route path='/staffsellman' element={
-            <ReqStaffAuth>
-              
-              <StaffSellerManage />
-            </ReqStaffAuth>
-          } />
-            <Route path='/staffcomman' element={
-            <ReqStaffAuth>
-              
-              <StaffCompanyManage />
-            </ReqStaffAuth>
-          } />
-            <Route path='/staffconman' element={
-            <ReqStaffAuth>
-              
-              <StaffConsignmentManage />
-            </ReqStaffAuth>
-          } />
-            <Route path='/staffvecman' element={
-            <ReqStaffAuth>
-              
-              <StaffVechicleManage />
-            </ReqStaffAuth>
-          } />
-            <Route path='/staffinvview' element={
-            <ReqStaffAuth>
-              
-              <StaffPdfViewer />
-            </ReqStaffAuth>
-          } />
-          </Routes>
-          
+				{/* Staff Routes */}
+				<StaffAuthProvider>
+					<Routes>
+						<Route path='/staff' element={<StaffLogin />} />
+						<Route
+							path='/staffinvdash'
+							element={
+								<ReqStaffAuth>
+									<StaffInvoiceDashboard />
+								</ReqStaffAuth>
+							}
+						/>
+						<Route
+							path='/staffsuperdash'
+							element={
+								<ReqStaffAuth>
+									<StaffDashboard />
+								</ReqStaffAuth>
+							}
+						/>
+						<Route
+							path='/staffhodash'
+							element={
+								<ReqStaffAuth>
+									<StaffDashboardHO />
+								</ReqStaffAuth>
+							}
+						/>
+						<Route
+							path='/staffgendash'
+							element={
+								<ReqStaffAuth>
+									<StaffDashboardGeneral />
+								</ReqStaffAuth>
+							}
+						/>
+						<Route
+							path='/staffbuyman'
+							element={
+								<ReqStaffAuth>
+									<StaffBuyerManage />
+								</ReqStaffAuth>
+							}
+						/>
+						<Route
+							path='/staffcrein'
+							element={
+								<ReqStaffAuth>
+									<StaffCreateInvoice />
+								</ReqStaffAuth>
+							}
+						/>
+						<Route
+							path='/staffinman'
+							element={
+								<ReqStaffAuth>
+									<StaffInvoiceManagement />
+								</ReqStaffAuth>
+							}
+						/>
+						<Route
+							path='/staffgenrep'
+							element={
+								<ReqStaffAuth>
+									<StaffReports />
+								</ReqStaffAuth>
+							}
+						/>
+						<Route
+							path='/staffsellman'
+							element={
+								<ReqStaffAuth>
+									<StaffSellerManage />
+								</ReqStaffAuth>
+							}
+						/>
+						<Route
+							path='/staffcomman'
+							element={
+								<ReqStaffAuth>
+									<StaffCompanyManage />
+								</ReqStaffAuth>
+							}
+						/>
+						<Route
+							path='/staffconman'
+							element={
+								<ReqStaffAuth>
+									<StaffConsignmentManage />
+								</ReqStaffAuth>
+							}
+						/>
+						<Route
+							path='/staffvecman'
+							element={
+								<ReqStaffAuth>
+									<StaffVechicleManage />
+								</ReqStaffAuth>
+							}
+						/>
+						<Route
+							path='/staffinvview'
+							element={
+								<ReqStaffAuth>
+									<StaffPdfViewer />
+								</ReqStaffAuth>
+							}
+						/>
+					</Routes>
+				</StaffAuthProvider>
 
-        </StaffAuthProvider>
-
-        {/* User Routes */}
-        <UserAuthProvider>
-          <Routes>
-            <Route path='/user' element={<UserLogin />} />
-            <Route path='/userinvdash' element={
-            <ReqUserAuth>
-              
-              <UserInvoiceDashboard />
-            </ReqUserAuth>
-            } />
-            <Route path='/usersuperdash' element={
-            <ReqUserAuth>
-              
-              <UserDashboard />
-            </ReqUserAuth>
-          } />
-            <Route path='/userhodash' element={
-            <ReqUserAuth>
-              
-              <UserDashboardHO />
-            </ReqUserAuth>
-          } />
-            <Route path='/usergendash' element={
-            <ReqUserAuth>
-              
-              <UserDashboardGeneral />
-            </ReqUserAuth>
-          } />
-            <Route path='/userbuyman' element={
-            <ReqUserAuth>
-              
-              <UserBuyerManage />
-            </ReqUserAuth>
-          } />
-            <Route path='/usersellman' element={
-            <ReqUserAuth>
-              
-              <UserSellerManage />
-            </ReqUserAuth>
-          } />
-            <Route path='/usercomman' element={
-            <ReqUserAuth>
-              
-              <UserCompanyManage />
-            </ReqUserAuth>
-          } />
-            <Route path='/userconman' element={
-            <ReqUserAuth>
-              
-              <UserConsignmentManage />
-            </ReqUserAuth>
-          } />
-            <Route path='/uservecman' element={
-            <ReqUserAuth>
-              
-              <UserVechicleManage />
-            </ReqUserAuth>
-          } />
-            <Route path='/userinman' element={
-            <ReqUserAuth>
-              
-              <UserInvoiceManagement />
-            </ReqUserAuth> 
-          } />
-            <Route path='/usergenrep' element={
-            <ReqUserAuth>
-              
-              <UserReports />
-            </ReqUserAuth>
-           } />
-            <Route path='/usercrein' element={
-            <ReqUserAuth>
-              
-              <UserCreateInvoice />
-            </ReqUserAuth>
-           } />
-            <Route path='/userinvview' element={
-            <ReqUserAuth>
-              
-              <UserPdfViewer />
-            </ReqUserAuth>
-           } />
-          </Routes>
-        </UserAuthProvider>
-      </div>
-    </Router>
-  );
+				{/* User Routes */}
+				<UserAuthProvider>
+					<Routes>
+						<Route path='/user' element={<UserLogin />} />
+						<Route
+							path='/userinvdash'
+							element={
+								<ReqUserAuth>
+									<UserInvoiceDashboard />
+								</ReqUserAuth>
+							}
+						/>
+						<Route
+							path='/usersuperdash'
+							element={
+								<ReqUserAuth>
+									<UserDashboard />
+								</ReqUserAuth>
+							}
+						/>
+						<Route
+							path='/userhodash'
+							element={
+								<ReqUserAuth>
+									<UserDashboardHO />
+								</ReqUserAuth>
+							}
+						/>
+						<Route
+							path='/usergendash'
+							element={
+								<ReqUserAuth>
+									<UserDashboardGeneral />
+								</ReqUserAuth>
+							}
+						/>
+						<Route
+							path='/userbuyman'
+							element={
+								<ReqUserAuth>
+									<UserBuyerManage />
+								</ReqUserAuth>
+							}
+						/>
+						<Route
+							path='/usersellman'
+							element={
+								<ReqUserAuth>
+									<UserSellerManage />
+								</ReqUserAuth>
+							}
+						/>
+						<Route
+							path='/usercomman'
+							element={
+								<ReqUserAuth>
+									<UserCompanyManage />
+								</ReqUserAuth>
+							}
+						/>
+						<Route
+							path='/userconman'
+							element={
+								<ReqUserAuth>
+									<UserConsignmentManage />
+								</ReqUserAuth>
+							}
+						/>
+						<Route
+							path='/uservecman'
+							element={
+								<ReqUserAuth>
+									<UserVechicleManage />
+								</ReqUserAuth>
+							}
+						/>
+						<Route
+							path='/userinman'
+							element={
+								<ReqUserAuth>
+									<UserInvoiceManagement />
+								</ReqUserAuth>
+							}
+						/>
+						<Route
+							path='/usergenrep'
+							element={
+								<ReqUserAuth>
+									<UserReports />
+								</ReqUserAuth>
+							}
+						/>
+						<Route
+							path='/usercrein'
+							element={
+								<ReqUserAuth>
+									<UserCreateInvoice />
+								</ReqUserAuth>
+							}
+						/>
+						<Route
+							path='/userinvview'
+							element={
+								<ReqUserAuth>
+									<UserPdfViewer />
+								</ReqUserAuth>
+							}
+						/>
+					</Routes>
+				</UserAuthProvider>
+			</div>
+		</Router>
+	);
 }
 
 export default App;

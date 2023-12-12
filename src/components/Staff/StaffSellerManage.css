@@ -1,342 +1,342 @@
 /* staff-seller-manage component styles */
 .staff-seller-manage {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    text-align: center;
-  }
-  
-  .staff-seller-manage-data {
-    margin-left: 100px;
-    margin-top: 100px;
-    margin-bottom: 100px;
-    margin-right: 50px;
-    border-radius: 15px;
-    border: 2px solid #D2D2D2;
-  }
-  
-  .staff-seller-manage-data-title {
-   font-family: "Urbanist";
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 38px;
-    letter-spacing: -0.578px;
-    text-align: left;
-    padding-left: 50px;
-  }
-  
-  .staff-seller-manage-data-table-head {
-    color: #1A1A1A;
-   font-family: "Urbanist";
-    font-size: 20px;
-    font-style: bold;
-  }
-  
-  .staff-seller-manage-data-table {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  .staff-seller-manage-data-table-body {
-    color: #767676;
-   font-family: "Urbanist";
-    font-size: 20px;
-    font-style: bold;
-    font-weight: 400;
-    line-height: 28px;
-    letter-spacing: -0.289px;
-  }
-  
-  .highlight {
-    color: green !important;
-  }
-  
-  .staff-seller-manage-form {
-    margin-left: 50px;
-    margin-top: 100px;
-    margin-right: 100px;
-    margin-bottom: 100px;
-    border-radius: 15px;
-    border: 2px solid #D2D2D2;
-  }
-  
-  .staff-seller-manage-form-title {
-   font-family: "Urbanist";
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 38px;
-    letter-spacing: -0.578px;
-    text-align: left;
-    padding-left: 50px;
-  }
-  
-  .staff-seller-manage-form-input {
-    border-radius: 6px;
-    border: 1px solid #ededed;
-    background: #EDEDED;
-    height: 50px;
-    width: 86%;
-    margin-bottom: 20px;
-    color: var(--color-grey-60, #767676);
-   font-family: "Urbanist";
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 26px;
-    letter-spacing: -0.289px;
-  }
-  .highlight{
-    color: green !important;
-}
-  
-  .staff-seller-manage-form-button {
-    color: var(--color-white-100, #FEFEFE);
-    text-align: center;
-    font-feature-settings: 'clig' off, 'liga' off;
-   font-family: "Urbanist";
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 26px;
-    letter-spacing: -0.289px;
-    width: 331px;
-    height: 48px;
-    flex-shrink: 0;
-    border-radius: 6px;
-    border: 1px solid #5925DC;
-    background: var(--color-primary-1, #5925DC);
-    margin-bottom: 20px;
-    margin-top: 20px;
-  }
-  .staff-seller-manage-form-button:hover{
-    cursor: pointer;
-  }
-  
-.staff-seller-manage-form-input-checkbox{
-    width: 16px;
-    height: 16px;
-}
-.staff-seller-manage-form-input-checkbox-label{
-    color: var(--color-grey-100, #1A1A1A);
-    font-feature-settings: 'clig' off, 'liga' off;
-   font-family: "Urbanist";
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 26px;
-    letter-spacing: -0.289px;
-}
-.staff-seller-manage-data-table-button{
-    color: #FEFEFE;
-   font-family: "Urbanist";
-    font-size: 15px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 28px;
-    letter-spacing: -0.325px;
-    background-color: #5925DC;
-    border-radius: 3px;
-    border: 1px solid #5925DC;
-}
-.staff-seller-manage-data-table-button:hover{
-  cursor: pointer;
-}
-.pagination-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    list-style-type: none;
-}
-.pagination-container li{
-    padding: 10px;
-    border: 1px solid #5925DC;
-    border-radius: 3px;
-    color: #fff;
-   font-family: "Urbanist";
-    font-size: 15px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 28px;
-    letter-spacing: -0.325px;
-    background-color: #5925DC;
-    margin: 5px;
-}
-.pagination-container li:hover{
-    cursor: poCalibri;
-}
-.pagination-container .active{
-    background-color: #767676;
-    color: #fff;
-}
-.pagination-container .disabled{
-    color: #ada9a9;
-    cursor: not-allowed;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	text-align: center;
 }
 
+.staff-seller-manage-data {
+	margin-left: 100px;
+	margin-top: 100px;
+	margin-bottom: 100px;
+	margin-right: 50px;
+	border-radius: 15px;
+	border: 2px solid #d2d2d2;
+}
+
+.staff-seller-manage-data-title {
+	font-family: 'Urbanist';
+	font-size: 32px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 38px;
+	letter-spacing: -0.578px;
+	text-align: left;
+	padding-left: 50px;
+}
+
+.staff-seller-manage-data-table-head {
+	color: #1a1a1a;
+	font-family: 'Urbanist';
+	font-size: 20px;
+	font-style: bold;
+}
+
+.staff-seller-manage-data-table {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.staff-seller-manage-data-table-body {
+	color: #767676;
+	font-family: 'Urbanist';
+	font-size: 20px;
+	font-style: bold;
+	font-weight: 400;
+	line-height: 28px;
+	letter-spacing: -0.289px;
+}
+
+.highlight {
+	color: green !important;
+}
+
+.staff-seller-manage-form {
+	margin-left: 50px;
+	margin-top: 100px;
+	margin-right: 100px;
+	margin-bottom: 100px;
+	border-radius: 15px;
+	border: 2px solid #d2d2d2;
+}
+
+.staff-seller-manage-form-title {
+	font-family: 'Urbanist';
+	font-size: 32px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 38px;
+	letter-spacing: -0.578px;
+	text-align: left;
+	padding-left: 50px;
+}
+
+.staff-seller-manage-form-input {
+	border-radius: 6px;
+	border: 1px solid #ededed;
+	background: #ededed;
+	height: 50px;
+	width: 86%;
+	margin-bottom: 20px;
+	color: var(--color-grey-60, #767676);
+	font-family: 'Urbanist';
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 26px;
+	letter-spacing: -0.289px;
+}
+.highlight {
+	color: green !important;
+}
+
+.staff-seller-manage-form-button {
+	color: var(--color-white-100, #fefefe);
+	text-align: center;
+	font-feature-settings: 'clig' off, 'liga' off;
+	font-family: 'Urbanist';
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 26px;
+	letter-spacing: -0.289px;
+	width: 331px;
+	height: 48px;
+	flex-shrink: 0;
+	border-radius: 6px;
+	border: 1px solid #5925dc;
+	background: var(--color-primary-1, #5925dc);
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
+.staff-seller-manage-form-button:hover {
+	cursor: pointer;
+}
+
+.staff-seller-manage-form-input-checkbox {
+	width: 16px;
+	height: 16px;
+}
+.staff-seller-manage-form-input-checkbox-label {
+	color: var(--color-grey-100, #1a1a1a);
+	font-feature-settings: 'clig' off, 'liga' off;
+	font-family: 'Urbanist';
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 26px;
+	letter-spacing: -0.289px;
+}
+.staff-seller-manage-data-table-button {
+	color: #fefefe;
+	font-family: 'Urbanist';
+	font-size: 15px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 28px;
+	letter-spacing: -0.325px;
+	background-color: #5925dc;
+	border-radius: 3px;
+	border: 1px solid #5925dc;
+}
+.staff-seller-manage-data-table-button:hover {
+	cursor: pointer;
+}
+.pagination-container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	list-style-type: none;
+}
+.pagination-container li {
+	padding: 10px;
+	border: 1px solid #5925dc;
+	border-radius: 3px;
+	color: #fff;
+	font-family: 'Urbanist';
+	font-size: 15px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 28px;
+	letter-spacing: -0.325px;
+	background-color: #5925dc;
+	margin: 5px;
+}
+.pagination-container li:hover {
+	cursor: poCalibri;
+}
+.pagination-container .active {
+	background-color: #767676;
+	color: #fff;
+}
+.pagination-container .disabled {
+	color: #ada9a9;
+	cursor: not-allowed;
+}
 
 /* Mobile styles - 768px width and below */
 @media only screen and (max-width: 1024px) {
-  .staff-seller-manage {
-    display: grid;
-    grid-template-columns: 1fr;
-    text-align: center;
-    align-items: center;
-  }
-  .staff-logout-button-nav {
-    margin-top: 10px;
-    margin-left: 5px;
-    display: flex;
-    flex-wrap: wrap;
-    grid-gap: 15px;
-    display: flex;
-    justify-content: space-around;
-  }
-  .staff-seller-manage-data {
-    margin-left: 35px;
-    margin-top: 100px;
-    margin-bottom: 100px;
-    margin-right: 35px;
-    border-radius: 15px;
-    border: 2px solid #D2D2D2;
-  }
-  .staff-seller-manage-form {
-    margin-left: 35px;
-    margin-top: 100px;
-    margin-bottom: 100px;
-    margin-right: 35px;
-    border-radius: 15px;
-    border: 2px solid #D2D2D2;
-  }
+	.staff-seller-manage {
+		display: grid;
+		grid-template-columns: 1fr;
+		text-align: center;
+		align-items: center;
+	}
+	.staff-logout-button-nav {
+		margin-top: 10px;
+		margin-left: 5px;
+		display: flex;
+		flex-wrap: wrap;
+		grid-gap: 15px;
+		display: flex;
+		justify-content: space-around;
+	}
+	.staff-seller-manage-data {
+		margin-left: 35px;
+		margin-top: 100px;
+		margin-bottom: 100px;
+		margin-right: 35px;
+		border-radius: 15px;
+		border: 2px solid #d2d2d2;
+	}
+	.staff-seller-manage-form {
+		margin-left: 35px;
+		margin-top: 100px;
+		margin-bottom: 100px;
+		margin-right: 35px;
+		border-radius: 15px;
+		border: 2px solid #d2d2d2;
+	}
 }
 
 @media only screen and (max-width: 768px) {
-  .staff-seller-manage-data {
-    margin-left: 15px;
-    margin-top: 40px;
-    margin-bottom: 20px;
-    margin-right: 15px;
-    border-radius: 12px;
-    border: 2px solid #D2D2D2;
-  }
-  .staff-seller-manage-form {
-    margin-left: 15px;
-    margin-top: 40px;
-    margin-bottom: 20px;
-    margin-right: 15px;
-    border-radius: 12px;
-    border: 2px solid #D2D2D2;
-  }
-  .staff-seller-manage-data-title {
-   font-family: "Urbanist";
-    font-size: 26px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 38px;
-    letter-spacing: -0.578px;
-    text-align: left;
-    padding-left: 50px;
-  }
-  .staff-seller-manage-data-table-head {
-    color: #1A1A1A;
-   font-family: "Urbanist";
-    font-size: 15px;
-    font-style: bold;
-  }
-  .staff-seller-manage-data-table-body {
-    color: #767676;
-   font-family: "Urbanist";
-    font-size: 12px;
-    font-style: bold;
-    font-weight: 400;
-    line-height: 28px;
-    letter-spacing: -0.289px;
-  }
-  .staff-user-manage-form-input {
-    border-radius: 6px;
-    border: 1px solid #ededed;
-    background: #EDEDED;
-    height: 35px;
-    width: 75%;
-    margin-bottom: 20px;
-    color: var(--color-grey-60, #767676);
-   font-family: "Urbanist";
-    font-size: 15px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 26px;
-    letter-spacing: -0.289px;
-  }
-  .staff-seller-manage-form-input {
-    border-radius: 6px;
-    border: 1px solid #ededed;
-    background: #EDEDED;
-    height: 35px;
-    width: 75%;
-    margin-bottom: 20px;
-    color: #767676;
-   font-family: "Urbanist";
-    font-size: 15px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 26px;
-    letter-spacing: -0.289px;
-  }
-  .staff-seller-manage-form-title {
-   font-family: "Urbanist";
-    font-size: 26px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 38px;
-    letter-spacing: -0.578px;
-    text-align: left;
-    padding-left: 50px;
-  }
-  .staff-seller-manage-form-input-checkbox-label {
-    color: #1A1A1A;
-    font-feature-settings: 'clig' off, 'liga' off;
-   font-family: "Urbanist";
-    font-size: 13px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 26px;
-    letter-spacing: -0.289px;
-  }
-  .staff-seller-manage-form-button {
-    color: #FEFEFE;
-    text-align: center;
-    font-feature-settings: 'clig' off, 'liga' off;
-   font-family: "Urbanist";
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 26px;
-    letter-spacing: -0.289px;
-    width: 170px;
-    height: 45px;
-    flex-shrink: 0;
-    border-radius: 6px;
-    border: 1px solid #5925DC;
-    background: #5925DC;
-    margin-bottom: 20px;
-    margin-top: 20px;
-  }
-  .staff-seller-manage-data-table-button{
-    color: #FEFEFE;
-   font-family: "Urbanist";
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 28px;
-    letter-spacing: -0.325px;
-    background-color: #5925DC;
-    border-radius: 3px;
-    border: 1px solid #5925DC;
-}
-.staff-seller-manage-form-input-checkbox{
-  width: 12px;
-  height: 12px;
-}
+	.staff-seller-manage-data {
+		margin-left: 15px;
+		margin-top: 40px;
+		margin-bottom: 20px;
+		margin-right: 15px;
+		border-radius: 12px;
+		border: 2px solid #d2d2d2;
+	}
+	.staff-seller-manage-form {
+		margin-left: 15px;
+		margin-top: 40px;
+		margin-bottom: 20px;
+		margin-right: 15px;
+		border-radius: 12px;
+		border: 2px solid #d2d2d2;
+	}
+	.staff-seller-manage-data-title {
+		font-family: 'Urbanist';
+		font-size: 26px;
+		font-style: normal;
+		font-weight: 600;
+		line-height: 38px;
+		letter-spacing: -0.578px;
+		text-align: left;
+		padding-left: 50px;
+	}
+	.staff-seller-manage-data-table-head {
+		color: #1a1a1a;
+		font-family: 'Urbanist';
+		font-size: 15px;
+		font-style: bold;
+	}
+	.staff-seller-manage-data-table-body {
+		color: #767676;
+		font-family: 'Urbanist';
+		font-size: 12px;
+		font-style: bold;
+		font-weight: 400;
+		line-height: 28px;
+		letter-spacing: -0.289px;
+	}
+	.staff-user-manage-form-input {
+		border-radius: 6px;
+		border: 1px solid #ededed;
+		background: #ededed;
+		height: 35px;
+		width: 75%;
+		margin-bottom: 20px;
+		color: var(--color-grey-60, #767676);
+		font-family: 'Urbanist';
+		font-size: 15px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 26px;
+		letter-spacing: -0.289px;
+	}
+	.staff-seller-manage-form-input {
+		border-radius: 6px;
+		border: 1px solid #ededed;
+		background: #ededed;
+		height: 35px;
+		width: 75%;
+		margin-bottom: 20px;
+		color: #767676;
+		font-family: 'Urbanist';
+		font-size: 15px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 26px;
+		letter-spacing: -0.289px;
+	}
+	.staff-seller-manage-form-title {
+		font-family: 'Urbanist';
+		font-size: 26px;
+		font-style: normal;
+		font-weight: 600;
+		line-height: 38px;
+		letter-spacing: -0.578px;
+		text-align: left;
+		padding-left: 50px;
+	}
+	.staff-seller-manage-form-input-checkbox-label {
+		color: #1a1a1a;
+		font-feature-settings: 'clig' off, 'liga' off;
+		font-family: 'Urbanist';
+		font-size: 13px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 26px;
+		letter-spacing: -0.289px;
+	}
+	.staff-seller-manage-form-button {
+		color: #fefefe;
+		text-align: center;
+		font-feature-settings: 'clig' off, 'liga' off;
+		font-family: 'Urbanist';
+		font-size: 16px;
+		font-style: normal;
+		font-weight: 600;
+		line-height: 26px;
+		letter-spacing: -0.289px;
+		width: 170px;
+		height: 45px;
+		flex-shrink: 0;
+		border-radius: 6px;
+		border: 1px solid #5925dc;
+		background: #5925dc;
+		margin-bottom: 20px;
+		margin-top: 20px;
+	}
+	.staff-seller-manage-data-table-button {
+		color: #fefefe;
+		font-family: 'Urbanist';
+		font-size: 12px;
+		font-style: normal;
+		font-weight: 600;
+		line-height: 28px;
+		letter-spacing: -0.325px;
+		background-color: #5925dc;
+		border-radius: 3px;
+		border: 1px solid #5925dc;
+	}
+	.staff-seller-manage-form-input-checkbox {
+		width: 12px;
+		height: 12px;
+	}
 }

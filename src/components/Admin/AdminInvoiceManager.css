@@ -1,279 +1,280 @@
-.invoice-management-data{
-  margin: 100px;
-  border-radius: 15px;
-  border: 2px solid #D2D2D2;
+.invoice-management-data {
+	margin: 100px;
+	border-radius: 15px;
+	border: 2px solid #d2d2d2;
 }
-.invoice-management-data-header{
-  text-align: left;
-  padding-left: 50px;
-  font-family: "Urbanist";
-  font-size: 32px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 38px;
-  letter-spacing: -0.578px;
-  text-transform: uppercase;
+.invoice-management-data-header {
+	text-align: left;
+	padding-left: 50px;
+	font-family: 'Urbanist';
+	font-size: 32px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 38px;
+	letter-spacing: -0.578px;
+	text-transform: uppercase;
 }
-.invoice-management-data-body-table{
-  margin-top: 20px;
-  margin-bottom: 20px;
-  border-collapse: collapse;
-  width: 100%;
-  text-align: center;
+.invoice-management-data-body-table {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	border-collapse: collapse;
+	width: 100%;
+	text-align: center;
 }
-.invoice-management-data-body-table-row-head{
-  color: #1A1A1A;
-  font-family: "Urbanist";
-  font-size: 24px;
-  font-style: bold;
-  text-transform: uppercase;
+.invoice-management-data-body-table-row-head {
+	color: #1a1a1a;
+	font-family: 'Urbanist';
+	font-size: 24px;
+	font-style: bold;
+	text-transform: uppercase;
 }
-.invoice-manage-search-input{
-  margin-left: 50px;
-  margin-right: 100px;
-  border-radius: 15px;
-  border: 2px solid #D2D2D2;
-  width: 300px;
-  height: 50px;
-  font-family: "Urbanist";
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 28px;
-  letter-spacing: -0.289px;
+.invoice-manage-search-input {
+	margin-left: 50px;
+	margin-right: 100px;
+	border-radius: 15px;
+	border: 2px solid #d2d2d2;
+	width: 300px;
+	height: 50px;
+	font-family: 'Urbanist';
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 28px;
+	letter-spacing: -0.289px;
 }
-.invoice-management-data-body-table-row-body{
-  color: #767676;
-  font-family: "Urbanist";
-  font-size: 20px;
-  font-style: bold;
-  font-weight: 400;
-  line-height: 28px;
-  letter-spacing: -0.289px;
+.invoice-management-data-body-table-row-body {
+	color: #767676;
+	font-family: 'Urbanist';
+	font-size: 20px;
+	font-style: bold;
+	font-weight: 400;
+	line-height: 28px;
+	letter-spacing: -0.289px;
 }
-.invoice-management-data-body-table-data-button{
-  background: #5925DC;
-  color: #FEFEFE;
-  font-family: "Urbanist";
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 28px;
-  letter-spacing: -0.325px;
-  border-radius: 3px;
-  border: 1px solid #5925DC;
-  width: 60px;
-  height: 30px;
-  margin-left: 10px;
+.invoice-management-data-body-table-data-button {
+	background: #5925dc;
+	color: #fefefe;
+	font-family: 'Urbanist';
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 28px;
+	letter-spacing: -0.325px;
+	border-radius: 3px;
+	border: 1px solid #5925dc;
+	width: 60px;
+	height: 30px;
+	margin-left: 10px;
 }
-.invoice-management-data-body-table-data-button:hover{
-  cursor: pointer;
-}
-
-.pagination-container{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  list-style-type: none;
-}
-.pagination-container li{
-  padding: 10px;
-  border: 1px solid #5925DC;
-  border-radius: 3px;
-  color: #fff;
-  font-family: "Urbanist";
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 28px;
-  letter-spacing: -0.325px;
-  background-color: #5925DC;
-  margin: 5px;
-}
-.pagination-container li:hover{
-  cursor: pointer;
-}
-.pagination-container .active{
-  background-color: #767676;
-  color: #fff;
-}
-.pagination-container .disabled{
-  color: #ada9a9;
-  cursor: not-allowed;
+.invoice-management-data-body-table-data-button:hover {
+	cursor: pointer;
 }
 
-@media only screen and (min-width: 769px) and (max-width: 1024px){
-  .invoice-management-data {
-    margin: 40px;
-    border-radius: 15px;
-    border: 2px solid #D2D2D2;
+.pagination-container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	list-style-type: none;
 }
-  .invoice-management-data-header {
-    text-align: left;
-    padding-left: 50px;
-    font-family: "Urbanist";
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 38px;
-    letter-spacing: -0.578px;
-    text-transform: uppercase;
+.pagination-container li {
+	padding: 10px;
+	border: 1px solid #5925dc;
+	border-radius: 3px;
+	color: #fff;
+	font-family: 'Urbanist';
+	font-size: 15px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 28px;
+	letter-spacing: -0.325px;
+	background-color: #5925dc;
+	margin: 5px;
 }
-  .invoice-management-data-body-table-row-head {
-    color: #1A1A1A;
-    font-family: "Urbanist";
-    font-size: 15px;
-    font-style: bold;
-    text-transform: uppercase;
-  }
-  .invoice-management-data-body-table-row-body{
-    color: #767676;
-    font-family: "Urbanist";
-    font-size: 15px;
-    font-style: bold;
-    font-weight: 400;
-    line-height: 28px;
-    letter-spacing: -0.289px;
-  }
-  .invoice-manage-search-input {
-    margin-left: 50px;
-    margin-right: 50px;
-    border-radius: 15px;
-    border: 2px solid #D2D2D2;
-    width: 200px;
-    height: 30px;
-    font-family: "Urbanist";
-    font-size: 15px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 28px;
-    letter-spacing: -0.289px;
+.pagination-container li:hover {
+	cursor: pointer;
 }
+.pagination-container .active {
+	background-color: #767676;
+	color: #fff;
+}
+.pagination-container .disabled {
+	color: #ada9a9;
+	cursor: not-allowed;
 }
 
-@media only screen and (min-width: 451px) and (max-width: 768px){
-  .invoice-management-data {
-    margin: 20px;
-    border-radius: 15px;
-    border: 2px solid #D2D2D2;
-}
-  .invoice-management-data-header {
-    text-align: left;
-    padding-left: 50px;
-   font-family: "Urbanist";
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 38px;
-    letter-spacing: -0.578px;
-    text-transform: uppercase;
-}
-  .invoice-management-data-body-table-row-head {
-    color: #1A1A1A;
-   font-family: "Urbanist";
-    font-size: 15px;
-    font-style: bold;
-    text-transform: uppercase;
-  }
-  .invoice-management-data-body-table-row-body{
-    color: #767676;
-   font-family: "Urbanist";
-    font-size: 15px;
-    font-style: bold;
-    font-weight: 400;
-    line-height: 28px;
-    letter-spacing: -0.289px;
-  }
-  .invoice-manage-search-input {
-    margin-left: 50px;
-    margin-right: 50px;
-    border-radius: 15px;
-    border: 2px solid #D2D2D2;
-    width: 150px;
-    height: 30px;
-   font-family: "Urbanist";
-    font-size: 15px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 28px;
-    letter-spacing: -0.289px;
-  }
-  .invoice-management-data-body-table-data-button {
-    background: #5925DC;
-    color: #FEFEFE;
-    font-family: "Urbanist";
-    font-size: 10px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 28px;
-    letter-spacing: -0.325px;
-    border-radius: 3px;
-    border: 1px solid #5925DC;
-    width: 40px;
-    height: 30px;
-    margin-left: 5px;
-  }
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+	.invoice-management-data {
+		margin: 40px;
+		border-radius: 15px;
+		border: 2px solid #d2d2d2;
+	}
+	.invoice-management-data-header {
+		text-align: left;
+		padding-left: 50px;
+		font-family: 'Urbanist';
+		font-size: 24px;
+		font-style: normal;
+		font-weight: 600;
+		line-height: 38px;
+		letter-spacing: -0.578px;
+		text-transform: uppercase;
+	}
+	.invoice-management-data-body-table-row-head {
+		color: #1a1a1a;
+		font-family: 'Urbanist';
+		font-size: 15px;
+		font-style: bold;
+		text-transform: uppercase;
+	}
+	.invoice-management-data-body-table-row-body {
+		color: #767676;
+		font-family: 'Urbanist';
+		font-size: 15px;
+		font-style: bold;
+		font-weight: 400;
+		line-height: 28px;
+		letter-spacing: -0.289px;
+	}
+	.invoice-manage-search-input {
+		margin-left: 50px;
+		margin-right: 50px;
+		border-radius: 15px;
+		border: 2px solid #d2d2d2;
+		width: 200px;
+		height: 30px;
+		font-family: 'Urbanist';
+		font-size: 15px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 28px;
+		letter-spacing: -0.289px;
+	}
 }
 
-@media only screen and (max-width: 450px){
-  .invoice-management-data {
-    margin: 5px;
-    border-radius: 15px;
-    border: 2px solid #D2D2D2;
+@media only screen and (min-width: 451px) and (max-width: 768px) {
+	.invoice-management-data {
+		margin: 20px;
+		border-radius: 15px;
+		border: 2px solid #d2d2d2;
+	}
+	.invoice-management-data-header {
+		text-align: left;
+		padding-left: 50px;
+		font-family: 'Urbanist';
+		font-size: 20px;
+		font-style: normal;
+		font-weight: 600;
+		line-height: 38px;
+		letter-spacing: -0.578px;
+		text-transform: uppercase;
+	}
+	.invoice-management-data-body-table-row-head {
+		color: #1a1a1a;
+		font-family: 'Urbanist';
+		font-size: 15px;
+		font-style: bold;
+		text-transform: uppercase;
+	}
+	.invoice-management-data-body-table-row-body {
+		color: #767676;
+		font-family: 'Urbanist';
+		font-size: 15px;
+		font-style: bold;
+		font-weight: 400;
+		line-height: 28px;
+		letter-spacing: -0.289px;
+	}
+	.invoice-manage-search-input {
+		margin-left: 50px;
+		margin-right: 50px;
+		border-radius: 15px;
+		border: 2px solid #d2d2d2;
+		width: 150px;
+		height: 30px;
+		font-family: 'Urbanist';
+		font-size: 15px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 28px;
+		letter-spacing: -0.289px;
+	}
+	.invoice-management-data-body-table-data-button {
+		background: #5925dc;
+		color: #fefefe;
+		font-family: 'Urbanist';
+		font-size: 10px;
+		font-style: normal;
+		font-weight: 600;
+		line-height: 28px;
+		letter-spacing: -0.325px;
+		border-radius: 3px;
+		border: 1px solid #5925dc;
+		width: 40px;
+		height: 30px;
+		margin-left: 5px;
+	}
 }
-  .invoice-management-data-header {
-    text-align: left;
-    padding-left: 25px;
-   font-family: "Urbanist";
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 38px;
-    letter-spacing: -0.578px;
-    text-transform: uppercase;
-}
-  .invoice-management-data-body-table-row-head {
-    color: #1A1A1A;
-   font-family: "Urbanist";
-    font-size: 12px;
-    font-style: bold;
-    text-transform: uppercase;
-  }
-  .invoice-management-data-body-table-row-body{
-    color: #767676;
-   font-family: "Urbanist";
-    font-size: 10px;
-    font-style: bold;
-    font-weight: 400;
-    line-height: 28px;
-    letter-spacing: -0.289px;
-  }
-  .invoice-manage-search-input {
-    margin-left: 25px;
-    margin-right: 25px;
-    border-radius: 15px;
-    border: 2px solid #D2D2D2;
-    width: 150px;
-    height: 20px;
-   font-family: "Urbanist";
-    font-size: 10px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 28px;
-    letter-spacing: -0.289px;
-  }
-  .invoice-management-data-body-table-data-button {
-    background: #5925DC;
-    color: #FEFEFE;
-    font-family: "Urbanist";
-    font-size: 8px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 28px;
-    letter-spacing: -0.325px;
-    border-radius: 3px;
-    border: 1px solid #5925DC;
-    width: 40px;
-    height: 25px;
-  }
+
+@media only screen and (max-width: 450px) {
+	.invoice-management-data {
+		margin: 5px;
+		border-radius: 15px;
+		border: 2px solid #d2d2d2;
+	}
+	.invoice-management-data-header {
+		text-align: left;
+		padding-left: 25px;
+		font-family: 'Urbanist';
+		font-size: 12px;
+		font-style: normal;
+		font-weight: 600;
+		line-height: 38px;
+		letter-spacing: -0.578px;
+		text-transform: uppercase;
+	}
+	.invoice-management-data-body-table-row-head {
+		color: #1a1a1a;
+		font-family: 'Urbanist';
+		font-size: 12px;
+		font-style: bold;
+		text-transform: uppercase;
+	}
+	.invoice-management-data-body-table-row-body {
+		color: #767676;
+		font-family: 'Urbanist';
+		font-size: 10px;
+		font-style: bold;
+		font-weight: 400;
+		line-height: 28px;
+		letter-spacing: -0.289px;
+	}
+	.invoice-manage-search-input {
+		margin-left: 25px;
+		margin-right: 25px;
+		border-radius: 15px;
+		border: 2px solid #d2d2d2;
+		width: 150px;
+		height: 20px;
+		font-family: 'Urbanist';
+		font-size: 10px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 28px;
+		letter-spacing: -0.289px;
+	}
+	.invoice-management-data-body-table-data-button {
+		background: #5925dc;
+		color: #fefefe;
+		font-family: 'Urbanist';
+		font-size: 8px;
+		font-style: normal;
+		font-weight: 600;
+		line-height: 28px;
+		letter-spacing: -0.325px;
+		border-radius: 3px;
+		border: 1px solid #5925dc;
+		width: 40px;
+		height: 25px;
+	}
 }

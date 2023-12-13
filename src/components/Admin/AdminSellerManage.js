@@ -3,8 +3,9 @@ import './AdminSellerManage.css';
 import axios from 'axios';
 import ReactPaginate from 'react-paginate';
 import AdminNavbar from './AdminNavbar';
-import D from '../images/D.png';
 import background from '../images/Desktop.png';
+import E from '../images/E.png';
+import D from '../images/D.png';
 
 function AdminSellerManage() {
   const [sellers, setSellers] = useState([]);
@@ -202,14 +203,30 @@ function AdminSellerManage() {
 
                   <td className='admin-seller-manage-data-table-data'>
                     <button
-                      className='admin-seller-manage-data-table-button'
+                    style={{
+                      background: 'none',
+                      border : 'none',
+                    }}
                       onClick={() => handleSellerUpdate(seller._id)}
+                  >
+                    <img  src={E} alt='Update' style={{
+                      height : '30px',
+                      width : '30px',
+                    }
+                  }/>
+                  </button>
+                  <button
+                      style={{
+                        background: 'none',
+                        border : 'none',
+                      }}
+                       onClick={() => handleSellerDelete(seller._id)}
                     >
-                      Update
-                    </button>
-
-                    <button onClick={() => handleSellerDelete(seller._id)}>
-                      <img className='admin-buyer-icon' src={D} alt='delete' />
+                      <img src={D} alt='delete' style={{
+                      height : '30px',
+                      width : '30px',
+                    }
+                  }/>
                     </button>
                   </td>
                 </tr>

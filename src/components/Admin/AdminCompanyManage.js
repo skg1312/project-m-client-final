@@ -108,6 +108,27 @@ function AdminCompanyManage() {
     setSelectedCompanyId(null);
   };
 
+    //Delete a exsiting company
+
+  const handleDeleteCompany = (companyId) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this company?"
+    );
+    if (confirmDelete)
+      axios
+        .delete(`${API}company/${companyId}`)
+        .then((response) => {
+          console.log("Company deleted successfully");
+
+          setCompanies((prevCompanies) =>
+            prevCompanies.filter((company) => company._id !== companyId)
+          );
+        })
+        .catch((error) => {
+          console.error("Error deleting company:", error);
+        });
+  };
+ 
   return (
     <div
     style={{
@@ -164,6 +185,14 @@ function AdminCompanyManage() {
                   >
                     Update
                   </button>
+                                          <button
+                      className="admin-company-manager-data-table-button"
+                      onClick={() => {
+                        handleDeleteCompany(company._id);
+                      }}
+                    >
+                      Delete
+                    </button>
                 </td>
               </tr>
             ))}

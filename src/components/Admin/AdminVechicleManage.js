@@ -55,20 +55,14 @@ function AdminLoadingManage() {
   };
 
   const handleLoadingDelete = (loadingDeleteId) => {
-  // Display a confirmation dialog
   const isConfirmed = window.confirm('Are you sure you want to delete this loading?');
 
   if (isConfirmed) {
     axios
       .delete(`${API}load/${loadingDeleteId}`)
       .then(() => {
-        // Handle successful deletion (if needed)
         console.log('Loading deleted successfully');
-        // Optionally, you can update the local state to reflect the changes
         setLoadings((prevLoadings) => prevLoadings.filter((loading) => loading._id !== loadingDeleteId));
-        
-        // Alert to notify the user
-        alert('Loading deleted successfully');
       })
       .catch((error) => {
         console.error('Error deleting loading:', error);
@@ -99,15 +93,11 @@ function AdminLoadingManage() {
           console.error('Error updating loading:', error);
         });
     } else {
-      // Create a new loading
       axios
         .post(`${API}load`, selectedLoadingData)
         .then((response) => {
-          // Handle successful creation (if needed)
-          console.log('Loading created successfully:', response.data);
-          // Optionally, you can update the local state to include the new loading
+          console.log('Loading created successfully:';
           setLoadings((prevLoadings) => [...prevLoadings, response.data]);
-          alert("Load details are Saved Successfully");
         })
         .catch((error) => {
           console.error('Error creating loading:', error);

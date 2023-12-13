@@ -61,6 +61,7 @@
 	border-radius: 3px;
 	border: 1px solid #5925dc;
 }
+
 .admin-buyer-manage-data-table-button:hover {
 	cursor: pointer;
 }
@@ -84,14 +85,17 @@
 	text-align: left;
 	padding-left: 50px;
 }
+
 .admin-buyer-icon {
 	border: none;
 	height: 30px;
 	width: 20px;
 }
+
 .highlight {
 	color: green !important;
 }
+
 .admin-buyer-manage-form-input {
 	border-radius: 6px;
 	border: 1px solid #ededed;
@@ -127,6 +131,7 @@
 	margin-bottom: 20px;
 	margin-top: 20px;
 }
+
 .admin-buyer-manage-form-button:hover {
 	cursor: pointer;
 }
@@ -154,6 +159,7 @@
 	align-items: center;
 	list-style-type: none;
 }
+
 .pagination-container li {
 	padding: 10px;
 	border: 1px solid #5925dc;
@@ -168,13 +174,16 @@
 	background-color: #5925dc;
 	margin: 5px;
 }
+
 .pagination-container li:hover {
 	cursor: pointer;
 }
+
 .pagination-container .active {
 	background-color: #767676;
 	color: #fff;
 }
+
 .pagination-container .disabled {
 	color: #ada9a9;
 	cursor: not-allowed;
@@ -188,6 +197,7 @@
 		text-align: center;
 		align-items: center;
 	}
+
 	.admin-logout-button-nav {
 		margin-top: 10px;
 		margin-left: 5px;
@@ -197,6 +207,7 @@
 		display: flex;
 		justify-content: space-evenly;
 	}
+
 	.admin-buyer-manage-data {
 		margin-left: 35px;
 		margin-top: 100px;
@@ -205,6 +216,7 @@
 		border-radius: 15px;
 		border: 2px solid #d2d2d2;
 	}
+
 	.admin-buyer-manage-form {
 		margin-left: 35px;
 		margin-top: 100px;
@@ -224,6 +236,7 @@
 		border-radius: 12px;
 		border: 2px solid #d2d2d2;
 	}
+
 	.admin-buyer-manage-form {
 		margin-left: 15px;
 		margin-top: 40px;
@@ -232,6 +245,7 @@
 		border-radius: 12px;
 		border: 2px solid #d2d2d2;
 	}
+
 	.admin-buyer-manage-data-title {
 		font-family: 'Urbanist';
 		font-size: 15px;
@@ -242,12 +256,14 @@
 		text-align: left;
 		padding-left: 50px;
 	}
+
 	.admin-buyer-manage-data-table-head {
 		color: #1a1a1a;
 		font-family: 'Urbanist';
 		font-size: 12px;
 		font-style: bold;
 	}
+
 	.admin-buyer-manage-data-table-body {
 		color: #767676;
 		font-family: 'Urbanist';
@@ -257,6 +273,7 @@
 		line-height: 28px;
 		letter-spacing: -0.289px;
 	}
+
 	.admin-buyer-manage-form-input {
 		border-radius: 6px;
 		border: 1px solid #ededed;
@@ -272,6 +289,7 @@
 		line-height: 26px;
 		letter-spacing: -0.289px;
 	}
+
 	.admin-buyer-manage-form-input {
 		border-radius: 6px;
 		border: 1px solid #ededed;
@@ -287,6 +305,7 @@
 		line-height: 26px;
 		letter-spacing: -0.289px;
 	}
+
 	.admin-buyer-manage-form-title {
 		font-family: 'Urbanist';
 		font-size: 15px;
@@ -297,6 +316,7 @@
 		text-align: left;
 		padding-left: 50px;
 	}
+
 	.admin-buyer-manage-form-input-checkbox-label {
 		color: #1a1a1a;
 		font-feature-settings: 'clig' off, 'liga' off;
@@ -307,6 +327,7 @@
 		line-height: 26px;
 		letter-spacing: -0.289px;
 	}
+
 	.admin-buyer-manage-form-button {
 		color: #fefefe;
 		text-align: center;
@@ -326,6 +347,7 @@
 		margin-bottom: 20px;
 		margin-top: 20px;
 	}
+
 	.admin-buyer-manage-data-table-button {
 		color: #fefefe;
 		font-family: 'Urbanist';
@@ -338,8 +360,24 @@
 		border-radius: 3px;
 		border: 1px solid #5925dc;
 	}
+
 	.admin-buyer-manage-form-input-checkbox {
 		width: 12px;
 		height: 12px;
+	}
+
+	.pagination-container li {
+		padding: 10px;
+		border: 1px solid #5925dc;
+		border-radius: 3px;
+		color: #fff;
+		font-family: 'Urbanist';
+		font-size: 8px;
+		font-style: normal;
+		font-weight: 600;
+		line-height: 12px;
+		letter-spacing: -0.325px;
+		background-color: #5925dc;
+		margin: 5px;
 	}
 }

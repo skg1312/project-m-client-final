@@ -156,7 +156,7 @@ function AdminCompanyManage() {
               <th className='admin-company-manager-data-table-header'>GST No</th>
               <th className='admin-company-manager-data-table-header'>Contact</th>
               <th className='admin-company-manager-data-table-header'>Office Address</th>
-              // <th className='admin-company-manager-data-table-header'>Party Type</th>
+{/*<th className='admin-company-manager-data-table-header'>Party Type</th> */}
               <th className='admin-company-manager-data-table-header'>Action</th>
             </tr>
           </thead>
@@ -175,9 +175,11 @@ function AdminCompanyManage() {
                 <td className='admin-company-manager-data-table-data'>
                   {company.companyofficeaddress.substring(0, 12)}
                 </td>
-                // <td className='admin-company-manager-data-table-data'>
-                //   {company.companypartytype.substring(0, 12)}
-                // </td>
+                                          {/*                
+<td className='admin-company-manager-data-table-data'>
+                  {company.companypartytype.substring(0, 12)}
+                </td>
+*/}
                 <td className='admin-company-manager-data-table-data'>
                   <button
                     className='admin-company-manager-data-table-button'

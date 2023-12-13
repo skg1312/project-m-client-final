@@ -4,6 +4,7 @@ import axios from 'axios';
 import ReactPaginate from 'react-paginate';
 import background from '../images/Desktop.png';
 import AdminNavbar from './AdminNavbar';
+import E from '../images/E.png';
 import D from '../images/D.png';
 
 function AdminBuyerManage() {
@@ -219,15 +220,32 @@ function AdminBuyerManage() {
 										{buyer.buyercompanystatecode?.substring(0, 12) ?? 'N/A'}
 									</td>
 									<td className='admin-buyer-manage-data-table-data'>
-										<button
-											className='admin-buyer-manage-data-table-button'
-											onClick={() => handleBuyerUpdate(buyer._id)}
-										>
-											Update
-										</button>
-										<button onClick={() => handleBuyerDelete(buyer._id)}>
-											<img className='admin-buyer-icon' src={D} alt='delete' />
-										</button>
+										 <button
+                    style={{
+                      background: 'none',
+                      border : 'none',
+                    }}
+                   onClick={() => handleBuyerUpdate(buyer._id)}
+                  >
+                    <img  src={E} alt='Update' style={{
+                      height : '30px',
+                      width : '30px',
+                    }
+                  }/>
+                  </button>
+                  <button
+                      style={{
+                        background: 'none',
+                        border : 'none',
+                      }}
+                     onClick={() => handleBuyerDelete(buyer._id)}
+                    >
+                      <img src={D} alt='delete' style={{
+                      height : '30px',
+                      width : '30px',
+                    }
+                  }/>
+                    </button>
 									</td>
 								</tr>
 							))}

@@ -4,6 +4,8 @@ import axios from 'axios';
 import background from '../images/Desktop.png';
 import ReactPaginate from 'react-paginate';
 import AdminNavbar from './AdminNavbar';
+import E from '../images/E.png';
+import D from '../images/D.png';
 
 function AdminUserManage() {
   const [users, setUsers] = useState([]);
@@ -98,6 +100,24 @@ function AdminUserManage() {
 
     setSelectedUserId(null);
   };
+const handleDeleteUser = (userId) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this user?");
+    if (confirmDelete) {
+        axios
+            .delete(`${API}user/${userId}`)
+            .then((response) => {
+                console.log("User deleted successfully");
+
+                setUsers((prevUsers) =>
+                    prevUsers.filter((user) => user._id !== userId)
+                );
+            })
+            .catch((error) => {
+                console.error("Error deleting user:", error);
+            });
+    }
+};
+
  
   return (
     <div
@@ -139,11 +159,33 @@ function AdminUserManage() {
                   <td className='admin-user-manage-data-table-data'>{user.useraccess.substring(0, 12)}</td>
                   <td className='admin-user-manage-data-table-data'>
                     <button
-                      className='admin-user-manage-data-table-button'
-                      onClick={() => handleUserUpdate(user._id)}
-                    >
-                      Update
-                    </button>
+    style={{
+        background: 'none',
+        border: 'none',
+    }}
+    onClick={() => handleUserUpdate(user._id)} // Fix the variable name here
+>
+    <img src={E} alt='Update' style={{
+        height: '30px',
+        width: '30px',
+    }} />
+</button>
+<button
+    style={{
+        background: 'none',
+        border: 'none',
+    }}
+    onClick={() => {
+        handleDeleteUser(user._id); // Fix the variable name here
+    }}
+>
+    <img src={D} alt='delete' style={{
+        height: '30px',
+        width: '30px',
+    }} />
+</button>
+
+
                   </td>
                 </tr>
               ))}

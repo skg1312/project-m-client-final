@@ -4,7 +4,8 @@ import axios from 'axios';
 import background from '../images/Desktop.png';
 import ReactPaginate from 'react-paginate';
 import AdminNavbar from './AdminNavbar';
-
+import E from '../images/E.png';
+import D from '../images/D.png';
 
 function AdminConsignmentManage() {
   const [consignedItems, setConsignedItems] = useState([]);
@@ -103,7 +104,24 @@ function AdminConsignmentManage() {
 
     setSelectedConsignmentId(null);
   };
+const handleDeleteConsignment = (consignmentId) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this Consignment?"
+    );
+    if (confirmDelete)
+      axios
+        .delete(`${API}consignment/${consignmentId}`)
+        .then((response) => {
+          console.log("Consignment deleted successfully");
 
+          setConsignedItems((prevConsignedItems) =>
+  prevConsignedItems.filter((consignment) => consignment._id !== consignmentId)
+);
+        })
+        .catch((error) => {
+          console.error("Error deleting company:", error);
+        });
+  };
  
   return (
     <div
@@ -145,12 +163,34 @@ function AdminConsignmentManage() {
                     <td className='admin-consignment-manage-data-table-data'>{item.itemprice}</td>
                     <td className='admin-consignment-manage-data-table-data'>{item.itemtaxrate}</td>
                     <td className='admin-consignment-manage-data-table-data'>
-                      <button
-                        className='admin-consignment-manage-data-table-button'
-                        onClick={() => handleConsignmentUpdate(item._id)}
-                      >
-                        Update
-                      </button>
+                       <button
+                    style={{
+                      background: 'none',
+                      border : 'none',
+                    }}
+                    onClick={() => handleConsignmentUpdate(item._id)}
+                  >
+                    <img  src={E} alt='Update' style={{
+                      height : '30px',
+                      width : '30px',
+                    }
+                  }/>
+                  </button>
+                  <button
+                      style={{
+                        background: 'none',
+                        border : 'none',
+                      }}
+                      onClick={() => {
+                        handleDeleteConsignment(item._id);
+                      }}
+                    >
+                      <img src={D} alt='delete' style={{
+                      height : '30px',
+                      width : '30px',
+                    }
+                  }/>
+                    </button>
                     </td>
                   </tr>
                 ))}

@@ -104,23 +104,26 @@ function AdminConsignmentManage() {
 
     setSelectedConsignmentId(null);
   };
-const handleDeleteConsignment = (consignmentId) => {
+
+  const handleDeleteConsignment = (consignmentId) => {
     const confirmDelete = window.confirm(
-      "Are you sure you want to delete this Consignment?"
+      'Are you sure you want to delete this Consignment?'
     );
-    if (confirmDelete)
+    if (confirmDelete) {
       axios
         .delete(`${API}consignment/${consignmentId}`)
         .then((response) => {
-          console.log("Consignment deleted successfully");
-
           setConsignedItems((prevConsignedItems) =>
-  prevConsignedItems.filter((consignment) => consignment._id !== consignmentId)
-);
+            prevConsignedItems.filter(
+              (consignment) => consignment._id !== consignmentId
+            )
+          );
+          console.log('Consignment deleted successfully');
         })
         .catch((error) => {
-          console.error("Error deleting company:", error);
+          console.error('Error deleting consignment:', error);
         });
+    }
   };
  
   return (

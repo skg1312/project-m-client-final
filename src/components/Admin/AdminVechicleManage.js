@@ -4,6 +4,8 @@ import axios from 'axios';
 import background from '../images/Desktop.png';
 import ReactPaginate from 'react-paginate';
 import AdminNavbar from './AdminNavbar';
+import E from '../images/E.png';
+import D from '../images/D.png';
 
 function AdminLoadingManage() {
   const [loadings, setLoadings] = useState([]);
@@ -148,17 +150,31 @@ function AdminLoadingManage() {
                   <td className='admin-loading-manage-data-table-data'>{loading.endpoint}</td>
                   <td className='admin-loading-manage-data-table-data'>{loading.rate}</td>
                   <td className='admin-loading-manage-data-table-data'>
-                    <button
-                      className='admin-loading-manage-data-table-button'
-                      onClick={() => handleLoadingUpdate(loading._id)}
-                    >
-                      Update
-                    </button>
-                    <button
-                      className='admin-loading-manage-data-table-button'
+                     <button
+                    style={{
+                      background: 'none',
+                      border : 'none',
+                    }}
+                    onClick={() => handleLoadingUpdate(loading._id)}
+                  >
+                    <img  src={E} alt='Update' style={{
+                      height : '30px',
+                      width : '30px',
+                    }
+                  }/>
+                  </button>
+                  <button
+                      style={{
+                        background: 'none',
+                        border : 'none',
+                      }}
                       onClick={() => handleLoadingDelete(loading._id)}
                     >
-                      Delete
+                      <img src={D} alt='delete' style={{
+                      height : '30px',
+                      width : '30px',
+                    }
+                  }/>
                     </button>
                   </td>
                 </tr>

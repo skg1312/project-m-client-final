@@ -4,6 +4,8 @@ import axios from 'axios';
 import background from '../images/Desktop.png';
 import ReactPaginate from 'react-paginate';
 import AdminNavbar from './AdminNavbar';
+import E from '../images/E.png';
+import D from '../images/D.png';
 
 function AdminCompanyManage() {
   const [companies, setCompanies] = useState([]);
@@ -181,19 +183,33 @@ function AdminCompanyManage() {
                 </td>
 */}
                 <td className='admin-company-manager-data-table-data'>
-                  <button
-                    className='admin-company-manager-data-table-button'
+                   <button
+                    style={{
+                      background: 'none',
+                      border : 'none',
+                    }}
                     onClick={() => handleCompanyUpdate(company._id)}
                   >
-                    Update
+                    <img  src={E} alt='Update' style={{
+                      height : '30px',
+                      width : '30px',
+                    }
+                  }/>
                   </button>
-                                          <button
-                      className="admin-company-manager-data-table-button"
+                  <button
+                      style={{
+                        background: 'none',
+                        border : 'none',
+                      }}
                       onClick={() => {
                         handleDeleteCompany(company._id);
                       }}
                     >
-                      Delete
+                      <img src={D} alt='delete' style={{
+                      height : '30px',
+                      width : '30px',
+                    }
+                  }/>
                     </button>
                 </td>
               </tr>

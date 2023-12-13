@@ -156,7 +156,7 @@ function AdminCompanyManage() {
               <th className='admin-company-manager-data-table-header'>GST No</th>
               <th className='admin-company-manager-data-table-header'>Contact</th>
               <th className='admin-company-manager-data-table-header'>Office Address</th>
-              <th className='admin-company-manager-data-table-header'>Party Type</th>
+              // <th className='admin-company-manager-data-table-header'>Party Type</th>
               <th className='admin-company-manager-data-table-header'>Action</th>
             </tr>
           </thead>
@@ -175,9 +175,9 @@ function AdminCompanyManage() {
                 <td className='admin-company-manager-data-table-data'>
                   {company.companyofficeaddress.substring(0, 12)}
                 </td>
-                <td className='admin-company-manager-data-table-data'>
-                  {company.companypartytype.substring(0, 12)}
-                </td>
+                // <td className='admin-company-manager-data-table-data'>
+                //   {company.companypartytype.substring(0, 12)}
+                // </td>
                 <td className='admin-company-manager-data-table-data'>
                   <button
                     className='admin-company-manager-data-table-button'
@@ -222,7 +222,7 @@ function AdminCompanyManage() {
   <input
     type='text'
     required
-    className='admin-company-manager-form-input-low'
+    className='admin-company-manager-form-input-high'
     placeholder='Company Name'
     value={selectedCompanyData.companyname || ''}
     onChange={(e) =>
@@ -233,7 +233,7 @@ function AdminCompanyManage() {
   <input
     type='text'
     required
-    className='admin-company-manager-form-input-low'
+    className='admin-company-manager-form-input-high'
     placeholder='GST No'
     value={selectedCompanyData.companygstno || ''}
     onChange={(e) =>
@@ -245,7 +245,7 @@ function AdminCompanyManage() {
     type='tel'
     required
     maxLength='10'
-    className='admin-company-manager-form-input-low'
+    className='admin-company-manager-form-input-high'
     placeholder='Contact'
     value={selectedCompanyData.companycontact || ''}
     onChange={(e) =>
@@ -256,14 +256,14 @@ function AdminCompanyManage() {
   <input
     type='text'
     required
-    className='admin-company-manager-form-input-low'
+    className='admin-company-manager-form-input-high'
     placeholder='Office Address'
     value={selectedCompanyData.companyofficeaddress || ''}
     onChange={(e) =>
       setSelectedCompanyData({ ...selectedCompanyData, companyofficeaddress: e.target.value })
     }
   />
-
+{/*
   <input
     type='text'
     required
@@ -275,6 +275,7 @@ function AdminCompanyManage() {
     }
   />
 
+
   <input
     type='text'
     required
@@ -285,11 +286,11 @@ function AdminCompanyManage() {
       setSelectedCompanyData({ ...selectedCompanyData, companypartytype: e.target.value })
     }
   />
-
+*/}
   <input
     type='text'
     required
-    className='admin-company-manager-form-input-low'
+    className='admin-company-manager-form-input-high'
     placeholder='State'
     value={selectedCompanyData.companystate || ''}
     onChange={(e) =>
@@ -302,7 +303,7 @@ function AdminCompanyManage() {
     pattern='[0-9]*'
     required
     maxLength='6'
-    className='admin-company-manager-form-input-low'
+    className='admin-company-manager-form-input-high'
     placeholder='Pincode'
     value={selectedCompanyData.companypincode || ''}
     onChange={(e) =>

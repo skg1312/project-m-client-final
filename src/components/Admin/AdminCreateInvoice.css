@@ -1,4 +1,4 @@
-.admin-create-invoice-container{
+.admin-create-invoice-container {
     margin-top: 2%;
     margin-left: 5%;
     margin-right: 5%;
@@ -6,32 +6,37 @@
     border-radius: 15px;
     border: 2px solid #5925DC;
 }
-.admin-create-invoice-title{
+
+.admin-create-invoice-title {
     font-family: "Urbanist";
     font-size: 50px;
     color: #1A1A1A;
     text-align: center;
 }
-.admin-create-invoice-subtitle{
+
+.admin-create-invoice-subtitle {
     font-family: "Urbanist";
     font-size: 35px;
     color: #1A1A1A;
     text-align: left;
     margin-left: 5%;
 }
-.admin-create-invoice-subtitle-table{
+
+.admin-create-invoice-subtitle-table {
     font-family: "Urbanist";
     font-size: 30px;
     color: #1A1A1A;
     text-align: left;
 }
-.admin-create-invoice-subtitle-table{
+
+.admin-create-invoice-subtitle-table {
     font-family: "Urbanist";
     font-size: 20px;
     color: #1A1A1A;
     text-align: left;
 }
-.admin-create-invoice-select{
+
+.admin-create-invoice-select {
     margin-top: 2%;
     border-radius: 6px;
     border: 1px solid #D2D2D2;
@@ -42,9 +47,24 @@
     font-size: 24px;
     color: #1A1A1A;
     margin-top: 30px;
-    margin-left: 60px;
+    margin-left: 30px;
 }
-.admin-create-invoice-data{
+
+.admin-create-invoice-select-loading {
+    margin-top: 2%;
+    border-radius: 6px;
+    border: 1px solid #D2D2D2;
+    width: 80%;
+    height: 40px;
+    text-align: center;
+    font-family: "Urbanist";
+    font-size: 10px;
+    color: #1A1A1A;
+    margin-top: 5px;
+    margin-left: 0px;
+}
+
+.admin-create-invoice-data {
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin-top: 2%;
@@ -53,40 +73,46 @@
     margin-bottom: 1%;
     text-align: left;
 }
-.admin-create-invoice-form{
+
+.admin-create-invoice-form {
     display: grid;
     grid-template-columns: 1fr 1fr;
     text-align: left;
     margin-left: 8%;
 
 }
-.admin-create-invoice-form-label{
+
+.admin-create-invoice-form-label {
     font-family: "Urbanist";
     font-size: 24px;
-    color:#767676;
+    color: #767676;
 }
-.admin-create-invoice-form-input{
+
+.admin-create-invoice-form-input {
     border-radius: 6px;
-    border: 1px solid  #D2D2D2;
+    border: 1px solid #D2D2D2;
     width: 80%;
     height: 40px;
     background: #EDEDED;
     color: #767676;
     font-family: "Urbanist";
     font-size: 24px;
-    margin-top:1%;
+    margin-top: 1%;
 }
-.admin-create-invoice-form-div{
+
+.admin-create-invoice-form-div {
     margin-top: 2%;
     margin-bottom: 1%;
 }
-.admin-create-invoice-table-consigment{
+
+.admin-create-invoice-table-consigment {
     margin-top: 3%;
     margin-left: 8%;
     margin-bottom: 2%;
     width: 80%;
 }
-.admin-create-invoice-select-table{
+
+.admin-create-invoice-select-table {
     border-radius: 6px;
     border: 1px solid #D2D2D2;
     text-align: center;
@@ -94,7 +120,8 @@
     font-size: 16px;
     color: #1A1A1A;
 }
-.admin-create-invoice-table-consigment-input{
+
+.admin-create-invoice-table-consigment-input {
     border-radius: 6px;
     border: 1px solid #D2D2D2;
     text-align: center;
@@ -106,40 +133,46 @@
     width: 80%;
     height: 40px;
 }
-.admin-create-invoice-table-consigment-icon{
+
+.admin-create-invoice-table-consigment-icon {
     width: 40px;
     height: 40px;
 }
-.admin-create-invoice-table-row-head{
-    font-family: "Urbanist";
-    font-size: 20px;
-    font-weight: bold;
-    text-align: center;
-}
-.admin-create-invoice-table-row-body{
+
+.admin-create-invoice-table-row-head {
     font-family: "Urbanist";
     font-size: 20px;
     font-weight: bold;
     text-align: center;
 }
 
-.admin-create-invoice-table-consigment-button{
+.admin-create-invoice-table-row-body {
+    font-family: "Urbanist";
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.admin-create-invoice-table-consigment-button {
     border: none;
     background: none;
 }
-.admin-create-invoice-table-consigment-value{
+
+.admin-create-invoice-table-consigment-value {
     font-family: "Urbanist";
     font-size: 20px;
     text-align: center;
     font-weight: bold;
     color: #767676;
 }
-.admin-create-invoice-table-consigment-icon-low{
+
+.admin-create-invoice-table-consigment-icon-low {
     width: 30px;
     height: 30px;
 }
-.admin-create-invoice-button{
-    margin-left:40%;
+
+.admin-create-invoice-button {
+    margin-left: 40%;
     border-radius: 6px;
     border: 2px solid #5925DC;
     background: #5925DC;
@@ -149,34 +182,37 @@
     width: 20%;
     height: 60px;
     font-weight: bold;
-    margin-top:5%;
+    margin-top: 5%;
     margin-bottom: 2%;
 }
-.admin-create-invoice-button:hover{
+
+.admin-create-invoice-button:hover {
     cursor: pointer;
-  }
+}
 
 /* Tablet Styles */
 @media only screen and (max-width: 768px) {
-    .admin-create-invoice-title{
+    .admin-create-invoice-title {
         font-family: "Urbanist";
         font-size: 20px;
         color: #1A1A1A;
         text-align: center;
     }
-    .admin-create-invoice-subtitle{
+
+    .admin-create-invoice-subtitle {
         font-family: "Urbanist";
         font-size: 20px;
         color: #1A1A1A;
         text-align: left;
         margin-left: 5%;
     }
-    .admin-create-invoice-select{
+
+    .admin-create-invoice-select {
         margin-top: 2%;
         border-radius: 6px;
         border: 1px solid #D2D2D2;
         width: 85%;
-        height: 50px;
+        height: 40px;
         text-align: center;
         font-family: "Urbanist";
         font-size: 10px;
@@ -184,7 +220,22 @@
         margin-top: 30px;
         margin-left: 30px;
     }
-    .admin-create-invoice-data{
+
+    .admin-create-invoice-select-loading {
+        margin-top: 2%;
+        border-radius: 6px;
+        border: 1px solid #D2D2D2;
+        width: 80%;
+        height: 40px;
+        text-align: center;
+        font-family: "Urbanist";
+        font-size: 10px;
+        color: #1A1A1A;
+        margin-top: 30px;
+        margin-left: 30px;
+    }
+
+    .admin-create-invoice-data {
         display: grid;
         grid-template-columns: 1fr 1fr;
         margin-top: 2%;
@@ -193,42 +244,48 @@
         margin-bottom: 1%;
         text-align: left;
     }
-    .admin-create-invoice-form{
+
+    .admin-create-invoice-form {
         display: grid;
         grid-template-columns: 1fr 1fr;
         text-align: left;
         margin-left: 8%;
-    
+
     }
-    .admin-create-invoice-form-label{
+
+    .admin-create-invoice-form-label {
         font-family: "Urbanist";
         font-size: 10px;
-        color:#767676;
+        color: #767676;
         margin-left: 30px;
     }
-    .admin-create-invoice-form-input{
+
+    .admin-create-invoice-form-input {
         border-radius: 6px;
-        border: 1px solid  #D2D2D2;
+        border: 1px solid #D2D2D2;
         width: 80%;
         height: 40px;
         background: #EDEDED;
         color: #767676;
         font-family: "Urbanist";
         font-size: 10px;
-        margin-top:1%;
+        margin-top: 1%;
         margin-left: 30px;
     }
-    .admin-create-invoice-form-div{
+
+    .admin-create-invoice-form-div {
         margin-top: 2%;
         margin-bottom: 1%;
     }
-    .admin-create-invoice-table-consigment{
+
+    .admin-create-invoice-table-consigment {
         margin-top: 3%;
         margin-left: 8%;
         margin-bottom: 2%;
         width: 80%;
     }
-    .admin-create-invoice-select-table{
+
+    .admin-create-invoice-select-table {
         border-radius: 6px;
         border: 1px solid #D2D2D2;
         text-align: center;
@@ -236,7 +293,8 @@
         font-size: 10px;
         color: #1A1A1A;
     }
-    .admin-create-invoice-table-consigment-input{
+
+    .admin-create-invoice-table-consigment-input {
         border-radius: 6px;
         border: 1px solid #D2D2D2;
         text-align: center;
@@ -248,33 +306,39 @@
         width: 80%;
         height: 40px;
     }
-    .admin-create-invoice-table-consigment-icon{
+
+    .admin-create-invoice-table-consigment-icon {
         width: 40px;
         height: 40px;
     }
-    .admin-create-invoice-table-row-head{
+
+    .admin-create-invoice-table-row-head {
         font-family: "Urbanist";
         font-size: 10px;
         font-weight: bold;
         text-align: center;
     }
-    .admin-create-invoice-table-consigment-button{
+
+    .admin-create-invoice-table-consigment-button {
         border: none;
         background: none;
     }
-    .admin-create-invoice-table-consigment-value{
+
+    .admin-create-invoice-table-consigment-value {
         font-family: "Urbanist";
         font-size: 10px;
         text-align: center;
         font-weight: bold;
         color: #767676;
     }
-    .admin-create-invoice-table-consigment-icon-low{
+
+    .admin-create-invoice-table-consigment-icon-low {
         width: 30px;
         height: 30px;
     }
-    .admin-create-invoice-button{
-        margin-left:40%;
+
+    .admin-create-invoice-button {
+        margin-left: 40%;
         border-radius: 6px;
         border: 2px solid #5925DC;
         background: #5925DC;
@@ -284,7 +348,7 @@
         width: 30%;
         height: 60px;
         font-weight: bold;
-        margin-top:5%;
+        margin-top: 5%;
         margin-bottom: 2%;
     }
 
@@ -294,5 +358,3 @@
         margin-left: 2%;
     }
 }
-
-

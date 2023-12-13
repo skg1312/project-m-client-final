@@ -96,7 +96,7 @@ function AdminLoadingManage() {
       axios
         .post(`${API}load`, selectedLoadingData)
         .then((response) => {
-          console.log('Loading created successfully:';
+          console.log('Loading created successfully:');
           setLoadings((prevLoadings) => [...prevLoadings, response.data]);
         })
         .catch((error) => {

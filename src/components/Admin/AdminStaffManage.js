@@ -4,7 +4,8 @@ import axios from 'axios';
 import background from '../images/Desktop.png';
 import ReactPaginate from 'react-paginate';
 import AdminNavbar from './AdminNavbar';
-
+import E from '../images/E.png';
+import D from '../images/D.png';
 function AdminStaffManage() {
 	const [staffMembers, setStaffMembers] = useState([]);
 	const [pageNumber, setPageNumber] = useState(0);
@@ -108,6 +109,24 @@ function AdminStaffManage() {
 
 		setSelectedStaffId(null);
 	};
+const handleDeleteStaff = (staffId) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this Staff member?");
+    if (confirmDelete) {
+        axios
+            .delete(`${API}staff/${staffId}`)
+            .then((response) => {
+                console.log("Staff member deleted successfully");
+
+                setStaffMembers((prevStaffMembers) =>
+                    prevStaffMembers.filter((staff) => staff._id !== staffId)
+                );
+            })
+            .catch((error) => {
+                console.error("Error deleting staff member:", error);
+            });
+    }
+};
+
 
 	return (
 		<div
@@ -171,11 +190,32 @@ function AdminStaffManage() {
 									</td>
 									<td className='admin-staff-manager-data-table-data'>
 										<button
-											className='admin-staff-manager-data-table-button'
-											onClick={() => handleStaffUpdate(staff._id)}
-										>
-											Update
-										</button>
+    style={{
+        background: 'none',
+        border: 'none',
+    }}
+    onClick={() => handleStaffUpdate(staff._id)}
+>
+    <img src={E} alt='Update' style={{
+        height: '30px',
+        width: '30px',
+    }} />
+</button>
+<button
+    style={{
+        background: 'none',
+        border: 'none',
+    }}
+    onClick={() => {
+        handleDeleteStaff(staff._id); // Fix the variable name here
+    }}
+>
+    <img src={D} alt='delete' style={{
+        height: '30px',
+        width: '30px',
+    }} />
+</button>
+
 									</td>
 								</tr>
 							))}

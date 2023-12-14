@@ -518,13 +518,13 @@ function AdminCreateInvoice() {
 							name='sellerid'
 							value={{
 								value: selectedSeller._id,
-								label: selectedSeller.sellerid,
+								label: selectedSeller.sellercompanyname,
 							}}
 							placeholder='Select Agent'
 							onChange={handleSelectChangeSeller}
 							options={sellers.map((seller) => ({
 								value: seller._id,
-								label: seller.sellerid,
+								label: seller.sellercompanyname,
 							}))}
 						/>
 					</div>
@@ -609,11 +609,11 @@ function AdminCreateInvoice() {
 							id='buyerid'
 							name='buyerid'
 							placeholder='Select Buyer'
-							value={{ value: selectedBuyer._id, label: selectedBuyer.buyerid }}
+							value={{ value: selectedBuyer._id, label: selectedBuyer.buyercompanyname }}
 							onChange={handleSelectChangeBuyer}
 							options={buyers.map((buyer) => ({
 								value: buyer._id,
-								label: buyer.buyerid,
+								label: buyer.buyercompanyname,
 							}))}
 						/>
 					</div>

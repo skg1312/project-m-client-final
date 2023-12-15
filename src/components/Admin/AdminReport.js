@@ -12,11 +12,19 @@ function AdminReports() {
 	const [searchInput, setSearchInput] = useState('');
 	const [value, setValue] = useState('');
 	const [exportedData, setExportedData] = useState([]);
+	const [selectedAgentOption, setSelectedAgentOption] = useState('');
+	const [agentData, setAgentData] = useState('');
+	const [startDate, setStartDate] = useState('');
+	const [endDate, setEndDate] = useState('');
+	const [selectedDateOption, setSelectedDateOption] = useState('');
+	const [filteredDateSelectData, setFilteredDateSelectData] = useState([]);
+	const [dateData, setDateData] = useState([]);
 
 	const API = process.env.REACT_APP_API;
 	const changeTable = (newValue) => {
 		setValue(newValue);
 	};
+
 	const itemsPerPage = 15;
 	const sortedInvoice = [...invoice].reverse();
 
@@ -60,6 +68,7 @@ function AdminReports() {
 		.slice(pageNumber * itemsPerPage, (pageNumber + 1) * itemsPerPage);
 
 	const pageCount = Math.ceil(sortedInvoice.length / itemsPerPage);
+
 	const changePage = ({ selected }) => {
 		setPageNumber(selected);
 	};
@@ -74,6 +83,266 @@ function AdminReports() {
 				console.error('Error fetching Invoice data:', error);
 			});
 	}, [API]);
+
+	const filteredAgentSelectData = sortedInvoice.filter((item) => {
+		const agentCompanyName =
+			(item.sellerdetails && item.sellerdetails.sellercompanyname) || ''; // **Include Agent Company Name field**
+		const agentCompanyState =
+			(item.sellerdetails && item.sellerdetails.sellercompanystatename) || ''; // **Include Agent Company State Name**
+		// const searchLowerCase = searchInput?.toLowerCase();
+		if (
+			agentCompanyName || // **Check Agent Company Name**
+			agentCompanyState // **Check Agent Company State Name**
+		) {
+			return true;
+		}
+		return false;
+	});
+	// console.log('filteredAgentSelectData', filteredAgentSelectData);
+
+	const loggedNames = new Set();
+	const distinctCompanyNames = [];
+
+	filteredAgentSelectData.map((item) => {
+		const companyName = item.sellerdetails.sellercompanyname;
+		if (!loggedNames.has(companyName)) {
+			// console.log(companyName);
+			loggedNames.add(companyName);
+			distinctCompanyNames.push(companyName);
+		}
+	});
+
+	// Now, distinctCompanyNames array contains all distinct values
+	// console.log(distinctCompanyNames);
+	const handleSelectChange = (e) => {
+		const selectedValue = e.target.value;
+		setSelectedAgentOption(selectedValue);
+	};
+
+	const handleFromDateSelect = (e) => {
+		const selectedFromDate = e.target.value;
+		setStartDate(selectedFromDate);
+		console.log(selectedFromDate);
+	};
+
+	const handleToDateSelect = (e) => {
+		const selectedDate = e.target.value;
+
+		// Use a utility function to increment the date by one day
+		const nextDate = incrementDate(selectedDate);
+
+		// Set the endDate state to the next date
+		setEndDate(nextDate);
+	};
+
+	const incrementDate = (dateString) => {
+		const selectedDate = new Date(dateString);
+		selectedDate.setDate(selectedDate.getDate() + 1);
+
+		// Format the next date to match the 'YYYY-MM-DD' format used by the input type 'date'
+		const formattedNextDate = selectedDate.toISOString().split('T')[0];
+
+		return formattedNextDate;
+	};
+
+	const filteredDataByDate = filteredAgentSelectData
+		.filter((item) => {
+			const itemDate = new Date(item.invoicedetails.invoicedate); // Replace 'date' with your actual date property
+
+			// Check if startDate and endDate are valid date strings
+			const isStartDateValid =
+				startDate !== '' && !isNaN(new Date(startDate).getTime());
+			const isEndDateValid =
+				endDate !== '' && !isNaN(new Date(endDate).getTime());
+
+			if (
+				(isStartDateValid && itemDate >= new Date(startDate)) ||
+				!isStartDateValid
+			) {
+				if (
+					(isEndDateValid && itemDate <= new Date(endDate)) ||
+					!isEndDateValid
+				) {
+					return true;
+				}
+			}
+
+			return false;
+		})
+		.map((item) => {
+			const toDate = endDate
+				? new Date(new Date(endDate).getTime() + 24 * 60 * 60 * 1000) // Adding one day in milliseconds
+				: null;
+
+			return {
+				...item,
+				fromDate: startDate || null,
+				toDate: toDate || null,
+			};
+		});
+
+	// console.log(filteredDataByDate);
+
+	useEffect(() => {
+		// console.log('Selected Agent:', selectedAgentOption);
+
+		const agentWiseData = filteredAgentSelectData.filter((item) => {
+			const agentCompanyName =
+				(item.sellerdetails && item.sellerdetails.sellercompanyname) || '';
+			const agentCompanyState =
+				(item.sellerdetails && item.sellerdetails.sellercompanystatename) || '';
+
+			if (
+				agentCompanyName === selectedAgentOption ||
+				agentCompanyState === selectedAgentOption
+			) {
+				return true;
+			}
+
+			return false;
+		});
+
+		setAgentData(agentWiseData);
+		// console.log(agentWiseData);
+	}, [selectedAgentOption]);
+
+	// console.log('agentData', agentData);
+
+	const handleShowButtonClick = () => {
+		const newWindow = window.open('', '_blank');
+		newWindow.document.write(
+			'<html><head><title>Agent Data</title></head><body>'
+		);
+
+		newWindow.document.write(
+			'<h2 style="text-align: center; font-size: 40px;">Agent Details</h2>'
+		);
+		newWindow.document.write(
+			'<table style="width: 70%; margin: 0 auto; border-collapse: collapse; border: 1px solid #ddd;">'
+		);
+
+		// Table header
+		newWindow.document.write('<tr style="background-color: #f2f2f2;">');
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Agent Name</th>'
+		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Date</th>'
+		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Quantity</th>'
+		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Place</th>'
+		);
+		newWindow.document.write('</tr>');
+
+		// Table body
+		let totalQuantity = 0; // Initialize total quantity
+
+		agentData.forEach((dataItem, index) => {
+			newWindow.document.write('<tr>');
+			newWindow.document.write(
+				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${dataItem.sellerdetails.sellercompanyname}</td>`
+			);
+			newWindow.document.write(
+				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+					dataItem.invoicedetails && dataItem.invoicedetails.invoicedate
+						? dataItem.invoicedetails.invoicedate.substring(0, 10)
+						: 'N/A'
+				}</td>`
+			);
+			const itemQuantity =
+				dataItem.consignmentdetails.itemdetails[0]?.itemquantity !== undefined
+					? dataItem.consignmentdetails.itemdetails[0]?.itemquantity
+					: 0;
+			totalQuantity += itemQuantity; // Accumulate quantity
+			newWindow.document.write(
+				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${itemQuantity}</td>`
+			);
+			newWindow.document.write(
+				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${dataItem.sellerdetails.sellercompanystatename}</td>`
+			);
+			newWindow.document.write('</tr>');
+		});
+
+		newWindow.document.write('</table>');
+
+		// Display total quantity after the table
+		newWindow.document.write(
+			`<h2 style="text-align: center; font-size: 24px;">Total Quantity: ${totalQuantity}</h2>`
+		);
+
+		newWindow.document.write('</body></html>');
+	};
+
+	const handleShowDataByDate = () => {
+		const newWindow = window.open('', '_blank');
+		newWindow.document.write(
+			'<html><head><title>Agent Data</title></head><body>'
+		);
+
+		newWindow.document.write(
+			'<h2 style="text-align: center; font-size: 40px;">Agent Details</h2>'
+		);
+		newWindow.document.write(
+			'<table style="width: 70%; margin: 0 auto; border-collapse: collapse; border: 1px solid #ddd;">'
+		);
+
+		// Table header
+		newWindow.document.write('<tr style="background-color: #f2f2f2;">');
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Agent Name</th>'
+		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Date</th>'
+		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Quantity</th>'
+		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Place</th>'
+		);
+		newWindow.document.write('</tr>');
+
+		// Table body
+		let totalQuantity = 0; // Initialize total quantity
+
+		filteredDataByDate.forEach((dataItem, index) => {
+			newWindow.document.write('<tr>');
+			newWindow.document.write(
+				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${dataItem.sellerdetails.sellercompanyname}</td>`
+			);
+			newWindow.document.write(
+				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+					dataItem.invoicedetails && dataItem.invoicedetails.invoicedate
+						? dataItem.invoicedetails.invoicedate.substring(0, 10)
+						: 'N/A'
+				}</td>`
+			);
+			const itemQuantity =
+				dataItem.consignmentdetails.itemdetails[0]?.itemquantity !== undefined
+					? dataItem.consignmentdetails.itemdetails[0]?.itemquantity
+					: 0;
+			totalQuantity += itemQuantity; // Accumulate quantity
+			newWindow.document.write(
+				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${itemQuantity}</td>`
+			);
+			newWindow.document.write(
+				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${dataItem.sellerdetails.sellercompanystatename}</td>`
+			);
+			newWindow.document.write('</tr>');
+		});
+
+		newWindow.document.write('</table>');
+
+		// Display total quantity after the table
+		newWindow.document.write(
+			`<h2 style="text-align: center; font-size: 24px;">Total Quantity: ${totalQuantity}</h2>`
+		);
+
+		newWindow.document.write('</body></html>');
+	};
 
 	const handleSearchInputChange = (e) => {
 		const inputValue = e.target.value;
@@ -113,7 +382,7 @@ function AdminReports() {
 							: '0',
 				}));
 
-				console.log(filteredLoadData);
+				// console.log(filteredLoadData);
 				setExportedData(filteredLoadData);
 				break;
 			case 'day':
@@ -127,7 +396,7 @@ function AdminReports() {
 					'Total Cost': invoice.boardingdetails.totalcost,
 					'Delivery Note Date': invoice.invoicedetails.deliverynotedate,
 				}));
-				console.log(filteredDayData);
+				// console.log(filteredDayData);
 				setExportedData(filteredDayData);
 				break;
 			case 'item':
@@ -143,7 +412,7 @@ function AdminReports() {
 								: 'N/A',
 					}))
 				);
-				console.log(filteredItemData);
+				// console.log(filteredItemData);
 				setExportedData(filteredItemData);
 				break;
 			case 'agent':
@@ -158,7 +427,7 @@ function AdminReports() {
 						invoice.sellerdetails.sellercompanystatename?.substring(0, 12) ??
 						'<N/A',
 				}));
-				console.log(filteredAgentData);
+				// console.log(filteredAgentData);
 				setExportedData(filteredAgentData);
 				break;
 			case 'vechicle':
@@ -169,7 +438,7 @@ function AdminReports() {
 					Driver: invoice.vehicledetails.drivername,
 					Weight: invoice.boardingdetails.weight,
 				}));
-				console.log(filteredVehicleData);
+				// console.log(filteredVehicleData);
 				setExportedData(filteredVehicleData);
 				break;
 			case 'driver':
@@ -183,7 +452,7 @@ function AdminReports() {
 					'Total Cost': invoice.boardingdetails.totalcost,
 					'Driver License No': invoice.vehicledetails.driverlicenseno,
 				}));
-				console.log(filteredDriverData);
+				// console.log(filteredDriverData);
 				setExportedData(filteredDriverData);
 				break;
 			default:
@@ -389,6 +658,7 @@ function AdminReports() {
 							Export
 						</CSVLink>
 					</div>
+
 					<div className='reports-data-body-container'>
 						{value === 'load' && (
 							<div className='reports-data-body'>
@@ -729,59 +999,108 @@ function AdminReports() {
 							</div>
 						)}
 						{value === 'agent' && (
-							<div className='reports-data-body'>
-								<table className='reports-data-body-table-driver'>
-									{/* Table header */}
-									<thead className='reports-data-body-table-driver-head'>
-										<tr className='reports-data-body-table-driver-head-row'>
-											<th className='reports-data-body-table-driver-head-row-item'>
-												Agent Company Name
-											</th>
-											<th className='reports-data-body-table-driver-head-row-item'>
-												Item Quantity
-											</th>
-											<th className='reports-data-body-table-driver-head-row-item'>
-												Invoice Date
-											</th>
-											<th className='reports-data-body-table-driver-head-row-item'>
-												Agent Company State Name
-											</th>
-										</tr>
-									</thead>
-									{/* Table body */}
-									<tbody className='reports-data-body-table-driver-body'>
-										{displayedInvoiceSearch.map((invoice) => (
-											<tr
-												key={invoice._id}
-												className='reports-data-body-table-driver-body-row'
-											>
-												<td className='reports-data-body-table-driver-body-row-item'>
-													{invoice.sellerdetails.sellercompanyname?.substring(
-														0,
-														12
-													) ?? '<N/A'}
-												</td>
-												<td className='reports-data-body-table-driver-body-row-item'>
-													{invoice.consignmentdetails.itemdetails[0]
-														?.itemquantity ?? '<N/A'}
-												</td>
-												<td className='reports-data-body-table-driver-body-row-item'>
-													{invoice.invoicedetails?.invoicedate
-														? new Date(
-																invoice.invoicedetails.invoicedate
-														  ).toLocaleDateString()
-														: '<N/A'}
-												</td>
-												<td className='reports-data-body-table-driver-body-row-item'>
-													{invoice.sellerdetails.sellercompanystatename?.substring(
-														0,
-														12
-													) ?? '<N/A'}
-												</td>
-											</tr>
+							<div className='data-show-div'>
+								<div>
+									{/* Select Input */}
+									<select
+										className='select-agent-input'
+										onChange={handleSelectChange}
+										defaultValue='' // Use defaultValue to set the default value
+									>
+										<option value='' disabled>
+											Select Agent
+										</option>
+										{distinctCompanyNames.map((option) => (
+											<option key={option} value={option}>
+												{option}
+											</option>
 										))}
-									</tbody>
-								</table>
+									</select>
+
+									{/* Button */}
+									<button
+										className='show-agent-data-btn'
+										onClick={handleShowButtonClick}
+									>
+										Show
+									</button>
+									<label className='from-label'>From:</label>
+									<input
+										className='from-date-select'
+										type='date'
+										value={startDate}
+										onChange={handleFromDateSelect}
+									/>
+									<label className='to-label'>To:</label>
+									<input
+										className='to-date-select'
+										type='date'
+										value={endDate}
+										onChange={handleToDateSelect}
+									/>
+									{/* Button for Date Range */}
+									<button
+										className='show-date-data-btn'
+										onClick={handleShowDataByDate}
+									>
+										Show By Date
+									</button>
+								</div>
+
+								<div className='reports-data-body'>
+									<table className='reports-data-body-table-driver'>
+										{/* Table header */}
+										<thead className='reports-data-body-table-driver-head'>
+											<tr className='reports-data-body-table-driver-head-row'>
+												<th className='reports-data-body-table-driver-head-row-item'>
+													Agent Company Name
+												</th>
+												<th className='reports-data-body-table-driver-head-row-item'>
+													Item Quantity
+												</th>
+												<th className='reports-data-body-table-driver-head-row-item'>
+													Invoice Date
+												</th>
+												<th className='reports-data-body-table-driver-head-row-item'>
+													Agent Company State Name
+												</th>
+											</tr>
+										</thead>
+										{/* Table body */}
+										<tbody className='reports-data-body-table-driver-body'>
+											{displayedInvoiceSearch.map((invoice) => (
+												<tr
+													key={invoice._id}
+													className='reports-data-body-table-driver-body-row'
+												>
+													<td className='reports-data-body-table-driver-body-row-item'>
+														{invoice.sellerdetails.sellercompanyname?.substring(
+															0,
+															12
+														) ?? '<N/A'}
+													</td>
+													<td className='reports-data-body-table-driver-body-row-item'>
+														{invoice.consignmentdetails.itemdetails[0]
+															?.itemquantity ?? '<N/A'}
+													</td>
+													<td className='reports-data-body-table-driver-body-row-item'>
+														{invoice.invoicedetails?.invoicedate
+															? new Date(
+																	invoice.invoicedetails.invoicedate
+															  ).toLocaleDateString()
+															: '<N/A'}
+													</td>
+													<td className='reports-data-body-table-driver-body-row-item'>
+														{invoice.sellerdetails.sellercompanystatename?.substring(
+															0,
+															12
+														) ?? '<N/A'}
+													</td>
+												</tr>
+											))}
+										</tbody>
+									</table>
+								</div>
 							</div>
 						)}
 					</div>

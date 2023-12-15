@@ -1,4 +1,3 @@
-
 .admin-dashboard-title {
     color: #1A1A1A;
     font-family: "Urbanist";
@@ -9,7 +8,8 @@
     letter-spacing: -0.939px;
     text-align: center
 }
-.admin-dashboard-buttons-row{
+
+.admin-dashboard-buttons-row {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
 }
@@ -30,7 +30,8 @@
     line-height: normal;
     letter-spacing: -0.361px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    transition: background-color 0.3s; /* Add a smooth transition for a better visual effect */
+    transition: background-color 0.3s;
+    /* Add a smooth transition for a better visual effect */
 }
 
 .admin-dashboard-button:hover {
@@ -38,31 +39,33 @@
     color: #333;
     cursor: pointer;
     border-color: #7a5af8;
-    z-index: 1; /* Adjust the z-index as needed to control the stacking order */
+    z-index: 1;
+    /* Adjust the z-index as needed to control the stacking order */
 }
 
 
-.admin-dashboard-button-icon{
+.admin-dashboard-button-icon {
     padding-left: 70px;
     padding-right: 70px;
     width: 60px;
     height: 60px;
 }
 
-.admin-logout-icon{
+.admin-logout-icon {
     padding-left: 10%;
     width: 40px;
     height: 40px;
 }
 
-.admin-logout-container{
+.admin-logout-container {
     display: flex;
     justify-content: flex-end;
     padding-top: 20px;
     padding-right: 20px;
     padding-bottom: 20px;
 }
-.admin-logout-button-value{
+
+.admin-logout-button-value {
     display: grid;
     grid-template-columns: 3fr 1fr;
     height: 50px;
@@ -86,7 +89,7 @@
 /* Mobile styles - 1200px width and below */
 @media only screen and (max-width: 1200px) {
     .admin-dashboard-buttons-row {
-        grid-template-columns: 1fr 1fr ;
+        grid-template-columns: 1fr 1fr;
     }
 }
 
@@ -95,7 +98,8 @@
     .admin-dashboard-buttons-row {
         grid-template-columns: 1fr;
     }
-    .admin-dashboard-button{
+
+    .admin-dashboard-button {
         width: 250px;
         height: 50px;
         border-radius: 15px;
@@ -111,17 +115,20 @@
         line-height: normal;
         letter-spacing: -0.361px;
     }
+
     .admin-card-box {
         display: flex;
         flex-direction: row;
         align-items: center;
     }
+
     .admin-dashboard-button-icon {
         padding-left: 30px;
         padding-right: 30px;
         width: 30px;
         height: 30px;
     }
+
     .admin-logout-button-value {
         display: grid;
         grid-template-columns: 3fr 1fr;

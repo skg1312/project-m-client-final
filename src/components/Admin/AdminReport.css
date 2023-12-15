@@ -6,9 +6,11 @@
 	border-radius: 15px;
 	border: 2px solid #d2d2d2;
 }
+
 .reports-data {
 	margin-top: 50px;
 }
+
 .reports-data-header {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -24,30 +26,37 @@
 	line-height: 28px;
 	letter-spacing: -0.289px;
 }
+
 .end {
 	border-radius: 0px 100px 100px 0px;
 }
+
 .start {
 	border-radius: 100px 0px 0px 100px;
 }
+
 .reports-data-header-button {
 	background-color: #fff;
 	color: #5925dc;
 	border: 1px solid #5925dc;
 }
+
 .reports-data-header-button:hover {
 	cursor: pointer;
 	background-color: #f1eaff;
 }
+
 .reports-data-header-button:active {
 	background-color: #5925dc;
 	color: #fff;
 	border: 1px solid #5925dc;
 }
+
 .reports-data-body-container {
 	display: flex;
-	justify-content: right;
+	justify-content: center;
 }
+
 .reports-data-body {
 	display: flex;
 	width: 100%;
@@ -55,14 +64,17 @@
 	background: #f4f3ff;
 	margin: 20px;
 }
+
 .reports-data-body-table-load {
 	margin-top: 20px;
 }
+
 .reports-data-body-table-load-head {
 	padding-top: 20px;
 	border-radius: 10px;
 	background: #fefefe;
 }
+
 .reports-data-body-table-load-head-row {
 	font-family: 'Urbanist';
 	font-size: 20px;
@@ -72,11 +84,13 @@
 	letter-spacing: -0.289px;
 	color: #767676;
 }
+
 .reports-data-body-table-load {
 	width: 100%;
 	height: 60px;
 	border-collapse: collapse;
 }
+
 .reports-data-body-table-load-body {
 	font-family: 'Urbanist';
 	font-size: 20px;
@@ -91,11 +105,13 @@
 .reports-data-body-table-day {
 	margin-top: 20px;
 }
+
 .reports-data-body-table-day-head {
 	padding-top: 20px;
 	border-radius: 10px;
 	background: #fefefe;
 }
+
 .reports-data-body-table-day-head-row {
 	font-family: 'Urbanist';
 	font-size: 20px;
@@ -105,11 +121,13 @@
 	letter-spacing: -0.289px;
 	color: #767676;
 }
+
 .reports-data-body-table-day {
 	width: 100%;
 	height: 60px;
 	border-collapse: collapse;
 }
+
 .reports-data-body-table-day-body {
 	font-family: 'Urbanist';
 	font-size: 20px;
@@ -124,11 +142,13 @@
 .reports-data-body-table-item {
 	margin-top: 20px;
 }
+
 .reports-data-body-table-item-head {
 	padding-top: 20px;
 	border-radius: 10px;
 	background: #fefefe;
 }
+
 .reports-data-body-table-item-head-row {
 	font-family: 'Urbanist';
 	font-size: 20px;
@@ -138,11 +158,13 @@
 	letter-spacing: -0.289px;
 	color: #767676;
 }
+
 .reports-data-body-table-item {
 	width: 100%;
 	height: 60px;
 	border-collapse: collapse;
 }
+
 .reports-data-body-table-item-body {
 	font-family: 'Urbanist';
 	font-size: 20px;
@@ -157,11 +179,13 @@
 .reports-data-body-table-vechicle {
 	margin-top: 20px;
 }
+
 .reports-data-body-table-vechicle-head {
 	padding-top: 20px;
 	border-radius: 10px;
 	background: #fefefe;
 }
+
 .reports-data-body-table-vechicle-head-row {
 	font-family: 'Urbanist';
 	font-size: 20px;
@@ -171,11 +195,13 @@
 	letter-spacing: -0.289px;
 	color: #767676;
 }
+
 .reports-data-body-table-vechicle {
 	width: 100%;
 	height: 60px;
 	border-collapse: collapse;
 }
+
 .reports-data-body-table-vechicle-body {
 	font-family: 'Urbanist';
 	font-size: 20px;
@@ -190,11 +216,13 @@
 .reports-data-body-table-driver {
 	margin-top: 20px;
 }
+
 .reports-data-body-table-driver-head {
 	padding-top: 20px;
 	border-radius: 10px;
 	background: #fefefe;
 }
+
 .reports-data-body-table-driver-head-row {
 	font-family: 'Urbanist';
 	font-size: 20px;
@@ -204,11 +232,13 @@
 	letter-spacing: -0.289px;
 	color: #767676;
 }
+
 .reports-data-body-table-driver {
 	width: 100%;
 	height: 60px;
 	border-collapse: collapse;
 }
+
 .reports-data-body-table-driver-body {
 	font-family: 'Urbanist';
 	font-size: 20px;
@@ -268,6 +298,7 @@
 	align-items: center;
 	list-style-type: none;
 }
+
 .pagination-container li {
 	padding: 10px;
 	border: 1px solid #5925dc;
@@ -282,16 +313,101 @@
 	background-color: #5925dc;
 	margin: 5px;
 }
+
 .pagination-container li:hover {
 	cursor: pointer;
 }
+
 .pagination-container .active {
 	background-color: #767676;
 	color: #fff;
 }
+
 .pagination-container .disabled {
 	color: #ada9a9;
 	cursor: not-allowed;
+}
+
+.data-show-div {
+	margin-top: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 96%;
+}
+
+.select-agent-input {
+	font-family: 'Urbanist';
+	font-size: 18px;
+	color: #000;
+	width: auto;
+	height: 40px;
+	border-radius: 10px;
+}
+
+.show-agent-data-btn {
+	margin-left: 15px;
+	border-radius: 15px;
+	border: 2px solid #5925dc;
+	width: auto;
+	height: 35px;
+	background-color: #5925dc;
+	color: white;
+	font-family: 'Urbanist';
+	font-size: 18px;
+	font-weight: bold;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+.from-label {
+	font-family: 'Urbanist';
+	font-size: 20px;
+	margin-left: 10px;
+	margin-right: 2px;
+}
+
+.to-label {
+	font-family: 'Urbanist';
+	font-size: 20px;
+	margin-left: 10px;
+	margin-right: 2px;
+}
+
+.from-date-select {
+	font-family: 'Urbanist';
+	font-size: 18px;
+	background-color: #ddd;
+	width: auto;
+	height: 40px;
+	border: 1px solid #767676;
+	border-radius: 10px;
+}
+
+.to-date-select {
+	font-family: 'Urbanist';
+	font-size: 18px;
+	background-color: #ddd;
+	width: auto;
+	height: 40px;
+	border: 1px solid #767676;
+	border-radius: 10px;
+}
+
+.show-date-data-btn {
+	margin-left: 15px;
+	border-radius: 15px;
+	border: 2px solid #5925dc;
+	width: auto;
+	height: 35px;
+	background-color: #5925dc;
+	color: white;
+	font-family: 'Urbanist';
+	font-size: 18px;
+	font-weight: bold;
+	border-radius: 10px;
+	cursor: pointer;
 }
 
 @media only screen and (min-width: 769px) and (max-width: 1024px) {
@@ -303,6 +419,7 @@
 		border-radius: 15px;
 		border: 2px solid #d2d2d2;
 	}
+
 	.export-button {
 		margin-left: 50px;
 		margin-right: 50px;
@@ -321,6 +438,7 @@
 		color: #ffffff;
 		background-color: #5925dc;
 	}
+
 	.reports-search-input {
 		margin-left: 50px;
 		margin-right: 50px;
@@ -346,6 +464,7 @@
 		border-radius: 15px;
 		border: 2px solid #d2d2d2;
 	}
+
 	.reports-data-body {
 		display: flex;
 		width: 100%;
@@ -353,6 +472,7 @@
 		background: #f4f3ff;
 		margin: 5px;
 	}
+
 	.reports-data-body-table-load-head-row {
 		font-family: 'Urbanist';
 		font-size: 15px;
@@ -362,6 +482,7 @@
 		letter-spacing: -0.289px;
 		color: #767676;
 	}
+
 	.reports-data-body-table-load-body {
 		font-family: 'Urbanist';
 		font-size: 10px;
@@ -372,6 +493,7 @@
 		color: #767676;
 		text-align: center;
 	}
+
 	.reports-data-body-table-day-head-row {
 		font-family: 'Urbanist';
 		font-size: 15px;
@@ -381,6 +503,7 @@
 		letter-spacing: -0.289px;
 		color: #767676;
 	}
+
 	.reports-data-body-table-day-body {
 		font-family: 'Urbanist';
 		font-size: 10px;
@@ -391,6 +514,7 @@
 		color: #767676;
 		text-align: center;
 	}
+
 	.reports-data-body-table-item-head-row {
 		font-family: 'Urbanist';
 		font-size: 15px;
@@ -400,6 +524,7 @@
 		letter-spacing: -0.289px;
 		color: #767676;
 	}
+
 	.reports-data-body-table-item-body {
 		font-family: 'Urbanist';
 		font-size: 10px;
@@ -410,6 +535,7 @@
 		color: #767676;
 		text-align: center;
 	}
+
 	.reports-data-body-table-vechicle-head-row {
 		font-family: 'Urbanist';
 		font-size: 15px;
@@ -419,6 +545,7 @@
 		letter-spacing: -0.289px;
 		color: #767676;
 	}
+
 	.reports-data-body-table-vechicle-body {
 		font-family: 'Urbanist';
 		font-size: 10px;
@@ -429,6 +556,7 @@
 		color: #767676;
 		text-align: center;
 	}
+
 	.reports-data-body-table-driver-head-row {
 		font-family: 'Urbanist';
 		font-size: 15px;
@@ -438,6 +566,7 @@
 		letter-spacing: -0.289px;
 		color: #767676;
 	}
+
 	.reports-data-body-table-driver-body {
 		font-family: 'Urbanist';
 		font-size: 10px;
@@ -448,6 +577,7 @@
 		color: #767676;
 		text-align: center;
 	}
+
 	.reports-data-header {
 		display: grid;
 		grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -463,12 +593,14 @@
 		line-height: 28px;
 		letter-spacing: -0.289px;
 	}
+
 	.reports-data-header-button {
 		background-color: #fff;
 		color: #5925dc;
 		border: 1px solid #5925dc;
 		font-size: 9px;
 	}
+
 	.export-button {
 		margin-left: 25px;
 		margin-right: 25px;
@@ -488,6 +620,7 @@
 		color: #ffffff;
 		background-color: #5925dc;
 	}
+
 	.reports-search-input {
 		margin-left: 30px;
 		margin-right: 25px;
@@ -502,6 +635,7 @@
 		line-height: 28px;
 		letter-spacing: -0.289px;
 	}
+
 	.pagination-container {
 		display: flex;
 		flex-wrap: wrap;
@@ -510,6 +644,7 @@
 		list-style-type: none;
 		margin-right: 30px;
 	}
+
 	.pagination-container li {
 		padding: 10px;
 		border: 1px solid #5925dc;

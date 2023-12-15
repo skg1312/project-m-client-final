@@ -46,7 +46,7 @@ function AdminLogin() {
 					<h2 className='Admin-login-head'>LOGIN</h2>
 					<div className='Admin-login-form'>
 						<div className='Admin-login-email'>
-							{/* <h3 className='Admin-label'>Email</h3> */}
+							<h3 className='Admin-label'>Email</h3>
 							<input
 								type='email'
 								placeholder='Email'

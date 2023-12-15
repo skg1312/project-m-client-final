@@ -1,4 +1,4 @@
-.reports{
+.reports {
     margin-left: 100px;
     margin-top: 100px;
     margin-bottom: 100px;
@@ -6,10 +6,12 @@
     border-radius: 15px;
     border: 2px solid #D2D2D2;
 }
-.reports-data{
+
+.reports-data {
     margin-top: 50px;
 }
-.reports-data-header{
+
+.reports-data-header {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     border-radius: 100px;
@@ -17,55 +19,65 @@
     width: 60%;
     height: 40px;
     margin: auto;
-   font-family: "Urbanist";
+    font-family: "Urbanist";
     font-size: 20px;
     font-style: bold;
     font-weight: 600;
     line-height: 28px;
     letter-spacing: -0.289px;
 }
-.end{
-    border-radius:0px 100px 100px 0px;
+
+.end {
+    border-radius: 0px 100px 100px 0px;
 }
-.start{
-    border-radius:100px 0px 0px 100px;
+
+.start {
+    border-radius: 100px 0px 0px 100px;
 }
-.reports-data-header-button{
+
+.reports-data-header-button {
     background-color: #fff;
     color: #5925DC;
     border: 1px solid #5925DC;
 }
-.reports-data-header-button:hover{
+
+.reports-data-header-button:hover {
     cursor: pointer;
     background-color: #f1eaff;
 }
-.reports-data-header-button:active{
+
+.reports-data-header-button:active {
     background-color: #5925DC;
     color: #fff;
     border: 1px solid #5925DC;
 }
-.reports-data-body-container{
+
+.reports-data-body-container {
     display: flex;
-    justify-content: right;
+    justify-content: center;
 }
-.reports-data-body{
+
+.reports-data-body {
     display: flex;
     width: 100%;
     border-radius: 15px;
     background: #F4F3FF;
     margin: 20px;
 }
-.reports-data-body-table-load{
+
+.reports-data-body-table-load {
     margin-top: 20px;
 }
-.reports-data-body-table-load-head{
+
+.reports-data-body-table-load-head {
     padding-top: 20px;
     border-radius: 10px;
     background: #FEFEFE;
 }
-.reports-data-body-table-load-head-row{
 
-   font-family: "Urbanist";
+.reports-data-body-table-load-head-row {
+
+    font-family: "Urbanist";
     font-size: 20px;
     font-style: bold;
     font-weight: 600;
@@ -73,13 +85,15 @@
     letter-spacing: -0.289px;
     color: #767676;
 }
-.reports-data-body-table-load{
+
+.reports-data-body-table-load {
     width: 100%;
     height: 60px;
     border-collapse: collapse;
 }
-.reports-data-body-table-load-body{
-   font-family: "Urbanist";
+
+.reports-data-body-table-load-body {
+    font-family: "Urbanist";
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -89,17 +103,19 @@
     text-align: center;
 }
 
-.reports-data-body-table-day{
+.reports-data-body-table-day {
     margin-top: 20px;
 }
-.reports-data-body-table-day-head{
+
+.reports-data-body-table-day-head {
     padding-top: 20px;
     border-radius: 10px;
     background: #FEFEFE;
 }
-.reports-data-body-table-day-head-row{
 
-   font-family: "Urbanist";
+.reports-data-body-table-day-head-row {
+
+    font-family: "Urbanist";
     font-size: 20px;
     font-style: bold;
     font-weight: 600;
@@ -107,83 +123,15 @@
     letter-spacing: -0.289px;
     color: #767676;
 }
-.reports-data-body-table-day{
+
+.reports-data-body-table-day {
     width: 100%;
     height: 60px;
     border-collapse: collapse;
 }
-.reports-data-body-table-day-body{
-   font-family: "Urbanist";
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 28px;
-    letter-spacing: -0.289px;
-    color: #767676;
-    text-align: center;
-}
 
-
-
-.reports-data-body-table-item{
-    margin-top: 20px;
-}
-.reports-data-body-table-item-head{
-    padding-top: 20px;
-    border-radius: 10px;
-    background: #FEFEFE;
-}
-.reports-data-body-table-item-head-row{
-
-   font-family: "Urbanist";
-    font-size: 20px;
-    font-style: bold;
-    font-weight: 600;
-    line-height: 28px;
-    letter-spacing: -0.289px;
-    color: #767676;
-}
-.reports-data-body-table-item{
-    width: 100%;
-    height: 60px;
-    border-collapse: collapse;
-}
-.reports-data-body-table-item-body{
-   font-family: "Urbanist";
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 28px;
-    letter-spacing: -0.289px;
-    color: #767676;
-    text-align: center;
-}
-
-.reports-data-body-table-vechicle{
-    margin-top: 20px;
-}
-.reports-data-body-table-vechicle-head{
-    padding-top: 20px;
-    border-radius: 10px;
-    background: #FEFEFE;
-}
-.reports-data-body-table-vechicle-head-row{
-
-   font-family: "Urbanist";
-    font-size: 20px;
-    font-style: bold;
-    font-weight: 600;
-    line-height: 28px;
-    letter-spacing: -0.289px;
-    color: #767676;
-}
-.reports-data-body-table-vechicle{
-    width: 100%;
-    height: 60px;
-    border-collapse: collapse;
-}
-.reports-data-body-table-vechicle-body{
-   font-family: "Urbanist";
+.reports-data-body-table-day-body {
+    font-family: "Urbanist";
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -195,17 +143,19 @@
 
 
 
-.reports-data-body-table-driver{
+.reports-data-body-table-item {
     margin-top: 20px;
 }
-.reports-data-body-table-driver-head{
+
+.reports-data-body-table-item-head {
     padding-top: 20px;
     border-radius: 10px;
     background: #FEFEFE;
 }
-.reports-data-body-table-driver-head-row{
 
-   font-family: "Urbanist";
+.reports-data-body-table-item-head-row {
+
+    font-family: "Urbanist";
     font-size: 20px;
     font-style: bold;
     font-weight: 600;
@@ -213,13 +163,15 @@
     letter-spacing: -0.289px;
     color: #767676;
 }
-.reports-data-body-table-driver{
+
+.reports-data-body-table-item {
     width: 100%;
     height: 60px;
     border-collapse: collapse;
 }
-.reports-data-body-table-driver-body{
-   font-family: "Urbanist";
+
+.reports-data-body-table-item-body {
+    font-family: "Urbanist";
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -229,7 +181,85 @@
     text-align: center;
 }
 
-.reports-data-top{
+.reports-data-body-table-vechicle {
+    margin-top: 20px;
+}
+
+.reports-data-body-table-vechicle-head {
+    padding-top: 20px;
+    border-radius: 10px;
+    background: #FEFEFE;
+}
+
+.reports-data-body-table-vechicle-head-row {
+
+    font-family: "Urbanist";
+    font-size: 20px;
+    font-style: bold;
+    font-weight: 600;
+    line-height: 28px;
+    letter-spacing: -0.289px;
+    color: #767676;
+}
+
+.reports-data-body-table-vechicle {
+    width: 100%;
+    height: 60px;
+    border-collapse: collapse;
+}
+
+.reports-data-body-table-vechicle-body {
+    font-family: "Urbanist";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28px;
+    letter-spacing: -0.289px;
+    color: #767676;
+    text-align: center;
+}
+
+
+
+.reports-data-body-table-driver {
+    margin-top: 20px;
+}
+
+.reports-data-body-table-driver-head {
+    padding-top: 20px;
+    border-radius: 10px;
+    background: #FEFEFE;
+}
+
+.reports-data-body-table-driver-head-row {
+
+    font-family: "Urbanist";
+    font-size: 20px;
+    font-style: bold;
+    font-weight: 600;
+    line-height: 28px;
+    letter-spacing: -0.289px;
+    color: #767676;
+}
+
+.reports-data-body-table-driver {
+    width: 100%;
+    height: 60px;
+    border-collapse: collapse;
+}
+
+.reports-data-body-table-driver-body {
+    font-family: "Urbanist";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28px;
+    letter-spacing: -0.289px;
+    color: #767676;
+    text-align: center;
+}
+
+.reports-data-top {
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin-top: 50px;
@@ -237,14 +267,14 @@
     justify-content: center;
 }
 
-.export-button{
+.export-button {
     margin-left: 50px;
     margin-right: 100px;
     border-radius: 15px;
     border: 2px solid #5925DC;
     width: 100px;
     height: 35px;
-   font-family: "Urbanist";
+    font-family: "Urbanist";
     text-decoration: none !important;
     font-size: 30px;
     font-style: normal;
@@ -256,14 +286,14 @@
     background-color: #5925DC;
 }
 
-.reports-search-input{
+.reports-search-input {
     margin-left: 50px;
     margin-right: 100px;
     border-radius: 15px;
     border: 2px solid #D2D2D2;
     width: 600px;
     height: 50px;
-   font-family: "Urbanist";
+    font-family: "Urbanist";
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -271,18 +301,19 @@
     letter-spacing: -0.289px;
 }
 
-.pagination-container{
+.pagination-container {
     display: flex;
     justify-content: center;
     align-items: center;
     list-style-type: none;
 }
-.pagination-container li{
+
+.pagination-container li {
     padding: 10px;
     border: 1px solid #5925DC;
     border-radius: 3px;
     color: #fff;
-   font-family: "Urbanist";
+    font-family: "Urbanist";
     font-size: 15px;
     font-style: normal;
     font-weight: 600;
@@ -291,14 +322,17 @@
     background-color: #5925DC;
     margin: 5px;
 }
-.pagination-container li:hover{
+
+.pagination-container li:hover {
     cursor: pointer;
 }
-.pagination-container .active{
+
+.pagination-container .active {
     background-color: #767676;
     color: #fff;
 }
-.pagination-container .disabled{
+
+.pagination-container .disabled {
     color: #ada9a9;
     cursor: not-allowed;
 }
@@ -312,6 +346,7 @@
         border-radius: 15px;
         border: 2px solid #D2D2D2;
     }
+
     .export-button {
         margin-left: 50px;
         margin-right: 50px;
@@ -319,7 +354,7 @@
         border: 2px solid #5925DC;
         width: 100px;
         height: 35px;
-       font-family: "Urbanist";
+        font-family: "Urbanist";
         text-decoration: none !important;
         font-size: 30px;
         font-style: normal;
@@ -330,6 +365,7 @@
         color: #ffffff;
         background-color: #5925DC;
     }
+
     .reports-search-input {
         margin-left: 50px;
         margin-right: 50px;
@@ -337,7 +373,7 @@
         border: 2px solid #D2D2D2;
         width: 300px;
         height: 50px;
-       font-family: "Urbanist";
+        font-family: "Urbanist";
         font-size: 20px;
         font-style: normal;
         font-weight: 400;
@@ -355,6 +391,7 @@
         border-radius: 15px;
         border: 2px solid #D2D2D2;
     }
+
     .reports-data-body {
         display: flex;
         width: 100%;
@@ -362,6 +399,7 @@
         background: #F4F3FF;
         margin: 5px;
     }
+
     .reports-data-body-table-load-head-row {
         font-family: "Urbanist";
         font-size: 15px;
@@ -371,6 +409,7 @@
         letter-spacing: -0.289px;
         color: #767676;
     }
+
     .reports-data-body-table-load-body {
         font-family: "Urbanist";
         font-size: 10px;
@@ -381,6 +420,7 @@
         color: #767676;
         text-align: center;
     }
+
     .reports-data-body-table-day-head-row {
         font-family: "Urbanist";
         font-size: 15px;
@@ -390,6 +430,7 @@
         letter-spacing: -0.289px;
         color: #767676;
     }
+
     .reports-data-body-table-day-body {
         font-family: "Urbanist";
         font-size: 10px;
@@ -400,6 +441,7 @@
         color: #767676;
         text-align: center;
     }
+
     .reports-data-body-table-item-head-row {
         font-family: "Urbanist";
         font-size: 15px;
@@ -409,6 +451,7 @@
         letter-spacing: -0.289px;
         color: #767676;
     }
+
     .reports-data-body-table-item-body {
         font-family: "Urbanist";
         font-size: 10px;
@@ -419,6 +462,7 @@
         color: #767676;
         text-align: center;
     }
+
     .reports-data-body-table-vechicle-head-row {
         font-family: "Urbanist";
         font-size: 15px;
@@ -428,6 +472,7 @@
         letter-spacing: -0.289px;
         color: #767676;
     }
+
     .reports-data-body-table-vechicle-body {
         font-family: "Urbanist";
         font-size: 10px;
@@ -438,6 +483,7 @@
         color: #767676;
         text-align: center;
     }
+
     .reports-data-body-table-driver-head-row {
         font-family: "Urbanist";
         font-size: 15px;
@@ -447,6 +493,7 @@
         letter-spacing: -0.289px;
         color: #767676;
     }
+
     .reports-data-body-table-driver-body {
         font-family: "Urbanist";
         font-size: 10px;
@@ -457,6 +504,7 @@
         color: #767676;
         text-align: center;
     }
+
     .reports-data-header {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -465,19 +513,21 @@
         width: 95%;
         height: 52px;
         margin: auto 5px;
-       font-family: "Urbanist";
+        font-family: "Urbanist";
         font-size: 15px;
         font-style: bold;
         font-weight: 600;
         line-height: 28px;
         letter-spacing: -0.289px;
     }
-    .reports-data-header-button{
+
+    .reports-data-header-button {
         background-color: #fff;
         color: #5925DC;
         border: 1px solid #5925DC;
         font-size: 9px;
     }
+
     .export-button {
         margin-left: 25px;
         margin-right: 25px;
@@ -497,6 +547,7 @@
         color: #ffffff;
         background-color: #5925DC;
     }
+
     .reports-search-input {
         margin-left: 30px;
         margin-right: 25px;
@@ -504,14 +555,15 @@
         border: 2px solid #D2D2D2;
         width: 150px;
         height: 30px;
-       font-family: "Urbanist";
+        font-family: "Urbanist";
         font-size: 12px;
         font-style: normal;
         font-weight: 400;
         line-height: 28px;
         letter-spacing: -0.289px;
     }
-    .pagination-container{
+
+    .pagination-container {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;

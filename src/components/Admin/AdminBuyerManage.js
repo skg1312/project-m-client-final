@@ -220,32 +220,40 @@ function AdminBuyerManage() {
 										{buyer.buyercompanystatecode?.substring(0, 12) ?? 'N/A'}
 									</td>
 									<td className='admin-buyer-manage-data-table-data'>
-										 <button
-                    style={{
-                      background: 'none',
-                      border : 'none',
-                    }}
-                   onClick={() => handleBuyerUpdate(buyer._id)}
-                  >
-                    <img  src={E} alt='Update' style={{
-                      height : '30px',
-                      width : '30px',
-                    }
-                  }/>
-                  </button>
-                  <button
-                      style={{
-                        background: 'none',
-                        border : 'none',
-                      }}
-                     onClick={() => handleBuyerDelete(buyer._id)}
-                    >
-                      <img src={D} alt='delete' style={{
-                      height : '30px',
-                      width : '30px',
-                    }
-                  }/>
-                    </button>
+										<button
+											style={{
+												background: 'none',
+												border: 'none',
+											}}
+											onClick={() => handleBuyerUpdate(buyer._id)}
+										>
+											<img
+												src={E}
+												alt='Update'
+												style={{
+													height: '18px',
+													width: '18px',
+													cursor: 'pointer',
+												}}
+											/>
+										</button>
+										<button
+											style={{
+												background: 'none',
+												border: 'none',
+											}}
+											onClick={() => handleBuyerDelete(buyer._id)}
+										>
+											<img
+												src={D}
+												alt='delete'
+												style={{
+													height: '18px',
+													width: '18px',
+													cursor: 'pointer',
+												}}
+											/>
+										</button>
 									</td>
 								</tr>
 							))}

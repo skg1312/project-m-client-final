@@ -16,7 +16,7 @@
 
 .admin-company-manager-data-title {
 	font-family: 'Urbanist';
-	font-size: 32px;
+	font-size: 26px;
 	font-style: normal;
 	font-weight: 600;
 	line-height: 38px;
@@ -42,7 +42,7 @@
 .admin-company-manager-data-table-body {
 	color: #767676;
 	font-family: 'Urbanist';
-	font-size: 20px;
+	font-size: 16px;
 	font-style: bold;
 	font-weight: 400;
 	line-height: 28px;
@@ -61,6 +61,7 @@
 	border-radius: 3px;
 	border: 1px solid #5925dc;
 }
+
 .admin-company-manager-data-table-button:hover {
 	cursor: pointer;
 }
@@ -113,7 +114,7 @@
 
 .admin-company-manager-form-title {
 	font-family: 'Urbanist';
-	font-size: 32px;
+	font-size: 26px;
 	font-style: normal;
 	font-weight: 600;
 	line-height: 38px;
@@ -131,12 +132,13 @@
 	margin-bottom: 20px;
 	color: var(--color-grey-60, #767676);
 	font-family: 'Urbanist';
-	font-size: 20px;
+	font-size: 16px;
 	font-style: normal;
 	font-weight: 400;
 	line-height: 26px;
 	letter-spacing: -0.289px;
 }
+
 .admin-company-manager-form-input-low {
 	border-radius: 6px;
 	border: 1px solid #ededed;
@@ -151,9 +153,11 @@
 	font-size: 20px;
 	font-style: normal;
 	font-weight: 400;
-	line-height: 26px; /* 162.5% */
+	line-height: 26px;
+	/* 162.5% */
 	letter-spacing: -0.289px;
 }
+
 .admin-company-manager-form-button {
 	color: var(--color-white-100, #fefefe);
 	text-align: center;
@@ -173,16 +177,20 @@
 	margin-bottom: 20px;
 	margin-top: 20px;
 }
+
 .admin-company-manager-form-button:hover {
 	cursor: pointer;
 }
+
 .highlight {
 	color: green !important;
 }
+
 .admin-company-manage-form-input-checkbox {
 	width: 16px;
 	height: 16px;
 }
+
 .admin-company-manage-form-input-checkbox-label {
 	color: var(--color-grey-100, #1a1a1a);
 	font-feature-settings: 'clig' off, 'liga' off;
@@ -220,6 +228,7 @@
 		text-align: center;
 		align-items: center;
 	}
+
 	.admin-company-manager-data {
 		margin-left: 35px;
 		margin-top: 100px;
@@ -228,6 +237,7 @@
 		border-radius: 15px;
 		border: 2px solid #d2d2d2;
 	}
+
 	.admin-company-manager-form {
 		margin-left: 35px;
 		margin-top: 100px;
@@ -236,6 +246,7 @@
 		border-radius: 15px;
 		border: 2px solid #d2d2d2;
 	}
+
 	.admin-logout-button-nav {
 		margin-top: 10px;
 		margin-left: 5px;
@@ -256,6 +267,7 @@
 		border-radius: 12px;
 		border: 2px solid #d2d2d2;
 	}
+
 	.admin-company-manager-form {
 		margin-left: 15px;
 		margin-top: 40px;
@@ -264,6 +276,7 @@
 		border-radius: 12px;
 		border: 2px solid #d2d2d2;
 	}
+
 	.admin-company-manager-data-title {
 		font-family: 'Urbanist';
 		font-size: 26px;
@@ -274,12 +287,14 @@
 		text-align: left;
 		padding-left: 50px;
 	}
+
 	.admin-company-manager-data-table-head {
 		color: #1a1a1a;
 		font-family: 'Urbanist';
 		font-size: 15px;
 		font-style: bold;
 	}
+
 	.admin-company-manager-data-table-body {
 		color: #767676;
 		font-family: 'Urbanist';
@@ -289,6 +304,7 @@
 		line-height: 28px;
 		letter-spacing: -0.289px;
 	}
+
 	.admin-user-manager-form-input {
 		border-radius: 6px;
 		border: 1px solid #ededed;
@@ -304,6 +320,7 @@
 		line-height: 26px;
 		letter-spacing: -0.289px;
 	}
+
 	.admin-company-manager-form-input {
 		border-radius: 6px;
 		border: 1px solid #ededed;
@@ -319,6 +336,7 @@
 		line-height: 26px;
 		letter-spacing: -0.289px;
 	}
+
 	.admin-company-manager-form-title {
 		font-family: 'Urbanist';
 		font-size: 26px;
@@ -329,6 +347,7 @@
 		text-align: left;
 		padding-left: 50px;
 	}
+
 	.admin-company-manager-form-input-checkbox-label {
 		color: #1a1a1a;
 		font-feature-settings: 'clig' off, 'liga' off;
@@ -339,6 +358,7 @@
 		line-height: 26px;
 		letter-spacing: -0.289px;
 	}
+
 	.admin-company-manager-form-button {
 		color: #fefefe;
 		text-align: center;
@@ -358,6 +378,7 @@
 		margin-bottom: 20px;
 		margin-top: 20px;
 	}
+
 	.admin-company-manager-form-input-high {
 		border-radius: 6px;
 		border: 1px solid #ededed;
@@ -373,6 +394,7 @@
 		line-height: 26px;
 		letter-spacing: -0.289px;
 	}
+
 	.admin-company-manager-form-input-low {
 		border-radius: 6px;
 		border: 1px solid #ededed;
@@ -390,6 +412,7 @@
 		line-height: 26px;
 		letter-spacing: -0.289px;
 	}
+
 	.admin-company-manage-form-input-checkbox-label {
 		color: var(--color-grey-100, #1a1a1a);
 		font-feature-settings: 'clig' off, 'liga' off;
@@ -400,6 +423,7 @@
 		line-height: 26px;
 		letter-spacing: -0.289px;
 	}
+
 	.admin-company-manager-data-table-button {
 		color: #fefefe;
 		font-family: 'Urbanist';
@@ -423,6 +447,7 @@
 		border-radius: 12px;
 		border: 2px solid #d2d2d2;
 	}
+
 	.admin-company-manager-form {
 		margin-left: 15px;
 		margin-top: 40px;
@@ -431,6 +456,7 @@
 		border-radius: 12px;
 		border: 2px solid #d2d2d2;
 	}
+
 	.admin-company-manager-data-title {
 		font-family: 'Urbanist';
 		font-size: 15px;
@@ -441,12 +467,14 @@
 		text-align: left;
 		padding-left: 50px;
 	}
+
 	.admin-company-manager-data-table-head {
 		color: #1a1a1a;
 		font-family: 'Urbanist';
 		font-size: 10px;
 		font-style: bold;
 	}
+
 	.admin-company-manager-data-table-body {
 		color: #767676;
 		font-family: 'Urbanist';
@@ -456,6 +484,7 @@
 		line-height: 28px;
 		letter-spacing: -0.289px;
 	}
+
 	.admin-user-manager-form-input {
 		border-radius: 6px;
 		border: 1px solid #ededed;
@@ -471,6 +500,7 @@
 		line-height: 26px;
 		letter-spacing: -0.289px;
 	}
+
 	.admin-company-manager-form-input {
 		border-radius: 6px;
 		border: 1px solid #ededed;
@@ -486,6 +516,7 @@
 		line-height: 26px;
 		letter-spacing: -0.289px;
 	}
+
 	.admin-company-manager-form-title {
 		font-family: 'Urbanist';
 		font-size: 15px;
@@ -496,6 +527,7 @@
 		text-align: left;
 		padding-left: 50px;
 	}
+
 	.admin-company-manager-form-input-checkbox-label {
 		color: #1a1a1a;
 		font-feature-settings: 'clig' off, 'liga' off;
@@ -506,6 +538,7 @@
 		line-height: 26px;
 		letter-spacing: -0.289px;
 	}
+
 	.admin-company-manager-form-button {
 		color: #fefefe;
 		text-align: center;
@@ -525,6 +558,7 @@
 		margin-bottom: 20px;
 		margin-top: 20px;
 	}
+
 	.admin-company-manager-form-input-high {
 		border-radius: 6px;
 		border: 1px solid #ededed;
@@ -540,6 +574,7 @@
 		line-height: 26px;
 		letter-spacing: -0.289px;
 	}
+
 	.admin-company-manager-form-input-low {
 		border-radius: 6px;
 		border: 1px solid #ededed;
@@ -555,6 +590,7 @@
 		line-height: 26px;
 		letter-spacing: -0.289px;
 	}
+
 	.admin-company-manage-form-input-checkbox-label {
 		color: var(--color-grey-100, #1a1a1a);
 		font-feature-settings: 'clig' off, 'liga' off;
@@ -565,6 +601,7 @@
 		line-height: 26px;
 		letter-spacing: -0.289px;
 	}
+
 	.admin-company-manager-data-table-button {
 		color: #fefefe;
 		font-family: 'Urbanist';
@@ -577,6 +614,7 @@
 		border-radius: 3px;
 		border: 1px solid #5925dc;
 	}
+
 	.admin-company-manage-form-input-checkbox {
 		width: 12px;
 		height: 12px;

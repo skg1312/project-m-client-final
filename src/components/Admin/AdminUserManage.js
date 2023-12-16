@@ -8,268 +8,320 @@ import E from '../images/E.png';
 import D from '../images/D.png';
 
 function AdminUserManage() {
-  const [users, setUsers] = useState([]);
-  const [pageNumber, setPageNumber] = useState(0);
-  const [selectedUserId, setSelectedUserId] = useState(null);
-  const API = process.env.REACT_APP_API;
-  const [selectedUserData, setSelectedUserData] = useState({
-    username: '',
-    useremail: '',
-    userpassword: '',
-    userphone: '',
-    useraccess: '',
-  });
+	const [users, setUsers] = useState([]);
+	const [pageNumber, setPageNumber] = useState(0);
+	const [selectedUserId, setSelectedUserId] = useState(null);
+	const API = process.env.REACT_APP_API;
+	const [selectedUserData, setSelectedUserData] = useState({
+		username: '',
+		useremail: '',
+		userpassword: '',
+		userphone: '',
+		useraccess: '',
+	});
 
-  const itemsPerPage = 12;
-  const [searchInput, setSearchInput] = useState('');
+	const itemsPerPage = 12;
+	const [searchInput, setSearchInput] = useState('');
 
-  // Sort the user array in reverse order (newest first)
-  const sortedUsers = [...users].reverse();
-  const displayedUserSearch = sortedUsers
-  .filter(
-    (item) =>
-      item.username.toLowerCase().includes(searchInput.toLowerCase()))
-  .slice(pageNumber * itemsPerPage, (pageNumber + 1) * itemsPerPage);
+	// Sort the user array in reverse order (newest first)
+	const sortedUsers = [...users].reverse();
+	const displayedUserSearch = sortedUsers
+		.filter((item) =>
+			item.username.toLowerCase().includes(searchInput.toLowerCase())
+		)
+		.slice(pageNumber * itemsPerPage, (pageNumber + 1) * itemsPerPage);
 
-  const pageCount = Math.ceil(users.length / itemsPerPage);
+	const pageCount = Math.ceil(users.length / itemsPerPage);
 
-  const changePage = ({ selected }) => {
-    setPageNumber(selected);
-  };
+	const changePage = ({ selected }) => {
+		setPageNumber(selected);
+	};
 
-  useEffect(() => {
-    axios
-      .get(`${API}user`)
-      .then((response) => {
-        setUsers(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching user data:', error);
-      });
-  }, [API]);
+	useEffect(() => {
+		axios
+			.get(`${API}user`)
+			.then((response) => {
+				setUsers(response.data);
+			})
+			.catch((error) => {
+				console.error('Error fetching user data:', error);
+			});
+	}, [API]);
 
-  const handleUserUpdate = (userUpdateId) => {
-    setSelectedUserId(userUpdateId);
-    const selectedUser = users.find((user) => user._id === userUpdateId);
-    setSelectedUserData({ ...selectedUser });
-  };
+	const handleUserUpdate = (userUpdateId) => {
+		setSelectedUserId(userUpdateId);
+		const selectedUser = users.find((user) => user._id === userUpdateId);
+		setSelectedUserData({ ...selectedUser });
+	};
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
+	const handleFormSubmit = (e) => {
+		e.preventDefault();
 
-    if (selectedUserId) {
-      // Update an existing user
-      axios
-        .put(`${API}user/${selectedUserId}`, selectedUserData)
-        .then((response) => {
-          // Handle successful update (if needed)
-          console.log('User updated successfully:', response.data);
-          // Optionally, you can update the local state to reflect the changes
-          setUsers((prevUsers) =>
-            prevUsers.map((user) => (user._id === selectedUserId ? response.data : user))
-          );
-          alert("User Details are Updated Successfully");
-        })
-        .catch((error) => {
-          console.error('Error updating user:', error);
-        });
-    } else {
-      // Create a new user
-      axios
-        .post(`${API}user`, selectedUserData)
-        .then((response) => {
-          // Handle successful creation (if needed)
-          console.log('User created successfully:', response.data);
-          // Optionally, you can update the local state to include the new user
-          setUsers((prevUsers) => [...prevUsers, response.data]);
-          alert("User Details are Saved Successfully");
-        })
-        .catch((error) => {
-          console.error('Error creating user:', error);
-        });
-    }
-   
+		if (selectedUserId) {
+			// Update an existing user
+			axios
+				.put(`${API}user/${selectedUserId}`, selectedUserData)
+				.then((response) => {
+					// Handle successful update (if needed)
+					console.log('User updated successfully:', response.data);
+					// Optionally, you can update the local state to reflect the changes
+					setUsers((prevUsers) =>
+						prevUsers.map((user) =>
+							user._id === selectedUserId ? response.data : user
+						)
+					);
+					alert('User Details are Updated Successfully');
+				})
+				.catch((error) => {
+					console.error('Error updating user:', error);
+				});
+		} else {
+			// Create a new user
+			axios
+				.post(`${API}user`, selectedUserData)
+				.then((response) => {
+					// Handle successful creation (if needed)
+					console.log('User created successfully:', response.data);
+					// Optionally, you can update the local state to include the new user
+					setUsers((prevUsers) => [...prevUsers, response.data]);
+					alert('User Details are Saved Successfully');
+				})
+				.catch((error) => {
+					console.error('Error creating user:', error);
+				});
+		}
 
-    setSelectedUserData({
-      username: '',
-      useremail: '',
-      userpassword: '',
-      userphone: '',
-      useraccess: '',
-    });
+		setSelectedUserData({
+			username: '',
+			useremail: '',
+			userpassword: '',
+			userphone: '',
+			useraccess: '',
+		});
 
-    setSelectedUserId(null);
-  };
-const handleDeleteUser = (userId) => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this user?");
-    if (confirmDelete) {
-        axios
-            .delete(`${API}user/${userId}`)
-            .then((response) => {
-                console.log("User deleted successfully");
+		setSelectedUserId(null);
+	};
+	const handleDeleteUser = (userId) => {
+		const confirmDelete = window.confirm(
+			'Are you sure you want to delete this user?'
+		);
+		if (confirmDelete) {
+			axios
+				.delete(`${API}user/${userId}`)
+				.then((response) => {
+					console.log('User deleted successfully');
 
-                setUsers((prevUsers) =>
-                    prevUsers.filter((user) => user._id !== userId)
-                );
-            })
-            .catch((error) => {
-                console.error("Error deleting user:", error);
-            });
-    }
-};
+					setUsers((prevUsers) =>
+						prevUsers.filter((user) => user._id !== userId)
+					);
+				})
+				.catch((error) => {
+					console.error('Error deleting user:', error);
+				});
+		}
+	};
 
- 
-  return (
-    <div
-      style={{
-        backgroundImage: `url(${background})`,
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        minHeight: '100vh',
-      }}
-    >
-      <AdminNavbar />
-      <div className='admin-user-manage'>
-      
-        <div className='admin-user-manage-data'>
-          <h1 className='admin-user-manage-data-title'>ALL USERS</h1>
-          <input
-              type='text'
-              placeholder='Search User...'
-              className='admin-user-manage-form-input' // Search input placeholder
-              value={searchInput} // Bind the input value to the state
-              onChange={(e) => setSearchInput(e.target.value)} // Update the searchInput state as the user types
-            />
-          <table className='admin-user-manage-data-table'>
-            <thead className='admin-user-manage-data-table-head'>
-              <tr className='admin-user-manage-data-table-row-head'>
-                <th className='admin-user-manage-data-table-header'>Username</th>
-                <th className='admin-user-manage-data-table-header'>Email</th>
-                <th className='admin-user-manage-data-table-header'>Phone</th>
-                <th className='admin-user-manage-data-table-header'>Access</th>
-                <th className='admin-user-manage-data-table-header'>Action</th>
-              </tr>
-            </thead>
-            <tbody className='admin-user-manage-data-table-body'>
-              {displayedUserSearch.map((user) => (
-                <tr key={user._id} className='admin-user-manage-data-table-row-body'>
-                  <td className='admin-user-manage-data-table-data highlight'>{user.username.substring(0, 12)}</td>
-                  <td className='admin-user-manage-data-table-data'>{user.useremail.substring(0, 18)}</td>
-                  <td className='admin-user-manage-data-table-data'>{user.userphone}</td>
-                  <td className='admin-user-manage-data-table-data'>{user.useraccess.substring(0, 12)}</td>
-                  <td className='admin-user-manage-data-table-data'>
-                    <button
-    style={{
-        background: 'none',
-        border: 'none',
-    }}
-    onClick={() => handleUserUpdate(user._id)} // Fix the variable name here
->
-    <img src={E} alt='Update' style={{
-        height: '30px',
-        width: '30px',
-    }} />
-</button>
-<button
-    style={{
-        background: 'none',
-        border: 'none',
-    }}
-    onClick={() => {
-        handleDeleteUser(user._id); // Fix the variable name here
-    }}
->
-    <img src={D} alt='delete' style={{
-        height: '30px',
-        width: '30px',
-    }} />
-</button>
+	return (
+		<div
+			style={{
+				backgroundImage: `url(${background})`,
+				backgroundSize: 'cover',
+				backgroundRepeat: 'no-repeat',
+				minHeight: '100vh',
+			}}
+		>
+			<AdminNavbar />
+			<div className='admin-user-manage'>
+				<div className='admin-user-manage-data'>
+					<h1 className='admin-user-manage-data-title'>ALL USERS</h1>
+					<input
+						type='text'
+						placeholder='Search User...'
+						className='admin-user-manage-form-input' // Search input placeholder
+						value={searchInput} // Bind the input value to the state
+						onChange={(e) => setSearchInput(e.target.value)} // Update the searchInput state as the user types
+					/>
+					<table className='admin-user-manage-data-table'>
+						<thead className='admin-user-manage-data-table-head'>
+							<tr className='admin-user-manage-data-table-row-head'>
+								<th className='admin-user-manage-data-table-header'>
+									Username
+								</th>
+								<th className='admin-user-manage-data-table-header'>Email</th>
+								<th className='admin-user-manage-data-table-header'>Phone</th>
+								<th className='admin-user-manage-data-table-header'>Access</th>
+								<th className='admin-user-manage-data-table-header'>Action</th>
+							</tr>
+						</thead>
+						<tbody className='admin-user-manage-data-table-body'>
+							{displayedUserSearch.map((user) => (
+								<tr
+									key={user._id}
+									className='admin-user-manage-data-table-row-body'
+								>
+									<td className='admin-user-manage-data-table-data highlight'>
+										{user.username.substring(0, 12)}
+									</td>
+									<td className='admin-user-manage-data-table-data'>
+										{user.useremail.substring(0, 18)}
+									</td>
+									<td className='admin-user-manage-data-table-data'>
+										{user.userphone}
+									</td>
+									<td className='admin-user-manage-data-table-data'>
+										{user.useraccess.substring(0, 12)}
+									</td>
+									<td className='admin-user-manage-data-table-data'>
+										<button
+											style={{
+												background: 'none',
+												border: 'none',
+											}}
+											onClick={() => handleUserUpdate(user._id)} // Fix the variable name here
+										>
+											<img
+												src={E}
+												alt='Update'
+												style={{
+													height: '18px',
+													width: '18px',
+													cursor: 'pointer',
+												}}
+											/>
+										</button>
+										<button
+											style={{
+												background: 'none',
+												border: 'none',
+											}}
+											onClick={() => {
+												handleDeleteUser(user._id); // Fix the variable name here
+											}}
+										>
+											<img
+												src={D}
+												alt='delete'
+												style={{
+													height: '18px',
+													width: '18px',
+													cursor: 'pointer',
+												}}
+											/>
+										</button>
+									</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+					<br />
+					<ReactPaginate
+						className='pagination-container'
+						previousLabel='Previous'
+						nextLabel='Next'
+						pageCount={pageCount}
+						onPageChange={changePage}
+						containerClassName='pagination'
+						previousLinkClassName='previous-page'
+						nextLinkClassName='next-page'
+						disabledClassName='pagination-button disabled'
+						activeClassName='pagination-button active'
+						pageClassName='pagination-button'
+						breakClassName='pagination-space'
+					/>
+				</div>
+				<div className='admin-user-manage-form'>
+					<h1 className='admin-user-manage-form-title'>
+						{selectedUserId ? 'UPDATE USER' : 'ADD USER'}
+					</h1>
+					<form
+						className='admin-user-manage-form-form'
+						onSubmit={handleFormSubmit}
+					>
+						<input
+							type='text'
+							required
+							className='admin-user-manage-form-input'
+							placeholder='Username'
+							value={selectedUserData.username || ''}
+							onChange={(e) =>
+								setSelectedUserData({
+									...selectedUserData,
+									username: e.target.value,
+								})
+							}
+						/>
+						<input
+							type='email'
+							required
+							className='admin-user-manage-form-input'
+							placeholder='Email'
+							value={selectedUserData.useremail || ''}
+							onChange={(e) =>
+								setSelectedUserData({
+									...selectedUserData,
+									useremail: e.target.value,
+								})
+							}
+						/>
+						<input
+							type='password'
+							required
+							className='admin-user-manage-form-input'
+							placeholder='Password'
+							value={selectedUserData.userpassword || ''}
+							onChange={(e) =>
+								setSelectedUserData({
+									...selectedUserData,
+									userpassword: e.target.value,
+								})
+							}
+						/>
+						<input
+							type='tel'
+							required
+							maxLength='10'
+							className='admin-user-manage-form-input'
+							placeholder='Phone'
+							value={selectedUserData.userphone || ''}
+							onChange={(e) =>
+								setSelectedUserData({
+									...selectedUserData,
+									userphone: e.target.value,
+								})
+							}
+						/>
 
-
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <br />
-          <ReactPaginate
-            className='pagination-container'
-            previousLabel='Previous'
-            nextLabel='Next'
-            pageCount={pageCount}
-            onPageChange={changePage}
-            containerClassName='pagination'
-            previousLinkClassName='previous-page'
-            nextLinkClassName='next-page'
-            disabledClassName='pagination-button disabled'
-            activeClassName='pagination-button active'
-            pageClassName='pagination-button'
-            breakClassName='pagination-space'
-          />
-        </div>
-        <div className='admin-user-manage-form'>
-          <h1 className='admin-user-manage-form-title'>{selectedUserId ? 'UPDATE USER' : 'ADD USER'}</h1>
-          <form className='admin-user-manage-form-form' onSubmit={handleFormSubmit}>
-            <input
-              type='text'
-              required
-              className='admin-user-manage-form-input'
-              placeholder='Username'
-              value={selectedUserData.username || ''}
-              onChange={(e) => setSelectedUserData({ ...selectedUserData, username: e.target.value })}
-            />
-            <input
-              type='email'
-              required
-              className='admin-user-manage-form-input'
-              placeholder='Email'
-              value={selectedUserData.useremail || ''}
-              onChange={(e) => setSelectedUserData({ ...selectedUserData, useremail: e.target.value })}
-            />
-            <input
-              type='password'
-              required
-              className='admin-user-manage-form-input'
-              placeholder='Password'
-              value={selectedUserData.userpassword || ''}
-              onChange={(e) => setSelectedUserData({ ...selectedUserData, userpassword: e.target.value })}
-            />
-            <input
-              type='tel'
-              required
-              maxLength='10'
-              className='admin-user-manage-form-input'
-              placeholder='Phone'
-              value={selectedUserData.userphone || ''}
-              onChange={(e) => setSelectedUserData({ ...selectedUserData, userphone: e.target.value })}
-            />
-            
-            <select
-            required
-            className='admin-staff-manager-form-input'
-            value={selectedUserData.useraccess || ''}
-            onChange={(e) => setSelectedUserData({ ...selectedUserData, useraccess: e.target.value })}
-          >
-            <option value='Super-User'>Super-User</option>
-            <option value='HO-User'>HO-User</option>
-            <option value='User'>User</option>
-          </select>
-            {/*
+						<select
+							required
+							className='admin-staff-manager-form-input'
+							value={selectedUserData.useraccess || ''}
+							onChange={(e) =>
+								setSelectedUserData({
+									...selectedUserData,
+									useraccess: e.target.value,
+								})
+							}
+						>
+							<option value='Super-User'>Super-User</option>
+							<option value='HO-User'>HO-User</option>
+							<option value='User'>User</option>
+						</select>
+						{/*
             <br />
             <input type='checkbox' required className='admin-user-manage-form-input-checkbox' />
           <label className='admin-user-manage-form-input-checkbox-label'>
             I agree with Terms and Conditions & Privacy Policy
           </label>
           */}
-            <br />
-            <button type='submit' className='admin-user-manage-form-button'>
-              {selectedUserId ? 'Update' : 'Add'}
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-  );
+						<br />
+						<button type='submit' className='admin-user-manage-form-button'>
+							{selectedUserId ? 'Update' : 'Add'}
+						</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	);
 }
 
 export default AdminUserManage;

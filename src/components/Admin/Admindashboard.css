@@ -6,7 +6,8 @@
     font-weight: 600;
     line-height: 62px;
     letter-spacing: -0.939px;
-    text-align: center
+    text-align: center;
+    margin-top: 0;
 }
 
 .admin-dashboard-buttons-row {
@@ -15,8 +16,8 @@
 }
 
 .admin-dashboard-button {
-    width: 300px;
-    height: 200px;
+    width: 270px;
+    height: 170px;
     border-radius: 15px;
     border: 2px solid #D2D2D2;
     background: none;
@@ -63,6 +64,7 @@
     padding-top: 20px;
     padding-right: 20px;
     padding-bottom: 20px;
+    margin-bottom: 0;
 }
 
 .admin-logout-button-value {
@@ -87,14 +89,14 @@
 }
 
 /* Mobile styles - 1200px width and below */
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1024px) {
     .admin-dashboard-buttons-row {
         grid-template-columns: 1fr 1fr;
     }
 }
 
 /* Mobile styles - 768px width and below */
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 670px) {
     .admin-dashboard-buttons-row {
         grid-template-columns: 1fr;
     }

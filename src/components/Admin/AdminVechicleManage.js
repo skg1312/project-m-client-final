@@ -8,245 +8,285 @@ import E from '../images/E.png';
 import D from '../images/D.png';
 
 function AdminLoadingManage() {
-  const [loadings, setLoadings] = useState([]);
-  const [pageNumber, setPageNumber] = useState(0);
-  const [selectedLoadingId, setSelectedLoadingId] = useState(null);
-  const API = process.env.REACT_APP_API;
-  const [selectedLoadingData, setSelectedLoadingData] = useState({
-    startpoint: '',
-    endpoint: '',
-    rate: '',
-  });
+	const [loadings, setLoadings] = useState([]);
+	const [pageNumber, setPageNumber] = useState(0);
+	const [selectedLoadingId, setSelectedLoadingId] = useState(null);
+	const API = process.env.REACT_APP_API;
+	const [selectedLoadingData, setSelectedLoadingData] = useState({
+		startpoint: '',
+		endpoint: '',
+		rate: '',
+	});
 
-  const itemsPerPage = 12;
-  const [searchInput, setSearchInput] = useState('');
+	const itemsPerPage = 12;
+	const [searchInput, setSearchInput] = useState('');
 
-  // Sort the loading array in reverse order (newest first)
-  const sortedLoadings = [...loadings].reverse();
-  const displayedLoadingsSearch = sortedLoadings
-    .filter(
-      (item) =>
-        item.startpoint.toLowerCase().includes(searchInput.toLowerCase()) ||
-        item.endpoint.toLowerCase().includes(searchInput.toLowerCase())
-    )
-    .slice(pageNumber * itemsPerPage, (pageNumber + 1) * itemsPerPage);
+	// Sort the loading array in reverse order (newest first)
+	const sortedLoadings = [...loadings].reverse();
+	const displayedLoadingsSearch = sortedLoadings
+		.filter(
+			(item) =>
+				item.startpoint.toLowerCase().includes(searchInput.toLowerCase()) ||
+				item.endpoint.toLowerCase().includes(searchInput.toLowerCase())
+		)
+		.slice(pageNumber * itemsPerPage, (pageNumber + 1) * itemsPerPage);
 
-  const pageCount = Math.ceil(sortedLoadings.length / itemsPerPage);
+	const pageCount = Math.ceil(sortedLoadings.length / itemsPerPage);
 
-  const changePage = ({ selected }) => {
-    setPageNumber(selected);
-  };
+	const changePage = ({ selected }) => {
+		setPageNumber(selected);
+	};
 
-  useEffect(() => {
-    axios
-      .get(`${API}load`)
-      .then((response) => {
-        setLoadings(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching loading data:', error);
-      });
-  }, [API]);
+	useEffect(() => {
+		axios
+			.get(`${API}load`)
+			.then((response) => {
+				setLoadings(response.data);
+			})
+			.catch((error) => {
+				console.error('Error fetching loading data:', error);
+			});
+	}, [API]);
 
-  const handleLoadingUpdate = (loadingUpdateId) => {
-    setSelectedLoadingId(loadingUpdateId);
-    const selectedLoading = loadings.find((loading) => loading._id === loadingUpdateId);
-    setSelectedLoadingData({ ...selectedLoading });
-  };
+	const handleLoadingUpdate = (loadingUpdateId) => {
+		setSelectedLoadingId(loadingUpdateId);
+		const selectedLoading = loadings.find(
+			(loading) => loading._id === loadingUpdateId
+		);
+		setSelectedLoadingData({ ...selectedLoading });
+	};
 
-  const handleLoadingDelete = (loadingDeleteId) => {
-  const isConfirmed = window.confirm('Are you sure you want to delete this loading?');
+	const handleLoadingDelete = (loadingDeleteId) => {
+		const isConfirmed = window.confirm(
+			'Are you sure you want to delete this loading?'
+		);
 
-  if (isConfirmed) {
-    axios
-      .delete(`${API}load/${loadingDeleteId}`)
-      .then(() => {
-        console.log('Loading deleted successfully');
-        setLoadings((prevLoadings) => prevLoadings.filter((loading) => loading._id !== loadingDeleteId));
-      })
-      .catch((error) => {
-        console.error('Error deleting loading:', error);
-      });
-  }
-};
+		if (isConfirmed) {
+			axios
+				.delete(`${API}load/${loadingDeleteId}`)
+				.then(() => {
+					console.log('Loading deleted successfully');
+					setLoadings((prevLoadings) =>
+						prevLoadings.filter((loading) => loading._id !== loadingDeleteId)
+					);
+				})
+				.catch((error) => {
+					console.error('Error deleting loading:', error);
+				});
+		}
+	};
 
+	const handleFormSubmit = (e) => {
+		e.preventDefault();
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
+		if (selectedLoadingId) {
+			// Update an existing loading
+			axios
+				.put(`${API}load/${selectedLoadingId}`, selectedLoadingData)
+				.then((response) => {
+					// Handle successful update (if needed)
+					console.log('Loading updated successfully:', response.data);
+					// Optionally, you can update the local state to reflect the changes
+					setLoadings((prevLoadings) =>
+						prevLoadings.map((loading) =>
+							loading._id === selectedLoadingId ? response.data : loading
+						)
+					);
+					alert('Load Details are Updated Successfully');
+				})
+				.catch((error) => {
+					console.error('Error updating loading:', error);
+				});
+		} else {
+			axios
+				.post(`${API}load`, selectedLoadingData)
+				.then((response) => {
+					console.log('Loading created successfully:');
+					setLoadings((prevLoadings) => [...prevLoadings, response.data]);
+				})
+				.catch((error) => {
+					console.error('Error creating loading:', error);
+				});
+		}
 
-    if (selectedLoadingId) {
-      // Update an existing loading
-      axios
-        .put(`${API}load/${selectedLoadingId}`, selectedLoadingData)
-        .then((response) => {
-          // Handle successful update (if needed)
-          console.log('Loading updated successfully:', response.data);
-          // Optionally, you can update the local state to reflect the changes
-          setLoadings((prevLoadings) =>
-            prevLoadings.map((loading) =>
-              loading._id === selectedLoadingId ? response.data : loading
-            )
-          );
-          alert("Load Details are Updated Successfully");
-        })
-        .catch((error) => {
-          console.error('Error updating loading:', error);
-        });
-    } else {
-      axios
-        .post(`${API}load`, selectedLoadingData)
-        .then((response) => {
-          console.log('Loading created successfully:');
-          setLoadings((prevLoadings) => [...prevLoadings, response.data]);
-        })
-        .catch((error) => {
-          console.error('Error creating loading:', error);
-        });
-    }
+		setSelectedLoadingData({
+			startpoint: '',
+			endpoint: '',
+			rate: '',
+		});
 
-    setSelectedLoadingData({
-      startpoint: '',
-      endpoint: '',
-      rate: '',
-    });
+		setSelectedLoadingId(null);
+	};
 
-    setSelectedLoadingId(null);
-  };
-
-  return (
-    <div
-      style={{
-        backgroundImage: `url(${background})`,
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        minHeight: '100vh',
-      }}
-    >
-      <AdminNavbar />
-      <div className='admin-loading-manage'>
-        <div className='admin-loading-manage-data'>
-          <h1 className='admin-loading-manage-data-title'>ALL LOADINGS</h1>
-          <input
-            type='text'
-            placeholder='Search Loading...'
-            className='admin-user-manage-form-input'
-            value={searchInput}
-            onChange={(e) => setSearchInput(e.target.value)}
-          />
-          <table className='admin-loading-manage-data-table'>
-            <thead className='admin-loading-manage-data-table-head'>
-              <tr className='admin-loading-manage-data-table-row-head'>
-                <th className='admin-loading-manage-data-table-header'>Start Point</th>
-                <th className='admin-loading-manage-data-table-header'>End Point</th>
-                <th className='admin-loading-manage-data-table-header'>Rate</th>
-                <th className='admin-loading-manage-data-table-header'>Action</th>
-              </tr>
-            </thead>
-            <tbody className='admin-loading-manage-data-table-body'>
-              {displayedLoadingsSearch.map((loading) => (
-                <tr key={loading._id} className='admin-loading-manage-data-table-row-body'>
-                  <td className='admin-loading-manage-data-table-data'>{loading.startpoint}</td>
-                  <td className='admin-loading-manage-data-table-data'>{loading.endpoint}</td>
-                  <td className='admin-loading-manage-data-table-data'>{loading.rate}</td>
-                  <td className='admin-loading-manage-data-table-data'>
-                     <button
-                    style={{
-                      background: 'none',
-                      border : 'none',
-                    }}
-                    onClick={() => handleLoadingUpdate(loading._id)}
-                  >
-                    <img  src={E} alt='Update' style={{
-                      height : '30px',
-                      width : '30px',
-                    }
-                  }/>
-                  </button>
-                  <button
-                      style={{
-                        background: 'none',
-                        border : 'none',
-                      }}
-                      onClick={() => handleLoadingDelete(loading._id)}
-                    >
-                      <img src={D} alt='delete' style={{
-                      height : '30px',
-                      width : '30px',
-                    }
-                  }/>
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <br />
-          <ReactPaginate
-            className='pagination-container'
-            previousLabel='Previous'
-            nextLabel='Next'
-            pageCount={pageCount}
-            onPageChange={changePage}
-            containerClassName='pagination'
-            previousLinkClassName='previous-page'
-            nextLinkClassName='next-page'
-            disabledClassName='pagination-button disabled'
-            activeClassName='pagination-button active'
-            pageClassName='pagination-button'
-            breakClassName='pagination-space'
-          />
-        </div>
-        <div className='admin-loading-manage-form'>
-          <h1 className='admin-loading-manage-form-title'>
-            {selectedLoadingId ? 'UPDATE LOADING' : 'ADD LOADING'}
-          </h1>
-          <form className='admin-loading-manage-form-form' onSubmit={handleFormSubmit}>
-            <input
-              type='text'
-              className='admin-loading-manage-form-input-high'
-              placeholder='Start Point'
-required
-              value={selectedLoadingData.startpoint}
-              onChange={(e) =>
-                setSelectedLoadingData({ ...selectedLoadingData, startpoint: e.target.value })
-              }
-            />
-            <input
-              type='text'
-              className='admin-loading-manage-form-input-high'
-              placeholder='End Point'
-required
-              value={selectedLoadingData.endpoint}
-              onChange={(e) =>
-                setSelectedLoadingData({ ...selectedLoadingData, endpoint: e.target.value })
-              }
-            />
-            <input
-              type='number'
-              className='admin-loading-manage-form-input-high'
-              placeholder='Rate'
-required
-              value={selectedLoadingData.rate}
-              onChange={(e) =>
-                setSelectedLoadingData({ ...selectedLoadingData, rate: e.target.value })
-              }
-            />
-                {/*
+	return (
+		<div
+			style={{
+				backgroundImage: `url(${background})`,
+				backgroundSize: 'cover',
+				backgroundRepeat: 'no-repeat',
+				minHeight: '100vh',
+			}}
+		>
+			<AdminNavbar />
+			<div className='admin-loading-manage'>
+				<div className='admin-loading-manage-data'>
+					<h1 className='admin-loading-manage-data-title'>ALL LOADINGS</h1>
+					<input
+						type='text'
+						placeholder='Search Loading...'
+						className='admin-user-manage-form-input'
+						value={searchInput}
+						onChange={(e) => setSearchInput(e.target.value)}
+					/>
+					<table className='admin-loading-manage-data-table'>
+						<thead className='admin-loading-manage-data-table-head'>
+							<tr className='admin-loading-manage-data-table-row-head'>
+								<th className='admin-loading-manage-data-table-header'>
+									Start Point
+								</th>
+								<th className='admin-loading-manage-data-table-header'>
+									End Point
+								</th>
+								<th className='admin-loading-manage-data-table-header'>Rate</th>
+								<th className='admin-loading-manage-data-table-header'>
+									Action
+								</th>
+							</tr>
+						</thead>
+						<tbody className='admin-loading-manage-data-table-body'>
+							{displayedLoadingsSearch.map((loading) => (
+								<tr
+									key={loading._id}
+									className='admin-loading-manage-data-table-row-body'
+								>
+									<td className='admin-loading-manage-data-table-data'>
+										{loading.startpoint}
+									</td>
+									<td className='admin-loading-manage-data-table-data'>
+										{loading.endpoint}
+									</td>
+									<td className='admin-loading-manage-data-table-data'>
+										{loading.rate}
+									</td>
+									<td className='admin-loading-manage-data-table-data'>
+										<button
+											style={{
+												background: 'none',
+												border: 'none',
+											}}
+											onClick={() => handleLoadingUpdate(loading._id)}
+										>
+											<img
+												src={E}
+												alt='Update'
+												style={{
+													height: '18px',
+													width: '18px',
+													cursor: 'pointer',
+												}}
+											/>
+										</button>
+										<button
+											style={{
+												background: 'none',
+												border: 'none',
+											}}
+											onClick={() => handleLoadingDelete(loading._id)}
+										>
+											<img
+												src={D}
+												alt='delete'
+												style={{
+													height: '18px',
+													width: '18px',
+													cursor: 'pointer',
+												}}
+											/>
+										</button>
+									</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+					<br />
+					<ReactPaginate
+						className='pagination-container'
+						previousLabel='Previous'
+						nextLabel='Next'
+						pageCount={pageCount}
+						onPageChange={changePage}
+						containerClassName='pagination'
+						previousLinkClassName='previous-page'
+						nextLinkClassName='next-page'
+						disabledClassName='pagination-button disabled'
+						activeClassName='pagination-button active'
+						pageClassName='pagination-button'
+						breakClassName='pagination-space'
+					/>
+				</div>
+				<div className='admin-loading-manage-form'>
+					<h1 className='admin-loading-manage-form-title'>
+						{selectedLoadingId ? 'UPDATE LOADING' : 'ADD LOADING'}
+					</h1>
+					<form
+						className='admin-loading-manage-form-form'
+						onSubmit={handleFormSubmit}
+					>
+						<input
+							type='text'
+							className='admin-loading-manage-form-input-high'
+							placeholder='Start Point'
+							required
+							value={selectedLoadingData.startpoint}
+							onChange={(e) =>
+								setSelectedLoadingData({
+									...selectedLoadingData,
+									startpoint: e.target.value,
+								})
+							}
+						/>
+						<input
+							type='text'
+							className='admin-loading-manage-form-input-high'
+							placeholder='End Point'
+							required
+							value={selectedLoadingData.endpoint}
+							onChange={(e) =>
+								setSelectedLoadingData({
+									...selectedLoadingData,
+									endpoint: e.target.value,
+								})
+							}
+						/>
+						<input
+							type='number'
+							className='admin-loading-manage-form-input-high'
+							placeholder='Rate'
+							required
+							value={selectedLoadingData.rate}
+							onChange={(e) =>
+								setSelectedLoadingData({
+									...selectedLoadingData,
+									rate: e.target.value,
+								})
+							}
+						/>
+						{/*
              <br />
             <input type='checkbox' className='admin-loading-manage-form-input-checkbox' />
             <label className='admin-loading-manage-form-input-checkbox-label'>
               I you agree with Terms and Conditions & Privacy Policy
             </label>
             */}
-            <br />
-            <button type='submit' className='admin-loading-manage-form-button'>
-              {selectedLoadingId ? 'Update' : 'Add'}
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-  );
+						<br />
+						<button type='submit' className='admin-loading-manage-form-button'>
+							{selectedLoadingId ? 'Update' : 'Add'}
+						</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	);
 }
 
 export default AdminLoadingManage;

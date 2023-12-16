@@ -6,20 +6,16 @@ import ReactPaginate from 'react-paginate';
 import AdminNavbar from './AdminNavbar';
 import E from '../images/E.png';
 import D from '../images/D.png';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function AdminStaffManage() {
 	const [staffMembers, setStaffMembers] = useState([]);
 	const [pageNumber, setPageNumber] = useState(0);
 	const [selectedStaffId, setSelectedStaffId] = useState(null);
 	const API = process.env.REACT_APP_API;
-	const [selectedStaffData, setSelectedStaffData] = useState({
-		staffname: '',
-		staffemail: '',
-		staffpassword: '',
-		staffphone: '',
-		staffaccess: '',
-		staffidproof: '',
-		staffofficebranch: '',
-	});
 
 	const itemsPerPage = 12;
 	const [searchInput, setSearchInput] = useState('');
@@ -49,21 +45,46 @@ function AdminStaffManage() {
 			});
 	}, [API]);
 
+	// Formik and Yup Validation
+	const formik = useFormik({
+		initialValues: {
+			staffname: '',
+			staffemail: '',
+			staffpassword: '',
+			staffphone: '',
+			staffaccess: '',
+			staffofficebranch: '',
+		},
+		validationSchema: Yup.object({
+			staffname: Yup.string().required('Staff Name is required'),
+			staffemail: Yup.string()
+				.email('Invalid email address')
+				.required('Email is required'),
+			staffpassword: Yup.string().required('Password is required'),
+			staffphone: Yup.string()
+				.matches(/^[0-9]+$/, 'Invalid phone number')
+				.required('Phone is required'),
+			staffaccess: Yup.string().required('Access is required'),
+			staffofficebranch: Yup.string().required('Office Branch is required'),
+		}),
+		onSubmit: (values) => {
+			handleFormSubmit(values);
+		},
+	});
+
 	const handleStaffUpdate = (staffUpdateId) => {
 		setSelectedStaffId(staffUpdateId);
 		const selectedStaff = staffMembers.find(
 			(staff) => staff._id === staffUpdateId
 		);
-		setSelectedStaffData({ ...selectedStaff });
+		formik.setValues({ ...selectedStaff });
 	};
 
-	const handleFormSubmit = (e) => {
-		e.preventDefault();
-
+	const handleFormSubmit = (values) => {
 		if (selectedStaffId) {
 			// Update an existing staff member
 			axios
-				.put(`${API}staff/${selectedStaffId}`, selectedStaffData)
+				.put(`${API}staff/${selectedStaffId}`, values)
 				.then((response) => {
 					// Handle successful update (if needed)
 					console.log('Staff member updated successfully:', response.data);
@@ -73,15 +94,16 @@ function AdminStaffManage() {
 							staff._id === selectedStaffId ? response.data : staff
 						)
 					);
-					alert('Staff Details are Updated Successfully');
+					toast.success('Staff Details are Updated Successfully');
 				})
 				.catch((error) => {
 					console.error('Error updating staff member:', error);
+					toast.error('Error updating staff member. Please try again.');
 				});
 		} else {
 			// Create a new staff member
 			axios
-				.post(`${API}staff`, selectedStaffData)
+				.post(`${API}staff`, values)
 				.then((response) => {
 					// Handle successful creation (if needed)
 					console.log('Staff member created successfully:', response.data);
@@ -90,25 +112,19 @@ function AdminStaffManage() {
 						...prevStaffMembers,
 						response.data,
 					]);
-					alert('Staff Details are Saved Successfully');
+					toast.success('Staff Details are Saved Successfully');
 				})
 				.catch((error) => {
 					console.error('Error creating staff member:', error);
+					toast.error('Error creating staff member. Please try again.');
 				});
 		}
 
-		setSelectedStaffData({
-			staffname: '',
-			staffemail: '',
-			staffpassword: '',
-			staffphone: '',
-			staffaccess: '',
-			staffidproof: '',
-			staffofficebranch: '',
-		});
-
+		// Reset the form
+		formik.resetForm();
 		setSelectedStaffId(null);
 	};
+
 	const handleDeleteStaff = (staffId) => {
 		const confirmDelete = window.confirm(
 			'Are you sure you want to delete this Staff member?'
@@ -118,13 +134,14 @@ function AdminStaffManage() {
 				.delete(`${API}staff/${staffId}`)
 				.then((response) => {
 					console.log('Staff member deleted successfully');
-
+					toast.success('Staff member deleted successfully');
 					setStaffMembers((prevStaffMembers) =>
 						prevStaffMembers.filter((staff) => staff._id !== staffId)
 					);
 				})
 				.catch((error) => {
 					console.error('Error deleting staff member:', error);
+					toast.error('Error deleting staff member. Please try again.');
 				});
 		}
 	};
@@ -213,7 +230,7 @@ function AdminStaffManage() {
 												border: 'none',
 											}}
 											onClick={() => {
-												handleDeleteStaff(staff._id); // Fix the variable name here
+												handleDeleteStaff(staff._id);
 											}}
 										>
 											<img
@@ -253,104 +270,80 @@ function AdminStaffManage() {
 					</h1>
 					<form
 						className='admin-staff-manager-form-form'
-						onSubmit={handleFormSubmit}
+						onSubmit={formik.handleSubmit}
 					>
 						<input
 							type='text'
 							required
 							className='admin-staff-manager-form-input'
 							placeholder='Staff Name'
-							value={selectedStaffData.staffname || ''}
-							onChange={(e) =>
-								setSelectedStaffData({
-									...selectedStaffData,
-									staffname: e.target.value,
-								})
-							}
+							{...formik.getFieldProps('staffname')}
 						/>
+						{formik.touched.staffname && formik.errors.staffname ? (
+							<div className='error-message'>{formik.errors.staffname}</div>
+						) : null}
+
 						<input
 							type='email'
 							required
 							className='admin-staff-manager-form-input'
 							placeholder='Email'
-							value={selectedStaffData.staffemail || ''}
-							onChange={(e) =>
-								setSelectedStaffData({
-									...selectedStaffData,
-									staffemail: e.target.value,
-								})
-							}
+							{...formik.getFieldProps('staffemail')}
 						/>
+						{formik.touched.staffemail && formik.errors.staffemail ? (
+							<div className='error-message'>{formik.errors.staffemail}</div>
+						) : null}
+
 						<input
 							type='password'
 							required
 							className='admin-staff-manager-form-input'
 							placeholder='Password'
-							value={selectedStaffData.staffpassword || ''}
-							onChange={(e) =>
-								setSelectedStaffData({
-									...selectedStaffData,
-									staffpassword: e.target.value,
-								})
-							}
+							{...formik.getFieldProps('staffpassword')}
 						/>
+						{formik.touched.staffpassword && formik.errors.staffpassword ? (
+							<div className='error-message'>{formik.errors.staffpassword}</div>
+						) : null}
+
 						<input
 							type='tel'
 							required
 							maxLength='10'
 							className='admin-staff-manager-form-input'
 							placeholder='Phone'
-							value={selectedStaffData.staffphone || ''}
-							onChange={(e) =>
-								setSelectedStaffData({
-									...selectedStaffData,
-									staffphone: e.target.value,
-								})
-							}
+							{...formik.getFieldProps('staffphone')}
 						/>
+						{formik.touched.staffphone && formik.errors.staffphone ? (
+							<div className='error-message'>{formik.errors.staffphone}</div>
+						) : null}
+
 						<select
 							required
 							className='admin-staff-manager-form-input'
-							value={selectedStaffData.staffaccess || ''}
-							onChange={(e) =>
-								setSelectedStaffData({
-									...selectedStaffData,
-									staffaccess: e.target.value,
-								})
-							}
+							{...formik.getFieldProps('staffaccess')}
 						>
 							<option value='Super-Staff'>Super-Staff</option>
 							<option value='HO-Staff'>HO-Staff</option>
 							<option value='Staff'>Staff</option>
 						</select>
-						{/* <input
-              type='text'
-              required
-              className='admin-staff-manager-form-input'
-              placeholder='ID Proof'
-              value={selectedStaffData.staffidproof || ''}
-              onChange={(e) => setSelectedStaffData({ ...selectedStaffData, staffidproof: e.target.value })}
-            /> */}
+						{formik.touched.staffaccess && formik.errors.staffaccess ? (
+							<div className='error-message'>{formik.errors.staffaccess}</div>
+						) : null}
+
 						<input
 							type='text'
 							required
 							className='admin-staff-manager-form-input'
 							placeholder='Office Branch'
-							value={selectedStaffData.staffofficebranch || ''}
-							onChange={(e) =>
-								setSelectedStaffData({
-									...selectedStaffData,
-									staffofficebranch: e.target.value,
-								})
-							}
+							{...formik.getFieldProps('staffofficebranch')}
 						/>
-						{/*
-          <br />
-          <input type='checkbox' required className='admin-staff-manage-form-input-checkbox' />
-          <label className='admin-staff-manage-form-input-checkbox-label'>
-            I agree with Terms and Conditions & Privacy Policy
-          </label>
-          */}
+						{formik.touched.staffofficebranch &&
+						formik.errors.staffofficebranch ? (
+							<div className='error-message'>
+								{formik.errors.staffofficebranch}
+							</div>
+						) : null}
+
 						<br />
 						<button type='submit' className='admin-staff-manager-form-button'>
 							{selectedStaffId ? 'Update Staff' : 'Add Staff'}
@@ -358,6 +351,7 @@ function AdminStaffManage() {
 					</form>
 				</div>
 			</div>
+			<ToastContainer position='top-right' autoClose={3000} />
 		</div>
 	);
 }

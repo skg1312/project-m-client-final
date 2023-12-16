@@ -6,12 +6,18 @@
 }
 
 .admin-buyer-manage-data {
-	margin-left: 100px;
+	margin-left: 75px;
 	margin-top: 100px;
 	margin-bottom: 100px;
-	margin-right: 50px;
+	margin-right: 25px;
 	border-radius: 15px;
+	max-height: 620px;
 	border: 2px solid #d2d2d2;
+}
+
+.table-scroll {
+	height: 450px;
+	overflow-y: scroll;
 }
 
 .admin-buyer-manage-data-title {
@@ -67,9 +73,9 @@
 }
 
 .admin-buyer-manage-form {
-	margin-left: 50px;
+	margin-left: 25px;
 	margin-top: 100px;
-	margin-right: 100px;
+	margin-right: 75px;
 	margin-bottom: 100px;
 	border-radius: 15px;
 	border: 2px solid #d2d2d2;
@@ -102,7 +108,7 @@
 	background: #ededed;
 	height: 50px;
 	width: 86%;
-	margin-bottom: 20px;
+	margin-top: 20px;
 	color: #767676;
 	font-family: 'Urbanist';
 	font-size: 14px;

@@ -6,10 +6,14 @@ import background from '../images/Desktop.png';
 import AdminNavbar from './AdminNavbar';
 import E from '../images/E.png';
 import D from '../images/D.png';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function AdminBuyerManage() {
 	const [buyers, setBuyers] = useState([]);
-	const [pageNumber, setPageNumber] = useState(0);
+	// const [pageNumber, setPageNumber] = useState(0);
 	const [selectedBuyerId, setSelectedBuyerId] = useState(null);
 
 	const [selectedBuyerData, setSelectedBuyerData] = useState({
@@ -25,27 +29,26 @@ function AdminBuyerManage() {
 
 	const API = process.env.REACT_APP_API;
 
-	const itemsPerPage = 12;
+	// const itemsPerPage = 12;
 	const [searchInput, setSearchInput] = useState('');
 
 	const sortedBuyers = [...buyers].reverse();
-	const displayedBuyerSearch = sortedBuyers
-		.filter((item) => {
-			const buyerCompanyName = item.buyercompanyname || '';
+	const displayedBuyerSearch = sortedBuyers.filter((item) => {
+		const buyerCompanyName = item.buyercompanyname || '';
 
-			if (buyerCompanyName.toLowerCase().includes(searchInput?.toLowerCase())) {
-				return true;
-			}
+		if (buyerCompanyName.toLowerCase().includes(searchInput?.toLowerCase())) {
+			return true;
+		}
 
-			return false;
-		})
-		.slice(pageNumber * itemsPerPage, (pageNumber + 1) * itemsPerPage);
+		return false;
+	});
+	// 	.slice(pageNumber * itemsPerPage, (pageNumber + 1) * itemsPerPage);
 
-	const pageCount = Math.ceil(sortedBuyers.length / itemsPerPage);
+	// const pageCount = Math.ceil(sortedBuyers.length / itemsPerPage);
 
-	const changePage = ({ selected }) => {
-		setPageNumber(selected);
-	};
+	// const changePage = ({ selected }) => {
+	// 	setPageNumber(selected);
+	// };
 
 	useEffect(() => {
 		axios
@@ -58,54 +61,69 @@ function AdminBuyerManage() {
 			});
 	}, [API]);
 
-	const handleBuyerUpdate = (buyerUpdateId) => {
-		setSelectedBuyerId(buyerUpdateId);
-		const selectedBuyer = buyers.find((buyer) => buyer._id === buyerUpdateId);
-		setSelectedBuyerData({ ...selectedBuyer });
-	};
-
-	const handleFormSubmit = (e) => {
-		e.preventDefault();
-
-		if (selectedBuyerId) {
-			axios
-				.put(`${API}buyer/${selectedBuyerId}`, selectedBuyerData)
-				.then((response) => {
-					console.log('Buyer updated successfully:', response.data);
-
-					setBuyers((prevBuyers) =>
-						prevBuyers.map((buyer) =>
-							buyer._id === selectedBuyerId ? response.data : buyer
-						)
-					);
-					alert('Buyer Details are Updated Successfully');
-				})
-				.catch((error) => {
-					console.error('Error updating buyer:', error);
-					alert('Error In Deleting the Buyer');
-				});
-		} else {
-			axios
-				.post(`${API}buyer`, selectedBuyerData)
-				.then((response) => {
-					console.log('Buyer created successfully:', response.data);
-					setBuyers((prevBuyers) => [...prevBuyers, response.data]);
-					alert('Buyer Details are Saved Successfully');
-				})
-				.catch((error) => {
-					console.error('Error creating buyer:', error);
-				});
-		}
-
-		setSelectedBuyerData({
+	// Formik and Yup Validation
+	const formik = useFormik({
+		initialValues: {
 			buyerid: '',
 			buyercompanyname: '',
 			buyercompanygstno: '',
 			buyercompanyaddress: '',
 			buyercompanystatename: '',
 			buyercompanystatecode: '',
-		});
+		},
+		validationSchema: Yup.object({
+			buyerid: Yup.string().required('Buyer ID is required'),
+			buyercompanyname: Yup.string().required('Company Name is required'),
+			buyercompanygstno: Yup.string().required('GST Number is required'),
+			buyercompanyaddress: Yup.string().required('Company Address is required'),
+			buyercompanystatename: Yup.string().required(
+				'Company State Name is required'
+			),
+			buyercompanystatecode: Yup.string().required(
+				'Company State Code is required'
+			),
+		}),
+		onSubmit: (values) => {
+			handleFormSubmit(values);
+		},
+	});
 
+	const handleBuyerUpdate = (buyerUpdateId) => {
+		setSelectedBuyerId(buyerUpdateId);
+		const selectedBuyer = buyers.find((buyer) => buyer._id === buyerUpdateId);
+		formik.setValues({ ...selectedBuyer });
+	};
+
+	const handleFormSubmit = (values) => {
+		if (selectedBuyerId) {
+			axios
+				.put(`${API}buyer/${selectedBuyerId}`, values)
+				.then((response) => {
+					setBuyers((prevBuyers) =>
+						prevBuyers.map((buyer) =>
+							buyer._id === selectedBuyerId ? response.data : buyer
+						)
+					);
+					toast.success('Buyer Details are Updated Successfully');
+				})
+				.catch((error) => {
+					console.error('Error updating buyer:', error);
+					toast.error('Error In Updating the Buyer');
+				});
+		} else {
+			axios
+				.post(`${API}buyer`, values)
+				.then((response) => {
+					setBuyers((prevBuyers) => [...prevBuyers, response.data]);
+					toast.success('Buyer Details are Saved Successfully');
+				})
+				.catch((error) => {
+					console.error('Error creating buyer:', error);
+					toast.error('Error creating buyer. Please try again.');
+				});
+		}
+
+		formik.resetForm();
 		setSelectedBuyerId(null);
 	};
 
@@ -129,29 +147,32 @@ function AdminBuyerManage() {
 				},
 			});
 
-			console.log('File uploaded successfully:', response.dat);
-			alert('File is Uploaded Successfully');
+			console.log('File uploaded successfully:', response.data);
+			toast.success('File is Uploaded Successfully');
 			window.location.reload();
 		} catch (error) {
 			console.error('Error uploading file:', error);
+			toast.error('Error uploading file. Please try again.');
 		}
 	};
+
 	const handleBuyerDelete = (buyerId) => {
 		const confirmDelete = window.confirm(
-			'Are you sure you want to delete this buyer?'
+			'Are you sure you want to delete this Buyer?'
 		);
 
 		if (confirmDelete) {
 			axios
 				.delete(`${API}buyer/${buyerId}`)
 				.then((response) => {
-					console.log('Buyer deleted successfully:', response.data);
 					setBuyers((prevBuyers) =>
 						prevBuyers.filter((buyer) => buyer._id !== buyerId)
 					);
+					toast.success('Buyer deleted successfully');
 				})
 				.catch((error) => {
 					console.error('Error deleting buyer:', error);
+					toast.error('Error deleting buyer. Please try again.');
 				});
 		}
 	};
@@ -166,6 +187,7 @@ function AdminBuyerManage() {
 			}}
 		>
 			<AdminNavbar />
+
 			<div className='admin-buyer-manage'>
 				<div className='admin-buyer-manage-data'>
 					<h1 className='admin-buyer-manage-data-title'>ALL BUYERS</h1>
@@ -184,83 +206,88 @@ function AdminBuyerManage() {
 						value={searchInput}
 						onChange={(e) => setSearchInput(e.target.value)}
 					/>
-
-					<table className='admin-buyer-manage-data-table'>
-						<thead className='admin-buyer-manage-data-table-head'>
-							<tr className='admin-buyer-manage-data-table-row-head'>
-								<th className='admin-buyer-manage-data-table-header'>
-									Company Name
-								</th>
-								<th className='admin-buyer-manage-data-table-header'>GST NO</th>
-								<th className='admin-buyer-manage-data-table-header'>
-									State Name
-								</th>
-								<th className='admin-buyer-manage-data-table-header'>
-									State Code
-								</th>
-								<th className='admin-buyer-manage-data-table-header'>Action</th>
-							</tr>
-						</thead>
-						<tbody className='admin-buyer-manage-data-table-body'>
-							{displayedBuyerSearch.map((buyer) => (
-								<tr
-									key={buyer._id}
-									className='admin-buyer-manage-data-table-row-body'
-								>
-									<td className='admin-buyer-manage-data-table-data highlight'>
-										{buyer.buyercompanyname?.substring(0, 12) ?? 'N/A'}
-									</td>
-									<td className='admin-buyer-manage-data-table-data'>
-										{buyer.buyercompanygstno?.substring(0, 12) ?? 'N/A'}
-									</td>
-									<td className='admin-buyer-manage-data-table-data'>
-										{buyer.buyercompanystatename?.substring(0, 12) ?? 'N/A'}
-									</td>
-									<td className='admin-buyer-manage-data-table-data'>
-										{buyer.buyercompanystatecode?.substring(0, 12) ?? 'N/A'}
-									</td>
-									<td className='admin-buyer-manage-data-table-data'>
-										<button
-											style={{
-												background: 'none',
-												border: 'none',
-											}}
-											onClick={() => handleBuyerUpdate(buyer._id)}
-										>
-											<img
-												src={E}
-												alt='Update'
-												style={{
-													height: '18px',
-													width: '18px',
-													cursor: 'pointer',
-												}}
-											/>
-										</button>
-										<button
-											style={{
-												background: 'none',
-												border: 'none',
-											}}
-											onClick={() => handleBuyerDelete(buyer._id)}
-										>
-											<img
-												src={D}
-												alt='delete'
-												style={{
-													height: '18px',
-													width: '18px',
-													cursor: 'pointer',
-												}}
-											/>
-										</button>
-									</td>
+					<div className='table-scroll'>
+						<table className='admin-buyer-manage-data-table'>
+							<thead className='admin-buyer-manage-data-table-head'>
+								<tr className='admin-buyer-manage-data-table-row-head'>
+									<th className='admin-buyer-manage-data-table-header'>
+										Company Name
+									</th>
+									<th className='admin-buyer-manage-data-table-header'>
+										GST NO
+									</th>
+									<th className='admin-buyer-manage-data-table-header'>
+										State Name
+									</th>
+									<th className='admin-buyer-manage-data-table-header'>
+										State Code
+									</th>
+									<th className='admin-buyer-manage-data-table-header'>
+										Action
+									</th>
 								</tr>
-							))}
-						</tbody>
-					</table>
+							</thead>
+							<tbody className='admin-buyer-manage-data-table-body'>
+								{displayedBuyerSearch.map((buyer) => (
+									<tr
+										key={buyer._id}
+										className='admin-buyer-manage-data-table-row-body'
+									>
+										<td className='admin-buyer-manage-data-table-data highlight'>
+											{buyer.buyercompanyname?.substring(0, 12) ?? 'N/A'}
+										</td>
+										<td className='admin-buyer-manage-data-table-data'>
+											{buyer.buyercompanygstno?.substring(0, 12) ?? 'N/A'}
+										</td>
+										<td className='admin-buyer-manage-data-table-data'>
+											{buyer.buyercompanystatename?.substring(0, 12) ?? 'N/A'}
+										</td>
+										<td className='admin-buyer-manage-data-table-data'>
+											{buyer.buyercompanystatecode?.substring(0, 12) ?? 'N/A'}
+										</td>
+										<td className='admin-buyer-manage-data-table-data'>
+											<button
+												style={{
+													background: 'none',
+													border: 'none',
+												}}
+												onClick={() => handleBuyerUpdate(buyer._id)}
+											>
+												<img
+													src={E}
+													alt='Update'
+													style={{
+														height: '18px',
+														width: '18px',
+														cursor: 'pointer',
+													}}
+												/>
+											</button>
+											<button
+												style={{
+													background: 'none',
+													border: 'none',
+												}}
+												onClick={() => handleBuyerDelete(buyer._id)}
+											>
+												<img
+													src={D}
+													alt='delete'
+													style={{
+														height: '18px',
+														width: '18px',
+														cursor: 'pointer',
+													}}
+												/>
+											</button>
+										</td>
+									</tr>
+								))}
+							</tbody>
+						</table>
+					</div>
 					<br />
-					<ReactPaginate
+					{/* <ReactPaginate
 						className='pagination-container'
 						previousLabel='Previous'
 						nextLabel='Next'
@@ -273,7 +300,7 @@ function AdminBuyerManage() {
 						activeClassName='pagination-button active'
 						pageClassName='pagination-button'
 						breakClassName='pagination-space'
-					/>
+					/> */}
 					<br />
 				</div>
 				<div className='admin-buyer-manage-form'>
@@ -282,93 +309,89 @@ function AdminBuyerManage() {
 					</h1>
 					<form
 						className='admin-buyer-manage-form-form'
-						onSubmit={handleFormSubmit}
+						onSubmit={formik.handleSubmit}
 					>
 						<input
 							type='text'
 							required
 							className='admin-buyer-manage-form-input'
 							placeholder='Buyer ID'
-							value={selectedBuyerData.buyerid || ''}
-							onChange={(e) =>
-								setSelectedBuyerData({
-									...selectedBuyerData,
-									buyerid: e.target.value,
-								})
-							}
+							{...formik.getFieldProps('buyerid')}
 						/>
+						{formik.touched.buyerid && formik.errors.buyerid ? (
+							<div className='error-message'>{formik.errors.buyerid}</div>
+						) : null}
+
 						<input
 							type='text'
 							required
 							className='admin-buyer-manage-form-input'
 							placeholder='Company Name'
-							value={selectedBuyerData.buyercompanyname || ''}
-							onChange={(e) =>
-								setSelectedBuyerData({
-									...selectedBuyerData,
-									buyercompanyname: e.target.value,
-								})
-							}
+							{...formik.getFieldProps('buyercompanyname')}
 						/>
+						{formik.touched.buyercompanyname &&
+						formik.errors.buyercompanyname ? (
+							<div className='error-message'>
+								{formik.errors.buyercompanyname}
+							</div>
+						) : null}
+
 						<input
 							type='text'
 							required
 							className='admin-buyer-manage-form-input'
 							placeholder='Company GST Number'
-							value={selectedBuyerData.buyercompanygstno || ''}
-							onChange={(e) =>
-								setSelectedBuyerData({
-									...selectedBuyerData,
-									buyercompanygstno: e.target.value,
-								})
-							}
+							{...formik.getFieldProps('buyercompanygstno')}
 						/>
+						{formik.touched.buyercompanygstno &&
+						formik.errors.buyercompanygstno ? (
+							<div className='error-message'>
+								{formik.errors.buyercompanygstno}
+							</div>
+						) : null}
+
 						<input
 							type='text'
 							required
 							className='admin-buyer-manage-form-input'
 							placeholder='Company Address'
-							value={selectedBuyerData.buyercompanyaddress || ''}
-							onChange={(e) =>
-								setSelectedBuyerData({
-									...selectedBuyerData,
-									buyercompanyaddress: e.target.value,
-								})
-							}
+							{...formik.getFieldProps('buyercompanyaddress')}
 						/>
+						{formik.touched.buyercompanyaddress &&
+						formik.errors.buyercompanyaddress ? (
+							<div className='error-message'>
+								{formik.errors.buyercompanyaddress}
+							</div>
+						) : null}
+
 						<input
 							type='text'
 							required
 							className='admin-buyer-manage-form-input'
 							placeholder='Company State Name'
-							value={selectedBuyerData.buyercompanystatename || ''}
-							onChange={(e) =>
-								setSelectedBuyerData({
-									...selectedBuyerData,
-									buyercompanystatename: e.target.value,
-								})
-							}
+							{...formik.getFieldProps('buyercompanystatename')}
 						/>
+						{formik.touched.buyercompanystatename &&
+						formik.errors.buyercompanystatename ? (
+							<div className='error-message'>
+								{formik.errors.buyercompanystatename}
+							</div>
+						) : null}
+
 						<input
 							type='text'
 							required
 							className='admin-buyer-manage-form-input'
 							placeholder='Company State Code'
-							value={selectedBuyerData.buyercompanystatecode || ''}
-							onChange={(e) =>
-								setSelectedBuyerData({
-									...selectedBuyerData,
-									buyercompanystatecode: e.target.value,
-								})
-							}
+							{...formik.getFieldProps('buyercompanystatecode')}
 						/>
-						{/*
-            <br />
-             <input type='checkbox' required className='buyer-manage-form-input-checkbox' />
-             <label className='admin-buyer-manage-form-input-checkbox-label'>
-               I you agree with Terms and Conditions & Privacy Policy
-             </label>
-             */}
+						{formik.touched.buyercompanystatecode &&
+						formik.errors.buyercompanystatecode ? (
+							<div className='error-message'>
+								{formik.errors.buyercompanystatecode}
+							</div>
+						) : null}
+
 						<br />
 						<button type='submit' className='admin-buyer-manage-form-button'>
 							{selectedBuyerId ? 'Update' : 'Add'}
@@ -376,6 +399,7 @@ function AdminBuyerManage() {
 					</form>
 				</div>
 			</div>
+			<ToastContainer position='top-right' autoClose={3000} />
 		</div>
 	);
 }

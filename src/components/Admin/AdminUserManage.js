@@ -1,41 +1,62 @@
 import React, { useState, useEffect } from 'react';
 import './AdminUserManage.css';
 import axios from 'axios';
+import * as Yup from 'yup';
+import { useFormik } from 'formik';
 import background from '../images/Desktop.png';
 import ReactPaginate from 'react-paginate';
 import AdminNavbar from './AdminNavbar';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import E from '../images/E.png';
 import D from '../images/D.png';
 
+const validationSchema = Yup.object().shape({
+	username: Yup.string().required('Username is required'),
+	useremail: Yup.string()
+		.email('Invalid email format')
+		.required('Email is required'),
+	userpassword: Yup.string().required('Password is required'),
+	userphone: Yup.string()
+		.matches(/^\d{10}$/, 'Invalid phone number format')
+		.required('Phone number is required'),
+	useraccess: Yup.string().required('User access is required'),
+});
+
 function AdminUserManage() {
 	const [users, setUsers] = useState([]);
-	const [pageNumber, setPageNumber] = useState(0);
+	// const [pageNumber, setPageNumber] = useState(0);
 	const [selectedUserId, setSelectedUserId] = useState(null);
 	const API = process.env.REACT_APP_API;
-	const [selectedUserData, setSelectedUserData] = useState({
-		username: '',
-		useremail: '',
-		userpassword: '',
-		userphone: '',
-		useraccess: '',
+
+	const formik = useFormik({
+		initialValues: {
+			username: '',
+			useremail: '',
+			userpassword: '',
+			userphone: '',
+			useraccess: '',
+		},
+		validationSchema: validationSchema,
+		onSubmit: (values) => {
+			handleFormSubmit(values);
+		},
 	});
 
-	const itemsPerPage = 12;
+	// const itemsPerPage = 12;
 	const [searchInput, setSearchInput] = useState('');
 
-	// Sort the user array in reverse order (newest first)
 	const sortedUsers = [...users].reverse();
-	const displayedUserSearch = sortedUsers
-		.filter((item) =>
-			item.username.toLowerCase().includes(searchInput.toLowerCase())
-		)
-		.slice(pageNumber * itemsPerPage, (pageNumber + 1) * itemsPerPage);
+	const displayedUserSearch = sortedUsers.filter((item) =>
+		item.username.toLowerCase().includes(searchInput.toLowerCase())
+	);
+	// 	.slice(pageNumber * itemsPerPage, (pageNumber + 1) * itemsPerPage);
 
-	const pageCount = Math.ceil(users.length / itemsPerPage);
+	// const pageCount = Math.ceil(users.length / itemsPerPage);
 
-	const changePage = ({ selected }) => {
-		setPageNumber(selected);
-	};
+	// const changePage = ({ selected }) => {
+	// 	setPageNumber(selected);
+	// };
 
 	useEffect(() => {
 		axios
@@ -51,56 +72,52 @@ function AdminUserManage() {
 	const handleUserUpdate = (userUpdateId) => {
 		setSelectedUserId(userUpdateId);
 		const selectedUser = users.find((user) => user._id === userUpdateId);
-		setSelectedUserData({ ...selectedUser });
+
+		formik.setValues({
+			username: selectedUser.username || '',
+			useremail: selectedUser.useremail || '',
+			userpassword: selectedUser.userpassword || '',
+			userphone: selectedUser.userphone || '',
+			useraccess: selectedUser.useraccess || '',
+		});
+
+		formik.setErrors({});
+		formik.setSubmitting(false);
 	};
 
-	const handleFormSubmit = (e) => {
-		e.preventDefault();
-
+	const handleFormSubmit = (formData) => {
 		if (selectedUserId) {
-			// Update an existing user
 			axios
-				.put(`${API}user/${selectedUserId}`, selectedUserData)
+				.put(`${API}user/${selectedUserId}`, formData)
 				.then((response) => {
-					// Handle successful update (if needed)
-					console.log('User updated successfully:', response.data);
-					// Optionally, you can update the local state to reflect the changes
 					setUsers((prevUsers) =>
 						prevUsers.map((user) =>
 							user._id === selectedUserId ? response.data : user
 						)
 					);
-					alert('User Details are Updated Successfully');
+					toast.success('User Details are Updated Successfully');
 				})
 				.catch((error) => {
 					console.error('Error updating user:', error);
+					toast.error('Error updating user. Please try again.');
 				});
 		} else {
-			// Create a new user
 			axios
-				.post(`${API}user`, selectedUserData)
+				.post(`${API}user`, formData)
 				.then((response) => {
-					// Handle successful creation (if needed)
-					console.log('User created successfully:', response.data);
-					// Optionally, you can update the local state to include the new user
 					setUsers((prevUsers) => [...prevUsers, response.data]);
-					alert('User Details are Saved Successfully');
+					toast.success('User Details are Saved Successfully');
 				})
 				.catch((error) => {
 					console.error('Error creating user:', error);
+					toast.error('Error creating user. Please try again.');
 				});
 		}
 
-		setSelectedUserData({
-			username: '',
-			useremail: '',
-			userpassword: '',
-			userphone: '',
-			useraccess: '',
-		});
-
+		formik.resetForm();
 		setSelectedUserId(null);
 	};
+
 	const handleDeleteUser = (userId) => {
 		const confirmDelete = window.confirm(
 			'Are you sure you want to delete this user?'
@@ -109,14 +126,14 @@ function AdminUserManage() {
 			axios
 				.delete(`${API}user/${userId}`)
 				.then((response) => {
-					console.log('User deleted successfully');
-
 					setUsers((prevUsers) =>
 						prevUsers.filter((user) => user._id !== userId)
 					);
+					toast.success('User Deleted Successfully');
 				})
 				.catch((error) => {
 					console.error('Error deleting user:', error);
+					toast.error('Error deleting user. Please try again.');
 				});
 		}
 	};
@@ -137,84 +154,88 @@ function AdminUserManage() {
 					<input
 						type='text'
 						placeholder='Search User...'
-						className='admin-user-manage-form-input' // Search input placeholder
-						value={searchInput} // Bind the input value to the state
-						onChange={(e) => setSearchInput(e.target.value)} // Update the searchInput state as the user types
+						className='admin-user-manage-form-input'
+						value={searchInput}
+						onChange={(e) => setSearchInput(e.target.value)}
 					/>
-					<table className='admin-user-manage-data-table'>
-						<thead className='admin-user-manage-data-table-head'>
-							<tr className='admin-user-manage-data-table-row-head'>
-								<th className='admin-user-manage-data-table-header'>
-									Username
-								</th>
-								<th className='admin-user-manage-data-table-header'>Email</th>
-								<th className='admin-user-manage-data-table-header'>Phone</th>
-								<th className='admin-user-manage-data-table-header'>Access</th>
-								<th className='admin-user-manage-data-table-header'>Action</th>
-							</tr>
-						</thead>
-						<tbody className='admin-user-manage-data-table-body'>
-							{displayedUserSearch.map((user) => (
-								<tr
-									key={user._id}
-									className='admin-user-manage-data-table-row-body'
-								>
-									<td className='admin-user-manage-data-table-data highlight'>
-										{user.username.substring(0, 12)}
-									</td>
-									<td className='admin-user-manage-data-table-data'>
-										{user.useremail.substring(0, 18)}
-									</td>
-									<td className='admin-user-manage-data-table-data'>
-										{user.userphone}
-									</td>
-									<td className='admin-user-manage-data-table-data'>
-										{user.useraccess.substring(0, 12)}
-									</td>
-									<td className='admin-user-manage-data-table-data'>
-										<button
-											style={{
-												background: 'none',
-												border: 'none',
-											}}
-											onClick={() => handleUserUpdate(user._id)} // Fix the variable name here
-										>
-											<img
-												src={E}
-												alt='Update'
-												style={{
-													height: '18px',
-													width: '18px',
-													cursor: 'pointer',
-												}}
-											/>
-										</button>
-										<button
-											style={{
-												background: 'none',
-												border: 'none',
-											}}
-											onClick={() => {
-												handleDeleteUser(user._id); // Fix the variable name here
-											}}
-										>
-											<img
-												src={D}
-												alt='delete'
-												style={{
-													height: '18px',
-													width: '18px',
-													cursor: 'pointer',
-												}}
-											/>
-										</button>
-									</td>
+					<div className='table-scroll'>
+						<table className='admin-user-manage-data-table'>
+							<thead className='admin-user-manage-data-table-head'>
+								<tr className='admin-user-manage-data-table-row-head'>
+									<th className='admin-user-manage-data-table-header'>
+										Username
+									</th>
+									<th className='admin-user-manage-data-table-header'>Email</th>
+									<th className='admin-user-manage-data-table-header'>Phone</th>
+									<th className='admin-user-manage-data-table-header'>
+										Access
+									</th>
+									<th className='admin-user-manage-data-table-header'>
+										Action
+									</th>
 								</tr>
-							))}
-						</tbody>
-					</table>
+							</thead>
+							<tbody className='admin-user-manage-data-table-body'>
+								{displayedUserSearch.map((user) => (
+									<tr
+										key={user._id}
+										className='admin-user-manage-data-table-row-body'
+									>
+										<td className='admin-user-manage-data-table-data highlight'>
+											{user.username.substring(0, 12)}
+										</td>
+										<td className='admin-user-manage-data-table-data'>
+											{user.useremail.substring(0, 18)}
+										</td>
+										<td className='admin-user-manage-data-table-data'>
+											{user.userphone}
+										</td>
+										<td className='admin-user-manage-data-table-data'>
+											{user.useraccess.substring(0, 12)}
+										</td>
+										<td className='admin-user-manage-data-table-data'>
+											<button
+												style={{
+													background: 'none',
+													border: 'none',
+												}}
+												onClick={() => handleUserUpdate(user._id)}
+											>
+												<img
+													src={E}
+													alt='Update'
+													style={{
+														height: '18px',
+														width: '18px',
+														cursor: 'pointer',
+													}}
+												/>
+											</button>
+											<button
+												style={{
+													background: 'none',
+													border: 'none',
+												}}
+												onClick={() => handleDeleteUser(user._id)}
+											>
+												<img
+													src={D}
+													alt='delete'
+													style={{
+														height: '18px',
+														width: '18px',
+														cursor: 'pointer',
+													}}
+												/>
+											</button>
+										</td>
+									</tr>
+								))}
+							</tbody>
+						</table>
+					</div>
 					<br />
-					<ReactPaginate
+					{/* <ReactPaginate
 						className='pagination-container'
 						previousLabel='Previous'
 						nextLabel='Next'
@@ -227,7 +248,7 @@ function AdminUserManage() {
 						activeClassName='pagination-button active'
 						pageClassName='pagination-button'
 						breakClassName='pagination-space'
-					/>
+					/> */}
 				</div>
 				<div className='admin-user-manage-form'>
 					<h1 className='admin-user-manage-form-title'>
@@ -235,91 +256,85 @@ function AdminUserManage() {
 					</h1>
 					<form
 						className='admin-user-manage-form-form'
-						onSubmit={handleFormSubmit}
+						onSubmit={formik.handleSubmit}
 					>
 						<input
 							type='text'
 							required
 							className='admin-user-manage-form-input'
 							placeholder='Username'
-							value={selectedUserData.username || ''}
-							onChange={(e) =>
-								setSelectedUserData({
-									...selectedUserData,
-									username: e.target.value,
-								})
-							}
+							name='username'
+							value={formik.values.username}
+							onChange={formik.handleChange}
+							onBlur={formik.handleBlur}
 						/>
+						{formik.touched.username && formik.errors.username && (
+							<div className='error-message'>{formik.errors.username}</div>
+						)}
 						<input
 							type='email'
 							required
 							className='admin-user-manage-form-input'
 							placeholder='Email'
-							value={selectedUserData.useremail || ''}
-							onChange={(e) =>
-								setSelectedUserData({
-									...selectedUserData,
-									useremail: e.target.value,
-								})
-							}
+							name='useremail'
+							value={formik.values.useremail}
+							onChange={formik.handleChange}
+							onBlur={formik.handleBlur}
 						/>
+						{formik.touched.useremail && formik.errors.useremail && (
+							<div className='error-message'>{formik.errors.useremail}</div>
+						)}
 						<input
 							type='password'
 							required
 							className='admin-user-manage-form-input'
 							placeholder='Password'
-							value={selectedUserData.userpassword || ''}
-							onChange={(e) =>
-								setSelectedUserData({
-									...selectedUserData,
-									userpassword: e.target.value,
-								})
-							}
+							name='userpassword'
+							value={formik.values.userpassword}
+							onChange={formik.handleChange}
+							onBlur={formik.handleBlur}
 						/>
+						{formik.touched.userpassword && formik.errors.userpassword && (
+							<div className='error-message'>{formik.errors.userpassword}</div>
+						)}
 						<input
 							type='tel'
 							required
 							maxLength='10'
 							className='admin-user-manage-form-input'
 							placeholder='Phone'
-							value={selectedUserData.userphone || ''}
-							onChange={(e) =>
-								setSelectedUserData({
-									...selectedUserData,
-									userphone: e.target.value,
-								})
-							}
+							name='userphone'
+							value={formik.values.userphone}
+							onChange={formik.handleChange}
+							onBlur={formik.handleBlur}
 						/>
-
+						{formik.touched.userphone && formik.errors.userphone && (
+							<div className='error-message'>{formik.errors.userphone}</div>
+						)}
 						<select
 							required
 							className='admin-staff-manager-form-input'
-							value={selectedUserData.useraccess || ''}
-							onChange={(e) =>
-								setSelectedUserData({
-									...selectedUserData,
-									useraccess: e.target.value,
-								})
-							}
+							name='useraccess'
+							value={formik.values.useraccess}
+							onChange={formik.handleChange}
+							onBlur={formik.handleBlur}
 						>
 							<option value='Super-User'>Super-User</option>
 							<option value='HO-User'>HO-User</option>
 							<option value='User'>User</option>
 						</select>
-						{/*
-            <br />
-            <input type='checkbox' required className='admin-user-manage-form-input-checkbox' />
-          <label className='admin-user-manage-form-input-checkbox-label'>
-            I agree with Terms and Conditions & Privacy Policy
-          </label>
-          */}
 						<br />
-						<button type='submit' className='admin-user-manage-form-button'>
+						<button
+							type='submit'
+							className='admin-user-manage-form-button'
+							disabled={formik.isSubmitting || !formik.isValid}
+						>
 							{selectedUserId ? 'Update' : 'Add'}
 						</button>
 					</form>
 				</div>
 			</div>
+			<ToastContainer position='top-right' autoClose={3000} />
 		</div>
 	);
 }

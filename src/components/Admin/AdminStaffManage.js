@@ -13,26 +13,25 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function AdminStaffManage() {
 	const [staffMembers, setStaffMembers] = useState([]);
-	const [pageNumber, setPageNumber] = useState(0);
+	// const [pageNumber, setPageNumber] = useState(0);
 	const [selectedStaffId, setSelectedStaffId] = useState(null);
 	const API = process.env.REACT_APP_API;
 
-	const itemsPerPage = 12;
+	// const itemsPerPage = 12;
 	const [searchInput, setSearchInput] = useState('');
 
 	// Sort the staff members array in reverse order (newest first)
 	const sortedStaffMembers = [...staffMembers].reverse();
-	const displayedStaffSearch = sortedStaffMembers
-		.filter((item) =>
-			item.staffname.toLowerCase().includes(searchInput.toLowerCase())
-		)
-		.slice(pageNumber * itemsPerPage, (pageNumber + 1) * itemsPerPage);
+	const displayedStaffSearch = sortedStaffMembers.filter((item) =>
+		item.staffname.toLowerCase().includes(searchInput.toLowerCase())
+	);
+	// 	.slice(pageNumber * itemsPerPage, (pageNumber + 1) * itemsPerPage);
 
-	const pageCount = Math.ceil(sortedStaffMembers.length / itemsPerPage);
+	// const pageCount = Math.ceil(sortedStaffMembers.length / itemsPerPage);
 
-	const changePage = ({ selected }) => {
-		setPageNumber(selected);
-	};
+	// const changePage = ({ selected }) => {
+	// 	setPageNumber(selected);
+	// };
 
 	useEffect(() => {
 		axios
@@ -166,90 +165,96 @@ function AdminStaffManage() {
 						value={searchInput} // Bind the input value to the state
 						onChange={(e) => setSearchInput(e.target.value)} // Update the searchInput state as the user types
 					/>
-					<table className='admin-staff-manager-data-table'>
-						<thead className='admin-staff-manager-data-table-head'>
-							<tr className='admin-staff-manager-data-table-row-head'>
-								<th className='admin-staff-manager-data-table-header'>
-									Staff Name
-								</th>
-								<th className='admin-staff-manager-data-table-header'>Email</th>
-								<th className='admin-staff-manager-data-table-header'>Phone</th>
-								<th className='admin-staff-manager-data-table-header'>
-									Office Branch
-								</th>
-								<th className='admin-staff-manager-data-table-header'>
-									Access
-								</th>
-								<th className='admin-staff-manager-data-table-header'>
-									Action
-								</th>
-							</tr>
-						</thead>
-						<tbody className='admin-staff-manager-data-table-body'>
-							{displayedStaffSearch.map((staff) => (
-								<tr
-									key={staff._id}
-									className='admin-staff-manager-data-table-row-body'
-								>
-									<td className='admin-staff-manager-data-table-data highlight'>
-										{staff.staffname.substring(0, 12)}
-									</td>
-									<td className='admin-staff-manager-data-table-data'>
-										{staff.staffemail.substring(0, 18)}
-									</td>
-									<td className='admin-staff-manager-data-table-data'>
-										{staff.staffphone}
-									</td>
-									<td className='admin-staff-manager-data-table-data'>
-										{staff.staffofficebranch.substring(0, 12)}
-									</td>
-									<td className='admin-staff-manager-data-table-data'>
-										{staff.staffaccess.substring(0, 12)}
-									</td>
-									<td className='admin-staff-manager-data-table-data'>
-										<button
-											style={{
-												background: 'none',
-												border: 'none',
-											}}
-											onClick={() => handleStaffUpdate(staff._id)}
-										>
-											<img
-												src={E}
-												alt='Update'
-												style={{
-													height: '18px',
-													width: '18px',
-													cursor: 'pointer',
-												}}
-											/>
-										</button>
-										<button
-											style={{
-												background: 'none',
-												border: 'none',
-											}}
-											onClick={() => {
-												handleDeleteStaff(staff._id);
-											}}
-										>
-											<img
-												src={D}
-												alt='delete'
-												style={{
-													height: '18px',
-													width: '18px',
-													cursor: 'pointer',
-												}}
-											/>
-										</button>
-									</td>
+					<div className='table-scroll'>
+						<table className='admin-staff-manager-data-table'>
+							<thead className='admin-staff-manager-data-table-head'>
+								<tr className='admin-staff-manager-data-table-row-head'>
+									<th className='admin-staff-manager-data-table-header'>
+										Staff Name
+									</th>
+									<th className='admin-staff-manager-data-table-header'>
+										Email
+									</th>
+									<th className='admin-staff-manager-data-table-header'>
+										Phone
+									</th>
+									<th className='admin-staff-manager-data-table-header'>
+										Office Branch
+									</th>
+									<th className='admin-staff-manager-data-table-header'>
+										Access
+									</th>
+									<th className='admin-staff-manager-data-table-header'>
+										Action
+									</th>
 								</tr>
-							))}
-						</tbody>
-					</table>
+							</thead>
+							<tbody className='admin-staff-manager-data-table-body'>
+								{displayedStaffSearch.map((staff) => (
+									<tr
+										key={staff._id}
+										className='admin-staff-manager-data-table-row-body'
+									>
+										<td className='admin-staff-manager-data-table-data highlight'>
+											{staff.staffname.substring(0, 12)}
+										</td>
+										<td className='admin-staff-manager-data-table-data'>
+											{staff.staffemail.substring(0, 18)}
+										</td>
+										<td className='admin-staff-manager-data-table-data'>
+											{staff.staffphone}
+										</td>
+										<td className='admin-staff-manager-data-table-data'>
+											{staff.staffofficebranch.substring(0, 12)}
+										</td>
+										<td className='admin-staff-manager-data-table-data'>
+											{staff.staffaccess.substring(0, 12)}
+										</td>
+										<td className='admin-staff-manager-data-table-data'>
+											<button
+												style={{
+													background: 'none',
+													border: 'none',
+												}}
+												onClick={() => handleStaffUpdate(staff._id)}
+											>
+												<img
+													src={E}
+													alt='Update'
+													style={{
+														height: '18px',
+														width: '18px',
+														cursor: 'pointer',
+													}}
+												/>
+											</button>
+											<button
+												style={{
+													background: 'none',
+													border: 'none',
+												}}
+												onClick={() => {
+													handleDeleteStaff(staff._id);
+												}}
+											>
+												<img
+													src={D}
+													alt='delete'
+													style={{
+														height: '18px',
+														width: '18px',
+														cursor: 'pointer',
+													}}
+												/>
+											</button>
+										</td>
+									</tr>
+								))}
+							</tbody>
+						</table>
+					</div>
 					<br />
-					<ReactPaginate
+					{/* <ReactPaginate
 						className='pagination-container'
 						previousLabel='Previous'
 						nextLabel='Next'
@@ -262,7 +267,7 @@ function AdminStaffManage() {
 						activeClassName='pagination-button active'
 						pageClassName='pagination-button'
 						breakClassName='pagination-space'
-					/>
+					/> */}
 				</div>
 				<div className='admin-staff-manager-form'>
 					<h1 className='admin-staff-manager-form-title'>

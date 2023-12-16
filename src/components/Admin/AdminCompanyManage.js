@@ -341,19 +341,57 @@ function AdminCompanyManage() {
     }
   />
 */}
-						<input
-							type='text'
-							required
-							className='admin-company-manager-form-input-high'
-							placeholder='State'
-							value={selectedCompanyData.companystate || ''}
-							onChange={(e) =>
-								setSelectedCompanyData({
-									...selectedCompanyData,
-									companystate: e.target.value,
-								})
-							}
-						/>
+<select
+  required
+  className='admin-company-manager-form-input-high'
+  value={selectedCompanyData.companystate || ''}
+  onChange={(e) =>
+    setSelectedCompanyData({
+      ...selectedCompanyData,
+      companystate: e.target.value,
+    })
+  }
+>
+  <option value="" disabled>Select State</option>
+  <option value="Jammu and Kashmir - JK">Jammu and Kashmir (JK)</option>
+  <option value="Himachal Pradesh - HP">Himachal Pradesh (HP)</option>
+  <option value="Punjab - PB">Punjab (PB)</option>
+  <option value="Chandigarh - CH">Chandigarh (CH)</option>
+  <option value="Uttarakhand - UK">Uttarakhand (UK)</option>
+  <option value="Haryana - HR">Haryana (HR)</option>
+  <option value="Delhi - DL">Delhi (DL)</option>
+  <option value="Rajasthan - RJ">Rajasthan (RJ)</option>
+  <option value="Uttar Pradesh - UP">Uttar Pradesh (UP)</option>
+  <option value="Bihar - BR">Bihar (BR)</option>
+  <option value="Sikkim - SK">Sikkim (SK)</option>
+  <option value="Arunachal Pradesh - AR">Arunachal Pradesh (AR)</option>
+  <option value="Nagaland - NL">Nagaland (NL)</option>
+  <option value="Manipur - MN">Manipur (MN)</option>
+  <option value="Mizoram - MZ">Mizoram (MZ)</option>
+  <option value="Tripura - TR">Tripura (TR)</option>
+  <option value="Meghalaya - ML">Meghalaya (ML)</option>
+  <option value="Assam - AS">Assam (AS)</option>
+  <option value="West Bengal - WB">West Bengal (WB)</option>
+  <option value="Jharkhand - JH">Jharkhand (JH)</option>
+  <option value="Odisha - OD">Odisha (OD)</option>
+  <option value="Chattisgarh - CG">Chattisgarh (CG)</option>
+  <option value="Madhya Pradesh - MP">Madhya Pradesh (MP)</option>
+  <option value="Gujarat - GJ">Gujarat (GJ)</option>
+  <option value="Dadra & Nagar Haveli and Daman & Diu - DNHDD">Dadra & Nagar Haveli and Daman & Diu (DNHDD)</option>
+  <option value="Maharashtra - MH">Maharashtra (MH)</option>
+  <option value="Karnataka - KA">Karnataka (KA)</option>
+  <option value="Goa - GA">Goa (GA)</option>
+  <option value="Lakshadweep Islands - LD">Lakshadweep Islands (LD)</option>
+  <option value="Kerala - KL">Kerala (KL)</option>
+  <option value="Tamil Nadu - TN">Tamil Nadu (TN)</option>
+  <option value="Pondicherry - PY">Pondicherry (PY)</option>
+  <option value="Andaman and Nicobar Islands - AN">Andaman and Nicobar Islands (AN)</option>
+  <option value="Telangana - TS">Telangana (TS)</option>
+  <option value="Andhra Pradesh - AD">Andhra Pradesh (AD)</option>
+  <option value="Ladakh - LA">Ladakh (LA)</option>
+  <option value="Other Territory - OT">Other Territory (OT)</option>
+</select>
+
 
 						<input
 							type='number'

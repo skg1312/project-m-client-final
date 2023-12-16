@@ -6,23 +6,27 @@ import ReactPaginate from 'react-paginate';
 import AdminNavbar from './AdminNavbar';
 import E from '../images/E.png';
 import D from '../images/D.png';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function AdminConsignmentManage() {
 	const [consignedItems, setConsignedItems] = useState([]);
 	const [selectedConsignmentId, setSelectedConsignmentId] = useState(null);
 	const API = process.env.REACT_APP_API;
 
-	const [selectedConsignmentData, setSelectedConsignmentData] = useState({
-		itemname: '',
-		itemquantity: '',
-		itemhsn: '',
-		itemprice: '',
-		itemtaxrate: '',
-	});
+	const [searchInput, setSearchInput] = useState('');
+	// const itemsPerPage = 12;
+	// const [pageNumber, setPageNumber] = useState(0);
 
-	const [searchInput, setSearchInput] = useState(''); // State for search input
-	const itemsPerPage = 12;
-	const [pageNumber, setPageNumber] = useState(0);
+	const sortedConsigned = [...consignedItems].reverse();
+	const displayedConsignedSearch = sortedConsigned.filter((item) =>
+		item.itemname.toLowerCase().includes(searchInput.toLowerCase())
+	);
+	// 	.slice(pageNumber * itemsPerPage, (pageNumber + 1) * itemsPerPage);
+
+	// const pageCount = Math.ceil(consignedItems.length / itemsPerPage);
 
 	useEffect(() => {
 		axios
@@ -35,41 +39,44 @@ function AdminConsignmentManage() {
 			});
 	}, [API]);
 
-	const sortedConsigned = [...consignedItems].reverse();
-	const displayedConsignedSearch = sortedConsigned
-		.filter((item) =>
-			item.itemname.toLowerCase().includes(searchInput.toLowerCase())
-		)
-		.slice(pageNumber * itemsPerPage, (pageNumber + 1) * itemsPerPage);
-
-	const pageCount = Math.ceil(consignedItems.length / itemsPerPage);
+	// Formik and Yup Validation
+	const formik = useFormik({
+		initialValues: {
+			itemname: '',
+			itemquantity: '',
+			itemhsn: '',
+			itemprice: '',
+			itemtaxrate: '',
+		},
+		validationSchema: Yup.object({
+			itemname: Yup.string().required('Item Name is required'),
+			itemquantity: Yup.number().required('Item Quantity is required'),
+			itemhsn: Yup.number().required('Item HSN is required'),
+			itemprice: Yup.number().required('Item Price is required'),
+			itemtaxrate: Yup.number().required('Item Tax Rate is required'),
+		}),
+		onSubmit: (values) => {
+			handleFormSubmit(values);
+		},
+	});
 
 	const handleConsignmentUpdate = (consignmentUpdateId) => {
 		setSelectedConsignmentId(consignmentUpdateId);
 		const selectedConsignment = consignedItems.find(
 			(consignment) => consignment._id === consignmentUpdateId
 		);
-		setSelectedConsignmentData({ ...selectedConsignment });
+		formik.setValues({ ...selectedConsignment });
 	};
 
-	const changePage = ({ selected }) => {
-		setPageNumber(selected);
-	};
+	// const changePage = ({ selected }) => {
+	// 	setPageNumber(selected);
+	// };
 
-	const handleFormSubmit = (e) => {
-		e.preventDefault();
-
+	const handleFormSubmit = (values) => {
 		if (selectedConsignmentId) {
-			// Update an existing consignment
 			axios
-				.put(
-					`${API}consignment/${selectedConsignmentId}`,
-					selectedConsignmentData
-				)
+				.put(`${API}consignment/${selectedConsignmentId}`, values)
 				.then((response) => {
-					// Handle successful update (if needed)
-					console.log('Consignment updated successfully:', response.data);
-					// Optionally, you can update the local state to reflect the changes
 					setConsignedItems((prevConsignedItems) =>
 						prevConsignedItems.map((consignment) =>
 							consignment._id === selectedConsignmentId
@@ -77,38 +84,29 @@ function AdminConsignmentManage() {
 								: consignment
 						)
 					);
-					alert('Consignment Details are Updated Successfully');
+					toast.success('Consignment Details are Updated Successfully');
 				})
 				.catch((error) => {
 					console.error('Error updating consignment:', error);
+					toast.error('Error In Updating the Consignment');
 				});
 		} else {
-			// Create a new consignment
 			axios
-				.post(`${API}consignment`, selectedConsignmentData)
+				.post(`${API}consignment`, values)
 				.then((response) => {
-					// Handle successful creation (if needed)
-					console.log('Consignment created successfully:', response.data);
-					// Optionally, you can update the local state to include the new consignment
 					setConsignedItems((prevConsignedItems) => [
 						...prevConsignedItems,
 						response.data,
 					]);
-					alert('Consignment Details are Saved Successfully');
+					toast.success('Consignment Details are Saved Successfully');
 				})
 				.catch((error) => {
 					console.error('Error creating consignment:', error);
+					toast.error('Error creating consignment. Please try again.');
 				});
 		}
 
-		setSelectedConsignmentData({
-			itemname: '',
-			itemquantity: '',
-			itemhsn: '',
-			itemprice: '',
-			itemtaxrate: '',
-		});
-
+		formik.resetForm();
 		setSelectedConsignmentId(null);
 	};
 
@@ -116,6 +114,7 @@ function AdminConsignmentManage() {
 		const confirmDelete = window.confirm(
 			'Are you sure you want to delete this Consignment?'
 		);
+
 		if (confirmDelete) {
 			axios
 				.delete(`${API}consignment/${consignmentId}`)
@@ -125,10 +124,11 @@ function AdminConsignmentManage() {
 							(consignment) => consignment._id !== consignmentId
 						)
 					);
-					console.log('Consignment deleted successfully');
+					toast.success('Consignment deleted successfully');
 				})
 				.catch((error) => {
 					console.error('Error deleting consignment:', error);
+					toast.error('Error deleting consignment. Please try again.');
 				});
 		}
 	};
@@ -151,99 +151,99 @@ function AdminConsignmentManage() {
 					<input
 						type='text'
 						placeholder='Search Item Name...'
-						className='admin-consignment-manage-form-input' // Search input placeholder
-						value={searchInput} // Bind the input value to the state
-						onChange={(e) => setSearchInput(e.target.value)} // Update the searchInput state as the user types
+						className='admin-consignment-manage-form-input'
+						value={searchInput}
+						onChange={(e) => setSearchInput(e.target.value)}
 					/>
-					<table className='admin-consignment-manage-data-table'>
-						<thead className='admin-consignment-manage-data-table-head'>
-							<tr className='admin-consignment-manage-data-table-row-head'>
-								<th className='admin-consignment-manage-data-table-header'>
-									Item Name
-								</th>
-								<th className='admin-consignment-manage-data-table-header'>
-									Item Quantity
-								</th>
-								<th className='admin-consignment-manage-data-table-header'>
-									Item HSN
-								</th>
-								<th className='admin-consignment-manage-data-table-header'>
-									Item Price
-								</th>
-								<th className='admin-consignment-manage-data-table-header'>
-									Item Tax Rate
-								</th>
-								<th className='admin-consignment-manage-data-table-header'>
-									Action
-								</th>
-							</tr>
-						</thead>
-						<tbody className='admin-consignment-manage-data-table-body'>
-							{displayedConsignedSearch.map((item) => (
-								<tr
-									key={item._id}
-									className='admin-consignment-manage-data-table-row-body'
-								>
-									<td className='admin-consignment-manage-data-table-data highlight'>
-										{item.itemname}
-									</td>
-									<td className='admin-consignment-manage-data-table-data'>
-										{item.itemquantity}
-									</td>
-									<td className='admin-consignment-manage-data-table-data'>
-										{item.itemhsn}
-									</td>
-									<td className='admin-consignment-manage-data-table-data'>
-										{item.itemprice}
-									</td>
-									<td className='admin-consignment-manage-data-table-data'>
-										{item.itemtaxrate}
-									</td>
-									<td className='admin-consignment-manage-data-table-data'>
-										<button
-											style={{
-												background: 'none',
-												border: 'none',
-											}}
-											onClick={() => handleConsignmentUpdate(item._id)}
-										>
-											<img
-												src={E}
-												alt='Update'
-												style={{
-													height: '18px',
-													width: '18px',
-													cursor: 'pointer',
-												}}
-											/>
-										</button>
-										<button
-											style={{
-												background: 'none',
-												border: 'none',
-											}}
-											onClick={() => {
-												handleDeleteConsignment(item._id);
-											}}
-										>
-											<img
-												src={D}
-												alt='delete'
-												style={{
-													height: '18px',
-													width: '18px',
-													cursor: 'pointer',
-												}}
-											/>
-										</button>
-									</td>
+					<div className='table-scroll'>
+						<table className='admin-consignment-manage-data-table'>
+							<thead className='admin-consignment-manage-data-table-head'>
+								<tr className='admin-consignment-manage-data-table-row-head'>
+									<th className='admin-consignment-manage-data-table-header'>
+										Item Name
+									</th>
+									<th className='admin-consignment-manage-data-table-header'>
+										Item Quantity
+									</th>
+									<th className='admin-consignment-manage-data-table-header'>
+										Item HSN
+									</th>
+									<th className='admin-consignment-manage-data-table-header'>
+										Item Price
+									</th>
+									<th className='admin-consignment-manage-data-table-header'>
+										Item Tax Rate
+									</th>
+									<th className='admin-consignment-manage-data-table-header'>
+										Action
+									</th>
 								</tr>
-							))}
-						</tbody>
-					</table>
+							</thead>
+							<tbody className='admin-consignment-manage-data-table-body'>
+								{displayedConsignedSearch.map((item) => (
+									<tr
+										key={item._id}
+										className='admin-consignment-manage-data-table-row-body'
+									>
+										<td className='admin-consignment-manage-data-table-data highlight'>
+											{item.itemname}
+										</td>
+										<td className='admin-consignment-manage-data-table-data'>
+											{item.itemquantity}
+										</td>
+										<td className='admin-consignment-manage-data-table-data'>
+											{item.itemhsn}
+										</td>
+										<td className='admin-consignment-manage-data-table-data'>
+											{item.itemprice}
+										</td>
+										<td className='admin-consignment-manage-data-table-data'>
+											{item.itemtaxrate}
+										</td>
+										<td className='admin-consignment-manage-data-table-data'>
+											<button
+												style={{
+													background: 'none',
+													border: 'none',
+												}}
+												onClick={() => handleConsignmentUpdate(item._id)}
+											>
+												<img
+													src={E}
+													alt='Update'
+													style={{
+														height: '18px',
+														width: '18px',
+														cursor: 'pointer',
+													}}
+												/>
+											</button>
+											<button
+												style={{
+													background: 'none',
+													border: 'none',
+												}}
+												onClick={() => handleDeleteConsignment(item._id)}
+											>
+												<img
+													src={D}
+													alt='delete'
+													style={{
+														height: '18px',
+														width: '18px',
+														cursor: 'pointer',
+													}}
+												/>
+											</button>
+										</td>
+									</tr>
+								))}
+							</tbody>
+						</table>
+					</div>
 					<br />
 
-					<ReactPaginate
+					{/* <ReactPaginate
 						className='pagination-container'
 						previousLabel='Previous'
 						nextLabel='Next'
@@ -256,7 +256,7 @@ function AdminConsignmentManage() {
 						activeClassName='pagination-button active'
 						pageClassName='pagination-button'
 						breakClassName='pagination-space'
-					/>
+					/> */}
 				</div>
 				<div className='admin-consignment-manage-form'>
 					<h1 className='admin-consignment-manage-form-title'>
@@ -264,84 +264,67 @@ function AdminConsignmentManage() {
 					</h1>
 					<form
 						className='admin-consignment-manage-form-form'
-						onSubmit={handleFormSubmit}
+						onSubmit={formik.handleSubmit}
 					>
 						<input
 							type='text'
 							required
 							className='admin-consignment-manage-form-input'
 							placeholder='Item Name'
-							value={selectedConsignmentData.itemname || ''}
-							onChange={(e) =>
-								setSelectedConsignmentData({
-									...selectedConsignmentData,
-									itemname: e.target.value,
-								})
-							}
+							{...formik.getFieldProps('itemname')}
 						/>
+						{formik.touched.itemname && formik.errors.itemname ? (
+							<div className='error-message'>{formik.errors.itemname}</div>
+						) : null}
+
 						<input
 							type='number'
 							required
 							pattern='[0-9]*'
 							className='admin-consignment-manage-form-input'
 							placeholder='Item Quantity'
-							value={selectedConsignmentData.itemquantity || ''}
-							onChange={(e) =>
-								setSelectedConsignmentData({
-									...selectedConsignmentData,
-									itemquantity: e.target.value,
-								})
-							}
+							{...formik.getFieldProps('itemquantity')}
 						/>
+						{formik.touched.itemquantity && formik.errors.itemquantity ? (
+							<div className='error-message'>{formik.errors.itemquantity}</div>
+						) : null}
+
 						<input
 							type='number'
 							pattern='[0-9]*'
 							required
 							className='admin-consignment-manage-form-input'
 							placeholder='Item HSN'
-							value={selectedConsignmentData.itemhsn || ''}
-							onChange={(e) =>
-								setSelectedConsignmentData({
-									...selectedConsignmentData,
-									itemhsn: e.target.value,
-								})
-							}
+							{...formik.getFieldProps('itemhsn')}
 						/>
+						{formik.touched.itemhsn && formik.errors.itemhsn ? (
+							<div className='error-message'>{formik.errors.itemhsn}</div>
+						) : null}
+
 						<input
 							type='number'
 							required
 							pattern='[0-9]*'
 							className='admin-consignment-manage-form-input'
 							placeholder='Item Price'
-							value={selectedConsignmentData.itemprice || ''}
-							onChange={(e) =>
-								setSelectedConsignmentData({
-									...selectedConsignmentData,
-									itemprice: e.target.value,
-								})
-							}
+							{...formik.getFieldProps('itemprice')}
 						/>
+						{formik.touched.itemprice && formik.errors.itemprice ? (
+							<div className='error-message'>{formik.errors.itemprice}</div>
+						) : null}
+
 						<input
 							type='number'
 							pattern='[0-9]*'
 							required
 							className='admin-consignment-manage-form-input'
 							placeholder='Item Tax Rate'
-							value={selectedConsignmentData.itemtaxrate || ''}
-							onChange={(e) =>
-								setSelectedConsignmentData({
-									...selectedConsignmentData,
-									itemtaxrate: e.target.value,
-								})
-							}
+							{...formik.getFieldProps('itemtaxrate')}
 						/>
-						{/*
-            <br />
-          <input type='checkbox' required className='admin-consignment-manage-form-input-checkbox' />
-          <label className='admin-consignment-manage-form-input-checkbox-label'>
-            I you agree with Terms and Conditions & Privacy Policy
-          </label>
-          */}
+						{formik.touched.itemtaxrate && formik.errors.itemtaxrate ? (
+							<div className='error-message'>{formik.errors.itemtaxrate}</div>
+						) : null}
+
 						<br />
 						<button
 							type='submit'
@@ -352,6 +335,7 @@ function AdminConsignmentManage() {
 					</form>
 				</div>
 			</div>
+			<ToastContainer position='top-right' autoClose={3000} />
 		</div>
 	);
 }

@@ -82,10 +82,10 @@
 .Admin-login-error {
     color: red;
     font-family: "Urbanist";
-    font-size: 20px;
+    font-size: 14px;
     font-weight: 500;
     text-align: center;
-    margin-right: 70px;
+    margin-right: 5px;
 }
 
 .Admin-login-content {
@@ -119,6 +119,7 @@
     text-transform: uppercase;
     text-align: center;
     margin-right: 5px;
+    margin-bottom: 0;
 }
 
 .admin-a {
@@ -129,6 +130,7 @@
     font-weight: 500;
     text-transform: uppercase;
     margin-left: 20px;
+    margin-bottom: 0;
 }
 
 @media only screen and (min-width: 769px) and (max-width: 1024px) {

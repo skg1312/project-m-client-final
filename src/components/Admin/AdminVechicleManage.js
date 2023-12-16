@@ -6,36 +6,53 @@ import ReactPaginate from 'react-paginate';
 import AdminNavbar from './AdminNavbar';
 import E from '../images/E.png';
 import D from '../images/D.png';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function AdminLoadingManage() {
 	const [loadings, setLoadings] = useState([]);
-	const [pageNumber, setPageNumber] = useState(0);
+	// const [pageNumber, setPageNumber] = useState(0);
 	const [selectedLoadingId, setSelectedLoadingId] = useState(null);
 	const API = process.env.REACT_APP_API;
-	const [selectedLoadingData, setSelectedLoadingData] = useState({
-		startpoint: '',
-		endpoint: '',
-		rate: '',
+
+	const validationSchema = Yup.object().shape({
+		startpoint: Yup.string().required('Start Point is required'),
+		endpoint: Yup.string().required('End Point is required'),
+		rate: Yup.number()
+			.required('Rate is required')
+			.positive('Rate must be positive'),
 	});
 
-	const itemsPerPage = 12;
+	const formik = useFormik({
+		initialValues: {
+			startpoint: '',
+			endpoint: '',
+			rate: '',
+		},
+		validationSchema: validationSchema,
+		onSubmit: (values) => {
+			handleFormSubmit(values);
+		},
+	});
+
+	// const itemsPerPage = 12;
 	const [searchInput, setSearchInput] = useState('');
 
-	// Sort the loading array in reverse order (newest first)
 	const sortedLoadings = [...loadings].reverse();
-	const displayedLoadingsSearch = sortedLoadings
-		.filter(
-			(item) =>
-				item.startpoint.toLowerCase().includes(searchInput.toLowerCase()) ||
-				item.endpoint.toLowerCase().includes(searchInput.toLowerCase())
-		)
-		.slice(pageNumber * itemsPerPage, (pageNumber + 1) * itemsPerPage);
+	const displayedLoadingsSearch = sortedLoadings.filter(
+		(item) =>
+			item.startpoint.toLowerCase().includes(searchInput.toLowerCase()) ||
+			item.endpoint.toLowerCase().includes(searchInput.toLowerCase())
+	);
+	// 	.slice(pageNumber * itemsPerPage, (pageNumber + 1) * itemsPerPage);
 
-	const pageCount = Math.ceil(sortedLoadings.length / itemsPerPage);
+	// const pageCount = Math.ceil(sortedLoadings.length / itemsPerPage);
 
-	const changePage = ({ selected }) => {
-		setPageNumber(selected);
-	};
+	// const changePage = ({ selected }) => {
+	// 	setPageNumber(selected);
+	// };
 
 	useEffect(() => {
 		axios
@@ -49,11 +66,15 @@ function AdminLoadingManage() {
 	}, [API]);
 
 	const handleLoadingUpdate = (loadingUpdateId) => {
-		setSelectedLoadingId(loadingUpdateId);
 		const selectedLoading = loadings.find(
 			(loading) => loading._id === loadingUpdateId
 		);
-		setSelectedLoadingData({ ...selectedLoading });
+		setSelectedLoadingId(loadingUpdateId);
+		formik.setValues({
+			startpoint: selectedLoading.startpoint,
+			endpoint: selectedLoading.endpoint,
+			rate: selectedLoading.rate,
+		});
 	};
 
 	const handleLoadingDelete = (loadingDeleteId) => {
@@ -69,52 +90,45 @@ function AdminLoadingManage() {
 					setLoadings((prevLoadings) =>
 						prevLoadings.filter((loading) => loading._id !== loadingDeleteId)
 					);
+					toast.success('Loading Deleted Successfully');
 				})
 				.catch((error) => {
 					console.error('Error deleting loading:', error);
+					toast.error('Error deleting loading. Please try again.');
 				});
 		}
 	};
 
-	const handleFormSubmit = (e) => {
-		e.preventDefault();
-
+	const handleFormSubmit = (formData) => {
 		if (selectedLoadingId) {
-			// Update an existing loading
 			axios
-				.put(`${API}load/${selectedLoadingId}`, selectedLoadingData)
+				.put(`${API}load/${selectedLoadingId}`, formData)
 				.then((response) => {
-					// Handle successful update (if needed)
-					console.log('Loading updated successfully:', response.data);
-					// Optionally, you can update the local state to reflect the changes
 					setLoadings((prevLoadings) =>
 						prevLoadings.map((loading) =>
 							loading._id === selectedLoadingId ? response.data : loading
 						)
 					);
-					alert('Load Details are Updated Successfully');
+					toast.success('Loading Details are Updated Successfully');
 				})
 				.catch((error) => {
 					console.error('Error updating loading:', error);
+					toast.error('Error updating loading. Please try again.');
 				});
 		} else {
 			axios
-				.post(`${API}load`, selectedLoadingData)
+				.post(`${API}load`, formData)
 				.then((response) => {
-					console.log('Loading created successfully:');
 					setLoadings((prevLoadings) => [...prevLoadings, response.data]);
+					toast.success('Loading Details are Saved Successfully');
 				})
 				.catch((error) => {
 					console.error('Error creating loading:', error);
+					toast.error('Error creating loading. Please try again.');
 				});
 		}
 
-		setSelectedLoadingData({
-			startpoint: '',
-			endpoint: '',
-			rate: '',
-		});
-
+		formik.resetForm();
 		setSelectedLoadingId(null);
 	};
 
@@ -138,78 +152,82 @@ function AdminLoadingManage() {
 						value={searchInput}
 						onChange={(e) => setSearchInput(e.target.value)}
 					/>
-					<table className='admin-loading-manage-data-table'>
-						<thead className='admin-loading-manage-data-table-head'>
-							<tr className='admin-loading-manage-data-table-row-head'>
-								<th className='admin-loading-manage-data-table-header'>
-									Start Point
-								</th>
-								<th className='admin-loading-manage-data-table-header'>
-									End Point
-								</th>
-								<th className='admin-loading-manage-data-table-header'>Rate</th>
-								<th className='admin-loading-manage-data-table-header'>
-									Action
-								</th>
-							</tr>
-						</thead>
-						<tbody className='admin-loading-manage-data-table-body'>
-							{displayedLoadingsSearch.map((loading) => (
-								<tr
-									key={loading._id}
-									className='admin-loading-manage-data-table-row-body'
-								>
-									<td className='admin-loading-manage-data-table-data'>
-										{loading.startpoint}
-									</td>
-									<td className='admin-loading-manage-data-table-data'>
-										{loading.endpoint}
-									</td>
-									<td className='admin-loading-manage-data-table-data'>
-										{loading.rate}
-									</td>
-									<td className='admin-loading-manage-data-table-data'>
-										<button
-											style={{
-												background: 'none',
-												border: 'none',
-											}}
-											onClick={() => handleLoadingUpdate(loading._id)}
-										>
-											<img
-												src={E}
-												alt='Update'
-												style={{
-													height: '18px',
-													width: '18px',
-													cursor: 'pointer',
-												}}
-											/>
-										</button>
-										<button
-											style={{
-												background: 'none',
-												border: 'none',
-											}}
-											onClick={() => handleLoadingDelete(loading._id)}
-										>
-											<img
-												src={D}
-												alt='delete'
-												style={{
-													height: '18px',
-													width: '18px',
-													cursor: 'pointer',
-												}}
-											/>
-										</button>
-									</td>
+					<div className='table-scroll'>
+						<table className='admin-loading-manage-data-table'>
+							<thead className='admin-loading-manage-data-table-head'>
+								<tr className='admin-loading-manage-data-table-row-head'>
+									<th className='admin-loading-manage-data-table-header'>
+										Start Point
+									</th>
+									<th className='admin-loading-manage-data-table-header'>
+										End Point
+									</th>
+									<th className='admin-loading-manage-data-table-header'>
+										Rate
+									</th>
+									<th className='admin-loading-manage-data-table-header'>
+										Action
+									</th>
 								</tr>
-							))}
-						</tbody>
-					</table>
+							</thead>
+							<tbody className='admin-loading-manage-data-table-body'>
+								{displayedLoadingsSearch.map((loading) => (
+									<tr
+										key={loading._id}
+										className='admin-loading-manage-data-table-row-body'
+									>
+										<td className='admin-loading-manage-data-table-data'>
+											{loading.startpoint}
+										</td>
+										<td className='admin-loading-manage-data-table-data'>
+											{loading.endpoint}
+										</td>
+										<td className='admin-loading-manage-data-table-data'>
+											{loading.rate}
+										</td>
+										<td className='admin-loading-manage-data-table-data'>
+											<button
+												style={{
+													background: 'none',
+													border: 'none',
+												}}
+												onClick={() => handleLoadingUpdate(loading._id)}
+											>
+												<img
+													src={E}
+													alt='Update'
+													style={{
+														height: '18px',
+														width: '18px',
+														cursor: 'pointer',
+													}}
+												/>
+											</button>
+											<button
+												style={{
+													background: 'none',
+													border: 'none',
+												}}
+												onClick={() => handleLoadingDelete(loading._id)}
+											>
+												<img
+													src={D}
+													alt='delete'
+													style={{
+														height: '18px',
+														width: '18px',
+														cursor: 'pointer',
+													}}
+												/>
+											</button>
+										</td>
+									</tr>
+								))}
+							</tbody>
+						</table>
+					</div>
 					<br />
-					<ReactPaginate
+					{/* <ReactPaginate
 						className='pagination-container'
 						previousLabel='Previous'
 						nextLabel='Next'
@@ -222,7 +240,7 @@ function AdminLoadingManage() {
 						activeClassName='pagination-button active'
 						pageClassName='pagination-button'
 						breakClassName='pagination-space'
-					/>
+					/> */}
 				</div>
 				<div className='admin-loading-manage-form'>
 					<h1 className='admin-loading-manage-form-title'>
@@ -230,61 +248,59 @@ function AdminLoadingManage() {
 					</h1>
 					<form
 						className='admin-loading-manage-form-form'
-						onSubmit={handleFormSubmit}
+						onSubmit={formik.handleSubmit}
 					>
 						<input
 							type='text'
 							className='admin-loading-manage-form-input-high'
 							placeholder='Start Point'
 							required
-							value={selectedLoadingData.startpoint}
-							onChange={(e) =>
-								setSelectedLoadingData({
-									...selectedLoadingData,
-									startpoint: e.target.value,
-								})
-							}
+							name='startpoint'
+							value={formik.values.startpoint}
+							onChange={formik.handleChange}
+							onBlur={formik.handleBlur}
 						/>
+						{formik.touched.startpoint && formik.errors.startpoint && (
+							<div className='error-message'>{formik.errors.startpoint}</div>
+						)}
 						<input
 							type='text'
 							className='admin-loading-manage-form-input-high'
 							placeholder='End Point'
 							required
-							value={selectedLoadingData.endpoint}
-							onChange={(e) =>
-								setSelectedLoadingData({
-									...selectedLoadingData,
-									endpoint: e.target.value,
-								})
-							}
+							name='endpoint'
+							value={formik.values.endpoint}
+							onChange={formik.handleChange}
+							onBlur={formik.handleBlur}
 						/>
+						{formik.touched.endpoint && formik.errors.endpoint && (
+							<div className='error-message'>{formik.errors.endpoint}</div>
+						)}
 						<input
 							type='number'
 							className='admin-loading-manage-form-input-high'
 							placeholder='Rate'
 							required
-							value={selectedLoadingData.rate}
-							onChange={(e) =>
-								setSelectedLoadingData({
-									...selectedLoadingData,
-									rate: e.target.value,
-								})
-							}
+							name='rate'
+							value={formik.values.rate}
+							onChange={formik.handleChange}
+							onBlur={formik.handleBlur}
 						/>
-						{/*
-             <br />
-            <input type='checkbox' className='admin-loading-manage-form-input-checkbox' />
-            <label className='admin-loading-manage-form-input-checkbox-label'>
-              I you agree with Terms and Conditions & Privacy Policy
-            </label>
-            */}
+						{formik.touched.rate && formik.errors.rate && (
+							<div className='error-message'>{formik.errors.rate}</div>
+						)}
 						<br />
-						<button type='submit' className='admin-loading-manage-form-button'>
+						<button
+							type='submit'
+							className='admin-loading-manage-form-button'
+							disabled={formik.isSubmitting || !formik.isValid}
+						>
 							{selectedLoadingId ? 'Update' : 'Add'}
 						</button>
 					</form>
 				</div>
 			</div>
+			<ToastContainer position='top-right' autoClose={3000} />
 		</div>
 	);
 }

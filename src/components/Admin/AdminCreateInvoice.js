@@ -27,7 +27,6 @@ function AdminCreateInvoice() {
 	const [dataToSend, setDataToSend] = useState({
 		companydetails: {
 			companyname: '',
-			companyregistrationtype: '',
 			companygstno: '',
 			companycontact: '',
 			companystate: '',
@@ -401,24 +400,7 @@ function AdminCreateInvoice() {
 								}
 							/>
 						</div>
-						<div className='admin-create-invoice-form-div'>
-							<label
-								className='admin-create-invoice-form-label'
-								htmlFor='companyregistrationtype'
-							>
-								Company Registration type
-							</label>
-							<input
-								className='admin-create-invoice-form-input'
-								id='companyregistrationtype'
-								name='companyregistrationtype'
-								type='text'
-								value={selectedCompany.companyregistrationtype}
-								onChange={(e) =>
-									handleChange(e, 'companydetails', 'companyregistrationtype')
-								}
-							/>
-						</div>
+						
 						<div className='admin-create-invoice-form-div'>
 							<label
 								className='admin-create-invoice-form-label'

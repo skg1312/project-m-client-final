@@ -16,7 +16,7 @@
 
 .user-seller-manage-data-title {
 	font-family: 'Urbanist';
-	font-size: 32px;
+	font-size: 26px;
 	font-style: normal;
 	font-weight: 600;
 	line-height: 38px;
@@ -28,7 +28,7 @@
 .user-seller-manage-data-table-head {
 	color: #1a1a1a;
 	font-family: 'Urbanist';
-	font-size: 20px;
+	font-size: 18px;
 	font-style: bold;
 }
 
@@ -42,7 +42,7 @@
 .user-seller-manage-data-table-body {
 	color: #767676;
 	font-family: 'Urbanist';
-	font-size: 20px;
+	font-size: 16px;
 	font-style: bold;
 	font-weight: 400;
 	line-height: 28px;
@@ -64,7 +64,7 @@
 
 .user-seller-manage-form-title {
 	font-family: 'Urbanist';
-	font-size: 32px;
+	font-size: 26px;
 	font-style: normal;
 	font-weight: 600;
 	line-height: 38px;
@@ -82,12 +82,13 @@
 	margin-bottom: 20px;
 	color: var(--color-grey-60, #767676);
 	font-family: 'Urbanist';
-	font-size: 20px;
+	font-size: 16px;
 	font-style: normal;
 	font-weight: 400;
 	line-height: 26px;
 	letter-spacing: -0.289px;
 }
+
 .highlight {
 	color: green !important;
 }
@@ -120,6 +121,7 @@
 	width: 16px;
 	height: 16px;
 }
+
 .user-seller-manage-form-input-checkbox-label {
 	color: var(--color-grey-100, #1a1a1a);
 	font-feature-settings: 'clig' off, 'liga' off;
@@ -130,6 +132,7 @@
 	line-height: 26px;
 	letter-spacing: -0.289px;
 }
+
 .user-seller-manage-data-table-button {
 	color: #fefefe;
 	font-family: 'Urbanist';
@@ -142,9 +145,11 @@
 	border-radius: 3px;
 	border: 1px solid #5925dc;
 }
+
 .user-seller-manage-data-table-button:hover {
 	cursor: pointer;
 }
+
 .pagination-container {
 	display: flex;
 	flex-wrap: wrap;
@@ -152,6 +157,7 @@
 	align-items: center;
 	list-style-type: none;
 }
+
 .pagination-container li {
 	padding: 10px;
 	border: 1px solid #5925dc;
@@ -166,13 +172,16 @@
 	background-color: #5925dc;
 	margin: 5px;
 }
+
 .pagination-container li:hover {
 	cursor: poCalibri;
 }
+
 .pagination-container .active {
 	background-color: #767676;
 	color: #fff;
 }
+
 .pagination-container .disabled {
 	color: #ada9a9;
 	cursor: not-allowed;
@@ -195,6 +204,7 @@
 		border-radius: 15px;
 		border: 2px solid #d2d2d2;
 	}
+
 	.user-seller-manage-form {
 		margin-left: 35px;
 		margin-top: 100px;
@@ -214,6 +224,7 @@
 		border-radius: 12px;
 		border: 2px solid #d2d2d2;
 	}
+
 	.user-seller-manage-form {
 		margin-left: 15px;
 		margin-top: 40px;
@@ -222,6 +233,7 @@
 		border-radius: 12px;
 		border: 2px solid #d2d2d2;
 	}
+
 	.user-seller-manage-data-title {
 		font-family: 'Urbanist';
 		font-size: 26px;
@@ -232,12 +244,14 @@
 		text-align: left;
 		padding-left: 50px;
 	}
+
 	.user-seller-manage-data-table-head {
 		color: #1a1a1a;
 		font-family: 'Urbanist';
 		font-size: 15px;
 		font-style: bold;
 	}
+
 	.user-seller-manage-data-table-body {
 		color: #767676;
 		font-family: 'Urbanist';
@@ -247,6 +261,7 @@
 		line-height: 28px;
 		letter-spacing: -0.289px;
 	}
+
 	.user-user-manage-form-input {
 		border-radius: 6px;
 		border: 1px solid #ededed;
@@ -262,6 +277,7 @@
 		line-height: 26px;
 		letter-spacing: -0.289px;
 	}
+
 	.user-seller-manage-form-input {
 		border-radius: 6px;
 		border: 1px solid #ededed;
@@ -277,6 +293,7 @@
 		line-height: 26px;
 		letter-spacing: -0.289px;
 	}
+
 	.user-seller-manage-form-title {
 		font-family: 'Urbanist';
 		font-size: 26px;
@@ -287,6 +304,7 @@
 		text-align: left;
 		padding-left: 50px;
 	}
+
 	.user-seller-manage-form-input-checkbox-label {
 		color: #1a1a1a;
 		font-feature-settings: 'clig' off, 'liga' off;
@@ -297,6 +315,7 @@
 		line-height: 26px;
 		letter-spacing: -0.289px;
 	}
+
 	.user-seller-manage-form-button {
 		color: #fefefe;
 		text-align: center;
@@ -316,6 +335,7 @@
 		margin-bottom: 20px;
 		margin-top: 20px;
 	}
+
 	.user-seller-manage-data-table-button {
 		color: #fefefe;
 		font-family: 'Urbanist';
@@ -328,6 +348,7 @@
 		border-radius: 3px;
 		border: 1px solid #5925dc;
 	}
+
 	.user-seller-manage-form-input-checkbox {
 		width: 12px;
 		height: 12px;

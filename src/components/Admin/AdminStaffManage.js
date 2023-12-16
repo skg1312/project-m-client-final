@@ -109,24 +109,25 @@ function AdminStaffManage() {
 
 		setSelectedStaffId(null);
 	};
-const handleDeleteStaff = (staffId) => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this Staff member?");
-    if (confirmDelete) {
-        axios
-            .delete(`${API}staff/${staffId}`)
-            .then((response) => {
-                console.log("Staff member deleted successfully");
+	const handleDeleteStaff = (staffId) => {
+		const confirmDelete = window.confirm(
+			'Are you sure you want to delete this Staff member?'
+		);
+		if (confirmDelete) {
+			axios
+				.delete(`${API}staff/${staffId}`)
+				.then((response) => {
+					console.log('Staff member deleted successfully');
 
-                setStaffMembers((prevStaffMembers) =>
-                    prevStaffMembers.filter((staff) => staff._id !== staffId)
-                );
-            })
-            .catch((error) => {
-                console.error("Error deleting staff member:", error);
-            });
-    }
-};
-
+					setStaffMembers((prevStaffMembers) =>
+						prevStaffMembers.filter((staff) => staff._id !== staffId)
+					);
+				})
+				.catch((error) => {
+					console.error('Error deleting staff member:', error);
+				});
+		}
+	};
 
 	return (
 		<div
@@ -190,32 +191,41 @@ const handleDeleteStaff = (staffId) => {
 									</td>
 									<td className='admin-staff-manager-data-table-data'>
 										<button
-    style={{
-        background: 'none',
-        border: 'none',
-    }}
-    onClick={() => handleStaffUpdate(staff._id)}
->
-    <img src={E} alt='Update' style={{
-        height: '30px',
-        width: '30px',
-    }} />
-</button>
-<button
-    style={{
-        background: 'none',
-        border: 'none',
-    }}
-    onClick={() => {
-        handleDeleteStaff(staff._id); // Fix the variable name here
-    }}
->
-    <img src={D} alt='delete' style={{
-        height: '30px',
-        width: '30px',
-    }} />
-</button>
-
+											style={{
+												background: 'none',
+												border: 'none',
+											}}
+											onClick={() => handleStaffUpdate(staff._id)}
+										>
+											<img
+												src={E}
+												alt='Update'
+												style={{
+													height: '18px',
+													width: '18px',
+													cursor: 'pointer',
+												}}
+											/>
+										</button>
+										<button
+											style={{
+												background: 'none',
+												border: 'none',
+											}}
+											onClick={() => {
+												handleDeleteStaff(staff._id); // Fix the variable name here
+											}}
+										>
+											<img
+												src={D}
+												alt='delete'
+												style={{
+													height: '18px',
+													width: '18px',
+													cursor: 'pointer',
+												}}
+											/>
+										</button>
 									</td>
 								</tr>
 							))}

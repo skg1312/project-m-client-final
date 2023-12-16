@@ -16,7 +16,7 @@
 
 .admin-user-manage-data-title {
 	font-family: 'Urbanist';
-	font-size: 32px;
+	font-size: 26px;
 	font-style: normal;
 	font-weight: 600;
 	line-height: 38px;
@@ -42,7 +42,7 @@
 .admin-user-manage-data-table-body {
 	color: #767676;
 	font-family: 'Urbanist';
-	font-size: 20px;
+	font-size: 16px;
 	font-style: bold;
 	font-weight: 400;
 	line-height: 28px;
@@ -61,6 +61,7 @@
 	border-radius: 3px;
 	border: 1px solid #5925dc;
 }
+
 .admin-user-manage-data-table-button:hover {
 	cursor: pointer;
 }
@@ -72,9 +73,11 @@
 	align-items: center;
 	list-style-type: none;
 }
+
 .highlight {
 	color: green !important;
 }
+
 .pagination-container li {
 	padding: 10px;
 	border: 1px solid #5925dc;
@@ -94,6 +97,7 @@
 	width: 16px;
 	height: 16px;
 }
+
 .admin-user-manage-form-input-checkbox-label {
 	color: var(--color-grey-100, #1a1a1a);
 	font-feature-settings: 'clig' off, 'liga' off;
@@ -130,7 +134,7 @@
 
 .admin-user-manage-form-title {
 	font-family: 'Urbanist';
-	font-size: 32px;
+	font-size: 26px;
 	font-style: normal;
 	font-weight: 600;
 	line-height: 38px;
@@ -148,12 +152,13 @@
 	margin-bottom: 20px;
 	color: var(--color-grey-60, #767676);
 	font-family: 'Urbanist';
-	font-size: 20px;
+	font-size: 16px;
 	font-style: normal;
 	font-weight: 400;
 	line-height: 26px;
 	letter-spacing: -0.289px;
 }
+
 .admin-user-manager-form-select-div {
 	margin-left: 60px;
 	border-radius: 6px;
@@ -170,6 +175,7 @@
 	line-height: 26px;
 	letter-spacing: -0.289px;
 }
+
 .admin-user-manager-form-select {
 	border-radius: 6px;
 	border: 1px solid #ededed;
@@ -185,6 +191,7 @@
 	line-height: 26px;
 	letter-spacing: -0.289px;
 }
+
 .admin-user-manage-form-button {
 	color: var(--color-white-100, #fefefe);
 	text-align: center;
@@ -204,6 +211,7 @@
 	margin-bottom: 20px;
 	margin-top: 20px;
 }
+
 .admin-user-manage-form-button:hover {
 	cursor: pointer;
 }
@@ -216,6 +224,7 @@
 		text-align: center;
 		align-items: center;
 	}
+
 	.admin-user-manage-data {
 		margin-left: 35px;
 		margin-top: 100px;
@@ -224,6 +233,7 @@
 		border-radius: 15px;
 		border: 2px solid #d2d2d2;
 	}
+
 	.admin-user-manage-form {
 		margin-left: 35px;
 		margin-top: 100px;
@@ -243,6 +253,7 @@
 		border-radius: 12px;
 		border: 2px solid #d2d2d2;
 	}
+
 	.admin-user-manage-form {
 		margin-left: 15px;
 		margin-top: 40px;
@@ -251,6 +262,7 @@
 		border-radius: 12px;
 		border: 2px solid #d2d2d2;
 	}
+
 	.admin-user-manage-data-title {
 		font-family: 'Urbanist';
 		font-size: 26px;
@@ -261,12 +273,14 @@
 		text-align: left;
 		padding-left: 50px;
 	}
+
 	.admin-user-manage-data-table-head {
 		color: #1a1a1a;
 		font-family: 'Urbanist';
 		font-size: 15px;
 		font-style: bold;
 	}
+
 	.admin-user-manage-data-table-body {
 		color: #767676;
 		font-family: 'Urbanist';
@@ -276,6 +290,7 @@
 		line-height: 28px;
 		letter-spacing: -0.289px;
 	}
+
 	.admin-user-manage-form-input {
 		border-radius: 6px;
 		border: 1px solid #ededed;
@@ -291,6 +306,7 @@
 		line-height: 26px;
 		letter-spacing: -0.289px;
 	}
+
 	.admin-user-manage-form-input {
 		border-radius: 6px;
 		border: 1px solid #ededed;
@@ -306,6 +322,7 @@
 		line-height: 26px;
 		letter-spacing: -0.289px;
 	}
+
 	.admin-user-manage-form-title {
 		font-family: 'Urbanist';
 		font-size: 26px;
@@ -316,6 +333,7 @@
 		text-align: left;
 		padding-left: 50px;
 	}
+
 	.admin-user-manage-form-input-checkbox-label {
 		color: #1a1a1a;
 		font-feature-settings: 'clig' off, 'liga' off;
@@ -326,6 +344,7 @@
 		line-height: 26px;
 		letter-spacing: -0.289px;
 	}
+
 	.admin-user-manage-form-button {
 		color: #fefefe;
 		text-align: center;
@@ -356,6 +375,7 @@
 		border-radius: 12px;
 		border: 2px solid #d2d2d2;
 	}
+
 	.admin-user-manage-form {
 		margin-left: 15px;
 		margin-top: 40px;
@@ -364,6 +384,7 @@
 		border-radius: 12px;
 		border: 2px solid #d2d2d2;
 	}
+
 	.admin-user-manage-data-title {
 		font-family: 'Urbanist';
 		font-size: 15px;
@@ -374,12 +395,14 @@
 		text-align: left;
 		padding-left: 50px;
 	}
+
 	.admin-user-manage-data-table-head {
 		color: #1a1a1a;
 		font-family: 'Urbanist';
 		font-size: 10px;
 		font-style: bold;
 	}
+
 	.admin-user-manage-data-table-body {
 		color: #767676;
 		font-family: 'Urbanist';
@@ -389,6 +412,7 @@
 		line-height: 28px;
 		letter-spacing: -0.289px;
 	}
+
 	.admin-user-manage-data-table-button {
 		color: #fefefe;
 		font-family: 'Urbanist';
@@ -401,6 +425,7 @@
 		border-radius: 3px;
 		border: 1px solid #5925dc;
 	}
+
 	.admin-user-manage-form-input {
 		border-radius: 6px;
 		border: 1px solid #ededed;
@@ -416,6 +441,7 @@
 		line-height: 26px;
 		letter-spacing: -0.289px;
 	}
+
 	.admin-user-manage-form-title {
 		font-family: 'Urbanist';
 		font-size: 15px;
@@ -426,6 +452,7 @@
 		text-align: left;
 		padding-left: 50px;
 	}
+
 	.admin-user-manage-form-input-checkbox-label {
 		color: #1a1a1a;
 		font-feature-settings: 'clig' off, 'liga' off;
@@ -436,6 +463,7 @@
 		line-height: 26px;
 		letter-spacing: -0.289px;
 	}
+
 	.admin-user-manage-form-button {
 		color: #fefefe;
 		text-align: center;
@@ -455,6 +483,7 @@
 		margin-bottom: 20px;
 		margin-top: 20px;
 	}
+
 	.admin-user-manage-form-input-checkbox {
 		width: 12px;
 		height: 12px;

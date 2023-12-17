@@ -1024,16 +1024,16 @@ function AdminReports() {
 									>
 										Show
 									</button>
-									<label className='from-label'>From:</label>
+									<label className='date-label'>From:</label>
 									<input
-										className='from-date-select'
+										className='date-select'
 										type='date'
 										value={startDate}
 										onChange={handleFromDateSelect}
 									/>
-									<label className='to-label'>To:</label>
+									<label className='date-label'>To:</label>
 									<input
-										className='to-date-select'
+										className='date-select'
 										type='date'
 										value={endDate}
 										onChange={handleToDateSelect}

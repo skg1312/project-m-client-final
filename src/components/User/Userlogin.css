@@ -22,7 +22,21 @@
     letter-spacing: 1.2px;
     line-height: normal;
     text-align: center;
+    margin-bottom: 0;
+}
 
+.error-message-email {
+    margin-left: 180px;
+    font-family: "Urbanist";
+    font-size: 20px;
+    color: red;
+}
+
+.error-message-password {
+    margin-left: 160px;
+    font-family: "Urbanist";
+    font-size: 20px;
+    color: red;
 }
 
 .user-label {
@@ -54,7 +68,7 @@
     line-height: normal;
     letter-spacing: 0.42px;
     margin-left: 70px;
-    margin-bottom: 30px;
+    margin-top: 30px;
 }
 
 .user-login-button {
@@ -76,7 +90,7 @@
     font-weight: 500;
     line-height: normal;
     letter-spacing: 0.72px;
-
+    margin-top: 15px;
 }
 
 .user-login-error {
@@ -257,6 +271,20 @@
         text-transform: uppercase;
         margin-left: 20px;
     }
+
+    .error-message-email {
+        margin-left: 120px;
+        font-family: "Urbanist";
+        font-size: 16px;
+        color: red;
+    }
+
+    .error-message-password {
+        margin-left: 100px;
+        font-family: "Urbanist";
+        font-size: 16px;
+        color: red;
+    }
 }
 
 @media only screen and (max-width: 450px) {
@@ -351,6 +379,7 @@
         font-weight: 500;
         line-height: normal;
         letter-spacing: 0.72px;
+        margin-top: 0;
     }
 
     .user-login-not-req {
@@ -371,5 +400,19 @@
         font-weight: 500;
         text-transform: uppercase;
         margin-left: 20px;
+    }
+
+    .error-message-email {
+        margin-left: 110px;
+        font-family: "Urbanist";
+        font-size: 12px;
+        color: red;
+    }
+
+    .error-message-password {
+        margin-left: 100px;
+        font-family: "Urbanist";
+        font-size: 12px;
+        color: red;
     }
 }

@@ -1,47 +1,64 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Stafflogin.css';
 import { useNavigate } from 'react-router-dom';
 import { useStaffAuth } from './StaffAuth';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import background from '../images/background.png';
 
 function StaffLogin() {
 	const auth = useStaffAuth();
 	const navigate = useNavigate();
-	const [Email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
-	const [userlist, setUserlist] = useState(true);
-	let access = '';
-	const login = (event) => {
-		let matchFound = false;
-		auth.stafflist.forEach((item) => {
-			if (item.staffemail === Email && item.staffpassword === password) {
-				matchFound = true;
-				access = item.staffaccess;
-				return;
-			}
-		});
 
-		if (matchFound) {
-			auth.stafflogin(Email, password, access);
-			auth.setStaffAccess(access);
-			switch (access) {
-				case 'Super-Staff':
-					navigate('/staffsuperdash');
-					break;
-				case 'HO-Staff':
-					navigate('/staffhodash');
-					break;
-				case 'Staff':
-					navigate('/staffgendash');
-					break;
-				default:
-					break;
+	const validationSchema = Yup.object().shape({
+		Email: Yup.string()
+			.email('Please enter a valid email address')
+			.required('Email is required'),
+		password: Yup.string().required('Password is required'),
+	});
+
+	const formik = useFormik({
+		initialValues: {
+			Email: '',
+			password: '',
+		},
+		validationSchema: validationSchema,
+		onSubmit: (values) => {
+			const { Email, password } = values;
+
+			let matchFound = false;
+			let access = '';
+
+			auth.stafflist.forEach((item) => {
+				if (item.staffemail === Email && item.staffpassword === password) {
+					matchFound = true;
+					access = item.staffaccess;
+					return;
+				}
+			});
+
+			if (matchFound) {
+				auth.stafflogin(Email, password, access);
+				auth.setStaffAccess(access);
+				switch (access) {
+					case 'Super-Staff':
+						navigate('/staffsuperdash');
+						break;
+					case 'HO-Staff':
+						navigate('/staffhodash');
+						break;
+					case 'Staff':
+						navigate('/staffgendash');
+						break;
+					default:
+						break;
+				}
+			} else {
+				formik.setFieldError('Email', 'Invalid username or password');
+				formik.setFieldError('password', 'Invalid username or password');
 			}
-		} else {
-			setUserlist(false);
-		}
-		event.preventDefault();
-	};
+		},
+	});
 
 	return (
 		<div
@@ -60,31 +77,45 @@ function StaffLogin() {
 				<div className='staff-login'>
 					<h2 className='staff-login-head'>LOGIN</h2>
 					<div className='staff-login-form'>
-						<div className='staff-login-email'>
-							{/* <h3 className='staff-label'>Email</h3> */}
-							<input
-								type='email'
-								placeholder='Email'
-								value={Email}
-								onChange={(e) => setEmail(e.target.value)}
-								className='staff-login-input'
-							/>
-						</div>
-						<div className='staff-login-password'>
-							{/* <h3 className='staff-label'>Password</h3> */}
-							<input
-								type='password'
-								placeholder='Password'
-								value={password}
-								onChange={(e) => setPassword(e.target.value)}
-								className='staff-login-input'
-							/>
-						</div>
-						<div className='staff-login-button'>
-							<button onClick={login} className='staff-login-button-value'>
-								Login
-							</button>
-						</div>
+						<form onSubmit={formik.handleSubmit}>
+							<div className='staff-login-email'>
+								<input
+									type='email'
+									placeholder='Email'
+									value={formik.values.Email}
+									onChange={formik.handleChange}
+									onBlur={formik.handleBlur}
+									className='staff-login-input'
+									name='Email'
+								/>
+								{formik.touched.Email && formik.errors.Email ? (
+									<div className='error-message-email'>
+										{formik.errors.Email}
+									</div>
+								) : null}
+							</div>
+							<div className='staff-login-password'>
+								<input
+									type='password'
+									placeholder='Password'
+									value={formik.values.password}
+									onChange={formik.handleChange}
+									onBlur={formik.handleBlur}
+									className='staff-login-input'
+									name='password'
+								/>
+								{formik.touched.password && formik.errors.password ? (
+									<div className='error-message-password'>
+										{formik.errors.password}
+									</div>
+								) : null}
+							</div>
+							<div className='staff-login-button'>
+								<button type='submit' className='staff-login-button-value'>
+									Login
+								</button>
+							</div>
+						</form>
 						<div className='staff-login-not-req'>
 							<p className='staff-login-not'>
 								Not Staff?
@@ -96,13 +127,13 @@ function StaffLogin() {
 								</a>
 							</p>
 						</div>
-						<div className='staff-login-error'>
-							{!userlist ? (
-								<h3 id='invalid'>Invalid username or password</h3>
-							) : (
-								''
+						{/* <div className='staff-login-error'>
+							{!formik.isValid && (
+								<h3 id='invalid'>
+									{formik.errors.Email || formik.errors.password}
+								</h3>
 							)}
-						</div>
+						</div> */}
 					</div>
 				</div>
 				<div className='staff-login-content'>

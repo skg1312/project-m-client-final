@@ -1,48 +1,64 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Userlogin.css';
 import { useNavigate } from 'react-router-dom';
 import { useUserAuth } from './UserAuth';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import background from '../images/background.png';
 
 function UserLogin() {
 	const auth = useUserAuth();
 	const navigate = useNavigate();
-	const [Email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
-	const [userlist, setUserlist] = useState(true);
-	let access = '';
 
-	const login = (event) => {
-		let matchFound = false;
-		auth.userlist.forEach((item) => {
-			if (item.useremail === Email && item.userpassword === password) {
-				matchFound = true;
-				access = item.useraccess;
-				return;
-			}
-		});
+	const validationSchema = Yup.object().shape({
+		Email: Yup.string()
+			.email('Please enter a valid email address')
+			.required('Email is required'),
+		password: Yup.string().required('Password is required'),
+	});
 
-		if (matchFound) {
-			auth.userlogin(Email, password, access);
-			auth.setUserAccess(access);
-			switch (access) {
-				case 'Super-User':
-					navigate('/usersuperdash');
-					break;
-				case 'HO-User':
-					navigate('/userhodash');
-					break;
-				case 'User':
-					navigate('/usergendash');
-					break;
-				default:
-					break;
+	const formik = useFormik({
+		initialValues: {
+			Email: '',
+			password: '',
+		},
+		validationSchema: validationSchema,
+		onSubmit: (values) => {
+			const { Email, password } = values;
+
+			let matchFound = false;
+			let access = '';
+
+			auth.userlist.forEach((item) => {
+				if (item.useremail === Email && item.userpassword === password) {
+					matchFound = true;
+					access = item.useraccess;
+					return;
+				}
+			});
+
+			if (matchFound) {
+				auth.userlogin(Email, password, access);
+				auth.setUserAccess(access);
+				switch (access) {
+					case 'Super-User':
+						navigate('/usersuperdash');
+						break;
+					case 'HO-User':
+						navigate('/userhodash');
+						break;
+					case 'User':
+						navigate('/usergendash');
+						break;
+					default:
+						break;
+				}
+			} else {
+				formik.setFieldError('Email', 'Invalid username or password');
+				formik.setFieldError('password', 'Invalid username or password');
 			}
-		} else {
-			setUserlist(false);
-		}
-		event.preventDefault();
-	};
+		},
+	});
 
 	return (
 		<div
@@ -61,31 +77,45 @@ function UserLogin() {
 				<div className='user-login'>
 					<h2 className='user-login-head'>LOGIN</h2>
 					<div className='user-login-form'>
-						<div className='user-login-email'>
-							{/* <h3 className='user-label'>Email</h3> */}
-							<input
-								type='email'
-								placeholder='Email'
-								value={Email}
-								onChange={(e) => setEmail(e.target.value)}
-								className='user-login-input'
-							/>
-						</div>
-						<div className='user-login-password'>
-							{/* <h3 className='user-label'>Password</h3> */}
-							<input
-								type='password'
-								placeholder='Password'
-								value={password}
-								onChange={(e) => setPassword(e.target.value)}
-								className='user-login-input'
-							/>
-						</div>
-						<div className='user-login-button'>
-							<button onClick={login} className='user-login-button-value'>
-								Login
-							</button>
-						</div>
+						<form onSubmit={formik.handleSubmit}>
+							<div className='user-login-email'>
+								<input
+									type='email'
+									placeholder='Email'
+									value={formik.values.Email}
+									onChange={formik.handleChange}
+									onBlur={formik.handleBlur}
+									className='user-login-input'
+									name='Email'
+								/>
+								{formik.touched.Email && formik.errors.Email ? (
+									<div className='error-message-email'>
+										{formik.errors.Email}
+									</div>
+								) : null}
+							</div>
+							<div className='user-login-password'>
+								<input
+									type='password'
+									placeholder='Password'
+									value={formik.values.password}
+									onChange={formik.handleChange}
+									onBlur={formik.handleBlur}
+									className='user-login-input'
+									name='password'
+								/>
+								{formik.touched.password && formik.errors.password ? (
+									<div className='error-message-password'>
+										{formik.errors.password}
+									</div>
+								) : null}
+							</div>
+							<div className='user-login-button'>
+								<button type='submit' className='user-login-button-value'>
+									Login
+								</button>
+							</div>
+						</form>
 						<div className='staff-login-not-req'>
 							<p className='staff-login-not'>
 								Not User?
@@ -97,13 +127,13 @@ function UserLogin() {
 								</a>
 							</p>
 						</div>
-						<div className='user-login-error'>
-							{!userlist ? (
-								<h3 id='invalid'>Invalid username or password</h3>
-							) : (
-								''
+						{/* <div className='user-login-error'>
+							{!formik.isValid && (
+								<h3 id='invalid'>
+									{formik.errors.Email || formik.errors.password}
+								</h3>
 							)}
-						</div>
+						</div> */}
 					</div>
 				</div>
 				<div className='user-login-content'>

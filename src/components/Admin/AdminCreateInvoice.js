@@ -5,8 +5,10 @@ import A from '../images/A.png';
 import D from '../images/D.png';
 import AdminNavbar from './AdminNavbar';
 import Select from 'react-select';
+import { useNavigate } from 'react-router-dom';
 
 function AdminCreateInvoice() {
+	const navigate = useNavigate();
 	const [view, setView] = useState(false);
 	const [url, setUrl] = useState([]);
 	const [companies, setCompanies] = useState([]);
@@ -145,7 +147,6 @@ function AdminCreateInvoice() {
 				if (response.ok) {
 					const data = await response.json();
 					setLoading(data);
-					console.log(data);
 				} else {
 					console.error('Failed to fetch loading data');
 				}
@@ -329,29 +330,12 @@ function AdminCreateInvoice() {
 			console.error('Error creating invoice:', error);
 		}
 	};
-
-	const openPdfViewer = (selectedInvoiceId) => {
-		const pdfUrl = `${API}download/${selectedInvoiceId}`;
-		const newWindow = window.open('', '_blank');
-		newWindow.document.write(
-			'<html><head><title>PDF Viewer</title></head><body><div id="pdf-viewer-container"></div></body></html>'
-		);
-
-		const iframeCode = `
-    <div style="width: 100%; height:80% ;">
-      <iframe
-        title="PDF Viewer"
-        src="https://docs.google.com/viewer?url=${encodeURIComponent(
-					pdfUrl
-				)}&embedded=true"
-        style="width: 100%; height: 100%; border: none;"
-      />
-    </div>
-  `;
-
-		newWindow.document.write(iframeCode);
+	
+	const openPdfViewer = () => {
+		navigate(`/pdf/${url}`);
 	};
-
+	
+	
 	return (
 		<div
 			style={{
@@ -372,6 +356,7 @@ function AdminCreateInvoice() {
 							name='companyid'
 							value={selectedCompany.companyid}
 							onChange={handleSelectChangeCompany}
+							required
 						>
 							<option value=''>Select Company</option>
 							{companies.map((company) => (
@@ -381,7 +366,7 @@ function AdminCreateInvoice() {
 							))}
 						</select>
 					</div>
-					<form className='admin-create-invoice-form'>
+					<div className='admin-create-invoice-form'>
 						<div className='admin-create-invoice-form-div'>
 							<label
 								className='admin-create-invoice-form-label'
@@ -394,6 +379,7 @@ function AdminCreateInvoice() {
 								id='companyname'
 								name='companyname'
 								type='text'
+								required
 								value={selectedCompany.companyname}
 								onChange={(e) =>
 									handleChange(e, 'companydetails', 'companyname')
@@ -413,6 +399,7 @@ function AdminCreateInvoice() {
 								id='companygstno'
 								name='companygstno'
 								type='text'
+								required
 								value={selectedCompany.companygstno}
 								onChange={(e) =>
 									handleChange(e, 'companydetails', 'companygstno')
@@ -431,6 +418,7 @@ function AdminCreateInvoice() {
 								id='companycontact'
 								name='companycontact'
 								type='tel'
+								required
 								value={selectedCompany.companycontact}
 								onChange={(e) =>
 									handleChange(e, 'companydetails', 'companycontact')
@@ -449,6 +437,7 @@ function AdminCreateInvoice() {
 								id='companystate'
 								name='companystate'
 								type='text'
+								required
 								value={selectedCompany.companystate}
 								onChange={(e) =>
 									handleChange(e, 'companydetails', 'companystate')
@@ -467,6 +456,7 @@ function AdminCreateInvoice() {
 								id='companyofficeaddress'
 								name='companyofficeaddress'
 								type='text'
+								required
 								value={selectedCompany.companyofficeaddress}
 								onChange={(e) =>
 									handleChange(e, 'companydetails', 'companyofficeaddress')
@@ -485,13 +475,14 @@ function AdminCreateInvoice() {
 								id='companypincode'
 								name='companypincode'
 								type='text'
+								required
 								value={selectedCompany.companypincode}
 								onChange={(e) =>
 									handleChange(e, 'companydetails', 'companypincode')
 								}
 							/>
 						</div>
-					</form>
+					</div>
 					<div className='admin-create-invoice-data'>
 						<h2 className='admin-create-invoice-subtitle'>AGENT DETAILS</h2>
 						<Select
@@ -502,6 +493,7 @@ function AdminCreateInvoice() {
 								value: selectedSeller._id,
 								label: selectedSeller.sellercompanyname,
 							}}
+							required
 							placeholder='Select Agent'
 							onChange={handleSelectChangeSeller}
 							options={sellers.map((seller) => ({
@@ -510,7 +502,7 @@ function AdminCreateInvoice() {
 							}))}
 						/>
 					</div>
-					<form className='admin-create-invoice-form'>
+					<div className='admin-create-invoice-form'>
 						<div className='admin-create-invoice-form-div'>
 							<label
 								className='admin-create-invoice-form-label'
@@ -523,6 +515,7 @@ function AdminCreateInvoice() {
 								id='sellercompanyname'
 								name='sellercompanyname'
 								type='text'
+								required
 								value={selectedSeller.sellercompanyname}
 								onChange={(e) =>
 									handleChange(e, 'sellerdetails', 'sellercompanyname')
@@ -541,6 +534,7 @@ function AdminCreateInvoice() {
 								id='sellercompanyaddress'
 								name='sellercompanyaddress'
 								type='text'
+								required
 								value={selectedSeller.sellercompanyaddress}
 								onChange={(e) =>
 									handleChange(e, 'sellerdetails', 'sellercompanyaddress')
@@ -559,6 +553,7 @@ function AdminCreateInvoice() {
 								id='sellercompanystatename'
 								name='sellercompanystatename'
 								type='text'
+								required
 								value={selectedSeller.sellercompanystatename}
 								onChange={(e) =>
 									handleChange(e, 'sellerdetails', 'sellercompanystatename')
@@ -577,13 +572,14 @@ function AdminCreateInvoice() {
 								id='sellercompanystatecode'
 								name='sellercompanystatecode'
 								type='text'
+								required
 								value={selectedSeller.sellercompanystatecode}
 								onChange={(e) =>
 									handleChange(e, 'sellerdetails', 'sellercompanystatecode')
 								}
 							/>
 						</div>
-					</form>
+					</div>
 					<div className='admin-create-invoice-data'>
 						<h2 className='admin-create-invoice-subtitle'>BUYER DETAILS</h2>
 						<Select
@@ -592,6 +588,7 @@ function AdminCreateInvoice() {
 							name='buyerid'
 							placeholder='Select Buyer'
 							value={{ value: selectedBuyer._id, label: selectedBuyer.buyercompanyname }}
+							required
 							onChange={handleSelectChangeBuyer}
 							options={buyers.map((buyer) => ({
 								value: buyer._id,
@@ -599,7 +596,7 @@ function AdminCreateInvoice() {
 							}))}
 						/>
 					</div>
-					<form className='admin-create-invoice-form'>
+					<div className='admin-create-invoice-form'>
 						<div className='admin-create-invoice-form-div'>
 							<label
 								className='admin-create-invoice-form-label'
@@ -612,6 +609,7 @@ function AdminCreateInvoice() {
 								id='buyercompanyname'
 								name='buyercompanyname'
 								type='text'
+								required
 								value={selectedBuyer.buyercompanyname}
 								onChange={(e) =>
 									handleChange(e, 'buyerdetails', 'buyercompanyname')
@@ -631,6 +629,7 @@ function AdminCreateInvoice() {
 								id='buyercompanyaddress'
 								name='buyercompanyaddress'
 								type='text'
+								required
 								value={selectedBuyer.buyercompanyaddress}
 								onChange={(e) =>
 									handleChange(e, 'buyerdetails', 'buyercompanyaddress')
@@ -649,6 +648,7 @@ function AdminCreateInvoice() {
 								id='buyercompanystatename'
 								name='buyercompanystatename'
 								type='text'
+								required
 								value={selectedBuyer.buyercompanystatename}
 								onChange={(e) =>
 									handleChange(e, 'buyerdetails', 'buyercompanystatename')
@@ -667,17 +667,18 @@ function AdminCreateInvoice() {
 								id='buyercompanystatecode'
 								name='buyercompanystatecode'
 								type='text'
+								required
 								value={selectedBuyer.buyercompanystatecode}
 								onChange={(e) =>
 									handleChange(e, 'buyerdetails', 'buyercompanystatecode')
 								}
 							/>
 						</div>
-					</form>
+					</div>
 					<div className='admin-create-invoice-data'>
 						<h2 className='admin-create-invoice-subtitle'>VEHICLE DETAILS</h2>
 					</div>
-					<form className='admin-create-invoice-form'>
+					<div className='admin-create-invoice-form'>
 						<div className='admin-create-invoice-form-div'>
 							<label
 								className='admin-create-invoice-form-label'
@@ -690,6 +691,9 @@ function AdminCreateInvoice() {
 								id='drivernumber'
 								name='drivernumber'
 								type='tel'
+								pattern='[0-9]{10}'
+								placeholder='Enter only mobile number'
+								required
 								onChange={(e) =>
 									handleChange(e, 'vehicledetails', 'drivernumber')
 								}
@@ -708,6 +712,7 @@ function AdminCreateInvoice() {
 								id='vechiclenuumber'
 								name='vechiclenuumber'
 								type='text'
+								required
 								onChange={(e) =>
 									handleChange(e, 'vehicledetails', 'vechiclenuumber')
 								}
@@ -726,12 +731,13 @@ function AdminCreateInvoice() {
 								id='vechiclemodel'
 								name='vechiclemodel'
 								type='text'
+								required
 								onChange={(e) =>
 									handleChange(e, 'vehicledetails', 'vechiclemodel')
 								}
 							/>
 						</div>
-					</form>
+					</div>
 					<div className='admin-create-invoice-data'>
 						<h2 className='admin-create-invoice-subtitle'>
 							CONSIGNMENT DETAILS
@@ -878,7 +884,7 @@ function AdminCreateInvoice() {
 					<div className='admin-create-invoice-data'>
 						<h2 className='admin-create-invoice-subtitle'>INVOICE DETAILS</h2>
 					</div>
-					<form className='admin-create-invoice-form'>
+					<div className='admin-create-invoice-form'>
 						<div className='admin-create-invoice-form-div'>
 							<label
 								className='admin-create-invoice-form-label'
@@ -891,17 +897,18 @@ function AdminCreateInvoice() {
 								className='admin-create-invoice-form-input'
 								id='invoicedate'
 								name='invoicedate'
+								required
 								type='date'
 								onChange={(e) =>
 									handleChange(e, 'invoicedetails', 'invoicedate')
 								}
 							/>
 						</div>
-					</form>
+					</div>
 					<div className='admin-create-invoice-data'>
 						<h2 className='admin-create-invoice-subtitle'>BOARDING DETAILS</h2>
 					</div>
-					<form className='admin-create-invoice-form'>
+					<div className='admin-create-invoice-form'>
 						<div className='admin-create-invoice-form-div'>
 							<label
 								className='admin-create-invoice-form-label'
@@ -913,6 +920,7 @@ function AdminCreateInvoice() {
 								className='admin-create-invoice-select-loading'
 								id='loading'
 								name='loading'
+								required
 								value={selectedLoading.startingpoint}
 								onChange={(selectedOption) =>
 									handleSelectChangeLoading(selectedOption, 'startingpoint')
@@ -941,6 +949,7 @@ function AdminCreateInvoice() {
 								id='transportationcost'
 								name='transportationcost'
 								type='text'
+								required
 								value={`${dataToSend.loadingdetails.startingpoint} ${dataToSend.loadingdetails.endingpoint} ${dataToSend.loadingdetails.transportationcost}`}
 								onChange={(e) =>
 									handleChange(e, 'loadingdetails', 'transportationcost')
@@ -961,6 +970,7 @@ function AdminCreateInvoice() {
 								id='dateofloading'
 								name='dateofloading'
 								type='date'
+								required
 								onChange={(e) =>
 									handleChange(e, 'boardingdetails', 'dateofloading')
 								}
@@ -979,12 +989,13 @@ function AdminCreateInvoice() {
 								id='watermark'
 								name='watermark'
 								type='text'
+								required
 								onChange={(e) =>
 									handleChange(e, 'boardingdetails', 'watermark')
 								}
 							/>
 						</div>
-					</form>
+					</div>
 					<div className='admin-create-invoice-data-submit'>
 						<button className='admin-create-invoice-button'>
 							CREATE INVOICE
@@ -993,7 +1004,7 @@ function AdminCreateInvoice() {
 						{view && (
 							<button
 								className='admin-create-invoice-button'
-								onClick={() => openPdfViewer(url)}
+								onClick={() => openPdfViewer()}
 							>
 								VIEW INVOICE
 							</button>

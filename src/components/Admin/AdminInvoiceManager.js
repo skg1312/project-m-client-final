@@ -6,7 +6,11 @@ import ReactPaginate from 'react-paginate';
 import AdminNavbar from './AdminNavbar';
 import PdfViewer from './AdminInvoiceView';
 
+import { useNavigate } from 'react-router-dom';
+
+
 function AdminInvoiceManagement() {
+	const navigate = useNavigate();
 	const [invoice, setInvoice] = useState([]);
 	const [pageNumber, setPageNumber] = useState(0);
 	const [selectedInvoiceId, setSelectedInvoiceId] = useState(null);
@@ -48,31 +52,13 @@ function AdminInvoiceManagement() {
 		setPageNumber(selected);
 	};
 
-	const ViewInvoice = (invoiceid) => {
-		setSelectedInvoiceId(invoiceid);
-		if (selectedInvoiceId) {
-			const pdfUrl = `${API}download/${selectedInvoiceId}`;
-
-			const newWindow = window.open('', '_blank');
-			newWindow.document.write(
-				'<html><head><title>PDF Viewer</title></head><body><div id="pdf-viewer-container"></div></body></html>'
-			);
-
-			const iframeCode = `
-      <div style="width: 100%; height: ;">
-        <iframe
-          title="PDF Viewer"
-          src="https://docs.google.com/viewer?url=${encodeURIComponent(
-						pdfUrl
-					)}&embedded=true"
-          style="width: 100%; height: 100%; border: none;"
-        />
-      </div>
-    `;
-
-			newWindow.document.write(iframeCode);
-		}
-	};
+const ViewInvoice = (invoiceid) => {
+        setSelectedInvoiceId(invoiceid);
+        if (selectedInvoiceId) {
+            const pdfUrl = `${selectedInvoiceId}`;        
+                navigate(`/pdf/${pdfUrl}`);
+        }
+    };
 	const PrintInvoice = (invoiceid) => {
 		setSelectedInvoiceId(invoiceid);
 		if (selectedInvoiceId) {
@@ -147,10 +133,10 @@ function AdminInvoiceManagement() {
 											{invoice.invoicedetails.invoiceno?.substring(0, 12) ??
 												'N/A'}
 										</td>
-										<td className='invoice-management-data-body-table-data'>
-											{invoice.companydetails.companyname?.substring(0, 12) ??
-												'N/A'}
-										</td>
+<td className='invoice-management-data-body-table-data'>
+    {invoice.companydetails?.companyname?.substring(0, 12) ?? 'N/A'}
+</td>
+
 										<td className='invoice-management-data-body-table-data'>
 											{invoice.invoicedetails.invoicedate
 												? new Date(

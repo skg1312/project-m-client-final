@@ -311,11 +311,9 @@
 }
 
 @media only screen and (max-width: 768px) {
-	.admin-buyer-manage-file-upload-input[type=file]::file-selector-button {
-		width: 80px;
-	}
-.admin-buyer-manage-file-upload-button {
-	font-size: 12px;
+	.admin-buyer-manage-data-header{
+	display: grid;
+	grid-template-columns: 1fr;
 }
 	.admin-buyer-manage-data {
 		margin-left: 15px;

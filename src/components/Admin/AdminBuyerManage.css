@@ -315,6 +315,10 @@
 	display: grid;
 	grid-template-columns: 1fr;
 }
+	.table-scroll {
+	height: 320px;
+	overflow-y: scroll;
+}
 	.admin-buyer-manage-data {
 		margin-left: 15px;
 		margin-top: 40px;
@@ -452,6 +456,7 @@
 		width: 12px;
 		height: 12px;
 	}
+
 
 	.pagination-container li {
 		padding: 10px;

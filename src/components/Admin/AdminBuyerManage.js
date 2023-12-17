@@ -132,29 +132,30 @@ function AdminBuyerManage() {
 	};
 
 	const handleFileUpload = async () => {
-		try {
-			if (!file) {
-				console.error('No file selected for upload.');
-				return;
-			}
+  try {
+    if (!file) {
+      toast.error('Please select a file before uploading.');
+      return;
+    }
 
-			const formData = new FormData();
-			formData.append('file', file);
+    const formData = new FormData();
+    formData.append('file', file);
 
-			const response = await axios.post(`${API}buyer/upload`, formData, {
-				headers: {
-					'Content-Type': 'multipart/form-data',
-				},
-			});
+    const response = await axios.post(`${API}buyer/upload`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
 
-			console.log('File uploaded successfully:', response.data);
-			toast.success('File is Uploaded Successfully');
-			window.location.reload();
-		} catch (error) {
-			console.error('Error uploading file:', error);
-			toast.error('Error uploading file. Please try again.');
-		}
-	};
+    console.log('File uploaded successfully:', response.data);
+    toast.success('File is Uploaded Successfully');
+    window.location.reload();
+  } catch (error) {
+    console.error('Error uploading file:', error);
+    toast.error('Error uploading file. Please try again.');
+  }
+};
+
 
 	const handleBuyerDelete = (buyerId) => {
 		const confirmDelete = window.confirm(

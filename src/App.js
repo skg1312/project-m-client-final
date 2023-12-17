@@ -45,7 +45,7 @@ import UserInvoiceDashboard from './components/User/UserInvoiceDashboard';
 import UserInvoiceManagement from './components/User/UserInvoiceManage';
 import UserReports from './components/User/UserReport';
 import UserCreateInvoice from './components/User/UserCreateInvoice';
-import PdfViewer from './components/Admin/AdminInvoiceView';
+import PdfViewer from './components/Admin/AdminPdfViewer';
 import StaffPdfViewer from './components/Staff/StaffInvoiceView';
 import UserPdfViewer from './components/User/UserInvoiceView';
 
@@ -65,6 +65,7 @@ function App() {
 								</ReqAdminAuth>
 							}
 						/>
+						  <Route path="/pdf/:selectedInvoiceId" element={<PdfViewer />} />
 						<Route
 							path='/admininvdash'
 							element={

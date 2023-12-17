@@ -190,14 +190,19 @@ function AdminBuyerManage() {
 
 			<div className='admin-buyer-manage'>
 				<div className='admin-buyer-manage-data'>
+					<div className='admin-buyer-manage-data-header'>
 					<h1 className='admin-buyer-manage-data-title'>ALL BUYERS</h1>
 					<div className='admin-buyer-manage-file-upload'>
 						<input
+						className='admin-buyer-manage-file-upload-input'
 							type='file'
 							accept='.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel'
 							onChange={handleFileChange}
 						/>
-						<button onClick={handleFileUpload}>Upload File</button>
+						<button 
+						className='admin-buyer-manage-file-upload-button'
+						onClick={handleFileUpload}>Upload File</button>
+					</div>
 					</div>
 					<input
 						type='text'

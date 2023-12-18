@@ -6,6 +6,8 @@ import D from '../images/D.png';
 import AdminNavbar from './AdminNavbar';
 import Select from 'react-select';
 import { useNavigate } from 'react-router-dom';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 function AdminCreateInvoice() {
 	const navigate = useNavigate();
@@ -71,6 +73,65 @@ function AdminCreateInvoice() {
 	});
 
 	const API = process.env.REACT_APP_API;
+
+	const handleChange = (e, section, field) => {
+		const value = e.target.value;
+		setDataToSend((prevData) => ({
+			...prevData,
+			[section]: {
+				...prevData[section],
+				[field]: value,
+			},
+		}));
+	};
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		try {
+			const response = await fetch(`${API}invoice`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(dataToSend),
+			});
+			if (response.ok) {
+				const data = await response.json();
+				console.log('Invoice created successfully:', data);
+				alert('Invoice Details are saved');
+				setUrl(data._id);
+				setView(true);
+			} else {
+				console.error('Invoice creation failed');
+			}
+		} catch (error) {
+			console.error('Error creating invoice:', error);
+		}
+	};
+
+	const validationSchema = Yup.object().shape({
+		vehicledetails: Yup.object().shape({
+			drivernumber: Yup.string()
+				.matches(/[0-9]{10}/, 'Invalid mobile number')
+				.required('Driver Number is required'),
+			vechiclenuumber: Yup.string()
+				.matches(/^[A-Z]{2}[0-9]{2}[A-Z]{2}[0-9]{4}$/, 'Invalid vehicle number')
+				.required('Vehicle Number is required'),
+			vechiclemodel: Yup.string().required('Vehicle Model is required'),
+		}),
+	});
+
+	const formik = useFormik({
+		initialValues: {
+			vehicledetails: {
+				drivernumber: '',
+				vechiclenuumber: '',
+				vechiclemodel: '',
+			},
+		},
+		validationSchema,
+		onSubmit: handleSubmit,
+	});
 
 	useEffect(() => {
 		const fetchCompanies = async () => {
@@ -277,16 +338,16 @@ function AdminCreateInvoice() {
 		}));
 	};
 
-	const handleChange = (e, section, field) => {
-		const value = e.target.value;
-		setDataToSend((prevData) => ({
-			...prevData,
-			[section]: {
-				...prevData[section],
-				[field]: value,
-			},
-		}));
-	};
+	// const handleChange = (e, section, field) => {
+	// 	const value = e.target.value;
+	// 	setDataToSend((prevData) => ({
+	// 		...prevData,
+	// 		[section]: {
+	// 			...prevData[section],
+	// 			[field]: value,
+	// 		},
+	// 	}));
+	// };
 
 	const handleSelectChangeLoading = (selectedOption, field) => {
 		const [startingpoint, endingpoint, rate] = selectedOption.value.split('-');
@@ -307,35 +368,34 @@ function AdminCreateInvoice() {
 		}));
 	};
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		try {
-			const response = await fetch(`${API}invoice`, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(dataToSend),
-			});
-			if (response.ok) {
-				const data = await response.json();
-				console.log('Invoice created successfully:', data);
-				alert('Invoice Details are saved');
-				setUrl(data._id);
-				setView(true);
-			} else {
-				console.error('Invoice creation failed');
-			}
-		} catch (error) {
-			console.error('Error creating invoice:', error);
-		}
-	};
-	
+	// const handleSubmit = async (e) => {
+	// 	e.preventDefault();
+	// 	try {
+	// 		const response = await fetch(`${API}invoice`, {
+	// 			method: 'POST',
+	// 			headers: {
+	// 				'Content-Type': 'application/json',
+	// 			},
+	// 			body: JSON.stringify(dataToSend),
+	// 		});
+	// 		if (response.ok) {
+	// 			const data = await response.json();
+	// 			console.log('Invoice created successfully:', data);
+	// 			alert('Invoice Details are saved');
+	// 			setUrl(data._id);
+	// 			setView(true);
+	// 		} else {
+	// 			console.error('Invoice creation failed');
+	// 		}
+	// 	} catch (error) {
+	// 		console.error('Error creating invoice:', error);
+	// 	}
+	// };
+
 	const openPdfViewer = () => {
 		navigate(`/pdf/${url}`);
 	};
-	
-	
+
 	return (
 		<div
 			style={{
@@ -368,119 +428,131 @@ function AdminCreateInvoice() {
 					</div>
 					<div className='admin-create-invoice-form'>
 						<div className='admin-create-invoice-form-div'>
-							<label
-								className='admin-create-invoice-form-label'
-								htmlFor='companyname'
-							>
-								Company Name
-							</label>
-							<input
-								className='admin-create-invoice-form-input'
-								id='companyname'
-								name='companyname'
-								type='text'
-								required
-								value={selectedCompany.companyname}
-								onChange={(e) =>
-									handleChange(e, 'companydetails', 'companyname')
-								}
-							/>
+							<div style={{ display: 'flex', flexDirection: 'column' }}>
+								<label
+									className='admin-create-invoice-form-label'
+									htmlFor='companyname'
+								>
+									Company Name
+								</label>
+								<input
+									className='admin-create-invoice-form-input'
+									id='companyname'
+									name='companyname'
+									type='text'
+									required
+									value={selectedCompany.companyname}
+									onChange={(e) =>
+										handleChange(e, 'companydetails', 'companyname')
+									}
+								/>
+							</div>
 						</div>
-						
+
 						<div className='admin-create-invoice-form-div'>
-							<label
-								className='admin-create-invoice-form-label'
-								htmlFor='companygstno'
-							>
-								Company GST No.
-							</label>
-							<input
-								className='admin-create-invoice-form-input'
-								id='companygstno'
-								name='companygstno'
-								type='text'
-								required
-								value={selectedCompany.companygstno}
-								onChange={(e) =>
-									handleChange(e, 'companydetails', 'companygstno')
-								}
-							/>
-						</div>
-						<div className='admin-create-invoice-form-div'>
-							<label
-								className='admin-create-invoice-form-label'
-								htmlFor='companycontact'
-							>
-								Company Contact
-							</label>
-							<input
-								className='admin-create-invoice-form-input'
-								id='companycontact'
-								name='companycontact'
-								type='tel'
-								required
-								value={selectedCompany.companycontact}
-								onChange={(e) =>
-									handleChange(e, 'companydetails', 'companycontact')
-								}
-							/>
+							<div style={{ display: 'flex', flexDirection: 'column' }}>
+								<label
+									className='admin-create-invoice-form-label'
+									htmlFor='companygstno'
+								>
+									Company GST No.
+								</label>
+								<input
+									className='admin-create-invoice-form-input'
+									id='companygstno'
+									name='companygstno'
+									type='text'
+									required
+									value={selectedCompany.companygstno}
+									onChange={(e) =>
+										handleChange(e, 'companydetails', 'companygstno')
+									}
+								/>
+							</div>
 						</div>
 						<div className='admin-create-invoice-form-div'>
-							<label
-								className='admin-create-invoice-form-label'
-								htmlFor='companystate'
-							>
-								Company State
-							</label>
-							<input
-								className='admin-create-invoice-form-input'
-								id='companystate'
-								name='companystate'
-								type='text'
-								required
-								value={selectedCompany.companystate}
-								onChange={(e) =>
-									handleChange(e, 'companydetails', 'companystate')
-								}
-							/>
+							<div style={{ display: 'flex', flexDirection: 'column' }}>
+								<label
+									className='admin-create-invoice-form-label'
+									htmlFor='companycontact'
+								>
+									Company Contact
+								</label>
+								<input
+									className='admin-create-invoice-form-input'
+									id='companycontact'
+									name='companycontact'
+									type='tel'
+									required
+									value={selectedCompany.companycontact}
+									onChange={(e) =>
+										handleChange(e, 'companydetails', 'companycontact')
+									}
+								/>
+							</div>
 						</div>
 						<div className='admin-create-invoice-form-div'>
-							<label
-								className='admin-create-invoice-form-label'
-								htmlFor='companyofficeaddress'
-							>
-								Company Office Address
-							</label>
-							<input
-								className='admin-create-invoice-form-input'
-								id='companyofficeaddress'
-								name='companyofficeaddress'
-								type='text'
-								required
-								value={selectedCompany.companyofficeaddress}
-								onChange={(e) =>
-									handleChange(e, 'companydetails', 'companyofficeaddress')
-								}
-							/>
+							<div style={{ display: 'flex', flexDirection: 'column' }}>
+								<label
+									className='admin-create-invoice-form-label'
+									htmlFor='companystate'
+								>
+									Company State
+								</label>
+								<input
+									className='admin-create-invoice-form-input'
+									id='companystate'
+									name='companystate'
+									type='text'
+									required
+									value={selectedCompany.companystate}
+									onChange={(e) =>
+										handleChange(e, 'companydetails', 'companystate')
+									}
+								/>
+							</div>
 						</div>
 						<div className='admin-create-invoice-form-div'>
-							<label
-								className='admin-create-invoice-form-label'
-								htmlFor='companypincode'
-							>
-								Company pincode
-							</label>
-							<input
-								className='admin-create-invoice-form-input'
-								id='companypincode'
-								name='companypincode'
-								type='text'
-								required
-								value={selectedCompany.companypincode}
-								onChange={(e) =>
-									handleChange(e, 'companydetails', 'companypincode')
-								}
-							/>
+							<div style={{ display: 'flex', flexDirection: 'column' }}>
+								<label
+									className='admin-create-invoice-form-label'
+									htmlFor='companyofficeaddress'
+								>
+									Company Office Address
+								</label>
+								<input
+									className='admin-create-invoice-form-input'
+									id='companyofficeaddress'
+									name='companyofficeaddress'
+									type='text'
+									required
+									value={selectedCompany.companyofficeaddress}
+									onChange={(e) =>
+										handleChange(e, 'companydetails', 'companyofficeaddress')
+									}
+								/>
+							</div>
+						</div>
+						<div className='admin-create-invoice-form-div'>
+							<div style={{ display: 'flex', flexDirection: 'column' }}>
+								<label
+									className='admin-create-invoice-form-label'
+									htmlFor='companypincode'
+								>
+									Company pincode
+								</label>
+								<input
+									className='admin-create-invoice-form-input'
+									id='companypincode'
+									name='companypincode'
+									type='text'
+									required
+									value={selectedCompany.companypincode}
+									onChange={(e) =>
+										handleChange(e, 'companydetails', 'companypincode')
+									}
+								/>
+							</div>
 						</div>
 					</div>
 					<div className='admin-create-invoice-data'>
@@ -504,80 +576,88 @@ function AdminCreateInvoice() {
 					</div>
 					<div className='admin-create-invoice-form'>
 						<div className='admin-create-invoice-form-div'>
-							<label
-								className='admin-create-invoice-form-label'
-								htmlFor='sellercompanyname'
-							>
-								Agent Company Name
-							</label>
-							<input
-								className='admin-create-invoice-form-input'
-								id='sellercompanyname'
-								name='sellercompanyname'
-								type='text'
-								required
-								value={selectedSeller.sellercompanyname}
-								onChange={(e) =>
-									handleChange(e, 'sellerdetails', 'sellercompanyname')
-								}
-							/>
+							<div style={{ display: 'flex', flexDirection: 'column' }}>
+								<label
+									className='admin-create-invoice-form-label'
+									htmlFor='sellercompanyname'
+								>
+									Agent Company Name
+								</label>
+								<input
+									className='admin-create-invoice-form-input'
+									id='sellercompanyname'
+									name='sellercompanyname'
+									type='text'
+									required
+									value={selectedSeller.sellercompanyname}
+									onChange={(e) =>
+										handleChange(e, 'sellerdetails', 'sellercompanyname')
+									}
+								/>
+							</div>
 						</div>
 						<div className='admin-create-invoice-form-div'>
-							<label
-								className='admin-create-invoice-form-label'
-								htmlFor='sellercompanyaddress'
-							>
-								Agent Company Address
-							</label>
-							<input
-								className='admin-create-invoice-form-input'
-								id='sellercompanyaddress'
-								name='sellercompanyaddress'
-								type='text'
-								required
-								value={selectedSeller.sellercompanyaddress}
-								onChange={(e) =>
-									handleChange(e, 'sellerdetails', 'sellercompanyaddress')
-								}
-							/>
+							<div style={{ display: 'flex', flexDirection: 'column' }}>
+								<label
+									className='admin-create-invoice-form-label'
+									htmlFor='sellercompanyaddress'
+								>
+									Agent Company Address
+								</label>
+								<input
+									className='admin-create-invoice-form-input'
+									id='sellercompanyaddress'
+									name='sellercompanyaddress'
+									type='text'
+									required
+									value={selectedSeller.sellercompanyaddress}
+									onChange={(e) =>
+										handleChange(e, 'sellerdetails', 'sellercompanyaddress')
+									}
+								/>
+							</div>
 						</div>
 						<div className='admin-create-invoice-form-div'>
-							<label
-								className='admin-create-invoice-form-label'
-								htmlFor='sellercompanystatename'
-							>
-								Agent Company State Name
-							</label>
-							<input
-								className='admin-create-invoice-form-input'
-								id='sellercompanystatename'
-								name='sellercompanystatename'
-								type='text'
-								required
-								value={selectedSeller.sellercompanystatename}
-								onChange={(e) =>
-									handleChange(e, 'sellerdetails', 'sellercompanystatename')
-								}
-							/>
+							<div style={{ display: 'flex', flexDirection: 'column' }}>
+								<label
+									className='admin-create-invoice-form-label'
+									htmlFor='sellercompanystatename'
+								>
+									Agent Company State Name
+								</label>
+								<input
+									className='admin-create-invoice-form-input'
+									id='sellercompanystatename'
+									name='sellercompanystatename'
+									type='text'
+									required
+									value={selectedSeller.sellercompanystatename}
+									onChange={(e) =>
+										handleChange(e, 'sellerdetails', 'sellercompanystatename')
+									}
+								/>
+							</div>
 						</div>
 						<div className='admin-create-invoice-form-div'>
-							<label
-								className='admin-create-invoice-form-label'
-								htmlFor='sellercompanystatecode'
-							>
-								Agent Company State Code
-							</label>
-							<input
-								className='admin-create-invoice-form-input'
-								id='sellercompanystatecode'
-								name='sellercompanystatecode'
-								type='text'
-								required
-								value={selectedSeller.sellercompanystatecode}
-								onChange={(e) =>
-									handleChange(e, 'sellerdetails', 'sellercompanystatecode')
-								}
-							/>
+							<div style={{ display: 'flex', flexDirection: 'column' }}>
+								<label
+									className='admin-create-invoice-form-label'
+									htmlFor='sellercompanystatecode'
+								>
+									Agent Company State Code
+								</label>
+								<input
+									className='admin-create-invoice-form-input'
+									id='sellercompanystatecode'
+									name='sellercompanystatecode'
+									type='text'
+									required
+									value={selectedSeller.sellercompanystatecode}
+									onChange={(e) =>
+										handleChange(e, 'sellerdetails', 'sellercompanystatecode')
+									}
+								/>
+							</div>
 						</div>
 					</div>
 					<div className='admin-create-invoice-data'>
@@ -587,7 +667,10 @@ function AdminCreateInvoice() {
 							id='buyerid'
 							name='buyerid'
 							placeholder='Select Buyer'
-							value={{ value: selectedBuyer._id, label: selectedBuyer.buyercompanyname }}
+							value={{
+								value: selectedBuyer._id,
+								label: selectedBuyer.buyercompanyname,
+							}}
 							required
 							onChange={handleSelectChangeBuyer}
 							options={buyers.map((buyer) => ({
@@ -618,61 +701,67 @@ function AdminCreateInvoice() {
 						</div>
 
 						<div className='admin-create-invoice-form-div'>
-							<label
-								className='admin-create-invoice-form-label'
-								htmlFor='buyercompanyaddress'
-							>
-								Buyer Company Address
-							</label>
-							<input
-								className='admin-create-invoice-form-input'
-								id='buyercompanyaddress'
-								name='buyercompanyaddress'
-								type='text'
-								required
-								value={selectedBuyer.buyercompanyaddress}
-								onChange={(e) =>
-									handleChange(e, 'buyerdetails', 'buyercompanyaddress')
-								}
-							/>
+							<div style={{ display: 'flex', flexDirection: 'column' }}>
+								<label
+									className='admin-create-invoice-form-label'
+									htmlFor='buyercompanyaddress'
+								>
+									Buyer Company Address
+								</label>
+								<input
+									className='admin-create-invoice-form-input'
+									id='buyercompanyaddress'
+									name='buyercompanyaddress'
+									type='text'
+									required
+									value={selectedBuyer.buyercompanyaddress}
+									onChange={(e) =>
+										handleChange(e, 'buyerdetails', 'buyercompanyaddress')
+									}
+								/>
+							</div>
 						</div>
 						<div className='admin-create-invoice-form-div'>
-							<label
-								className='admin-create-invoice-form-label'
-								htmlFor='buyercompanystatename'
-							>
-								Buyer Company State Name
-							</label>
-							<input
-								className='admin-create-invoice-form-input'
-								id='buyercompanystatename'
-								name='buyercompanystatename'
-								type='text'
-								required
-								value={selectedBuyer.buyercompanystatename}
-								onChange={(e) =>
-									handleChange(e, 'buyerdetails', 'buyercompanystatename')
-								}
-							/>
+							<div style={{ display: 'flex', flexDirection: 'column' }}>
+								<label
+									className='admin-create-invoice-form-label'
+									htmlFor='buyercompanystatename'
+								>
+									Buyer Company State Name
+								</label>
+								<input
+									className='admin-create-invoice-form-input'
+									id='buyercompanystatename'
+									name='buyercompanystatename'
+									type='text'
+									required
+									value={selectedBuyer.buyercompanystatename}
+									onChange={(e) =>
+										handleChange(e, 'buyerdetails', 'buyercompanystatename')
+									}
+								/>
+							</div>
 						</div>
 						<div className='admin-create-invoice-form-div'>
-							<label
-								className='admin-create-invoice-form-label'
-								htmlFor='buyercompanystatecode'
-							>
-								Buyer Company State Code
-							</label>
-							<input
-								className='admin-create-invoice-form-input'
-								id='buyercompanystatecode'
-								name='buyercompanystatecode'
-								type='text'
-								required
-								value={selectedBuyer.buyercompanystatecode}
-								onChange={(e) =>
-									handleChange(e, 'buyerdetails', 'buyercompanystatecode')
-								}
-							/>
+							<div style={{ display: 'flex', flexDirection: 'column' }}>
+								<label
+									className='admin-create-invoice-form-label'
+									htmlFor='buyercompanystatecode'
+								>
+									Buyer Company State Code
+								</label>
+								<input
+									className='admin-create-invoice-form-input'
+									id='buyercompanystatecode'
+									name='buyercompanystatecode'
+									type='text'
+									required
+									value={selectedBuyer.buyercompanystatecode}
+									onChange={(e) =>
+										handleChange(e, 'buyerdetails', 'buyercompanystatecode')
+									}
+								/>
+							</div>
 						</div>
 					</div>
 					<div className='admin-create-invoice-data'>
@@ -680,63 +769,87 @@ function AdminCreateInvoice() {
 					</div>
 					<div className='admin-create-invoice-form'>
 						<div className='admin-create-invoice-form-div'>
-							<label
-								className='admin-create-invoice-form-label'
-								htmlFor='drivernumber'
-							>
-								Driver Number
-							</label>
-							<input
-								className='admin-create-invoice-form-input'
-								id='drivernumber'
-								name='drivernumber'
-								type='tel'
-								pattern='[0-9]{10}'
-								placeholder='Enter only mobile number'
-								required
-								onChange={(e) =>
-									handleChange(e, 'vehicledetails', 'drivernumber')
-								}
-							/>
+							<div style={{ display: 'flex', flexDirection: 'column' }}>
+								<label
+									className='admin-create-invoice-form-label'
+									htmlFor='drivernumber'
+								>
+									Driver Number
+								</label>
+								<input
+									className='admin-create-invoice-form-input'
+									id='drivernumber'
+									name='vehicledetails.drivernumber'
+									type='tel'
+									pattern='[0-9]{10}'
+									placeholder='Enter only mobile number'
+									required
+									onChange={formik.handleChange}
+									onBlur={formik.handleBlur}
+									value={formik.values.vehicledetails?.drivernumber || ''}
+								/>
+								{formik.touched.vehicledetails?.drivernumber &&
+									formik.errors.vehicledetails?.drivernumber && (
+										<div className='error'>
+											{formik.errors.vehicledetails.drivernumber}
+										</div>
+									)}
+							</div>
 						</div>
 
 						<div className='admin-create-invoice-form-div'>
-							<label
-								className='admin-create-invoice-form-label'
-								htmlFor='vehiclenumber'
-							>
-								Vehicle Number
-							</label>
-							<input
-								className='admin-create-invoice-form-input'
-								id='vechiclenuumber'
-								name='vechiclenuumber'
-								type='text'
-								pattern="^[A-Z]{2}[0-9]{2}[A-Z]{2}[0-9]{4}$"
-								required
-								onChange={(e) =>
-									handleChange(e, 'vehicledetails', 'vechiclenuumber')
-								}
-							/>
+							<div style={{ display: 'flex', flexDirection: 'column' }}>
+								<label
+									className='admin-create-invoice-form-label'
+									htmlFor='vechiclenuumber'
+								>
+									Vehicle Number
+								</label>
+								<input
+									className='admin-create-invoice-form-input'
+									id='vechiclenuumber'
+									name='vehicledetails.vechiclenuumber'
+									type='text'
+									pattern='^[A-Z]{2}[0-9]{2}[A-Z]{2}[0-9]{4}$'
+									required
+									onChange={formik.handleChange}
+									onBlur={formik.handleBlur}
+									value={formik.values.vehicledetails?.vechiclenuumber || ''}
+								/>
+								{formik.touched.vehicledetails?.vechiclenuumber &&
+									formik.errors.vehicledetails?.vechiclenuumber && (
+										<div className='error'>
+											{formik.errors.vehicledetails.vechiclenuumber}
+										</div>
+									)}
+							</div>
 						</div>
 						<div className='admin-create-invoice-form-div'>
-							<label
-								className='admin-create-invoice-form-label'
-								htmlFor='vehiclemodel'
-							>
-								Vehicle Model
-							</label>
-							<br />
-							<input
-								className='admin-create-invoice-form-input'
-								id='vechiclemodel'
-								name='vechiclemodel'
-								type='text'
-								required
-								onChange={(e) =>
-									handleChange(e, 'vehicledetails', 'vechiclemodel')
-								}
-							/>
+							<div style={{ display: 'flex', flexDirection: 'column' }}>
+								<label
+									className='admin-create-invoice-form-label'
+									htmlFor='vechiclemodel'
+								>
+									Vehicle Model
+								</label>
+								<br />
+								<input
+									className='admin-create-invoice-form-input'
+									id='vechiclemodel'
+									name='vehicledetails.vechiclemodel'
+									type='text'
+									required
+									onChange={formik.handleChange}
+									onBlur={formik.handleBlur}
+									value={formik.values.vehicledetails?.vechiclemodel || ''}
+								/>
+								{formik.touched.vehicledetails?.vechiclemodel &&
+									formik.errors.vehicledetails?.vechiclemodel && (
+										<div className='error'>
+											{formik.errors.vehicledetails.vechiclemodel}
+										</div>
+									)}
+							</div>
 						</div>
 					</div>
 					<div className='admin-create-invoice-data'>
@@ -938,6 +1051,7 @@ function AdminCreateInvoice() {
 						</div>
 
 						<div className='admin-create-invoice-form-div'>
+							{/* <div style={{ display: 'flex', flexDirection: 'column' }}> */}
 							<label
 								className='admin-create-invoice-form-label'
 								htmlFor='transportationcost'
@@ -957,27 +1071,31 @@ function AdminCreateInvoice() {
 								}
 								readOnly
 							/>
+							{/* </div> */}
 						</div>
 
 						<div className='admin-create-invoice-form-div'>
-							<label
-								className='admin-create-invoice-form-label'
-								htmlFor='dateofloading'
-							>
-								Date of Loading
-							</label>
-							<input
-								className='admin-create-invoice-form-input'
-								id='dateofloading'
-								name='dateofloading'
-								type='date'
-								required
-								onChange={(e) =>
-									handleChange(e, 'boardingdetails', 'dateofloading')
-								}
-							/>
+							<div style={{ display: 'flex', flexDirection: 'column' }}>
+								<label
+									className='admin-create-invoice-form-label'
+									htmlFor='dateofloading'
+								>
+									Date of Loading
+								</label>
+								<input
+									className='admin-create-invoice-form-input'
+									id='dateofloading'
+									name='dateofloading'
+									type='date'
+									required
+									onChange={(e) =>
+										handleChange(e, 'boardingdetails', 'dateofloading')
+									}
+								/>
+							</div>
 						</div>
 						<div className='admin-create-invoice-form-div'>
+							{/* <div style={{ display: 'flex', flexDirection: 'column' }}> */}
 							<label
 								className='admin-create-invoice-form-label'
 								htmlFor='watermark'
@@ -995,6 +1113,7 @@ function AdminCreateInvoice() {
 									handleChange(e, 'boardingdetails', 'watermark')
 								}
 							/>
+							{/* </div> */}
 						</div>
 					</div>
 					<div className='admin-create-invoice-data-submit'>

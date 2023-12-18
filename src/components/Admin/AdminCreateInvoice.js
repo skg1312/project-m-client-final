@@ -798,7 +798,11 @@ function AdminCreateInvoice() {
 									pattern='[0-9]{10}'
 									placeholder='Enter only mobile number'
 									required
-									onChange={formik.handleChange}
+									onChange={(e) => {
+  formik.handleChange(e);
+  handleChange(e, 'vehicledetails', 'vechiclemodel');
+}}
+
 									onBlur={formik.handleBlur}
 									value={formik.values.vehicledetails?.drivernumber || ''}
 								/>
@@ -826,7 +830,11 @@ function AdminCreateInvoice() {
 									type='text'
 									pattern='^[A-Z]{2}[0-9]{2}[A-Z]{2}[0-9]{4}$'
 									required
-									onChange={formik.handleChange}
+									onChange={(e) => {
+  formik.handleChange(e);
+  handleChange(e, 'vehicledetails', 'vechiclemodel');
+}}
+
 									onBlur={formik.handleBlur}
 									value={formik.values.vehicledetails?.vechiclenumber || ''}
 								/>
@@ -853,7 +861,11 @@ function AdminCreateInvoice() {
 									name='vehicledetails.vechiclemodel'
 									type='text'
 									required
-									onChange={formik.handleChange}
+									onChange={(e) => {
+  formik.handleChange(e);
+  handleChange(e, 'vehicledetails', 'vechiclemodel');
+}}
+
 									onBlur={formik.handleBlur}
 									value={formik.values.vehicledetails?.vechiclemodel || ''}
 								/>

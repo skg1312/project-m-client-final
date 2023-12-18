@@ -116,7 +116,7 @@ const ViewInvoice = (invoiceid) => {
 										Vehicle Number
 									</th>
 									<th className='invoice-management-data-body-table-header'>
-										Total Cost
+										Transportation Cost
 									</th>
 									<th className='invoice-management-data-body-table-header'>
 										Action
@@ -154,8 +154,8 @@ const ViewInvoice = (invoiceid) => {
 												'N/A'}
 										</td>
 										<td className='invoice-management-data-body-table-data'>
-											{invoice.boardingdetails?.totalcost
-												? invoice.boardingdetails.totalcost
+											{invoice.boardingdetails?.transportationcost
+												? invoice.boardingdetails.transportationcost
 												: 'N/A'}
 										</td>
 										<td className='invoice-management-data-body-table-data'>

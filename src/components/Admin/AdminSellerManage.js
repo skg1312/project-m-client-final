@@ -131,10 +131,10 @@ function AdminSellerManage() {
 		setFile(event.target.files[0]);
 	};
 
-	const handleFileUpload = async () => {
+const handleFileUpload = async () => {
 		try {
 			if (!file) {
-				console.error('No file selected for upload.');
+				toast.error('Please select a file before uploading.');
 				return;
 			}
 
@@ -155,7 +155,6 @@ function AdminSellerManage() {
 			toast.error('Error uploading file. Please try again.');
 		}
 	};
-
 	const handleSellerDelete = (sellerId) => {
 		const confirmDelete = window.confirm(
 			'Are you sure you want to delete this Seller?'
@@ -190,13 +189,23 @@ function AdminSellerManage() {
 
 			<div className='admin-seller-manage'>
 				<div className='admin-seller-manage-data'>
-					<h1 className='admin-seller-manage-data-title'>ALL AGENTS</h1>
-					<input
-						type='file'
-						accept='.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel'
-						onChange={handleFileChange}
-					/>
-					<button onClick={handleFileUpload}>Upload File</button>
+					<div className='admin-buyer-manage-data-header'>
+						<h1 className='admin-buyer-manage-data-title'>ALL AGENTS</h1>
+						<div className='admin-buyer-manage-file-upload'>
+							<input
+								className='admin-buyer-manage-file-upload-input'
+								type='file'
+								accept='.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel'
+								onChange={handleFileChange}
+							/>
+							<button
+								className='admin-buyer-manage-file-upload-button'
+								onClick={handleFileUpload}
+							>
+								Upload File
+							</button>
+						</div>
+					</div>
 					<input
 						type='text'
 						placeholder='Search Agents...'

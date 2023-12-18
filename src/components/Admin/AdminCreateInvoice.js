@@ -836,12 +836,12 @@ function AdminCreateInvoice() {
 }}
 
 									onBlur={formik.handleBlur}
-									value={formik.values.vehicledetails?. || ''}
+									value={formik.values.vehicledetails?.vechiclenumber || ''}
 								/>
-								{formik.touched.vehicledetails?. &&
-									formik.errors.vehicledetails?. && (
+								{formik.touched.vehicledetails?.vechiclenumber &&
+									formik.errors.vehicledetails?.vechiclenumber && (
 										<div className='error'>
-											{formik.errors.vehicledetails.}
+											{formik.errors.vehicledetails.vechiclenumber}
 										</div>
 									)}
 							</div>

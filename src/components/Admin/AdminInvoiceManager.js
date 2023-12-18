@@ -150,7 +150,7 @@ const ViewInvoice = (invoiceid) => {
 										</td>
 
 										<td className='invoice-management-data-body-table-data'>
-											{invoice.vehicledetails?.vehiclenumber?.substring(0, 12) ??
+											{invoice.vehicledetails?.vechiclenumber?.substring(0, 12) ??
 												'N/A'}
 										</td>
 										<td className='invoice-management-data-body-table-data'>

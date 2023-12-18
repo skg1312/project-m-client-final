@@ -51,7 +51,7 @@ function AdminCreateInvoice() {
 		},
 		vehicledetails: {
 			drivernumber: '',
-			vechiclenumber: '',
+			: '',
 			vechiclemodel: '',
 		},
 		consignmentdetails: {
@@ -800,7 +800,7 @@ function AdminCreateInvoice() {
 									required
 									onChange={(e) => {
   formik.handleChange(e);
-  handleChange(e, 'vehicledetails', 'vechiclemodel');
+  handleChange(e, 'vehicledetails', 'vechiclenumber');
 }}
 
 									onBlur={formik.handleBlur}
@@ -819,14 +819,14 @@ function AdminCreateInvoice() {
 							<div style={{ display: 'flex', flexDirection: 'column' }}>
 								<label
 									className='admin-create-invoice-form-label'
-									htmlFor='vechiclenumber'
+									htmlFor=''
 								>
 									Vehicle Number
 								</label>
 								<input
 									className='admin-create-invoice-form-input'
-									id='vechiclenumber'
-									name='vehicledetails.vechiclenumber'
+									id=''
+									name='vehicledetails.'
 									type='text'
 									pattern='^[A-Z]{2}[0-9]{2}[A-Z]{2}[0-9]{4}$'
 									required
@@ -836,12 +836,12 @@ function AdminCreateInvoice() {
 }}
 
 									onBlur={formik.handleBlur}
-									value={formik.values.vehicledetails?.vechiclenumber || ''}
+									value={formik.values.vehicledetails?. || ''}
 								/>
-								{formik.touched.vehicledetails?.vechiclenumber &&
-									formik.errors.vehicledetails?.vechiclenumber && (
+								{formik.touched.vehicledetails?. &&
+									formik.errors.vehicledetails?. && (
 										<div className='error'>
-											{formik.errors.vehicledetails.vechiclenumber}
+											{formik.errors.vehicledetails.}
 										</div>
 									)}
 							</div>

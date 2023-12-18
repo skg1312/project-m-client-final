@@ -832,7 +832,7 @@ function AdminCreateInvoice() {
 									required
 									onChange={(e) => {
   formik.handleChange(e);
-  handleChange(e, 'vehicledetails', 'vechiclemodel');
+  handleChange(e, 'vehicledetails', 'vechiclenumber');
 }}
 
 									onBlur={formik.handleBlur}

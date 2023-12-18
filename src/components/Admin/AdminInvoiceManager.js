@@ -154,8 +154,8 @@ const ViewInvoice = (invoiceid) => {
 												'N/A'}
 										</td>
 										<td className='invoice-management-data-body-table-data'>
-											{invoice.boardingdetails?.transportationcost
-												? invoice.boardingdetails.transportationcost
+											{invoice.loadingdetails?.transportationcost
+												? invoice.loadingdetails.transportationcost
 												: 'N/A'}
 										</td>
 										<td className='invoice-management-data-body-table-data'>

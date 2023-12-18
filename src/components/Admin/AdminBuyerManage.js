@@ -132,30 +132,29 @@ function AdminBuyerManage() {
 	};
 
 	const handleFileUpload = async () => {
-  try {
-    if (!file) {
-      toast.error('Please select a file before uploading.');
-      return;
-    }
+		try {
+			if (!file) {
+				toast.error('Please select a file before uploading.');
+				return;
+			}
 
-    const formData = new FormData();
-    formData.append('file', file);
+			const formData = new FormData();
+			formData.append('file', file);
 
-    const response = await axios.post(`${API}buyer/upload`, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
+			const response = await axios.post(`${API}buyer/upload`, formData, {
+				headers: {
+					'Content-Type': 'multipart/form-data',
+				},
+			});
 
-    console.log('File uploaded successfully:', response.data);
-    toast.success('File is Uploaded Successfully');
-    window.location.reload();
-  } catch (error) {
-    console.error('Error uploading file:', error);
-    toast.error('Error uploading file. Please try again.');
-  }
-};
-
+			console.log('File uploaded successfully:', response.data);
+			toast.success('File is Uploaded Successfully');
+			window.location.reload();
+		} catch (error) {
+			console.error('Error uploading file:', error);
+			toast.error('Error uploading file. Please try again.');
+		}
+	};
 
 	const handleBuyerDelete = (buyerId) => {
 		const confirmDelete = window.confirm(
@@ -192,18 +191,21 @@ function AdminBuyerManage() {
 			<div className='admin-buyer-manage'>
 				<div className='admin-buyer-manage-data'>
 					<div className='admin-buyer-manage-data-header'>
-					<h1 className='admin-buyer-manage-data-title'>ALL BUYERS</h1>
-					<div className='admin-buyer-manage-file-upload'>
-						<input
-						className='admin-buyer-manage-file-upload-input'
-							type='file'
-							accept='.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel'
-							onChange={handleFileChange}
-						/>
-						<button 
-						className='admin-buyer-manage-file-upload-button'
-						onClick={handleFileUpload}>Upload File</button>
-					</div>
+						<h1 className='admin-buyer-manage-data-title'>ALL BUYERS</h1>
+						<div className='admin-buyer-manage-file-upload'>
+							<input
+								className='admin-buyer-manage-file-upload-input'
+								type='file'
+								accept='.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel'
+								onChange={handleFileChange}
+							/>
+							<button
+								className='admin-buyer-manage-file-upload-button'
+								onClick={handleFileUpload}
+							>
+								Upload File
+							</button>
+						</div>
 					</div>
 					<input
 						type='text'

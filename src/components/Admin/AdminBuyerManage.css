@@ -14,37 +14,41 @@
 	max-height: 620px;
 	border: 2px solid #d2d2d2;
 }
-.admin-buyer-manage-data-header{
+
+.admin-buyer-manage-data-header {
 	display: grid;
 	grid-template-columns: 1fr 2fr;
 }
+
 .admin-buyer-manage-file-upload {
 	padding: 32px;
 	border-radius: 20px;
 	display: flex;
 	align-items: center;
-  }
-  .admin-buyer-manage-file-upload-button {
-	background-color: #4caf50;
+}
+
+.admin-buyer-manage-file-upload-button {
+	background-color: #5925dc;
 	color: white;
 	padding: 10px 15px;
 	border: none;
 	border-radius: 4px;
 	cursor: pointer;
 	font-size: 16px;
-  }
-  
-  .admin-buyer-manage-file-upload-button:hover {
-	background-color: #45a049;
-  }
-  .admin-buyer-manage-file-upload-input[type=file] {
+}
+
+.admin-buyer-manage-file-upload-button:hover {
+	background-color: #703ef0;
+}
+
+.admin-buyer-manage-file-upload-input[type=file] {
 	padding: 4px;
 	margin: -4px;
 	position: relative;
 	outline: none;
-  }
-  
-  .admin-buyer-manage-file-upload-input[type=file]::file-selector-button {
+}
+
+.admin-buyer-manage-file-upload-input[type=file]::file-selector-button {
 	border-radius: 4px;
 	padding: 0 16px;
 	height: 40px;
@@ -55,17 +59,17 @@
 	margin-right: 16px;
 	width: 132px;
 	color: transparent;
-  }
-  
-  .admin-buyer-manage-file-upload-input[type=file]:hover::file-selector-button {
+}
+
+.admin-buyer-manage-file-upload-input[type=file]:hover::file-selector-button {
 	background-color: #f3f4f6;
-  }
-  
-  .admin-buyer-manage-file-upload-input[type=file]:active::file-selector-button {
+}
+
+.admin-buyer-manage-file-upload-input[type=file]:active::file-selector-button {
 	background-color: #e5e7eb;
-  }
-  
-  .admin-buyer-manage-file-upload-input[type=file]::before {
+}
+
+.admin-buyer-manage-file-upload-input[type=file]::before {
 	position: absolute;
 	pointer-events: none;
 	top: 14px;
@@ -74,22 +78,22 @@
 	width: 20px;
 	content: "";
 	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230964B0'%3E%3Cpath d='M18 15v3H6v-3H4v3c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-3h-2zM7 9l1.41 1.41L11 7.83V16h2V7.83l2.59 2.58L17 9l-5-5-5 5z'/%3E%3C/svg%3E");
-  }
-  
-  .admin-buyer-manage-file-upload-input[type=file]::after {
+}
+
+.admin-buyer-manage-file-upload-input[type=file]::after {
 	position: absolute;
 	pointer-events: none;
 	top: 16px;
 	left: 40px;
 	color: var(--primary-color);
 	content: "Upload File";
-  }
-  
-  .admin-buyer-manage-file-upload-input[type=file]:focus-within::file-selector-button,
-  .admin-buyer-manage-file-upload-input[type=file]:focus::file-selector-button {
+}
+
+.admin-buyer-manage-file-upload-input[type=file]:focus-within::file-selector-button,
+.admin-buyer-manage-file-upload-input[type=file]:focus::file-selector-button {
 	outline: 2px solid var(--primary-color);
 	outline-offset: 2px;
-  }
+}
 
 .table-scroll {
 	height: 420px;
@@ -105,7 +109,7 @@
 	letter-spacing: -0.578px;
 	text-align: left;
 	padding-left: 50px;
-	padding-top:15px;
+	padding-top: 15px;
 }
 
 .admin-buyer-manage-data-table-head {
@@ -311,14 +315,16 @@
 }
 
 @media only screen and (max-width: 768px) {
-	.admin-buyer-manage-data-header{
-	display: grid;
-	grid-template-columns: 1fr;
-}
+	.admin-buyer-manage-data-header {
+		display: grid;
+		grid-template-columns: 1fr;
+	}
+
 	.table-scroll {
-	height: 320px;
-	overflow-y: scroll;
-}
+		height: 320px;
+		overflow-y: scroll;
+	}
+
 	.admin-buyer-manage-data {
 		margin-left: 15px;
 		margin-top: 40px;

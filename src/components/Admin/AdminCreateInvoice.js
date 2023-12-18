@@ -441,6 +441,7 @@ function AdminCreateInvoice() {
 									name='companyname'
 									type='text'
 									required
+									disabled
 									value={selectedCompany.companyname}
 									onChange={(e) =>
 										handleChange(e, 'companydetails', 'companyname')
@@ -463,6 +464,7 @@ function AdminCreateInvoice() {
 									name='companygstno'
 									type='text'
 									required
+									disabled
 									value={selectedCompany.companygstno}
 									onChange={(e) =>
 										handleChange(e, 'companydetails', 'companygstno')
@@ -484,6 +486,7 @@ function AdminCreateInvoice() {
 									name='companycontact'
 									type='tel'
 									required
+									disabled
 									value={selectedCompany.companycontact}
 									onChange={(e) =>
 										handleChange(e, 'companydetails', 'companycontact')
@@ -505,6 +508,7 @@ function AdminCreateInvoice() {
 									name='companystate'
 									type='text'
 									required
+									disabled
 									value={selectedCompany.companystate}
 									onChange={(e) =>
 										handleChange(e, 'companydetails', 'companystate')
@@ -526,6 +530,7 @@ function AdminCreateInvoice() {
 									name='companyofficeaddress'
 									type='text'
 									required
+									disabled
 									value={selectedCompany.companyofficeaddress}
 									onChange={(e) =>
 										handleChange(e, 'companydetails', 'companyofficeaddress')
@@ -547,6 +552,7 @@ function AdminCreateInvoice() {
 									name='companypincode'
 									type='text'
 									required
+									disabled
 									value={selectedCompany.companypincode}
 									onChange={(e) =>
 										handleChange(e, 'companydetails', 'companypincode')
@@ -589,6 +595,7 @@ function AdminCreateInvoice() {
 									name='sellercompanyname'
 									type='text'
 									required
+									disabled
 									value={selectedSeller.sellercompanyname}
 									onChange={(e) =>
 										handleChange(e, 'sellerdetails', 'sellercompanyname')
@@ -610,6 +617,7 @@ function AdminCreateInvoice() {
 									name='sellercompanyaddress'
 									type='text'
 									required
+									disabled
 									value={selectedSeller.sellercompanyaddress}
 									onChange={(e) =>
 										handleChange(e, 'sellerdetails', 'sellercompanyaddress')
@@ -631,6 +639,7 @@ function AdminCreateInvoice() {
 									name='sellercompanystatename'
 									type='text'
 									required
+									disabled
 									value={selectedSeller.sellercompanystatename}
 									onChange={(e) =>
 										handleChange(e, 'sellerdetails', 'sellercompanystatename')
@@ -652,6 +661,7 @@ function AdminCreateInvoice() {
 									name='sellercompanystatecode'
 									type='text'
 									required
+									disabled
 									value={selectedSeller.sellercompanystatecode}
 									onChange={(e) =>
 										handleChange(e, 'sellerdetails', 'sellercompanystatecode')
@@ -693,6 +703,7 @@ function AdminCreateInvoice() {
 								name='buyercompanyname'
 								type='text'
 								required
+								disabled
 								value={selectedBuyer.buyercompanyname}
 								onChange={(e) =>
 									handleChange(e, 'buyerdetails', 'buyercompanyname')
@@ -714,6 +725,7 @@ function AdminCreateInvoice() {
 									name='buyercompanyaddress'
 									type='text'
 									required
+									disabled
 									value={selectedBuyer.buyercompanyaddress}
 									onChange={(e) =>
 										handleChange(e, 'buyerdetails', 'buyercompanyaddress')
@@ -735,6 +747,7 @@ function AdminCreateInvoice() {
 									name='buyercompanystatename'
 									type='text'
 									required
+									disabled
 									value={selectedBuyer.buyercompanystatename}
 									onChange={(e) =>
 										handleChange(e, 'buyerdetails', 'buyercompanystatename')
@@ -756,6 +769,7 @@ function AdminCreateInvoice() {
 									name='buyercompanystatecode'
 									type='text'
 									required
+									disabled
 									value={selectedBuyer.buyercompanystatecode}
 									onChange={(e) =>
 										handleChange(e, 'buyerdetails', 'buyercompanystatecode')
@@ -774,7 +788,7 @@ function AdminCreateInvoice() {
 									className='admin-create-invoice-form-label'
 									htmlFor='drivernumber'
 								>
-									Driver Number
+									Driver Mobile Number
 								</label>
 								<input
 									className='admin-create-invoice-form-input'
@@ -897,6 +911,7 @@ function AdminCreateInvoice() {
 										value={addedConsignment.itemname || ''}
 										onChange={handleConsignmentChange}
 										name='itemname'
+										disabled
 									/>
 								</td>
 								<td className='admin-create-invoice-table-row-body-td'>
@@ -1065,6 +1080,7 @@ function AdminCreateInvoice() {
 								name='transportationcost'
 								type='text'
 								required
+								disabled
 								value={`${dataToSend.loadingdetails.startingpoint} ${dataToSend.loadingdetails.endingpoint} ${dataToSend.loadingdetails.transportationcost}`}
 								onChange={(e) =>
 									handleChange(e, 'loadingdetails', 'transportationcost')

@@ -51,7 +51,7 @@ function AdminCreateInvoice() {
 		},
 		vehicledetails: {
 			drivernumber: '',
-			vechiclenuumber: '',
+			vechiclenumber: '',
 			vechiclemodel: '',
 		},
 		consignmentdetails: {
@@ -114,7 +114,7 @@ function AdminCreateInvoice() {
 			drivernumber: Yup.string()
 				.matches(/[0-9]{10}/, 'Invalid mobile number')
 				.required('Driver Number is required'),
-			vechiclenuumber: Yup.string()
+			vechiclenumber: Yup.string()
 				.matches(/^[A-Z]{2}[0-9]{2}[A-Z]{2}[0-9]{4}$/, 'Invalid vehicle number')
 				.required('Vehicle Number is required'),
 			vechiclemodel: Yup.string().required('Vehicle Model is required'),
@@ -125,7 +125,7 @@ function AdminCreateInvoice() {
 		initialValues: {
 			vehicledetails: {
 				drivernumber: '',
-				vechiclenuumber: '',
+				vechiclenumber: '',
 				vechiclemodel: '',
 			},
 		},
@@ -815,25 +815,25 @@ function AdminCreateInvoice() {
 							<div style={{ display: 'flex', flexDirection: 'column' }}>
 								<label
 									className='admin-create-invoice-form-label'
-									htmlFor='vechiclenuumber'
+									htmlFor='vechiclenumber'
 								>
 									Vehicle Number
 								</label>
 								<input
 									className='admin-create-invoice-form-input'
-									id='vechiclenuumber'
-									name='vehicledetails.vechiclenuumber'
+									id='vechiclenumber'
+									name='vehicledetails.vechiclenumber'
 									type='text'
 									pattern='^[A-Z]{2}[0-9]{2}[A-Z]{2}[0-9]{4}$'
 									required
 									onChange={formik.handleChange}
 									onBlur={formik.handleBlur}
-									value={formik.values.vehicledetails?.vechiclenuumber || ''}
+									value={formik.values.vehicledetails?.vechiclenumber || ''}
 								/>
-								{formik.touched.vehicledetails?.vechiclenuumber &&
-									formik.errors.vehicledetails?.vechiclenuumber && (
+								{formik.touched.vehicledetails?.vechiclenumber &&
+									formik.errors.vehicledetails?.vechiclenumber && (
 										<div className='error'>
-											{formik.errors.vehicledetails.vechiclenuumber}
+											{formik.errors.vehicledetails.vechiclenumber}
 										</div>
 									)}
 							</div>

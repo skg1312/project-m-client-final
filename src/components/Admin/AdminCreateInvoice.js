@@ -51,7 +51,7 @@ function AdminCreateInvoice() {
 		},
 		vehicledetails: {
 			drivernumber: '',
-			: '',
+			vechiclenumber: '',
 			vechiclemodel: '',
 		},
 		consignmentdetails: {

@@ -826,7 +826,7 @@ function AdminCreateInvoice() {
 								<input
 									className='admin-create-invoice-form-input'
 									id=''
-									name='vehicledetails.'
+									name='vehicledetails.vechiclenumber'
 									type='text'
 									pattern='^[A-Z]{2}[0-9]{2}[A-Z]{2}[0-9]{4}$'
 									required

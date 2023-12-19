@@ -16,14 +16,16 @@
 }
 
 .admin-buyer-manage-data-header {
-	display: grid;
-	grid-template-columns: 1fr 2fr;
+	display: flex;
+	/* grid-template-columns: 1fr 2fr; */
+	flex-direction: column;
 }
 
 .admin-buyer-manage-file-upload {
 	padding: 32px;
 	border-radius: 20px;
 	display: flex;
+	flex-direction: row;
 	align-items: center;
 }
 
@@ -277,7 +279,7 @@
 }
 
 /* Mobile styles - 768px width and below */
-@media only screen and (max-width: 1024px) {
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
 	.admin-buyer-manage {
 		display: grid;
 		grid-template-columns: 1fr;
@@ -291,7 +293,6 @@
 		display: flex;
 		flex-wrap: wrap;
 		grid-gap: 15px;
-		display: flex;
 		justify-content: space-evenly;
 	}
 
@@ -314,15 +315,31 @@
 	}
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (min-width: 451px) and (max-width: 768px) {
 	.admin-buyer-manage-data-header {
-		display: grid;
-		grid-template-columns: 1fr;
+		display: flex;
+		/* grid-template-columns: 1fr; */
+		flex-direction: column;
 	}
 
 	.table-scroll {
 		height: 320px;
 		overflow-y: scroll;
+	}
+
+	.admin-buyer-manage {
+		display: grid;
+		grid-template-columns: 1fr;
+		text-align: center;
+		align-items: center;
+	}
+
+	.admin-logout-button-nav {
+		margin-top: 10px;
+		margin-left: 5px;
+		display: flex;
+		flex-wrap: wrap;
+		grid-gap: 15px;
 	}
 
 	.admin-buyer-manage-data {
@@ -357,14 +374,14 @@
 	.admin-buyer-manage-data-table-head {
 		color: #1a1a1a;
 		font-family: 'Urbanist';
-		font-size: 12px;
+		font-size: 10px;
 		font-style: bold;
 	}
 
 	.admin-buyer-manage-data-table-body {
 		color: #767676;
 		font-family: 'Urbanist';
-		font-size: 10px;
+		font-size: 8px;
 		font-style: bold;
 		font-weight: 400;
 		line-height: 28px;
@@ -463,7 +480,6 @@
 		height: 12px;
 	}
 
-
 	.pagination-container li {
 		padding: 10px;
 		border: 1px solid #5925dc;
@@ -477,5 +493,118 @@
 		letter-spacing: -0.325px;
 		background-color: #5925dc;
 		margin: 5px;
+	}
+}
+
+@media only screen and (max-width: 450px) {
+	.admin-buyer-manage {
+		display: grid;
+		grid-template-columns: 1fr;
+		text-align: center;
+		align-items: center;
+	}
+
+	.admin-buyer-manage-data {
+		margin-left: 5px;
+		margin-top: 40px;
+		margin-bottom: 20px;
+		margin-right: 5px;
+		border-radius: 12px;
+		border: 2px solid #d2d2d2;
+	}
+
+	.admin-buyer-manage-form {
+		margin-left: 5px;
+		margin-top: 40px;
+		margin-bottom: 20px;
+		margin-right: 5px;
+		border-radius: 12px;
+		border: 2px solid #d2d2d2;
+	}
+
+	.admin-logout-button-nav {
+		margin-top: 10px;
+		margin-left: 5px;
+		display: flex;
+		flex-wrap: wrap;
+		grid-gap: 15px;
+	}
+
+	.admin-buyer-manage-data-header {
+		display: flex;
+		/* grid-template-columns: 1fr; */
+		flex-direction: column;
+	}
+
+	.admin-buyer-manage-file-upload {
+		padding: 16px;
+		border-radius: 20px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.admin-buyer-manage-file-upload-button {
+		background-color: #5925dc;
+		color: white;
+		margin-top: 15px;
+		padding: 8px 13px;
+		border: none;
+		border-radius: 4px;
+		cursor: pointer;
+		font-size: 13px;
+	}
+
+	.admin-buyer-manage-data-table-head {
+		color: #1a1a1a;
+		font-family: 'Urbanist';
+		font-size: 10px;
+		font-style: bold;
+	}
+
+	.admin-buyer-manage-data-table-body {
+		color: #767676;
+		font-family: 'Urbanist';
+		font-size: 8px;
+		font-style: bold;
+		font-weight: 400;
+		line-height: 28px;
+		letter-spacing: -0.289px;
+	}
+
+	.admin-buyer-manage-form-button {
+		color: #fefefe;
+		text-align: center;
+		font-feature-settings: 'clig' off, 'liga' off;
+		font-family: 'Urbanist';
+		font-size: 10px;
+		font-style: normal;
+		font-weight: 600;
+		line-height: 26px;
+		letter-spacing: -0.289px;
+		width: 40%;
+		height: 40px;
+		flex-shrink: 0;
+		border-radius: 6px;
+		border: 1px solid #5925dc;
+		background: #5925dc;
+		margin-bottom: 20px;
+		margin-top: 20px;
+	}
+
+	.admin-buyer-manage-form-input {
+		border-radius: 6px;
+		border: 1px solid #ededed;
+		background: #ededed;
+		height: 35px;
+		width: 75%;
+		margin-bottom: 20px;
+		color: #767676;
+		font-family: 'Urbanist';
+		font-size: 10px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 26px;
+		letter-spacing: -0.289px;
 	}
 }

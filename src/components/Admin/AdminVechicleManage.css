@@ -240,8 +240,7 @@
 		display: flex;
 		flex-wrap: wrap;
 		grid-gap: 15px;
-		display: flex;
-		justify-content: space-evenly;
+		justify-content: space-around;
 	}
 
 	.admin-loading-manage-data {
@@ -265,9 +264,10 @@
 
 @media only screen and (max-width: 768px) {
 	.table-scroll {
-	height: 320px;
-	overflow-y: scroll;
-}
+		height: 320px;
+		overflow-y: scroll;
+	}
+
 	.admin-loading-manage-data {
 		margin-left: 5px;
 		margin-top: 40px;

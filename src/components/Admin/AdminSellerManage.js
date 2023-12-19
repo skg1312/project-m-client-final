@@ -131,7 +131,7 @@ function AdminSellerManage() {
 		setFile(event.target.files[0]);
 	};
 
-const handleFileUpload = async () => {
+	const handleFileUpload = async () => {
 		try {
 			if (!file) {
 				toast.error('Please select a file before uploading.');
@@ -189,17 +189,17 @@ const handleFileUpload = async () => {
 
 			<div className='admin-seller-manage'>
 				<div className='admin-seller-manage-data'>
-					<div className='admin-buyer-manage-data-header'>
-						<h1 className='admin-buyer-manage-data-title'>ALL AGENTS</h1>
-						<div className='admin-buyer-manage-file-upload'>
+					<div className='admin-seller-manage-data-header'>
+						<h1 className='admin-seller-manage-data-title'>ALL AGENTS</h1>
+						<div className='admin-seller-manage-file-upload'>
 							<input
-								className='admin-buyer-manage-file-upload-input'
+								className='admin-seller-manage-file-upload-input'
 								type='file'
 								accept='.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel'
 								onChange={handleFileChange}
 							/>
 							<button
-								className='admin-buyer-manage-file-upload-button'
+								className='admin-seller-manage-file-upload-button'
 								onClick={handleFileUpload}
 							>
 								Upload File

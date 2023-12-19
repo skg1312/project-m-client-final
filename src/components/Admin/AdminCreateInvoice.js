@@ -799,10 +799,9 @@ function AdminCreateInvoice() {
 									placeholder='Enter only mobile number'
 									required
 									onChange={(e) => {
-  formik.handleChange(e);
-  handleChange(e, 'vehicledetails', 'drivernumber');
-}}
-
+										formik.handleChange(e);
+										handleChange(e, 'vehicledetails', 'drivernumber');
+									}}
 									onBlur={formik.handleBlur}
 									value={formik.values.vehicledetails?.drivernumber || ''}
 								/>
@@ -817,10 +816,7 @@ function AdminCreateInvoice() {
 
 						<div className='admin-create-invoice-form-div'>
 							<div style={{ display: 'flex', flexDirection: 'column' }}>
-								<label
-									className='admin-create-invoice-form-label'
-									htmlFor=''
-								>
+								<label className='admin-create-invoice-form-label' htmlFor=''>
 									Vehicle Number
 								</label>
 								<input
@@ -831,10 +827,9 @@ function AdminCreateInvoice() {
 									pattern='^[A-Z]{2}[0-9]{2}[A-Z]{2}[0-9]{4}$'
 									required
 									onChange={(e) => {
-  formik.handleChange(e);
-  handleChange(e, 'vehicledetails', 'vechiclenumber');
-}}
-
+										formik.handleChange(e);
+										handleChange(e, 'vehicledetails', 'vechiclenumber');
+									}}
 									onBlur={formik.handleBlur}
 									value={formik.values.vehicledetails?.vechiclenumber || ''}
 								/>
@@ -862,10 +857,9 @@ function AdminCreateInvoice() {
 									type='text'
 									required
 									onChange={(e) => {
-  formik.handleChange(e);
-  handleChange(e, 'vehicledetails', 'vechiclemodel');
-}}
-
+										formik.handleChange(e);
+										handleChange(e, 'vehicledetails', 'vechiclemodel');
+									}}
 									onBlur={formik.handleBlur}
 									value={formik.values.vehicledetails?.vechiclemodel || ''}
 								/>

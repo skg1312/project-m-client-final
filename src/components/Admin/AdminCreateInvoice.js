@@ -100,7 +100,7 @@ function AdminCreateInvoice() {
 			if (response.ok) {
 				const data = await response.json();
 				console.log('Invoice created successfully:', data);
-				toast.success('Buyer Details are Updated Successfully');
+				toast.success('Invoice created successfully');
 				setUrl(data._id);
 				setView(true);
 			} else {

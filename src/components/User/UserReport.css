@@ -261,38 +261,38 @@
 }
 
 .reports-data-top {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
     margin-top: 50px;
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: row;
 }
 
 .export-button {
-    margin-left: 50px;
+    margin-left: 0px;
     margin-right: 50px;
     border-radius: 15px;
     border: 2px solid #5925DC;
-    width: 100px;
+    width: 120px;
     height: 35px;
     font-family: "Urbanist";
     text-decoration: none !important;
-    font-size: 30px;
+    font-size: 20px;
     font-style: normal;
     text-align: center;
     font-weight: 600;
-    line-height: 28px;
+    line-height: 33px;
     letter-spacing: -0.289px;
     color: #ffffff;
     background-color: #5925DC;
 }
 
 .reports-search-input {
-    margin-left: 50px;
-    margin-right: 100px;
+    margin-left: 0px;
+    margin-right: 10px;
     border-radius: 15px;
     border: 2px solid #D2D2D2;
-    width: 600px;
+    width: 400px;
     height: 50px;
     font-family: "Urbanist";
     font-size: 20px;

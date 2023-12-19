@@ -8,11 +8,11 @@
 .admin-logout-button-nav {
   margin-top: 20px;
   margin-left: 5px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  /* display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr; */
   grid-gap: 15px;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
 }
 
 .admin-logout-button-value-no-img {

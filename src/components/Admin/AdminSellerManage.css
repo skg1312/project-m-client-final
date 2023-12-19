@@ -15,6 +15,88 @@
 	border: 2px solid #d2d2d2;
 }
 
+.admin-seller-manage-data-header {
+	display: flex;
+	/* grid-template-columns: 1fr 2fr; */
+	flex-direction: column;
+}
+
+.admin-seller-manage-file-upload {
+	padding: 32px;
+	border-radius: 20px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.admin-seller-manage-file-upload-button {
+	background-color: #5925dc;
+	color: white;
+	padding: 10px 15px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 16px;
+}
+
+.admin-seller-manage-file-upload-button:hover {
+	background-color: #703ef0;
+}
+
+.admin-seller-manage-file-upload-input[type=file] {
+	padding: 4px;
+	margin: -4px;
+	position: relative;
+	outline: none;
+}
+
+.admin-seller-manage-file-upload-input[type=file]::file-selector-button {
+	border-radius: 4px;
+	padding: 0 16px;
+	height: 40px;
+	cursor: pointer;
+	background-color: white;
+	border: 1px solid rgba(0, 0, 0, 0.16);
+	box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.05);
+	margin-right: 16px;
+	width: 132px;
+	color: transparent;
+}
+
+.admin-seller-manage-file-upload-input[type=file]:hover::file-selector-button {
+	background-color: #f3f4f6;
+}
+
+.admin-seller-manage-file-upload-input[type=file]:active::file-selector-button {
+	background-color: #e5e7eb;
+}
+
+.admin-seller-manage-file-upload-input[type=file]::before {
+	position: absolute;
+	pointer-events: none;
+	top: 14px;
+	left: 16px;
+	height: 20px;
+	width: 20px;
+	content: "";
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230964B0'%3E%3Cpath d='M18 15v3H6v-3H4v3c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-3h-2zM7 9l1.41 1.41L11 7.83V16h2V7.83l2.59 2.58L17 9l-5-5-5 5z'/%3E%3C/svg%3E");
+}
+
+.admin-seller-manage-file-upload-input[type=file]::after {
+	position: absolute;
+	pointer-events: none;
+	top: 16px;
+	left: 40px;
+	color: var(--primary-color);
+	content: "Upload File";
+}
+
+.admin-seller-manage-file-upload-input[type=file]:focus-within::file-selector-button,
+.admin-seller-manage-file-upload-input[type=file]:focus::file-selector-button {
+	outline: 2px solid var(--primary-color);
+	outline-offset: 2px;
+}
+
 .table-scroll {
 	height: 450px;
 	overflow-y: scroll;
@@ -194,7 +276,7 @@
 }
 
 /* Mobile styles - 768px width and below */
-@media only screen and (max-width: 1024px) {
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
 	.admin-seller-manage {
 		display: grid;
 		grid-template-columns: 1fr;
@@ -208,7 +290,6 @@
 		display: flex;
 		flex-wrap: wrap;
 		grid-gap: 15px;
-		display: flex;
 		justify-content: space-evenly;
 	}
 
@@ -231,7 +312,33 @@
 	}
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (min-width: 451px) and (max-width: 768px) {
+	.admin-seller-manage-data-header {
+		display: flex;
+		/* grid-template-columns: 1fr; */
+		flex-direction: column;
+	}
+
+	.table-scroll {
+		height: 320px;
+		overflow-y: scroll;
+	}
+
+	.admin-seller-manage {
+		display: grid;
+		grid-template-columns: 1fr;
+		text-align: center;
+		align-items: center;
+	}
+
+	.admin-logout-button-nav {
+		margin-top: 10px;
+		margin-left: 5px;
+		display: flex;
+		flex-wrap: wrap;
+		grid-gap: 15px;
+	}
+
 	.admin-seller-manage-data {
 		margin-left: 15px;
 		margin-top: 40px;
@@ -368,5 +475,118 @@
 	.admin-seller-manage-form-input-checkbox {
 		height: 12px;
 		width: 12px;
+	}
+}
+
+@media only screen and (max-width: 450px) {
+	.admin-seller-manage {
+		display: grid;
+		grid-template-columns: 1fr;
+		text-align: center;
+		align-items: center;
+	}
+
+	.admin-seller-manage-data {
+		margin-left: 5px;
+		margin-top: 40px;
+		margin-bottom: 20px;
+		margin-right: 5px;
+		border-radius: 12px;
+		border: 2px solid #d2d2d2;
+	}
+
+	.admin-seller-manage-form {
+		margin-left: 5px;
+		margin-top: 40px;
+		margin-bottom: 20px;
+		margin-right: 5px;
+		border-radius: 12px;
+		border: 2px solid #d2d2d2;
+	}
+
+	.admin-logout-button-nav {
+		margin-top: 10px;
+		margin-left: 5px;
+		display: flex;
+		flex-wrap: wrap;
+		grid-gap: 15px;
+	}
+
+	.admin-seller-manage-data-header {
+		display: flex;
+		/* grid-template-columns: 1fr; */
+		flex-direction: column;
+	}
+
+	.admin-seller-manage-file-upload {
+		padding: 16px;
+		border-radius: 20px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.admin-seller-manage-file-upload-button {
+		background-color: #5925dc;
+		color: white;
+		margin-top: 15px;
+		padding: 8px 13px;
+		border: none;
+		border-radius: 4px;
+		cursor: pointer;
+		font-size: 13px;
+	}
+
+	.admin-seller-manage-data-table-head {
+		color: #1a1a1a;
+		font-family: 'Urbanist';
+		font-size: 10px;
+		font-style: bold;
+	}
+
+	.admin-seller-manage-data-table-body {
+		color: #767676;
+		font-family: 'Urbanist';
+		font-size: 8px;
+		font-style: bold;
+		font-weight: 400;
+		line-height: 28px;
+		letter-spacing: -0.289px;
+	}
+
+	.admin-seller-manage-form-button {
+		color: #fefefe;
+		text-align: center;
+		font-feature-settings: 'clig' off, 'liga' off;
+		font-family: 'Urbanist';
+		font-size: 10px;
+		font-style: normal;
+		font-weight: 600;
+		line-height: 26px;
+		letter-spacing: -0.289px;
+		width: 40%;
+		height: 40px;
+		flex-shrink: 0;
+		border-radius: 6px;
+		border: 1px solid #5925dc;
+		background: #5925dc;
+		margin-bottom: 20px;
+		margin-top: 20px;
+	}
+
+	.admin-seller-manage-form-input {
+		border-radius: 6px;
+		border: 1px solid #ededed;
+		background: #ededed;
+		height: 35px;
+		width: 75%;
+		margin-bottom: 20px;
+		color: #767676;
+		font-family: 'Urbanist';
+		font-size: 10px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 26px;
+		letter-spacing: -0.289px;
 	}
 }

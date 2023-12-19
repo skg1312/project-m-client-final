@@ -100,14 +100,16 @@ function AdminCreateInvoice() {
 			if (response.ok) {
 				const data = await response.json();
 				console.log('Invoice created successfully:', data);
-				toast.success('Invoice created successfully');
+				toast.success('Invoice Created Successfully');
 				setUrl(data._id);
 				setView(true);
 			} else {
 				toast.error('Invoice creation failed');
+				console.error('Invoice creation failed');
 			}
 		} catch (error) {
-			toast.error('Error creating invoice:', error);
+			toast.error('Error creating invoice');
+			console.error('Error creating invoice:', error);
 		}
 	};
 
@@ -1160,6 +1162,7 @@ function AdminCreateInvoice() {
 					</div>
 				</div>
 			</form>
+			<ToastContainer position='top-right' autoClose={3000} />
 		</div>
 	);
 }

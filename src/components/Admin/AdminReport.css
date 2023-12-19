@@ -1,6 +1,6 @@
 .reports {
 	margin-left: 100px;
-	margin-top: 100px;
+	margin-top: 75px;
 	margin-bottom: 100px;
 	margin-right: 50px;
 	border-radius: 15px;
@@ -9,6 +9,7 @@
 
 .reports-data {
 	margin-top: 50px;
+	height: 650px;
 }
 
 .reports-data-header {
@@ -55,6 +56,7 @@
 .reports-data-body-container {
 	display: flex;
 	justify-content: center;
+	height: 90%;
 }
 
 .reports-data-body {
@@ -63,6 +65,8 @@
 	border-radius: 15px;
 	background: #f4f3ff;
 	margin: 20px;
+	height: 70%;
+	overflow-y: auto;
 }
 
 .reports-data-body-table-load {
@@ -86,9 +90,7 @@
 }
 
 .reports-data-body-table-load {
-	width: 100%;
-	height: 60px;
-	border-collapse: collapse;
+	margin-top: 20px;
 }
 
 .reports-data-body-table-load-body {
@@ -329,10 +331,9 @@
 }
 
 .data-show-div {
-	margin-top: 10px;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	/* justify-content: center; */
 	align-items: center;
 	width: 96%;
 }

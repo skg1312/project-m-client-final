@@ -8,7 +8,7 @@ import AdminNavbar from './AdminNavbar';
 
 function AdminReports() {
 	const [invoice, setInvoice] = useState([]);
-	const [pageNumber, setPageNumber] = useState(0);
+	// const [pageNumber, setPageNumber] = useState(0);
 	const [searchInput, setSearchInput] = useState('');
 	const [value, setValue] = useState('');
 	const [exportedData, setExportedData] = useState([]);
@@ -25,53 +25,52 @@ function AdminReports() {
 		setValue(newValue);
 	};
 
-	const itemsPerPage = 15;
+	// const itemsPerPage = 15;
 	const sortedInvoice = [...invoice].reverse();
 
-	const displayedInvoiceSearch = sortedInvoice
-		.filter((item) => {
-			const invoiceNo =
-				(item.invoicedetails && item.invoicedetails.invoiceno) || '';
-			const companyName =
-				(item.companydetails && item.companydetails.companyname) || '';
-			const invoiceDate =
-				(item.invoicedetails && item.invoicedetails.invoicedate) || '';
-			const vehicleNumber =
-				(item.vehicledetails && item.vehicledetails.vehiclenumber) || '';
-			const driverName =
-				(item.vehicledetails && item.vehicledetails.drivername) || '';
-			const itemName =
-				(item.consignmentdetails.itemdetails[0] &&
-					item.consignmentdetails.itemdetails[0].itemname) ||
-				'';
-			const agentCompanyName =
-				(item.sellerdetails && item.sellerdetails.sellercompanyname) || ''; // **Include Agent Company Name field**
-			const agentCompanyState =
-				(item.sellerdetails && item.sellerdetails.sellercompanystatename) || ''; // **Include Agent Company State Name**
-			const searchLowerCase = searchInput?.toLowerCase();
+	const displayedInvoiceSearch = sortedInvoice.filter((item) => {
+		const invoiceNo =
+			(item.invoicedetails && item.invoicedetails.invoiceno) || '';
+		const companyName =
+			(item.companydetails && item.companydetails.companyname) || '';
+		const invoiceDate =
+			(item.invoicedetails && item.invoicedetails.invoicedate) || '';
+		const vehicleNumber =
+			(item.vehicledetails && item.vehicledetails.vehiclenumber) || '';
+		const driverName =
+			(item.vehicledetails && item.vehicledetails.drivername) || '';
+		const itemName =
+			(item.consignmentdetails.itemdetails[0] &&
+				item.consignmentdetails.itemdetails[0].itemname) ||
+			'';
+		const agentCompanyName =
+			(item.sellerdetails && item.sellerdetails.sellercompanyname) || ''; // **Include Agent Company Name field**
+		const agentCompanyState =
+			(item.sellerdetails && item.sellerdetails.sellercompanystatename) || ''; // **Include Agent Company State Name**
+		const searchLowerCase = searchInput?.toLowerCase();
 
-			if (
-				invoiceNo.toLowerCase().includes(searchInput?.toLowerCase()) ||
-				companyName.toLowerCase().includes(searchInput?.toLowerCase()) ||
-				invoiceDate.toLowerCase().includes(searchInput?.toLowerCase()) ||
-				vehicleNumber.toLowerCase().includes(searchInput?.toLowerCase()) ||
-				driverName.toLowerCase().includes(searchInput?.toLowerCase()) ||
-				itemName.toLowerCase().includes(searchLowerCase) ||
-				agentCompanyName.toLowerCase().includes(searchLowerCase) || // **Check Agent Company Name**
-				agentCompanyState.toLowerCase().includes(searchLowerCase) // **Check Agent Company State Name**
-			) {
-				return true;
-			}
+		if (
+			invoiceNo.toLowerCase().includes(searchInput?.toLowerCase()) ||
+			companyName.toLowerCase().includes(searchInput?.toLowerCase()) ||
+			invoiceDate.toLowerCase().includes(searchInput?.toLowerCase()) ||
+			vehicleNumber.toLowerCase().includes(searchInput?.toLowerCase()) ||
+			driverName.toLowerCase().includes(searchInput?.toLowerCase()) ||
+			itemName.toLowerCase().includes(searchLowerCase) ||
+			agentCompanyName.toLowerCase().includes(searchLowerCase) || // **Check Agent Company Name**
+			agentCompanyState.toLowerCase().includes(searchLowerCase) // **Check Agent Company State Name**
+		) {
+			return true;
+		}
 
-			return false;
-		})
-		.slice(pageNumber * itemsPerPage, (pageNumber + 1) * itemsPerPage);
+		return false;
+	});
+	// 	.slice(pageNumber * itemsPerPage, (pageNumber + 1) * itemsPerPage);
 
-	const pageCount = Math.ceil(sortedInvoice.length / itemsPerPage);
+	// const pageCount = Math.ceil(sortedInvoice.length / itemsPerPage);
 
-	const changePage = ({ selected }) => {
-		setPageNumber(selected);
-	};
+	// const changePage = ({ selected }) => {
+	// 	setPageNumber(selected);
+	// };
 
 	useEffect(() => {
 		axios
@@ -126,62 +125,49 @@ function AdminReports() {
 	};
 
 	const handleToDateSelect = (e) => {
-		const selectedDate = e.target.value;
-
-		// Use a utility function to increment the date by one day
-		const nextDate = incrementDate(selectedDate);
-
-		// Set the endDate state to the next date
-		setEndDate(nextDate);
+		const selectedToDate = e.target.value;
+		setEndDate(selectedToDate);
+		console.log(selectedToDate);
 	};
 
-	const incrementDate = (dateString) => {
-		const selectedDate = new Date(dateString);
-		selectedDate.setDate(selectedDate.getDate() + 1);
+	// Declare isStartDateValid and isEndDateValid before the .filter function
+	const isStartDateValid =
+		startDate !== '' && !isNaN(new Date(startDate).getTime());
+	const isEndDateValid = endDate !== '' && !isNaN(new Date(endDate).getTime());
 
-		// Format the next date to match the 'YYYY-MM-DD' format used by the input type 'date'
-		const formattedNextDate = selectedDate.toISOString().split('T')[0];
-
-		return formattedNextDate;
-	};
-
-	const filteredDataByDate = filteredAgentSelectData
+	const filteredDataByDate = sortedInvoice
 		.filter((item) => {
-			const itemDate = new Date(item.invoicedetails.invoicedate); // Replace 'date' with your actual date property
-
-			// Check if startDate and endDate are valid date strings
-			const isStartDateValid =
-				startDate !== '' && !isNaN(new Date(startDate).getTime());
-			const isEndDateValid =
-				endDate !== '' && !isNaN(new Date(endDate).getTime());
+			const itemDate = new Date(item.invoicedetails.invoicedate);
 
 			if (
-				(isStartDateValid && itemDate >= new Date(startDate)) ||
-				!isStartDateValid
+				isStartDateValid &&
+				(itemDate < new Date(startDate + 'T00:00:00') ||
+					itemDate > new Date(startDate + 'T23:59:59'))
 			) {
-				if (
-					(isEndDateValid && itemDate <= new Date(endDate)) ||
-					!isEndDateValid
-				) {
-					return true;
-				}
+				return false; // Filter out items before and after the start date
 			}
 
-			return false;
+			if (
+				isEndDateValid &&
+				(itemDate < new Date(endDate + 'T00:00:00') ||
+					itemDate > new Date(endDate + 'T23:59:59'))
+			) {
+				return false; // Filter out items before and after the end date
+			}
+
+			return true; // Include items within the date range
 		})
 		.map((item) => {
-			const toDate = endDate
-				? new Date(new Date(endDate).getTime() + 24 * 60 * 60 * 1000) // Adding one day in milliseconds
-				: null;
-
 			return {
 				...item,
-				fromDate: startDate || null,
-				toDate: toDate || null,
+				fromDate: isStartDateValid ? startDate : null,
+				toDate: isEndDateValid ? endDate : null,
 			};
 		});
 
-	// console.log(filteredDataByDate);
+	// Rest of your code...
+
+	console.log(filteredDataByDate);
 
 	useEffect(() => {
 		// console.log('Selected Agent:', selectedAgentOption);
@@ -208,6 +194,7 @@ function AdminReports() {
 
 	// console.log('agentData', agentData);
 
+	//for showing data of selected agent
 	const handleShowButtonClick = () => {
 		const newWindow = window.open('', '_blank');
 		newWindow.document.write(
@@ -276,10 +263,11 @@ function AdminReports() {
 		newWindow.document.write('</body></html>');
 	};
 
+	//for showing data of agents by date
 	const handleShowDataByDate = () => {
 		const newWindow = window.open('', '_blank');
 		newWindow.document.write(
-			'<html><head><title>Agent Data</title></head><body>'
+			'<html><head><title>Agent Details</title></head><body>'
 		);
 
 		newWindow.document.write(
@@ -340,6 +328,460 @@ function AdminReports() {
 		newWindow.document.write(
 			`<h2 style="text-align: center; font-size: 24px;">Total Quantity: ${totalQuantity}</h2>`
 		);
+
+		newWindow.document.write('</body></html>');
+	};
+
+	//for showing data of load section by date
+	const handleShowLoadDataByDate = () => {
+		const newWindow = window.open('', '_blank');
+		newWindow.document.write(
+			'<html><head><title>Load Details</title></head><body>'
+		);
+
+		newWindow.document.write(
+			'<h2 style="text-align: center; font-size: 40px;">Load Details</h2>'
+		);
+		newWindow.document.write(
+			'<table style="width: 70%; margin: 0 auto; border-collapse: collapse; border: 1px solid #ddd;">'
+		);
+
+		// Table header
+		newWindow.document.write('<tr style="background-color: #f2f2f2;">');
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Invoice NO</th>'
+		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Date</th>'
+		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Total Cost</th>'
+		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Company Name</th>'
+		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">No of Items</th>'
+		);
+		newWindow.document.write('</tr>');
+
+		filteredDataByDate.forEach((dataItem, index) => {
+			newWindow.document.write('<tr>');
+			newWindow.document.write(
+				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+					dataItem.invoicedetails && dataItem.invoicedetails.invoiceno
+						? dataItem.invoicedetails.invoiceno.substring(0, 12)
+						: 'N/A'
+				}</td>`
+			);
+			newWindow.document.write(
+				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+					dataItem.invoicedetails && dataItem.invoicedetails.invoicedate
+						? new Date(dataItem.invoicedetails.invoicedate).toLocaleDateString(
+								'en-GB',
+								{
+									day: '2-digit',
+									month: '2-digit',
+									year: 'numeric',
+								}
+						  )
+						: 'N/A'
+				}</td>`
+			);
+			newWindow.document.write(
+				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+					dataItem.boardingdetails && dataItem.boardingdetails.totalcost
+						? dataItem.boardingdetails.totalcost
+						: 'N/A'
+				}</td>`
+			);
+			newWindow.document.write(
+				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+					dataItem.companydetails && dataItem.companydetails.companyname
+						? dataItem.companydetails.companyname.substring(0, 12)
+						: 'N/A'
+				}</td>`
+			);
+			newWindow.document.write(
+				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+					dataItem.consignmentdetails &&
+					dataItem.consignmentdetails.itemdetails &&
+					dataItem.consignmentdetails.itemdetails.length
+						? dataItem.consignmentdetails.itemdetails.length
+						: 'N/A'
+				}</td>`
+			);
+			newWindow.document.write('</tr>');
+		});
+
+		newWindow.document.write('</table>');
+
+		newWindow.document.write('</body></html>');
+	};
+
+	//for showing data of Day section by date
+	const handleShowDayDataByDate = () => {
+		const newWindow = window.open('', '_blank');
+		newWindow.document.write(
+			'<html><head><title>Day Wise Details</title></head><body>'
+		);
+
+		newWindow.document.write(
+			'<h2 style="text-align: center; font-size: 40px;">Day Wise Details</h2>'
+		);
+		newWindow.document.write(
+			'<table style="width: 70%; margin: 0 auto; border-collapse: collapse; border: 1px solid #ddd;">'
+		);
+
+		// Table header
+		newWindow.document.write('<tr style="background-color: #f2f2f2;">');
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Date</th>'
+		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Invoice NO</th>'
+		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Order Date</th>'
+		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Total Cost</th>'
+		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">No of Items</th>'
+		);
+		newWindow.document.write('</tr>');
+
+		filteredDataByDate.forEach((dataItem, index) => {
+			newWindow.document.write('<tr>');
+			newWindow.document.write(
+				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+					dataItem.invoicedetails && dataItem.invoicedetails.invoicedate
+						? new Date(dataItem.invoicedetails.invoicedate).toLocaleDateString(
+								'en-GB',
+								{
+									day: '2-digit',
+									month: '2-digit',
+									year: 'numeric',
+								}
+						  )
+						: 'N/A'
+				}</td>`
+			);
+			newWindow.document.write(
+				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+					dataItem.invoicedetails && dataItem.invoicedetails.invoiceno
+						? dataItem.invoicedetails.invoiceno.substring(0, 12)
+						: 'N/A'
+				}</td>`
+			);
+			newWindow.document.write(
+				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+					dataItem.invoicedetails.ordereddate
+						? new Date(dataItem.invoicedetails.ordereddate).toLocaleDateString(
+								'en-GB',
+								{
+									day: '2-digit',
+									month: '2-digit',
+									year: 'numeric',
+								}
+						  )
+						: 'N/A'
+				}</td>`
+			);
+			newWindow.document.write(
+				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+					dataItem.boardingdetails && dataItem.boardingdetails.totalcost
+						? dataItem.boardingdetails.totalcost
+						: 'N/A'
+				}</td>`
+			);
+			newWindow.document.write(
+				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+					dataItem.invoicedetails.deliverynotedate
+						? new Date(
+								dataItem.invoicedetails.deliverynotedate
+						  ).toLocaleDateString('en-GB', {
+								day: '2-digit',
+								month: '2-digit',
+								year: 'numeric',
+						  })
+						: 'N/A'
+				}</td>`
+			);
+			newWindow.document.write('</tr>');
+		});
+
+		newWindow.document.write('</table>');
+
+		newWindow.document.write('</body></html>');
+	};
+
+	//for showing data of Item section by date
+	const handleShowItemDataByDate = () => {
+		const newWindow = window.open('', '_blank');
+		newWindow.document.write(
+			'<html><head><title>Item Wise Details</title></head><body>'
+		);
+
+		newWindow.document.write(
+			'<h2 style="text-align: center; font-size: 40px;">Item Wise Details</h2>'
+		);
+		newWindow.document.write(
+			'<table style="width: 70%; margin: 0 auto; border-collapse: collapse; border: 1px solid #ddd;">'
+		);
+
+		// Table header
+		newWindow.document.write('<tr style="background-color: #f2f2f2;">');
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Date</th>'
+		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Item Name</th>'
+		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Item Amount</th>'
+		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Item Tax</th>'
+		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Item Quantity</th>'
+		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Invoice No</th>'
+		);
+		newWindow.document.write('</tr>');
+
+		filteredDataByDate.forEach((dataItem, index) => {
+			newWindow.document.write('<tr>');
+			newWindow.document.write(
+				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+					dataItem.invoicedetails && dataItem.invoicedetails.invoicedate
+						? new Date(dataItem.invoicedetails.invoicedate).toLocaleDateString(
+								'en-GB',
+								{
+									day: '2-digit',
+									month: '2-digit',
+									year: 'numeric',
+								}
+						  )
+						: 'N/A'
+				}</td>`
+			);
+			newWindow.document.write(
+				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+					dataItem.itemname ? dataItem.itemname : 'N/A'
+				}</td>`
+			);
+			newWindow.document.write(
+				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+					dataItem.itemprice ? dataItem.itemprice : 'N/A'
+				}</td>`
+			);
+			newWindow.document.write(
+				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+					dataItem.itemtaxrate ? dataItem.itemtaxrate : 'N/A'
+				}</td>`
+			);
+			newWindow.document.write(
+				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+					dataItem.itemquantity ? dataItem.itemquantity : 'N/A'
+				}</td>`
+			);
+			newWindow.document.write(
+				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+					dataItem.invoicedetails && dataItem.invoicedetails.invoiceno
+						? dataItem.invoicedetails.invoiceno.substring(0, 12)
+						: 'N/A'
+				}</td>`
+			);
+			newWindow.document.write('</tr>');
+		});
+
+		newWindow.document.write('</table>');
+
+		newWindow.document.write('</body></html>');
+	};
+
+	//for showing data of Vehicle section by date
+	const handleShowVehicleDataByDate = () => {
+		const newWindow = window.open('', '_blank');
+		newWindow.document.write(
+			'<html><head><title>Vehicle Wise Details</title></head><body>'
+		);
+
+		newWindow.document.write(
+			'<h2 style="text-align: center; font-size: 40px;">Vehicle Wise Details</h2>'
+		);
+		newWindow.document.write(
+			'<table style="width: 70%; margin: 0 auto; border-collapse: collapse; border: 1px solid #ddd;">'
+		);
+
+		// Table header
+		newWindow.document.write('<tr style="background-color: #f2f2f2;">');
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Date</th>'
+		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Vechicle</th>'
+		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Transportation Cost</th>'
+		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Total Cost</th>'
+		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Driver</th>'
+		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Weight</th>'
+		);
+		newWindow.document.write('</tr>');
+
+		filteredDataByDate.forEach((dataItem, index) => {
+			newWindow.document.write('<tr>');
+			newWindow.document.write(
+				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+					dataItem.invoicedetails && dataItem.invoicedetails.invoicedate
+						? new Date(dataItem.invoicedetails.invoicedate).toLocaleDateString(
+								'en-GB',
+								{
+									day: '2-digit',
+									month: '2-digit',
+									year: 'numeric',
+								}
+						  )
+						: 'N/A'
+				}</td>`
+			);
+			newWindow.document.write(
+				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+					dataItem.itemname ? dataItem.itemname : 'N/A'
+				}</td>`
+			);
+			newWindow.document.write(
+				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+					dataItem.itemprice ? dataItem.itemprice : 'N/A'
+				}</td>`
+			);
+			newWindow.document.write(
+				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+					dataItem.itemtaxrate ? dataItem.itemtaxrate : 'N/A'
+				}</td>`
+			);
+			newWindow.document.write(
+				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+					dataItem.itemquantity ? dataItem.itemquantity : 'N/A'
+				}</td>`
+			);
+			newWindow.document.write(
+				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+					dataItem.invoicedetails && dataItem.invoicedetails.invoiceno
+						? dataItem.invoicedetails.invoiceno.substring(0, 12)
+						: 'N/A'
+				}</td>`
+			);
+			newWindow.document.write('</tr>');
+		});
+
+		newWindow.document.write('</table>');
+
+		newWindow.document.write('</body></html>');
+	};
+
+	//for showing data of Driver section by date
+	const handleShowDriverDataByDate = () => {
+		const newWindow = window.open('', '_blank');
+		newWindow.document.write(
+			'<html><head><title>Driver Wise Details</title></head><body>'
+		);
+
+		newWindow.document.write(
+			'<h2 style="text-align: center; font-size: 40px;">Driver Wise Details</h2>'
+		);
+		newWindow.document.write(
+			'<table style="width: 70%; margin: 0 auto; border-collapse: collapse; border: 1px solid #ddd;">'
+		);
+
+		// Table header
+		newWindow.document.write('<tr style="background-color: #f2f2f2;">');
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Date</th>'
+		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Driver</th>'
+		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Vechicle</th>'
+		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Invoice No</th>'
+		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Total Cost</th>'
+		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Driver License No</th>'
+		);
+		newWindow.document.write('</tr>');
+
+		filteredDataByDate.forEach((dataItem, index) => {
+			newWindow.document.write('<tr>');
+			newWindow.document.write(
+				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+					dataItem.invoicedetails && dataItem.invoicedetails.invoicedate
+						? new Date(dataItem.invoicedetails.invoicedate).toLocaleDateString(
+								'en-GB',
+								{
+									day: '2-digit',
+									month: '2-digit',
+									year: 'numeric',
+								}
+						  )
+						: 'N/A'
+				}</td>`
+			);
+			newWindow.document.write(
+				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+					dataItem.vehicledetails && dataItem.vehicledetails.drivername
+						? dataItem.vehicledetails.drivername.substring(0, 12)
+						: 'N/A'
+				}</td>`
+			);
+			newWindow.document.write(
+				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+					dataItem.vehicledetails && dataItem.vehicledetails.vehiclenumber
+						? dataItem.vehicledetails.vehiclenumber.substring(0, 12)
+						: 'N/A'
+				}</td>`
+			);
+			newWindow.document.write(
+				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+					dataItem.invoicedetails && dataItem.invoicedetails.invoiceno
+						? dataItem.invoicedetails.invoiceno.substring(0, 12)
+						: 'N/A'
+				}</td>`
+			);
+			newWindow.document.write(
+				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+					dataItem.boardingdetails && dataItem.boardingdetails.totalcost
+						? dataItem.boardingdetails.totalcost.substring(0, 12)
+						: 'N/A'
+				}</td>`
+			);
+			newWindow.document.write(
+				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+					dataItem.vehicledetails && dataItem.vehicledetails.driverlicenseno
+						? dataItem.vehicledetails.driverlicenseno.substring(0, 12)
+						: 'N/A'
+				}</td>`
+			);
+			newWindow.document.write('</tr>');
+		});
+
+		newWindow.document.write('</table>');
 
 		newWindow.document.write('</body></html>');
 	};
@@ -661,346 +1103,506 @@ function AdminReports() {
 
 					<div className='reports-data-body-container'>
 						{value === 'load' && (
-							<div className='reports-data-body'>
-								<table className='reports-data-body-table-load'>
-									<thead className='reports-data-body-table-load-head'>
-										<tr className='reports-data-body-table-load-head-row'>
-											<th className='reports-data-body-table-load-head-row-item'>
-												Invoice No
-											</th>
-											<th className='reports-data-body-table-load-head-row-item'>
-												Date
-											</th>
-											<th className='reports-data-body-table-load-head-row-item'>
-												Total Cost
-											</th>
-											<th className='reports-data-body-table-load-head-row-item'>
-												Company Name
-											</th>
-											<th className='reports-data-body-table-load-head-row-item'>
-												No of Items
-											</th>
-										</tr>
-									</thead>
-									<tbody className='reports-data-body-table-load-body'>
-										{displayedInvoiceSearch.map((invoice) => (
-											<tr
-												key={invoice._id}
-												className='reports-data-body-table-load-body-row'
-											>
-												<td className='reports-data-body-table-load-body-row-item'>
-													{invoice.invoicedetails &&
-													invoice.invoicedetails.invoiceno
-														? invoice.invoicedetails.invoiceno.substring(0, 12)
-														: 'N/A'}
-												</td>
-												<td className='reports-data-body-table-load-body-row-item'>
-													{invoice.invoicedetails &&
-													invoice.invoicedetails.invoicedate
-														? new Date(
-																invoice.invoicedetails.invoicedate
-														  ).toLocaleDateString('en-GB', {
-																day: '2-digit',
-																month: '2-digit',
-																year: 'numeric',
-														  })
-														: 'N/A'}
-												</td>
-												<td className='reports-data-body-table-load-body-row-item'>
-													{invoice.boardingdetails &&
-													invoice.boardingdetails.totalcost
-														? invoice.boardingdetails.totalcost
-														: 'N/A'}
-												</td>
-												<td className='reports-data-body-table-load-body-row-item'>
-													{invoice.companydetails &&
-													invoice.companydetails.companyname
-														? invoice.companydetails.companyname.substring(
-																0,
-																12
-														  )
-														: 'N/A'}
-												</td>
-												<td className='reports-data-body-table-load-body-row-item'>
-													{invoice.consignmentdetails &&
-													invoice.consignmentdetails.itemdetails &&
-													invoice.consignmentdetails.itemdetails.length
-														? invoice.consignmentdetails.itemdetails.length
-														: 'N/A'}
-												</td>
+							<div className='data-show-div'>
+								<div style={{ margin: '10px' }}>
+									<label className='date-label'>From:</label>
+									<input
+										className='date-select'
+										type='date'
+										value={startDate}
+										onChange={handleFromDateSelect}
+									/>
+									<label className='date-label'>To:</label>
+									<input
+										className='date-select'
+										type='date'
+										value={endDate}
+										onChange={handleToDateSelect}
+									/>
+									{/* Button for Date Range */}
+									<button
+										className='show-date-data-btn'
+										onClick={handleShowLoadDataByDate}
+									>
+										Show By Date
+									</button>
+								</div>
+								<div className='reports-data-body'>
+									<table className='reports-data-body-table-load'>
+										<thead className='reports-data-body-table-load-head'>
+											<tr className='reports-data-body-table-load-head-row'>
+												<th className='reports-data-body-table-load-head-row-item'>
+													Invoice No
+												</th>
+												<th className='reports-data-body-table-load-head-row-item'>
+													Date
+												</th>
+												<th className='reports-data-body-table-load-head-row-item'>
+													Total Cost
+												</th>
+												<th className='reports-data-body-table-load-head-row-item'>
+													Company Name
+												</th>
+												<th className='reports-data-body-table-load-head-row-item'>
+													No of Items
+												</th>
 											</tr>
-										))}
-									</tbody>
-								</table>
+										</thead>
+										<tbody className='reports-data-body-table-load-body'>
+											{displayedInvoiceSearch.map((invoice) => (
+												<tr
+													key={invoice._id}
+													className='reports-data-body-table-load-body-row'
+												>
+													<td className='reports-data-body-table-load-body-row-item'>
+														{invoice.invoicedetails &&
+														invoice.invoicedetails.invoiceno
+															? invoice.invoicedetails.invoiceno.substring(
+																	0,
+																	12
+															  )
+															: 'N/A'}
+													</td>
+													<td className='reports-data-body-table-load-body-row-item'>
+														{invoice.invoicedetails &&
+														invoice.invoicedetails.invoicedate
+															? new Date(
+																	invoice.invoicedetails.invoicedate
+															  ).toLocaleDateString('en-GB', {
+																	day: '2-digit',
+																	month: '2-digit',
+																	year: 'numeric',
+															  })
+															: 'N/A'}
+													</td>
+													<td className='reports-data-body-table-load-body-row-item'>
+														{invoice.boardingdetails &&
+														invoice.boardingdetails.totalcost
+															? invoice.boardingdetails.totalcost
+															: 'N/A'}
+													</td>
+													<td className='reports-data-body-table-load-body-row-item'>
+														{invoice.companydetails &&
+														invoice.companydetails.companyname
+															? invoice.companydetails.companyname.substring(
+																	0,
+																	12
+															  )
+															: 'N/A'}
+													</td>
+													<td className='reports-data-body-table-load-body-row-item'>
+														{invoice.consignmentdetails &&
+														invoice.consignmentdetails.itemdetails &&
+														invoice.consignmentdetails.itemdetails.length
+															? invoice.consignmentdetails.itemdetails.length
+															: 'N/A'}
+													</td>
+												</tr>
+											))}
+										</tbody>
+									</table>
+								</div>
 							</div>
 						)}
 						{value === 'day' && (
-							<div className='reports-data-body'>
-								<table className='reports-data-body-table-day'>
-									<thead className='reports-data-body-table-day-head'>
-										<tr className='reports-data-body-table-day-head-row'>
-											<th className='reports-data-body-table-day-head-row-item'>
-												Date
-											</th>
-											<th className='reports-data-body-table-day-head-row-item'>
-												Invoice no
-											</th>
-											<th className='reports-data-body-table-day-head-row-item'>
-												Order Date
-											</th>
-											<th className='reports-data-body-table-day-head-row-item'>
-												Total Cost
-											</th>
-											<th className='reports-data-body-table-day-head-row-item'>
-												Delivery Note Date
-											</th>
-										</tr>
-									</thead>
-									<tbody className='reports-data-body-table-day-body'>
-										{displayedInvoiceSearch.map((invoice) => (
-											<tr
-												key={invoice._id}
-												className='reports-data-body-table-day-body-row'
-											>
-												<td className='reports-data-body-table-day-body-row-item'>
-													{invoice.invoicedetails.invoicedate
-														? new Date(
-																invoice.invoicedetails.invoicedate
-														  ).toLocaleDateString('en-GB', {
-																day: '2-digit',
-																month: '2-digit',
-																year: 'numeric',
-														  })
-														: 'N/A'}
-												</td>
-												<td className='reports-data-body-table-day-body-row-item'>
-													{invoice.invoicedetails &&
-													invoice.invoicedetails.invoiceno
-														? invoice.invoicedetails.invoiceno.substring(0, 12)
-														: 'N/A'}
-												</td>
-												<td className='reports-data-body-table-day-body-row-item'>
-													{invoice.invoicedetails.ordereddate
-														? new Date(
-																invoice.invoicedetails.ordereddate
-														  ).toLocaleDateString('en-GB', {
-																day: '2-digit',
-																month: '2-digit',
-																year: 'numeric',
-														  })
-														: 'N/A'}
-												</td>
-												<td className='reports-data-body-table-day-body-row-item'>
-													{invoice.boardingdetails.totalcost
-														? invoice.boardingdetails.totalcost
-														: 'N/A'}
-												</td>
-												<td className='reports-data-body-table-day-body-row-item'>
-													{invoice.invoicedetails.deliverynotedate
-														? new Date(
-																invoice.invoicedetails.deliverynotedate
-														  ).toLocaleDateString('en-GB', {
-																day: '2-digit',
-																month: '2-digit',
-																year: 'numeric',
-														  })
-														: 'N/A'}
-												</td>
+							<div className='data-show-div'>
+								<div style={{ margin: '10px' }}>
+									<label className='date-label'>From:</label>
+									<input
+										className='date-select'
+										type='date'
+										value={startDate}
+										onChange={handleFromDateSelect}
+									/>
+									<label className='date-label'>To:</label>
+									<input
+										className='date-select'
+										type='date'
+										value={endDate}
+										onChange={handleToDateSelect}
+									/>
+									{/* Button for Date Range */}
+									<button
+										className='show-date-data-btn'
+										onClick={handleShowDayDataByDate}
+									>
+										Show By Date
+									</button>
+								</div>
+								<div className='reports-data-body'>
+									<table className='reports-data-body-table-day'>
+										<thead className='reports-data-body-table-day-head'>
+											<tr className='reports-data-body-table-day-head-row'>
+												<th className='reports-data-body-table-day-head-row-item'>
+													Date
+												</th>
+												<th className='reports-data-body-table-day-head-row-item'>
+													Invoice no
+												</th>
+												<th className='reports-data-body-table-day-head-row-item'>
+													Order Date
+												</th>
+												<th className='reports-data-body-table-day-head-row-item'>
+													Total Cost
+												</th>
+												<th className='reports-data-body-table-day-head-row-item'>
+													Delivery Note Date
+												</th>
 											</tr>
-										))}
-									</tbody>
-								</table>
+										</thead>
+										<tbody className='reports-data-body-table-day-body'>
+											{displayedInvoiceSearch.map((invoice) => (
+												<tr
+													key={invoice._id}
+													className='reports-data-body-table-day-body-row'
+												>
+													<td className='reports-data-body-table-day-body-row-item'>
+														{invoice.invoicedetails.invoicedate
+															? new Date(
+																	invoice.invoicedetails.invoicedate
+															  ).toLocaleDateString('en-GB', {
+																	day: '2-digit',
+																	month: '2-digit',
+																	year: 'numeric',
+															  })
+															: 'N/A'}
+													</td>
+													<td className='reports-data-body-table-day-body-row-item'>
+														{invoice.invoicedetails &&
+														invoice.invoicedetails.invoiceno
+															? invoice.invoicedetails.invoiceno.substring(
+																	0,
+																	12
+															  )
+															: 'N/A'}
+													</td>
+													<td className='reports-data-body-table-day-body-row-item'>
+														{invoice.invoicedetails.ordereddate
+															? new Date(
+																	invoice.invoicedetails.ordereddate
+															  ).toLocaleDateString('en-GB', {
+																	day: '2-digit',
+																	month: '2-digit',
+																	year: 'numeric',
+															  })
+															: 'N/A'}
+													</td>
+													<td className='reports-data-body-table-day-body-row-item'>
+														{invoice.boardingdetails.totalcost
+															? invoice.boardingdetails.totalcost
+															: 'N/A'}
+													</td>
+													<td className='reports-data-body-table-day-body-row-item'>
+														{invoice.invoicedetails.deliverynotedate
+															? new Date(
+																	invoice.invoicedetails.deliverynotedate
+															  ).toLocaleDateString('en-GB', {
+																	day: '2-digit',
+																	month: '2-digit',
+																	year: 'numeric',
+															  })
+															: 'N/A'}
+													</td>
+												</tr>
+											))}
+										</tbody>
+									</table>
+								</div>
 							</div>
 						)}
 						{value === 'item' && (
-							<div className='reports-data-body'>
-								<table className='reports-data-body-table-item'>
-									<thead className='reports-data-body-table-item-head'>
-										<tr className='reports-data-body-table-item-head-row'>
-											<th className='reports-data-body-table-item-head-row-item'>
-												Item Name
-											</th>
-											<th className='reports-data-body-table-item-head-row-item'>
-												Item Amount
-											</th>
-											<th className='reports-data-body-table-item-head-row-item'>
-												Item Tax
-											</th>
-											<th className='reports-data-body-table-item-head-row-item'>
-												Item Quantity
-											</th>
-											<th className='reports-data-body-table-item-head-row-item'>
-												Invoice No
-											</th>
-										</tr>
-									</thead>
-									<tbody className='reports-data-body-table-item-body'>
-										{displayedInvoiceSearch.map((invoice) =>
-											invoice.consignmentdetails.itemdetails.map(
-												(item, index) => (
-													<tr
-														key={index}
-														className='reports-data-body-table-item-body-row'
-													>
-														<td className='reports-data-body-table-item-body-row-item'>
-															{item.itemname ? item.itemname : 'N/A'}
-														</td>
-														<td className='reports-data-body-table-item-body-row-item'>
-															{item.itemprice ? item.itemprice : 'N/A'}
-														</td>
-														<td className='reports-data-body-table-item-body-row-item'>
-															{item.itemtaxrate ? item.itemtaxrate : 'N/A'}
-														</td>
-														<td className='reports-data-body-table-item-body-row-item'>
-															{item.itemquantity ? item.itemquantity : 'N/A'}
-														</td>
-														<td className='reports-data-body-table-load-body-row-item'>
-															{invoice.invoicedetails &&
-															invoice.invoicedetails.invoiceno
-																? invoice.invoicedetails.invoiceno.substring(
-																		0,
-																		12
-																  )
-																: 'N/A'}
-														</td>
-													</tr>
+							<div className='data-show-div'>
+								<div style={{ margin: '10px' }}>
+									<label className='date-label'>From:</label>
+									<input
+										className='date-select'
+										type='date'
+										value={startDate}
+										onChange={handleFromDateSelect}
+									/>
+									<label className='date-label'>To:</label>
+									<input
+										className='date-select'
+										type='date'
+										value={endDate}
+										onChange={handleToDateSelect}
+									/>
+									{/* Button for Date Range */}
+									<button
+										className='show-date-data-btn'
+										onClick={handleShowItemDataByDate}
+									>
+										Show By Date
+									</button>
+								</div>
+								<div className='reports-data-body'>
+									<table className='reports-data-body-table-item'>
+										<thead className='reports-data-body-table-item-head'>
+											<tr className='reports-data-body-table-item-head-row'>
+												<th className='reports-data-body-table-item-head-row-item'>
+													Item Name
+												</th>
+												<th className='reports-data-body-table-item-head-row-item'>
+													Item Amount
+												</th>
+												<th className='reports-data-body-table-item-head-row-item'>
+													Item Tax
+												</th>
+												<th className='reports-data-body-table-item-head-row-item'>
+													Item Quantity
+												</th>
+												<th className='reports-data-body-table-item-head-row-item'>
+													Invoice No
+												</th>
+											</tr>
+										</thead>
+										<tbody className='reports-data-body-table-item-body'>
+											{displayedInvoiceSearch.map((invoice) =>
+												invoice.consignmentdetails.itemdetails.map(
+													(item, index) => (
+														<tr
+															key={index}
+															className='reports-data-body-table-item-body-row'
+														>
+															<td className='reports-data-body-table-item-body-row-item'>
+																{item.itemname ? item.itemname : 'N/A'}
+															</td>
+															<td className='reports-data-body-table-item-body-row-item'>
+																{item.itemprice ? item.itemprice : 'N/A'}
+															</td>
+															<td className='reports-data-body-table-item-body-row-item'>
+																{item.itemtaxrate ? item.itemtaxrate : 'N/A'}
+															</td>
+															<td className='reports-data-body-table-item-body-row-item'>
+																{item.itemquantity ? item.itemquantity : 'N/A'}
+															</td>
+															<td className='reports-data-body-table-load-body-row-item'>
+																{invoice.invoicedetails &&
+																invoice.invoicedetails.invoiceno
+																	? invoice.invoicedetails.invoiceno.substring(
+																			0,
+																			12
+																	  )
+																	: 'N/A'}
+															</td>
+														</tr>
+													)
 												)
-											)
-										)}
-									</tbody>
-								</table>
+											)}
+										</tbody>
+									</table>
+								</div>
 							</div>
 						)}
 						{value === 'vechicle' && (
-							<div className='reports-data-body'>
-								<table className='reports-data-body-table-vechicle'>
-									<thead className='reports-data-body-table-vechicle-head'>
-										<tr className='reports-data-body-table-vechicle-head-row'>
-											<th className='reports-data-body-table-vechicle-head-row-item'>
-												Vechicle
-											</th>
-											<th className='reports-data-body-table-vechicle-head-row-item'>
-												Transportation Cost
-											</th>
-											<th className='reports-data-body-table-vechicle-head-row-item'>
-												Total Cost
-											</th>
-											<th className='reports-data-body-table-vechicle-head-row-item'>
-												Driver
-											</th>
-											<th className='reports-data-body-table-vechicle-head-row-item'>
-												weight
-											</th>
-										</tr>
-									</thead>
-
-									<tbody className='reports-data-body-table-vechicle-body'>
-										{displayedInvoiceSearch.map((invoice) => (
-											<tr
-												key={invoice._id}
-												className='reports-data-body-table-vechicle-body-row'
-											>
-												<td className='reports-data-body-table-vechicle-body-row-item'>
-													{invoice.vehicledetails.vehiclenumber?.substring(
-														0,
-														12
-													) ?? '<N/A'}
-												</td>
-												<td className='reports-data-body-table-vechicle-body-row-item'>
-													{invoice.boardingdetails.transportationcost?.substring(
-														0,
-														12
-													) ?? '<N/A'}
-												</td>
-												<td className='reports-data-body-table-vechicle-body-row-item'>
-													{invoice.boardingdetails.totalcost?.substring(
-														0,
-														12
-													) ?? '<N/A'}
-												</td>
-												<td className='reports-data-body-table-vechicle-body-row-item'>
-													{invoice.vehicledetails.drivername?.substring(
-														0,
-														12
-													) ?? '<N/A'}
-												</td>
-												<td className='reports-data-body-table-vechicle-body-row-item'>
-													{invoice.boardingdetails.weight?.substring(0, 12) ??
-														'<N/A'}
-												</td>
+							<div className='data-show-div'>
+								<div style={{ margin: '10px' }}>
+									<label className='date-label'>From:</label>
+									<input
+										className='date-select'
+										type='date'
+										value={startDate}
+										onChange={handleFromDateSelect}
+									/>
+									<label className='date-label'>To:</label>
+									<input
+										className='date-select'
+										type='date'
+										value={endDate}
+										onChange={handleToDateSelect}
+									/>
+									{/* Button for Date Range */}
+									<button
+										className='show-date-data-btn'
+										onClick={handleShowVehicleDataByDate}
+									>
+										Show By Date
+									</button>
+								</div>
+								<div className='reports-data-body'>
+									<table className='reports-data-body-table-vechicle'>
+										<thead className='reports-data-body-table-vechicle-head'>
+											<tr className='reports-data-body-table-vechicle-head-row'>
+												<th className='reports-data-body-table-vechicle-head-row-item'>
+													Vechicle
+												</th>
+												<th className='reports-data-body-table-vechicle-head-row-item'>
+													Transportation Cost
+												</th>
+												<th className='reports-data-body-table-vechicle-head-row-item'>
+													Total Cost
+												</th>
+												<th className='reports-data-body-table-vechicle-head-row-item'>
+													Driver
+												</th>
+												<th className='reports-data-body-table-vechicle-head-row-item'>
+													Weight
+												</th>
 											</tr>
-										))}
-									</tbody>
-								</table>
+										</thead>
+
+										<tbody className='reports-data-body-table-vechicle-body'>
+											{displayedInvoiceSearch.map((invoice) => (
+												<tr
+													key={invoice._id}
+													className='reports-data-body-table-vechicle-body-row'
+												>
+													<td className='reports-data-body-table-vechicle-body-row-item'>
+														{invoice.vehicledetails &&
+														invoice.vehicledetails.vehiclenumber
+															? invoice.vehicledetails.vehiclenumber.substring(
+																	0,
+																	12
+															  )
+															: 'N/A'}
+													</td>
+													<td className='reports-data-body-table-vechicle-body-row-item'>
+														{invoice.boardingdetails &&
+														invoice.boardingdetails.transportationcost
+															? invoice.boardingdetails.transportationcost.substring(
+																	0,
+																	12
+															  )
+															: 'N/A'}
+													</td>
+													<td className='reports-data-body-table-vechicle-body-row-item'>
+														{invoice.boardingdetails &&
+														invoice.boardingdetails.totalcost
+															? invoice.boardingdetails.totalcost.substring(
+																	0,
+																	12
+															  )
+															: 'N/A'}
+													</td>
+													<td className='reports-data-body-table-vechicle-body-row-item'>
+														{invoice.vehicledetails &&
+														invoice.vehicledetails.drivername
+															? invoice.vehicledetails.drivername.substring(
+																	0,
+																	12
+															  )
+															: 'N/A'}
+													</td>
+													<td className='reports-data-body-table-vechicle-body-row-item'>
+														{invoice.boardingdetails &&
+														invoice.boardingdetails.weight
+															? invoice.boardingdetails.weight.substring(0, 12)
+															: 'N/A'}
+													</td>
+												</tr>
+											))}
+										</tbody>
+									</table>
+								</div>
 							</div>
 						)}
 						{value === 'driver' && (
-							<div className='reports-data-body'>
-								<table className='reports-data-body-table-driver'>
-									<thead className='reports-data-body-table-driver-head'>
-										<tr className='reports-data-body-table-driver-head-row'>
-											<th className='reports-data-body-table-driver-head-row-item'>
-												Driver
-											</th>
-											<th className='reports-data-body-table-driver-head-row-item'>
-												Vechicle
-											</th>
-											<th className='reports-data-body-table-driver-head-row-item'>
-												Invoice No
-											</th>
-											<th className='reports-data-body-table-driver-head-row-item'>
-												Total Cost
-											</th>
-											<th className='reports-data-body-table-driver-head-row-item'>
-												Driver License No
-											</th>
-										</tr>
-									</thead>
-									<tbody className='reports-data-body-table-driver-body'>
-										{displayedInvoiceSearch.map((invoice) => (
-											<tr
-												key={invoice._id}
-												className='reports-data-body-table-driver-body-row'
-											>
-												<td className='reports-data-body-table-driver-body-row-item'>
-													{invoice.vehicledetails.drivername?.substring(
-														0,
-														12
-													) ?? '<N/A'}
-												</td>
-												<td className='reports-data-body-table-driver-body-row-item'>
-													{invoice.vehicledetails.vehiclenumber?.substring(
-														0,
-														12
-													) ?? '<N/A'}
-												</td>
-												<td className='reports-data-body-table-load-body-row-item'>
-													{invoice.invoicedetails &&
-													invoice.invoicedetails.invoiceno
-														? invoice.invoicedetails.invoiceno.substring(0, 12)
-														: 'N/A'}
-												</td>
-												<td className='reports-data-body-table-driver-body-row-item'>
-													{invoice.boardingdetails.totalcost?.substring(
-														0,
-														12
-													) ?? '<N/A'}
-												</td>
-												<td className='reports-data-body-table-driver-body-row-item'>
-													{invoice.vehicledetails.driverlicenseno?.substring(
-														0,
-														12
-													) ?? '<N/A'}
-												</td>
+							<div className='data-show-div'>
+								<div style={{ margin: '10px' }}>
+									<label className='date-label'>From:</label>
+									<input
+										className='date-select'
+										type='date'
+										value={startDate}
+										onChange={handleFromDateSelect}
+									/>
+									<label className='date-label'>To:</label>
+									<input
+										className='date-select'
+										type='date'
+										value={endDate}
+										onChange={handleToDateSelect}
+									/>
+									{/* Button for Date Range */}
+									<button
+										className='show-date-data-btn'
+										onClick={handleShowDriverDataByDate}
+									>
+										Show By Date
+									</button>
+								</div>
+								<div className='reports-data-body'>
+									<table className='reports-data-body-table-driver'>
+										<thead className='reports-data-body-table-driver-head'>
+											<tr className='reports-data-body-table-driver-head-row'>
+												<th className='reports-data-body-table-driver-head-row-item'>
+													Driver
+												</th>
+												<th className='reports-data-body-table-driver-head-row-item'>
+													Vechicle
+												</th>
+												<th className='reports-data-body-table-driver-head-row-item'>
+													Invoice No
+												</th>
+												<th className='reports-data-body-table-driver-head-row-item'>
+													Total Cost
+												</th>
+												<th className='reports-data-body-table-driver-head-row-item'>
+													Driver License No
+												</th>
 											</tr>
-										))}
-									</tbody>
-								</table>
+										</thead>
+										<tbody className='reports-data-body-table-driver-body'>
+											{displayedInvoiceSearch.map((invoice) => (
+												<tr
+													key={invoice._id}
+													className='reports-data-body-table-driver-body-row'
+												>
+													<td className='reports-data-body-table-driver-body-row-item'>
+														{invoice.vehicledetails &&
+														invoice.vehicledetails.drivername
+															? invoice.vehicledetails.drivername.substring(
+																	0,
+																	12
+															  )
+															: 'N/A'}
+													</td>
+													<td className='reports-data-body-table-driver-body-row-item'>
+														{invoice.vehicledetails &&
+														invoice.vehicledetails.vehiclenumber
+															? invoice.vehicledetails.vehiclenumber.substring(
+																	0,
+																	12
+															  )
+															: 'N/A'}
+													</td>
+													<td className='reports-data-body-table-load-body-row-item'>
+														{invoice.invoicedetails &&
+														invoice.invoicedetails.invoiceno
+															? invoice.invoicedetails.invoiceno.substring(
+																	0,
+																	12
+															  )
+															: 'N/A'}
+													</td>
+													<td className='reports-data-body-table-driver-body-row-item'>
+														{invoice.boardingdetails &&
+														invoice.boardingdetails.totalcost
+															? invoice.boardingdetails.totalcost.substring(
+																	0,
+																	12
+															  )
+															: 'N/A'}
+													</td>
+													<td className='reports-data-body-table-driver-body-row-item'>
+														{invoice.vehicledetails &&
+														invoice.vehicledetails.driverlicenseno
+															? invoice.vehicledetails.driverlicenseno.substring(
+																	0,
+																	12
+															  )
+															: 'N/A'}
+													</td>
+												</tr>
+											))}
+										</tbody>
+									</table>
+								</div>
 							</div>
 						)}
 						{value === 'agent' && (
 							<div className='data-show-div'>
-								<div>
+								<div style={{ margin: '10px' }}>
 									{/* Select Input */}
 									<select
 										className='select-agent-input'
@@ -1074,27 +1676,43 @@ function AdminReports() {
 													className='reports-data-body-table-driver-body-row'
 												>
 													<td className='reports-data-body-table-driver-body-row-item'>
-														{invoice.sellerdetails.sellercompanyname?.substring(
-															0,
-															12
-														) ?? '<N/A'}
+														{invoice.sellerdetails &&
+														invoice.sellerdetails.sellercompanyname
+															? invoice.sellerdetails.sellercompanyname.substring(
+																	0,
+																	12
+															  )
+															: 'N/A'}
 													</td>
 													<td className='reports-data-body-table-driver-body-row-item'>
-														{invoice.consignmentdetails.itemdetails[0]
-															?.itemquantity ?? '<N/A'}
+														{/* {invoice.consignmentdetails.itemdetails[0]
+															?.itemquantity ?? '<N/A'} */}
+														{invoice.consignmentdetails &&
+														invoice.consignmentdetails.itemdetails
+															? invoice.consignmentdetails.itemdetails[0]
+																	?.itemquantity
+															: 'N/A'}
 													</td>
 													<td className='reports-data-body-table-driver-body-row-item'>
-														{invoice.invoicedetails?.invoicedate
+														{invoice.invoicedetails &&
+														invoice.invoicedetails.invoicedate
 															? new Date(
 																	invoice.invoicedetails.invoicedate
-															  ).toLocaleDateString()
-															: '<N/A'}
+															  ).toLocaleDateString('en-GB', {
+																	day: '2-digit',
+																	month: '2-digit',
+																	year: 'numeric',
+															  })
+															: 'N/A'}
 													</td>
 													<td className='reports-data-body-table-driver-body-row-item'>
-														{invoice.sellerdetails.sellercompanystatename?.substring(
-															0,
-															12
-														) ?? '<N/A'}
+														{invoice.sellerdetails &&
+														invoice.sellerdetails.sellercompanystatename
+															? invoice.sellerdetails.sellercompanystatename.substring(
+																	0,
+																	12
+															  )
+															: 'N/A'}
 													</td>
 												</tr>
 											))}
@@ -1104,7 +1722,7 @@ function AdminReports() {
 							</div>
 						)}
 					</div>
-					<ReactPaginate
+					{/* <ReactPaginate
 						className='pagination-container'
 						previousLabel='Previous'
 						nextLabel='Next'
@@ -1117,7 +1735,7 @@ function AdminReports() {
 						activeClassName='pagination-button active'
 						pageClassName='pagination-button'
 						breakClassName='pagination-space'
-					/>
+					/> */}
 				</div>
 			</div>
 		</div>

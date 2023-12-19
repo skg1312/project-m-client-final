@@ -25,14 +25,7 @@
 
 .admin-create-invoice-subtitle-table {
     font-family: "Urbanist";
-    font-size: 30px;
-    color: #1A1A1A;
-    text-align: left;
-}
-
-.admin-create-invoice-subtitle-table {
-    font-family: "Urbanist";
-    font-size: 20px;
+    font-size: 16px;
     color: #1A1A1A;
     text-align: left;
 }
@@ -136,13 +129,14 @@
 }
 
 .admin-create-invoice-table-consigment-icon {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
 }
 
 .admin-create-invoice-table-row-head {
     font-family: "Urbanist";
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
     text-align: center;
 }
@@ -161,15 +155,16 @@
 
 .admin-create-invoice-table-consigment-value {
     font-family: "Urbanist";
-    font-size: 20px;
+    font-size: 16px;
     text-align: center;
     font-weight: bold;
     color: #767676;
 }
 
 .admin-create-invoice-table-consigment-icon-low {
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
 }
 
 .admin-create-invoice-button {
@@ -368,6 +363,13 @@
         grid-template-columns: 1fr;
         margin-left: 2%;
     }
+
+    .admin-create-invoice-subtitle-table {
+        font-family: "Urbanist";
+        font-size: 10px;
+        color: #1A1A1A;
+        text-align: left;
+    }
 }
 
 @media only screen and (max-width: 450px) {
@@ -516,7 +518,7 @@
 
     .admin-create-invoice-table-consigment-value {
         font-family: "Urbanist";
-        font-size: 10px;
+        font-size: 8px;
         text-align: center;
         font-weight: bold;
         color: #767676;

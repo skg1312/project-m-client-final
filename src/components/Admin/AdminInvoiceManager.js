@@ -2,63 +2,57 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './AdminInvoiceManager.css';
 import background from '../images/Desktop.png';
-import ReactPaginate from 'react-paginate';
+// import ReactPaginate from 'react-paginate';
 import AdminNavbar from './AdminNavbar';
 import PdfViewer from './AdminInvoiceView';
 
 import { useNavigate } from 'react-router-dom';
 
-
 function AdminInvoiceManagement() {
 	const navigate = useNavigate();
 	const [invoice, setInvoice] = useState([]);
-	const [pageNumber, setPageNumber] = useState(0);
+	// const [pageNumber, setPageNumber] = useState(0);
 	const [selectedInvoiceId, setSelectedInvoiceId] = useState(null);
 	const [searchInput, setSearchInput] = useState('');
 
 	const API = process.env.REACT_APP_API;
-	const itemsPerPage = 10;
+	// const itemsPerPage = 10;
 
 	const sortedInvoice = [...invoice].reverse();
-	const displayedInvoiceSearch = sortedInvoice
-		.filter((item) => {
-			const invoiceNo = item.invoicedetails?.invoiceno || '';
-			const companyName = item.companydetails?.companyname || '';
-			const vehicleNumber = item.vehicledetails?.vehiclenumber || '';
+	const displayedInvoiceSearch = sortedInvoice.filter((item) => {
+		const invoiceNo = item.invoicedetails?.invoiceno || '';
+		const companyName = item.companydetails?.companyname || '';
+		const vehicleNumber = item.vehicledetails?.vehiclenumber || '';
 
-			// Check if the search criteria is null or cannot be converted to lowercase
-			if (
-				(invoiceNo &&
-					invoiceNo.toLowerCase().includes(searchInput?.toLowerCase() ?? '')) ||
-				(companyName &&
-					companyName
-						.toLowerCase()
-						.includes(searchInput?.toLowerCase() ?? '')) ||
-				(vehicleNumber &&
-					vehicleNumber
-						.toLowerCase()
-						.includes(searchInput?.toLowerCase() ?? ''))
-			) {
-				return true;
-			}
+		// Check if the search criteria is null or cannot be converted to lowercase
+		if (
+			(invoiceNo &&
+				invoiceNo.toLowerCase().includes(searchInput?.toLowerCase() ?? '')) ||
+			(companyName &&
+				companyName.toLowerCase().includes(searchInput?.toLowerCase() ?? '')) ||
+			(vehicleNumber &&
+				vehicleNumber.toLowerCase().includes(searchInput?.toLowerCase() ?? ''))
+		) {
+			return true;
+		}
 
-			return false;
-		})
-		.slice(pageNumber * itemsPerPage, (pageNumber + 1) * itemsPerPage);
+		return false;
+	});
+	// 	.slice(pageNumber * itemsPerPage, (pageNumber + 1) * itemsPerPage);
 
-	const pageCount = Math.ceil(sortedInvoice.length / itemsPerPage);
+	// const pageCount = Math.ceil(sortedInvoice.length / itemsPerPage);
 
-	const changePage = ({ selected }) => {
-		setPageNumber(selected);
+	// const changePage = ({ selected }) => {
+	// 	setPageNumber(selected);
+	// };
+
+	const ViewInvoice = (invoiceid) => {
+		setSelectedInvoiceId(invoiceid);
+		if (selectedInvoiceId) {
+			const pdfUrl = `${selectedInvoiceId}`;
+			navigate(`/pdf/${pdfUrl}`);
+		}
 	};
-
-const ViewInvoice = (invoiceid) => {
-        setSelectedInvoiceId(invoiceid);
-        if (selectedInvoiceId) {
-            const pdfUrl = `${selectedInvoiceId}`;        
-                navigate(`/pdf/${pdfUrl}`);
-        }
-    };
 	const PrintInvoice = (invoiceid) => {
 		setSelectedInvoiceId(invoiceid);
 		if (selectedInvoiceId) {
@@ -133,9 +127,10 @@ const ViewInvoice = (invoiceid) => {
 											{invoice.invoicedetails.invoiceno?.substring(0, 12) ??
 												'N/A'}
 										</td>
-<td className='invoice-management-data-body-table-data'>
-    {invoice.companydetails?.companyname?.substring(0, 12) ?? 'N/A'}
-</td>
+										<td className='invoice-management-data-body-table-data'>
+											{invoice.companydetails?.companyname?.substring(0, 12) ??
+												'N/A'}
+										</td>
 
 										<td className='invoice-management-data-body-table-data'>
 											{invoice.invoicedetails.invoicedate
@@ -150,8 +145,10 @@ const ViewInvoice = (invoiceid) => {
 										</td>
 
 										<td className='invoice-management-data-body-table-data'>
-											{invoice.vehicledetails?.vechiclenumber?.substring(0, 12) ??
-												'N/A'}
+											{invoice.vehicledetails?.vechiclenumber?.substring(
+												0,
+												12
+											) ?? 'N/A'}
 										</td>
 										<td className='invoice-management-data-body-table-data'>
 											{invoice.loadingdetails?.transportationcost
@@ -177,7 +174,7 @@ const ViewInvoice = (invoiceid) => {
 							</tbody>
 						</table>
 
-						<ReactPaginate
+						{/* <ReactPaginate
 							className='pagination-container'
 							previousLabel='Previous'
 							nextLabel='Next'
@@ -190,7 +187,7 @@ const ViewInvoice = (invoiceid) => {
 							activeClassName='pagination-button active'
 							pageClassName='pagination-button'
 							breakClassName='pagination-space'
-						/>
+						/> */}
 					</div>
 				</div>
 			</div>

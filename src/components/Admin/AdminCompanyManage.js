@@ -148,7 +148,7 @@ function AdminCompanyManage() {
 						value={searchInput}
 						onChange={(e) => setSearchInput(e.target.value)}
 					/>
-					<div className='table-scroll'>
+					<div className='table-scroll-company'>
 						<table className='admin-company-manager-data-table'>
 							<thead className='admin-company-manager-data-table-head'>
 								<tr className='admin-company-manager-data-table-row-head'>

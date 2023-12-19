@@ -8,6 +8,8 @@ import Select from 'react-select';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function AdminCreateInvoice() {
 	const navigate = useNavigate();
@@ -98,14 +100,14 @@ function AdminCreateInvoice() {
 			if (response.ok) {
 				const data = await response.json();
 				console.log('Invoice created successfully:', data);
-				alert('Invoice Details are saved');
+				toast.success('Invoice created successfully');
 				setUrl(data._id);
 				setView(true);
 			} else {
-				console.error('Invoice creation failed');
+				toast.error('Invoice creation failed');
 			}
 		} catch (error) {
-			console.error('Error creating invoice:', error);
+			toast.error('Error creating invoice:', error);
 		}
 	};
 

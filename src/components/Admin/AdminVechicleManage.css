@@ -300,14 +300,14 @@
 	.admin-loading-manage-data-table-head {
 		color: #1a1a1a;
 		font-family: 'Urbanist';
-		font-size: 10px;
+		font-size: 12px;
 		font-style: bold;
 	}
 
 	.admin-loading-manage-data-table-body {
 		color: #767676;
 		font-family: 'Urbanist';
-		font-size: 12px;
+		font-size: 10px;
 		font-style: bold;
 		font-weight: 400;
 		line-height: 28px;

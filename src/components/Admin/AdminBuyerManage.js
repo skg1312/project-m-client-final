@@ -265,8 +265,8 @@ function AdminBuyerManage() {
 													src={E}
 													alt='Update'
 													style={{
-														height: '18px',
-														width: '18px',
+														height: '15px',
+														width: '15px',
 														cursor: 'pointer',
 													}}
 												/>
@@ -282,8 +282,8 @@ function AdminBuyerManage() {
 													src={D}
 													alt='delete'
 													style={{
-														height: '18px',
-														width: '18px',
+														height: '15px',
+														width: '15px',
 														cursor: 'pointer',
 													}}
 												/>

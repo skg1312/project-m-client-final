@@ -162,8 +162,8 @@
 }
 
 .admin-create-invoice-table-consigment-icon-low {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     cursor: pointer;
 }
 
@@ -314,8 +314,8 @@
     }
 
     .admin-create-invoice-table-consigment-icon {
-        width: 40px;
-        height: 40px;
+        width: 20px;
+        height: 20px;
     }
 
     .admin-create-invoice-table-row-head {
@@ -339,8 +339,8 @@
     }
 
     .admin-create-invoice-table-consigment-icon-low {
-        width: 30px;
-        height: 30px;
+        width: 20px;
+        height: 20px;
     }
 
     .admin-create-invoice-button {
@@ -423,7 +423,7 @@
         font-family: "Urbanist";
         font-size: 10px;
         color: #1A1A1A;
-        margin-top: 30px;
+        margin-top: 2px;
         margin-left: 30px;
     }
 
@@ -496,12 +496,12 @@
         font-weight: bold;
         background: #EDEDED;
         width: 80%;
-        height: 40px;
+        height: 20px;
     }
 
     .admin-create-invoice-table-consigment-icon {
-        width: 40px;
-        height: 40px;
+        width: 15px;
+        height: 15px;
     }
 
     .admin-create-invoice-table-row-head {
@@ -525,8 +525,8 @@
     }
 
     .admin-create-invoice-table-consigment-icon-low {
-        width: 30px;
-        height: 30px;
+        width: 15px;
+        height: 15px;
     }
 
     .admin-create-invoice-button {

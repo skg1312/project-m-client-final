@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './AdminBuyerManage.css';
 import axios from 'axios';
-import ReactPaginate from 'react-paginate';
+// import ReactPaginate from 'react-paginate';
 import background from '../images/Desktop.png';
 import AdminNavbar from './AdminNavbar';
 import E from '../images/E.png';
@@ -16,14 +16,14 @@ function AdminBuyerManage() {
 	// const [pageNumber, setPageNumber] = useState(0);
 	const [selectedBuyerId, setSelectedBuyerId] = useState(null);
 
-	const [selectedBuyerData, setSelectedBuyerData] = useState({
-		buyerid: '',
-		buyercompanyname: '',
-		buyercompanygstno: '',
-		buyercompanyaddress: '',
-		buyercompanystatename: '',
-		buyercompanystatecode: '',
-	});
+	// const [selectedBuyerData, setSelectedBuyerData] = useState({
+	// 	buyerid: '',
+	// 	buyercompanyname: '',
+	// 	buyercompanygstno: '',
+	// 	buyercompanyaddress: '',
+	// 	buyercompanystatename: '',
+	// 	buyercompanystatecode: '',
+	// });
 
 	const [file, setFile] = useState(null);
 

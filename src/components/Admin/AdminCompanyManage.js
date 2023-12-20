@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import background from '../images/Desktop.png';
-import ReactPaginate from 'react-paginate';
+// import ReactPaginate from 'react-paginate';
 import AdminNavbar from './AdminNavbar';
 import E from '../images/E.png';
 import D from '../images/D.png';

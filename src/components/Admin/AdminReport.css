@@ -666,7 +666,7 @@
 		width: 153px;
 		height: 30px;
 		border-radius: 10px;
-		margin-left: 2px;
+		margin-left: -10px;
 		margin-right: 45px;
 	}
 
@@ -674,16 +674,16 @@
 		margin-left: 15px;
 		border-radius: 15px;
 		border: 2px solid #5925dc;
-		width: auto;
+		width: 100px;
 		height: 30px;
 		background-color: #5925dc;
 		color: white;
 		font-family: 'Urbanist';
-		font-size: 12px;
+		font-size: 15px;
 		font-weight: bold;
 		border-radius: 10px;
 		cursor: pointer;
-		margin-left: 20px;
+		/* margin-left: 20px; */
 	}
 
 	.date-label {

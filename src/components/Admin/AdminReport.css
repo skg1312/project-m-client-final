@@ -339,6 +339,20 @@
 	width: 96%;
 }
 
+.agent-div {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.agent-in-div {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
 .select-agent-input {
 	font-family: 'Urbanist';
 	background-color: #fff;
@@ -371,7 +385,7 @@
 .date-label {
 	font-family: 'Urbanist';
 	font-size: 20px;
-	margin-left: 0px;
+	margin-left: 10px;
 	margin-right: 2px;
 }
 
@@ -658,6 +672,21 @@
 }
 
 @media only screen and (max-width: 450px) {
+	.agent-div {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.agent-in-div {
+		display: grid;
+		grid-template-columns: 1fr;
+		/* flex-direction: column;
+		justify-content: center;
+		align-items: center; */
+	}
+
 	.select-agent-input {
 		background-color: #fff;
 		font-family: 'Urbanist';
@@ -727,10 +756,6 @@
 		margin-right: 10px;
 	}
 
-	.date-div-agent {
-		margin-left: -20px;
-	}
-
 	.date-label-agent {
 		font-family: 'Urbanist';
 		font-size: 12px;
@@ -739,31 +764,14 @@
 		margin-top: 10px;
 	}
 
-	.date-select-agent {
+	.date-agent-select {
 		font-family: 'Urbanist';
 		font-size: 12px;
 		background-color: #fff;
-		width: 85px;
+		width: 100px;
 		height: 20px;
 		border: 1px solid #767676;
 		border-radius: 10px;
 		margin-top: 15px;
-	}
-
-	.show-date-data-btn-agent {
-		margin-left: 20px;
-		border-radius: 15px;
-		border: 2px solid #5925dc;
-		width: auto;
-		height: 30px;
-		background-color: #5925dc;
-		color: white;
-		font-family: 'Urbanist';
-		font-size: 14px;
-		font-weight: bold;
-		border-radius: 10px;
-		cursor: pointer;
-		/* margin-left: 125px; */
-		margin-top: 10px;
 	}
 }

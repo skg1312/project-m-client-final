@@ -1132,27 +1132,29 @@ function AdminReports() {
 						{value === 'load' && (
 							<div className='data-show-div'>
 								<div style={{ margin: '10px' }}>
-									<label className='date-label'>From:</label>
-									<input
-										className='date-select'
-										type='date'
-										value={startDate}
-										onChange={handleFromDateSelect}
-									/>
-									<label className='date-label'>To:</label>
-									<input
-										className='date-select'
-										type='date'
-										value={endDate}
-										onChange={handleToDateSelect}
-									/>
-									{/* Button for Date Range */}
-									<button
-										className='show-date-data-btn'
-										onClick={handleShowLoadDataByDate}
-									>
-										Show
-									</button>
+									<div className='date-div'>
+										<label className='date-label'>From:</label>
+										<input
+											className='date-select'
+											type='date'
+											value={startDate}
+											onChange={handleFromDateSelect}
+										/>
+										<label className='date-label'>To:</label>
+										<input
+											className='date-select'
+											type='date'
+											value={endDate}
+											onChange={handleToDateSelect}
+										/>
+										{/* Button for Date Range */}
+										<button
+											className='show-date-data-btn'
+											onClick={handleShowLoadDataByDate}
+										>
+											Show
+										</button>
+									</div>
 								</div>
 								<div className='reports-data-body'>
 									<table className='reports-data-body-table-load'>
@@ -1234,27 +1236,29 @@ function AdminReports() {
 						{value === 'day' && (
 							<div className='data-show-div'>
 								<div style={{ margin: '10px' }}>
-									<label className='date-label'>From:</label>
-									<input
-										className='date-select'
-										type='date'
-										value={startDate}
-										onChange={handleFromDateSelect}
-									/>
-									<label className='date-label'>To:</label>
-									<input
-										className='date-select'
-										type='date'
-										value={endDate}
-										onChange={handleToDateSelect}
-									/>
-									{/* Button for Date Range */}
-									<button
-										className='show-date-data-btn'
-										onClick={handleShowDayDataByDate}
-									>
-										Show
-									</button>
+									<div className='date-div'>
+										<label className='date-label'>From:</label>
+										<input
+											className='date-select'
+											type='date'
+											value={startDate}
+											onChange={handleFromDateSelect}
+										/>
+										<label className='date-label'>To:</label>
+										<input
+											className='date-select'
+											type='date'
+											value={endDate}
+											onChange={handleToDateSelect}
+										/>
+										{/* Button for Date Range */}
+										<button
+											className='show-date-data-btn'
+											onClick={handleShowDayDataByDate}
+										>
+											Show
+										</button>
+									</div>
 								</div>
 								<div className='reports-data-body'>
 									<table className='reports-data-body-table-day'>
@@ -1350,27 +1354,29 @@ function AdminReports() {
 						{value === 'item' && (
 							<div className='data-show-div'>
 								<div style={{ margin: '10px' }}>
-									<label className='date-label'>From:</label>
-									<input
-										className='date-select'
-										type='date'
-										value={startDate}
-										onChange={handleFromDateSelect}
-									/>
-									<label className='date-label'>To:</label>
-									<input
-										className='date-select'
-										type='date'
-										value={endDate}
-										onChange={handleToDateSelect}
-									/>
-									{/* Button for Date Range */}
-									<button
-										className='show-date-data-btn'
-										onClick={handleShowItemDataByDate}
-									>
-										Show
-									</button>
+									<div className='date-div'>
+										<label className='date-label'>From:</label>
+										<input
+											className='date-select'
+											type='date'
+											value={startDate}
+											onChange={handleFromDateSelect}
+										/>
+										<label className='date-label'>To:</label>
+										<input
+											className='date-select'
+											type='date'
+											value={endDate}
+											onChange={handleToDateSelect}
+										/>
+										{/* Button for Date Range */}
+										<button
+											className='show-date-data-btn'
+											onClick={handleShowItemDataByDate}
+										>
+											Show
+										</button>
+									</div>
 								</div>
 								<div className='reports-data-body'>
 									<table className='reports-data-body-table-item'>
@@ -1448,27 +1454,29 @@ function AdminReports() {
 						{value === 'vechicle' && (
 							<div className='data-show-div'>
 								<div style={{ margin: '10px' }}>
-									<label className='date-label'>From:</label>
-									<input
-										className='date-select'
-										type='date'
-										value={startDate}
-										onChange={handleFromDateSelect}
-									/>
-									<label className='date-label'>To:</label>
-									<input
-										className='date-select'
-										type='date'
-										value={endDate}
-										onChange={handleToDateSelect}
-									/>
-									{/* Button for Date Range */}
-									<button
-										className='show-date-data-btn'
-										onClick={handleShowVehicleDataByDate}
-									>
-										Show
-									</button>
+									<div className='date-div'>
+										<label className='date-label'>From:</label>
+										<input
+											className='date-select'
+											type='date'
+											value={startDate}
+											onChange={handleFromDateSelect}
+										/>
+										<label className='date-label'>To:</label>
+										<input
+											className='date-select'
+											type='date'
+											value={endDate}
+											onChange={handleToDateSelect}
+										/>
+										{/* Button for Date Range */}
+										<button
+											className='show-date-data-btn'
+											onClick={handleShowVehicleDataByDate}
+										>
+											Show
+										</button>
+									</div>
 								</div>
 								<div className='reports-data-body'>
 									<table className='reports-data-body-table-vechicle'>
@@ -1556,27 +1564,29 @@ function AdminReports() {
 						{value === 'driver' && (
 							<div className='data-show-div'>
 								<div style={{ margin: '10px' }}>
-									<label className='date-label'>From:</label>
-									<input
-										className='date-select'
-										type='date'
-										value={startDate}
-										onChange={handleFromDateSelect}
-									/>
-									<label className='date-label'>To:</label>
-									<input
-										className='date-select'
-										type='date'
-										value={endDate}
-										onChange={handleToDateSelect}
-									/>
-									{/* Button for Date Range */}
-									<button
-										className='show-date-data-btn'
-										onClick={handleShowDriverDataByDate}
-									>
-										Show
-									</button>
+									<div className='date-div'>
+										<label className='date-label'>From:</label>
+										<input
+											className='date-select'
+											type='date'
+											value={startDate}
+											onChange={handleFromDateSelect}
+										/>
+										<label className='date-label'>To:</label>
+										<input
+											className='date-select'
+											type='date'
+											value={endDate}
+											onChange={handleToDateSelect}
+										/>
+										{/* Button for Date Range */}
+										<button
+											className='show-date-data-btn'
+											onClick={handleShowDriverDataByDate}
+										>
+											Show
+										</button>
+									</div>
 								</div>
 								<div className='reports-data-body'>
 									<table className='reports-data-body-table-driver'>
@@ -1683,24 +1693,24 @@ function AdminReports() {
 										Show
 									</button>
 								</div>
-								<div className='date-div'>
-									<label className='date-label'>From:</label>
+								<div className='date-div-agent'>
+									<label className='date-label-agent'>From:</label>
 									<input
-										className='date-select'
+										className='date-select-agent'
 										type='date'
 										value={startDate}
 										onChange={handleFromDateSelect}
 									/>
-									<label className='date-label'>To:</label>
+									<label className='date-label-agent'>To:</label>
 									<input
-										className='date-select'
+										className='date-select-agent'
 										type='date'
 										value={endDate}
 										onChange={handleToDateSelect}
 									/>
 									{/* Button for Date Range */}
 									<button
-										className='show-date-data-btn'
+										className='show-date-data-btn-agent'
 										onClick={handleShowDataByDate}
 									>
 										Show

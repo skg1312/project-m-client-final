@@ -62,8 +62,10 @@
     display: flex;
     width: 100%;
     border-radius: 15px;
-    background: #F4F3FF;
+    background: #f4f3ff;
     margin: 20px;
+    height: 70%;
+    overflow-y: auto;
 }
 
 .reports-data-body-table-load {

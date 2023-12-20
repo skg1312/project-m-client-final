@@ -124,47 +124,78 @@ function AdminReports() {
 		// console.log(selectedFromDate);
 	};
 
-	const handleToDateSelect = (e) => {
-		const selectedToDate = e.target.value;
-		setEndDate(selectedToDate);
-		// console.log(selectedToDate);
+	// const handleToDateSelect = (e) => {
+	// 	const selectedToDate = e.target.value;
+	// 	setEndDate(selectedToDate);
+	// 	// console.log(selectedToDate);
+	// };
+	const handleToDateSelect = (event) => {
+		const selectedToDate = event.target.value;
+
+		// Use a utility function to increment the date by one day
+		const nextDate = incrementDate(selectedToDate);
+
+		// Set the endDate state to the next date
+		setEndDate(nextDate);
 	};
 
-	// Declare isStartDateValid and isEndDateValid before the .filter function
-	const isStartDateValid =
-		startDate !== '' && !isNaN(new Date(startDate).getTime());
-	const isEndDateValid = endDate !== '' && !isNaN(new Date(endDate).getTime());
+	const incrementDate = (dateString) => {
+		const selectedDate = new Date(dateString);
+		selectedDate.setDate(selectedDate.getDate() + 1);
 
-	const filteredDataByDate = sortedInvoice
+		// Format the next date to match the 'YYYY-MM-DD' format used by the input type 'date'
+		const formattedNextDate = selectedDate.toISOString().split('T')[0];
+
+		return formattedNextDate;
+	};
+
+	// // Declare isStartDateValid and isEndDateValid before the .filter function
+	// const isStartDateValid =
+	// 	startDate !== '' && !isNaN(new Date(startDate).getTime());
+	// const isEndDateValid = endDate !== '' && !isNaN(new Date(endDate).getTime());
+
+	const filteredDataByDate = filteredAgentSelectData
 		.filter((item) => {
 			const itemDate = new Date(item.invoicedetails.invoicedate);
 
-			if (
-				isStartDateValid &&
-				(itemDate < new Date(startDate + 'T00:00:00') ||
-					itemDate > new Date(startDate + 'T23:59:59'))
-			) {
-				return false; // Filter out items before and after the start date
-			}
+			// Check if startDate and endDate are valid date strings
+			const isStartDateValid =
+				startDate !== '' && !isNaN(new Date(startDate).getTime());
+			const isEndDateValid =
+				endDate !== '' && !isNaN(new Date(endDate).getTime());
 
 			if (
-				isEndDateValid &&
-				(itemDate < new Date(endDate + 'T00:00:00') ||
-					itemDate > new Date(endDate + 'T23:59:59'))
+				(isStartDateValid && itemDate >= new Date(startDate)) ||
+				!isStartDateValid
 			) {
-				return false; // Filter out items before and after the end date
+				if (
+					(isEndDateValid && itemDate <= new Date(endDate)) ||
+					!isEndDateValid
+				) {
+					return true;
+				}
 			}
 
-			return true; // Include items within the date range
+			return false;
 		})
 		.map((item) => {
-			// Omitting 'fromDate' and 'toDate' properties from the returned object
-			const { fromDate, toDate, ...filteredItem } = item;
+			const toDate = endDate
+				? new Date(endDate) // Create a new date object from the endDate
+				: null;
 
-			return filteredItem;
+			if (toDate) {
+				// Add one day to the toDate
+				toDate.setDate(toDate.getDate() + 1);
+			}
+
+			return {
+				...item,
+				fromDate: startDate || null,
+				toDate: toDate || null,
+			};
 		});
 
-	// console.log(filteredDataByDate);
+	console.log(filteredDataByDate);
 
 	useEffect(() => {
 		// console.log('Selected Agent:', selectedAgentOption);
@@ -260,74 +291,74 @@ function AdminReports() {
 		newWindow.document.write('</body></html>');
 	};
 
-	//for showing data of agents by date
-	const handleShowDataByDate = () => {
-		const newWindow = window.open('', '_blank');
-		newWindow.document.write(
-			'<html><head><title>Agent Details</title></head><body>'
-		);
+	// //for showing data of agents by date
+	// const handleShowDataByDate = () => {
+	// 	const newWindow = window.open('', '_blank');
+	// 	newWindow.document.write(
+	// 		'<html><head><title>Agent Details</title></head><body>'
+	// 	);
 
-		newWindow.document.write(
-			'<h2 style="text-align: center; font-size: 40px;">Agent Details</h2>'
-		);
-		newWindow.document.write(
-			'<table style="width: 70%; margin: 0 auto; border-collapse: collapse; border: 1px solid #ddd;">'
-		);
+	// 	newWindow.document.write(
+	// 		'<h2 style="text-align: center; font-size: 40px;">Agent Details</h2>'
+	// 	);
+	// 	newWindow.document.write(
+	// 		'<table style="width: 70%; margin: 0 auto; border-collapse: collapse; border: 1px solid #ddd;">'
+	// 	);
 
-		// Table header
-		newWindow.document.write('<tr style="background-color: #f2f2f2;">');
-		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Agent Name</th>'
-		);
-		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Date</th>'
-		);
-		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Quantity</th>'
-		);
-		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Place</th>'
-		);
-		newWindow.document.write('</tr>');
+	// 	// Table header
+	// 	newWindow.document.write('<tr style="background-color: #f2f2f2;">');
+	// 	newWindow.document.write(
+	// 		'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Agent Name</th>'
+	// 	);
+	// 	newWindow.document.write(
+	// 		'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Date</th>'
+	// 	);
+	// 	newWindow.document.write(
+	// 		'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Quantity</th>'
+	// 	);
+	// 	newWindow.document.write(
+	// 		'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Place</th>'
+	// 	);
+	// 	newWindow.document.write('</tr>');
 
-		// Table body
-		let totalQuantity = 0; // Initialize total quantity
+	// 	// Table body
+	// 	let totalQuantity = 0; // Initialize total quantity
 
-		filteredDataByDate.forEach((dataItem, index) => {
-			newWindow.document.write('<tr>');
-			newWindow.document.write(
-				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${dataItem.sellerdetails.sellercompanyname}</td>`
-			);
-			newWindow.document.write(
-				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
-					dataItem.invoicedetails && dataItem.invoicedetails.invoicedate
-						? dataItem.invoicedetails.invoicedate.substring(0, 10)
-						: 'N/A'
-				}</td>`
-			);
-			const itemQuantity =
-				dataItem.consignmentdetails.itemdetails[0]?.itemquantity !== undefined
-					? dataItem.consignmentdetails.itemdetails[0]?.itemquantity
-					: 0;
-			totalQuantity += itemQuantity; // Accumulate quantity
-			newWindow.document.write(
-				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${itemQuantity}</td>`
-			);
-			newWindow.document.write(
-				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${dataItem.sellerdetails.sellercompanystatename}</td>`
-			);
-			newWindow.document.write('</tr>');
-		});
+	// 	filteredDataByDate.forEach((dataItem, index) => {
+	// 		newWindow.document.write('<tr>');
+	// 		newWindow.document.write(
+	// 			`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${dataItem.sellerdetails.sellercompanyname}</td>`
+	// 		);
+	// 		newWindow.document.write(
+	// 			`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+	// 				dataItem.invoicedetails && dataItem.invoicedetails.invoicedate
+	// 					? dataItem.invoicedetails.invoicedate.substring(0, 10)
+	// 					: 'N/A'
+	// 			}</td>`
+	// 		);
+	// 		const itemQuantity =
+	// 			dataItem.consignmentdetails.itemdetails[0]?.itemquantity !== undefined
+	// 				? dataItem.consignmentdetails.itemdetails[0]?.itemquantity
+	// 				: 0;
+	// 		totalQuantity += itemQuantity; // Accumulate quantity
+	// 		newWindow.document.write(
+	// 			`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${itemQuantity}</td>`
+	// 		);
+	// 		newWindow.document.write(
+	// 			`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${dataItem.sellerdetails.sellercompanystatename}</td>`
+	// 		);
+	// 		newWindow.document.write('</tr>');
+	// 	});
 
-		newWindow.document.write('</table>');
+	// 	newWindow.document.write('</table>');
 
-		// Display total quantity after the table
-		newWindow.document.write(
-			`<h2 style="text-align: center; font-size: 24px;">Total Quantity: ${totalQuantity}</h2>`
-		);
+	// 	// Display total quantity after the table
+	// 	newWindow.document.write(
+	// 		`<h2 style="text-align: center; font-size: 24px;">Total Quantity: ${totalQuantity}</h2>`
+	// 	);
 
-		newWindow.document.write('</body></html>');
-	};
+	// 	newWindow.document.write('</body></html>');
+	// };
 
 	//for showing data of load section by date
 	const handleShowLoadDataByDate = () => {
@@ -1120,7 +1151,7 @@ function AdminReports() {
 										className='show-date-data-btn'
 										onClick={handleShowLoadDataByDate}
 									>
-										Show By Date
+										Show
 									</button>
 								</div>
 								<div className='reports-data-body'>
@@ -1222,7 +1253,7 @@ function AdminReports() {
 										className='show-date-data-btn'
 										onClick={handleShowDayDataByDate}
 									>
-										Show By Date
+										Show
 									</button>
 								</div>
 								<div className='reports-data-body'>
@@ -1338,7 +1369,7 @@ function AdminReports() {
 										className='show-date-data-btn'
 										onClick={handleShowItemDataByDate}
 									>
-										Show By Date
+										Show
 									</button>
 								</div>
 								<div className='reports-data-body'>
@@ -1436,7 +1467,7 @@ function AdminReports() {
 										className='show-date-data-btn'
 										onClick={handleShowVehicleDataByDate}
 									>
-										Show By Date
+										Show
 									</button>
 								</div>
 								<div className='reports-data-body'>
@@ -1544,7 +1575,7 @@ function AdminReports() {
 										className='show-date-data-btn'
 										onClick={handleShowDriverDataByDate}
 									>
-										Show By Date
+										Show
 									</button>
 								</div>
 								<div className='reports-data-body'>
@@ -1651,6 +1682,8 @@ function AdminReports() {
 									>
 										Show
 									</button>
+								</div>
+								<div>
 									<label className='date-label'>From:</label>
 									<input
 										className='date-select'
@@ -1668,13 +1701,13 @@ function AdminReports() {
 									{/* Button for Date Range */}
 									<button
 										className='show-date-data-btn'
-										onClick={handleShowDataByDate}
+										onClick={handleShowButtonClick}
 									>
-										Show By Date
+										Show
 									</button>
 								</div>
 
-								<div className='reports-data-body'>
+								<div className='reports-data-body-agent'>
 									<table className='reports-data-body-table-driver'>
 										{/* Table header */}
 										<thead className='reports-data-body-table-driver-head'>

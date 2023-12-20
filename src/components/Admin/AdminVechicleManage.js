@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './AdminVechicleManage.css';
 import axios from 'axios';
 import background from '../images/Desktop.png';
-import ReactPaginate from 'react-paginate';
+// import ReactPaginate from 'react-paginate';
 import AdminNavbar from './AdminNavbar';
 import E from '../images/E.png';
 import D from '../images/D.png';

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './AdminSellerManage.css';
 import axios from 'axios';
-import ReactPaginate from 'react-paginate';
+// import ReactPaginate from 'react-paginate';
 import AdminNavbar from './AdminNavbar';
 import background from '../images/Desktop.png';
 import E from '../images/E.png';
@@ -15,14 +15,14 @@ function AdminSellerManage() {
 	const [sellers, setSellers] = useState([]);
 	// const [pageNumber, setPageNumber] = useState(0);
 	const [selectedSellerId, setSelectedSellerId] = useState(null);
-	const [selectedSellerData, setSelectedSellerData] = useState({
-		sellerid: '',
-		sellercompanyname: '',
-		sellercompanygstno: '',
-		sellercompanyaddress: '',
-		sellercompanystatename: '',
-		sellercompanystatecode: '',
-	});
+	// const [selectedSellerData, setSelectedSellerData] = useState({
+	// 	sellerid: '',
+	// 	sellercompanyname: '',
+	// 	sellercompanygstno: '',
+	// 	sellercompanyaddress: '',
+	// 	sellercompanystatename: '',
+	// 	sellercompanystatecode: '',
+	// });
 	const [file, setFile] = useState(null);
 	const API = process.env.REACT_APP_API;
 	// const itemsPerPage = 12;
@@ -155,6 +155,7 @@ function AdminSellerManage() {
 			toast.error('Error uploading file. Please try again.');
 		}
 	};
+
 	const handleSellerDelete = (sellerId) => {
 		const confirmDelete = window.confirm(
 			'Are you sure you want to delete this Seller?'

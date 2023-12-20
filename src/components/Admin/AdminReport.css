@@ -702,7 +702,7 @@
 		font-family: 'Urbanist';
 		font-size: 12px;
 		background-color: #fff;
-		width: 85px;
+		width: 80px;
 		height: 20px;
 		border: 1px solid #767676;
 		border-radius: 10px;
@@ -710,7 +710,7 @@
 	}
 
 	.show-date-data-btn {
-		margin-left: 30px;
+		margin-left: 20px;
 		border-radius: 15px;
 		border: 2px solid #5925dc;
 		width: auto;

@@ -698,7 +698,7 @@
 		font-family: 'Urbanist';
 		font-size: 12px;
 		background-color: #fff;
-		width: 100px;
+		width: 75px;
 		height: 20px;
 		border: 1px solid #767676;
 		border-radius: 10px;
@@ -706,7 +706,7 @@
 	}
 
 	.show-date-data-btn {
-		/* margin-left: 15px; */
+		margin-left: 30px;
 		border-radius: 15px;
 		border: 2px solid #5925dc;
 		width: auto;
@@ -718,7 +718,7 @@
 		font-weight: bold;
 		border-radius: 10px;
 		cursor: pointer;
-		margin-left: 125px;
+		/* margin-left: 125px; */
 		margin-top: 10px;
 	}
 }

@@ -686,6 +686,10 @@
 		/* margin-left: 20px; */
 	}
 
+	.date-div {
+		margin-left: -10px;
+	}
+
 	.date-label {
 		font-family: 'Urbanist';
 		font-size: 12px;
@@ -698,7 +702,7 @@
 		font-family: 'Urbanist';
 		font-size: 12px;
 		background-color: #fff;
-		width: 75px;
+		width: 85px;
 		height: 20px;
 		border: 1px solid #767676;
 		border-radius: 10px;

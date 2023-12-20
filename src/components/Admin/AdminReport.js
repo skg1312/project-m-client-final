@@ -1683,7 +1683,7 @@ function AdminReports() {
 										Show
 									</button>
 								</div>
-								<div>
+								<div className='date-div'>
 									<label className='date-label'>From:</label>
 									<input
 										className='date-select'

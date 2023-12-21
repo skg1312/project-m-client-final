@@ -77,7 +77,8 @@ function AdminCreateInvoice() {
 	const API = process.env.REACT_APP_API;
 
 	const handleChange = (e, section, field) => {
-		const value = e.target.value;
+		// const value = e.target.value;
+		const value = 'Mahaveer Trading Company';
 		setDataToSend((prevData) => ({
 			...prevData,
 			[section]: {
@@ -208,6 +209,7 @@ function AdminCreateInvoice() {
 		};
 		fetchConsignments();
 	}, [API]);
+
 	useEffect(() => {
 		const fetchLoadingData = async () => {
 			try {
@@ -574,10 +576,26 @@ function AdminCreateInvoice() {
 							className='admin-create-invoice-select'
 							id='sellerid'
 							name='sellerid'
-							value={{
-								value: selectedSeller._id,
-								label: selectedSeller.sellercompanyname,
-							}}
+							placeholder='Select Seller'
+							// value={{
+							// 	value: selectedSeller._id,
+							// 	label: selectedSeller.sellercompanyname,
+							// }}
+							required
+							onChange={handleSelectChangeSeller}
+							options={sellers.map((seller) => ({
+								value: seller._id,
+								label: seller.sellercompanyname,
+							}))}
+						/>
+						{/* <Select
+							className='admin-create-invoice-select'
+							id='sellerid'
+							name='sellerid'
+							// value={{
+							// 	value: selectedSeller._id,
+							// 	label: selectedSeller.sellercompanyname,
+							// }}
 							required
 							placeholder='Select Agent'
 							onChange={handleSelectChangeSeller}
@@ -585,7 +603,7 @@ function AdminCreateInvoice() {
 								value: seller._id,
 								label: seller.sellercompanyname,
 							}))}
-						/>
+						/> */}
 					</div>
 					<div className='admin-create-invoice-form'>
 						<div className='admin-create-invoice-form-div'>
@@ -684,10 +702,10 @@ function AdminCreateInvoice() {
 							id='buyerid'
 							name='buyerid'
 							placeholder='Select Buyer'
-							value={{
-								value: selectedBuyer._id,
-								label: selectedBuyer.buyercompanyname,
-							}}
+							// value={{
+							// 	value: selectedBuyer._id,
+							// 	label: selectedBuyer.buyercompanyname,
+							// }}
 							required
 							onChange={handleSelectChangeBuyer}
 							options={buyers.map((buyer) => ({
@@ -888,8 +906,9 @@ function AdminCreateInvoice() {
 							className='admin-create-invoice-select'
 							id='consignmentid'
 							name='consignmentid'
-							value={addedConsignment._id || ''}
+							// value={addedConsignment._id || ''}
 							onChange={handleSelectChangeConsignment}
+							required
 						>
 							<option value=''>Select Consignment ID</option>
 							{consignments.map((consignment) => (
@@ -925,6 +944,7 @@ function AdminCreateInvoice() {
 										value={addedConsignment.itemname || ''}
 										onChange={handleConsignmentChange}
 										name='itemname'
+										required
 										disabled
 									/>
 								</td>
@@ -935,6 +955,7 @@ function AdminCreateInvoice() {
 										value={addedConsignment.itemquantity || ''}
 										onChange={handleConsignmentChange}
 										name='itemquantity'
+										required
 									/>
 								</td>
 								<td className='admin-create-invoice-table-row-body-td'>
@@ -944,6 +965,7 @@ function AdminCreateInvoice() {
 										value={addedConsignment.itemhsn || ''}
 										onChange={handleConsignmentChange}
 										name='itemhsn'
+										required
 									/>
 								</td>
 								<td className='admin-create-invoice-table-row-body-td'>
@@ -953,6 +975,7 @@ function AdminCreateInvoice() {
 										value={addedConsignment.itemprice || ''}
 										onChange={handleConsignmentChange}
 										name='itemprice'
+										required
 									/>
 								</td>
 								<td className='admin-create-invoice-table-row-body-td'>
@@ -962,6 +985,7 @@ function AdminCreateInvoice() {
 										value={addedConsignment.itemtaxrate || ''}
 										onChange={handleConsignmentChange}
 										name='itemtaxrate'
+										required
 									/>
 								</td>
 								<td className='admin-create-invoice-table-row-body-td'>
@@ -1138,7 +1162,9 @@ function AdminCreateInvoice() {
 								id='watermark'
 								name='watermark'
 								type='text'
+								placeholder='Mahaveer Trading Company'
 								required
+								disabled
 								onChange={(e) =>
 									handleChange(e, 'boardingdetails', 'watermark')
 								}

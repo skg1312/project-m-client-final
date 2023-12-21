@@ -65,7 +65,7 @@
 	border-radius: 15px;
 	background: #f4f3ff;
 	margin: 20px;
-	height: 65%;
+	height: 70%;
 	overflow-y: auto;
 }
 
@@ -343,7 +343,7 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	align-items: center;
+	align-items: end;
 }
 
 .agent-in-div {
@@ -669,6 +669,17 @@
 		background-color: #5925dc;
 		margin: 5px;
 	}
+
+	.date-agent-select {
+		font-family: 'Urbanist';
+		font-size: 12px;
+		background-color: #fff;
+		width: 100px;
+		height: 30px;
+		border: 1px solid #767676;
+		border-radius: 10px;
+		margin-top: 15px;
+	}
 }
 
 @media only screen and (max-width: 450px) {
@@ -700,7 +711,25 @@
 	}
 
 	.show-agent-data-btn {
-		margin-left: 15px;
+		margin-left: 10px;
+		margin-right: 0px;
+		border-radius: 15px;
+		border: 2px solid #5925DC;
+		padding-left: 10px;
+		padding-right: 10px;
+		width: auto;
+		height: 35px;
+		font-family: "Urbanist";
+		text-decoration: none !important;
+		font-size: 16px;
+		font-style: normal;
+		text-align: center;
+		font-weight: 600;
+		line-height: 28px;
+		letter-spacing: -0.289px;
+		color: #ffffff;
+		background-color: #5925DC;
+		/* margin-left: 15px;
 		border-radius: 15px;
 		border: 2px solid #5925dc;
 		width: 100px;
@@ -711,7 +740,7 @@
 		font-size: 15px;
 		font-weight: bold;
 		border-radius: 10px;
-		cursor: pointer;
+		cursor: pointer; */
 		/* margin-left: 20px; */
 	}
 

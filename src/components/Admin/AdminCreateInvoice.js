@@ -955,7 +955,6 @@ function AdminCreateInvoice() {
 										value={addedConsignment.itemquantity || ''}
 										onChange={handleConsignmentChange}
 										name='itemquantity'
-										required
 									/>
 								</td>
 								<td className='admin-create-invoice-table-row-body-td'>
@@ -965,7 +964,6 @@ function AdminCreateInvoice() {
 										value={addedConsignment.itemhsn || ''}
 										onChange={handleConsignmentChange}
 										name='itemhsn'
-										required
 									/>
 								</td>
 								<td className='admin-create-invoice-table-row-body-td'>
@@ -975,7 +973,6 @@ function AdminCreateInvoice() {
 										value={addedConsignment.itemprice || ''}
 										onChange={handleConsignmentChange}
 										name='itemprice'
-										required
 									/>
 								</td>
 								<td className='admin-create-invoice-table-row-body-td'>
@@ -985,7 +982,6 @@ function AdminCreateInvoice() {
 										value={addedConsignment.itemtaxrate || ''}
 										onChange={handleConsignmentChange}
 										name='itemtaxrate'
-										required
 									/>
 								</td>
 								<td className='admin-create-invoice-table-row-body-td'>

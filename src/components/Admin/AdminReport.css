@@ -400,6 +400,17 @@
 	border-radius: 10px;
 }
 
+.date-agent-select {
+	font-family: 'Urbanist';
+	font-size: 12px;
+	background-color: #fff;
+	width: 100px;
+	height: 30px;
+	border: 1px solid #767676;
+	border-radius: 10px;
+	margin-top: 15px;
+}
+
 
 .show-date-data-btn {
 	margin-left: 10px;
@@ -462,6 +473,17 @@
 		font-weight: 400;
 		line-height: 28px;
 		letter-spacing: -0.289px;
+	}
+
+	.date-agent-select {
+		font-family: 'Urbanist';
+		font-size: 12px;
+		background-color: #fff;
+		width: 100px;
+		height: 30px;
+		border: 1px solid #767676;
+		border-radius: 10px;
+		margin-top: 15px;
 	}
 }
 

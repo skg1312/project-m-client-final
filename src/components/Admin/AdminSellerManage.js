@@ -128,7 +128,13 @@ function AdminSellerManage() {
 	};
 
 	const handleFileChange = (event) => {
-		setFile(event.target.files[0]);
+		const selectedFile = event.target.files[0];
+
+		if (selectedFile) {
+			toast.info(`Selected file: ${selectedFile.name}`);
+		}
+
+		setFile(selectedFile);
 	};
 
 	const handleFileUpload = async () => {
@@ -206,6 +212,7 @@ function AdminSellerManage() {
 								Upload File
 							</button>
 						</div>
+						{/* <div>Total Agents: {sellers.length}</div> */}
 					</div>
 					<input
 						type='text'
@@ -218,6 +225,9 @@ function AdminSellerManage() {
 						<table className='admin-seller-manage-data-table'>
 							<thead className='admin-seller-manage-data-table-head'>
 								<tr className='admin-seller-manage-data-table-row-head'>
+									<th className='admin-seller-manage-data-table-header'>
+										SlNo.
+									</th>
 									<th className='admin-seller-manage-data-table-header'>
 										Agents Id
 									</th>
@@ -236,11 +246,14 @@ function AdminSellerManage() {
 								</tr>
 							</thead>
 							<tbody className='admin-seller-manage-data-table-body'>
-								{displayedSellerSearch.map((seller) => (
+								{displayedSellerSearch.map((seller, idx) => (
 									<tr
 										key={seller._id}
 										className='admin-seller-manage-data-table-row-body'
 									>
+										<td className='admin-seller-manage-data-table-data highlight'>
+											{idx + 1}
+										</td>
 										<td className='admin-seller-manage-data-table-data highlight'>
 											{seller.sellerid?.substring(0, 12) ?? 'N/A'}
 										</td>

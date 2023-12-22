@@ -128,7 +128,13 @@ function AdminBuyerManage() {
 	};
 
 	const handleFileChange = (event) => {
-		setFile(event.target.files[0]);
+		const selectedFile = event.target.files[0];
+
+		if (selectedFile) {
+			toast.info(`Selected file: ${selectedFile.name}`);
+		}
+
+		setFile(selectedFile);
 	};
 
 	const handleFileUpload = async () => {
@@ -206,6 +212,7 @@ function AdminBuyerManage() {
 								Upload File
 							</button>
 						</div>
+						{/* <div>Total Buyers: {buyers.length}</div> */}
 					</div>
 					<input
 						type='text'
@@ -218,6 +225,9 @@ function AdminBuyerManage() {
 						<table className='admin-buyer-manage-data-table'>
 							<thead className='admin-buyer-manage-data-table-head'>
 								<tr className='admin-buyer-manage-data-table-row-head'>
+									<th className='admin-buyer-manage-data-table-header'>
+										SlNo.
+									</th>
 									<th className='admin-buyer-manage-data-table-header'>
 										Company Name
 									</th>
@@ -236,11 +246,14 @@ function AdminBuyerManage() {
 								</tr>
 							</thead>
 							<tbody className='admin-buyer-manage-data-table-body'>
-								{displayedBuyerSearch.map((buyer) => (
+								{displayedBuyerSearch.map((buyer, idx) => (
 									<tr
 										key={buyer._id}
 										className='admin-buyer-manage-data-table-row-body'
 									>
+										<td className='admin-buyer-manage-data-table-data highlight'>
+											{idx + 1}
+										</td>
 										<td className='admin-buyer-manage-data-table-data highlight'>
 											{buyer.buyercompanyname?.substring(0, 12) ?? 'N/A'}
 										</td>

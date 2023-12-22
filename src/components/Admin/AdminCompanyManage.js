@@ -10,6 +10,7 @@ import background from '../images/Desktop.png';
 import AdminNavbar from './AdminNavbar';
 import E from '../images/E.png';
 import D from '../images/D.png';
+import CompanyImage from '../images/addComapny.png';
 
 const validationSchema = Yup.object().shape({
 	companyname: Yup.string().required('Company Name is required'),
@@ -23,6 +24,8 @@ const validationSchema = Yup.object().shape({
 function AdminCompanyManage() {
 	const [companies, setCompanies] = useState([]);
 	// const [pageNumber, setPageNumber] = useState(0);
+	const [showTable, setShowTable] = useState(false);
+	const [showButton, setShowButton] = useState(true);
 	const [selectedCompanyId, setSelectedCompanyId] = useState(null);
 	const API = process.env.REACT_APP_API;
 
@@ -70,6 +73,8 @@ function AdminCompanyManage() {
 
 	const handleCompanyUpdate = (companyUpdateId) => {
 		setSelectedCompanyId(companyUpdateId);
+		setShowTable(!showTable); // Toggle the visibility of the table
+		setShowButton(true);
 		const selectedCompany = companies.find(
 			(company) => company._id === companyUpdateId
 		);
@@ -140,96 +145,132 @@ function AdminCompanyManage() {
 			<AdminNavbar />
 			<div className='admin-company-manager'>
 				<div className='admin-company-manager-data'>
-					<h1 className='admin-company-manager-data-title'>ALL COMPANIES</h1>
-					<input
-						type='text'
-						placeholder='Search Company...'
-						className='admin-user-manage-form-input'
-						value={searchInput}
-						onChange={(e) => setSearchInput(e.target.value)}
-					/>
-					<div className='table-scroll-company'>
-						<table className='admin-company-manager-data-table'>
-							<thead className='admin-company-manager-data-table-head'>
-								<tr className='admin-company-manager-data-table-row-head'>
-									<th className='admin-company-manager-data-table-header'>
-										Company Name
-									</th>
-									<th className='admin-company-manager-data-table-header'>
-										GST No
-									</th>
-									<th className='admin-company-manager-data-table-header'>
-										Contact
-									</th>
-									<th className='admin-company-manager-data-table-header'>
-										Office Address
-									</th>
-									<th className='admin-company-manager-data-table-header'>
-										Action
-									</th>
-								</tr>
-							</thead>
-							<tbody className='admin-company-manager-data-table-body'>
-								{displayedCompaniesSearch.map((company) => (
-									<tr
-										key={company._id}
-										className='admin-company-manager-data-table-row-body'
-									>
-										<td className='admin-company-manager-data-table-data highlight'>
-											{company.companyname.substring(0, 12)}
-										</td>
-										<td className='admin-company-manager-data-table-data'>
-											{company.companygstno.substring(0, 12)}
-										</td>
-										<td className='admin-company-manager-data-table-data'>
-											{company.companycontact}
-										</td>
-										<td className='admin-company-manager-data-table-data'>
-											{company.companyofficeaddress.substring(0, 12)}
-										</td>
-										<td className='admin-company-manager-data-table-data'>
-											<button
-												style={{
-													background: 'none',
-													border: 'none',
-												}}
-												onClick={() => handleCompanyUpdate(company._id)}
+					{showButton && (
+						<button
+							style={{ cursor: 'pointer' }}
+							onClick={() => {
+								setShowTable(!showTable);
+								setShowButton(false);
+							}}
+							className='toggle-button'
+						>
+							{showTable ? 'Show Image' : 'Show Table'}
+						</button>
+					)}
+					{showTable ? (
+						<div>
+							<input
+								type='text'
+								placeholder='Search Company...'
+								className='admin-user-manage-form-input'
+								value={searchInput}
+								onChange={(e) => setSearchInput(e.target.value)}
+							/>
+							<h1 className='admin-company-manager-data-title'>
+								ALL COMPANIES
+							</h1>
+							<div className='table-scroll-company'>
+								<table className='admin-company-manager-data-table'>
+									<thead className='admin-company-manager-data-table-head'>
+										<tr className='admin-company-manager-data-table-row-head'>
+											<th className='admin-company-manager-data-table-header'>
+												Sl
+											</th>
+											<th className='admin-company-manager-data-table-header'>
+												Company Name
+											</th>
+											<th className='admin-company-manager-data-table-header'>
+												GST No
+											</th>
+											<th className='admin-company-manager-data-table-header'>
+												Contact
+											</th>
+											<th className='admin-company-manager-data-table-header'>
+												Office Address
+											</th>
+											<th className='admin-company-manager-data-table-header'>
+												Action
+											</th>
+										</tr>
+									</thead>
+									<tbody className='admin-company-manager-data-table-body'>
+										{displayedCompaniesSearch.map((company, idx) => (
+											<tr
+												key={company._id}
+												className='admin-company-manager-data-table-row-body'
 											>
-												<img
-													src={E}
-													alt='Update'
-													style={{
-														height: '15px',
-														width: '15px',
-														cursor: 'pointer',
-													}}
-												/>
-											</button>
-											<button
-												style={{
-													background: 'none',
-													border: 'none',
-												}}
-												onClick={() => {
-													handleDeleteCompany(company._id);
-												}}
-											>
-												<img
-													src={D}
-													alt='delete'
-													style={{
-														height: '15px',
-														width: '15px',
-														cursor: 'pointer',
-													}}
-												/>
-											</button>
-										</td>
-									</tr>
-								))}
-							</tbody>
-						</table>
-					</div>
+												<td className='admin-company-manager-data-table-data highlight'>
+													{idx + 1}
+												</td>
+												<td className='admin-company-manager-data-table-data highlight'>
+													{company.companyname.substring(0, 12)}
+												</td>
+												<td className='admin-company-manager-data-table-data'>
+													{company.companygstno.substring(0, 12)}
+												</td>
+												<td className='admin-company-manager-data-table-data'>
+													{company.companycontact}
+												</td>
+												<td className='admin-company-manager-data-table-data'>
+													{company.companyofficeaddress.substring(0, 12)}
+												</td>
+												<td className='admin-company-manager-data-table-data'>
+													<button
+														style={{
+															background: 'none',
+															border: 'none',
+														}}
+														onClick={() => handleCompanyUpdate(company._id)}
+													>
+														<img
+															src={E}
+															alt='Update'
+															style={{
+																height: '15px',
+																width: '15px',
+																cursor: 'pointer',
+															}}
+														/>
+													</button>
+													<button
+														style={{
+															background: 'none',
+															border: 'none',
+														}}
+														onClick={() => {
+															handleDeleteCompany(company._id);
+														}}
+													>
+														<img
+															src={D}
+															alt='delete'
+															style={{
+																height: '15px',
+																width: '15px',
+																cursor: 'pointer',
+															}}
+														/>
+													</button>
+												</td>
+											</tr>
+										))}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					) : (
+						<div className='admin-company-manager-image'>
+							<img
+								src={CompanyImage}
+								alt='add company img'
+								style={{
+									height: 'auto',
+									width: 'auto',
+									// cursor: 'pointer',
+								}}
+							/>
+						</div>
+					)}
 					<br />
 					{/* <ReactPaginate
 						className='pagination-container'
@@ -278,17 +319,17 @@ function AdminCompanyManage() {
 
 						<input
 							type='tel'
-							required
+							// required
 							maxLength='10'
 							className='admin-company-manager-form-input-high'
 							placeholder='Contact'
 							{...formik.getFieldProps('companycontact')}
 						/>
-						{formik.touched.companycontact && formik.errors.companycontact ? (
+						{/* {formik.touched.companycontact && formik.errors.companycontact ? (
 							<div className='error-message'>
 								{formik.errors.companycontact}
 							</div>
-						) : null}
+						) : null} */}
 
 						<input
 							type='text'
@@ -372,17 +413,17 @@ function AdminCompanyManage() {
 						<input
 							type='number'
 							pattern='[0-9]*'
-							required
+							// required
 							maxLength='6'
 							className='admin-company-manager-form-input-high'
 							placeholder='Pincode'
 							{...formik.getFieldProps('companypincode')}
 						/>
-						{formik.touched.companypincode && formik.errors.companypincode ? (
+						{/* {formik.touched.companypincode && formik.errors.companypincode ? (
 							<div className='error-message'>
 								{formik.errors.companypincode}
 							</div>
-						) : null}
+						) : null} */}
 
 						<br />
 						<button type='submit' className='admin-company-manager-form-button'>

@@ -156,9 +156,7 @@ function AdminLoadingManage() {
 						<table className='admin-loading-manage-data-table'>
 							<thead className='admin-loading-manage-data-table-head'>
 								<tr className='admin-loading-manage-data-table-row-head'>
-									<th className='admin-loading-manage-data-table-header'>
-										SlNo.
-									</th>
+									<th className='admin-loading-manage-data-table-header'>Sl</th>
 									<th className='admin-loading-manage-data-table-header'>
 										Start Point
 									</th>

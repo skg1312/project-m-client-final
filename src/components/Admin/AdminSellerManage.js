@@ -225,9 +225,7 @@ function AdminSellerManage() {
 						<table className='admin-seller-manage-data-table'>
 							<thead className='admin-seller-manage-data-table-head'>
 								<tr className='admin-seller-manage-data-table-row-head'>
-									<th className='admin-seller-manage-data-table-header'>
-										SlNo.
-									</th>
+									<th className='admin-seller-manage-data-table-header'>Sl</th>
 									<th className='admin-seller-manage-data-table-header'>
 										Agents Id
 									</th>

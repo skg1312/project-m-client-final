@@ -160,7 +160,7 @@ function AdminConsignmentManage() {
 							<thead className='admin-consignment-manage-data-table-head'>
 								<tr className='admin-consignment-manage-data-table-row-head'>
 									<th className='admin-consignment-manage-data-table-header'>
-										SlNo.
+										Sl
 									</th>
 									<th className='admin-consignment-manage-data-table-header'>
 										Item Name

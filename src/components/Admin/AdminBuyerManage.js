@@ -225,9 +225,7 @@ function AdminBuyerManage() {
 						<table className='admin-buyer-manage-data-table'>
 							<thead className='admin-buyer-manage-data-table-head'>
 								<tr className='admin-buyer-manage-data-table-row-head'>
-									<th className='admin-buyer-manage-data-table-header'>
-										SlNo.
-									</th>
+									<th className='admin-buyer-manage-data-table-header'>Sl</th>
 									<th className='admin-buyer-manage-data-table-header'>
 										Company Name
 									</th>

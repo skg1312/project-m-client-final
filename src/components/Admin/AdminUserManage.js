@@ -162,7 +162,7 @@ function AdminUserManage() {
 						<table className='admin-user-manage-data-table'>
 							<thead className='admin-user-manage-data-table-head'>
 								<tr className='admin-user-manage-data-table-row-head'>
-									<th className='admin-user-manage-data-table-header'>SlNo.</th>
+									<th className='admin-user-manage-data-table-header'>Sl</th>
 									<th className='admin-user-manage-data-table-header'>
 										Username
 									</th>

@@ -169,9 +169,7 @@ function AdminStaffManage() {
 						<table className='admin-staff-manager-data-table'>
 							<thead className='admin-staff-manager-data-table-head'>
 								<tr className='admin-staff-manager-data-table-row-head'>
-									<th className='admin-staff-manager-data-table-header'>
-										SlNo.
-									</th>
+									<th className='admin-staff-manager-data-table-header'>Sl</th>
 									<th className='admin-staff-manager-data-table-header'>
 										Staff Name
 									</th>

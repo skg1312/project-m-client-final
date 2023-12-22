@@ -162,6 +162,7 @@ function AdminUserManage() {
 						<table className='admin-user-manage-data-table'>
 							<thead className='admin-user-manage-data-table-head'>
 								<tr className='admin-user-manage-data-table-row-head'>
+									<th className='admin-user-manage-data-table-header'>Sl</th>
 									<th className='admin-user-manage-data-table-header'>
 										Username
 									</th>
@@ -176,11 +177,14 @@ function AdminUserManage() {
 								</tr>
 							</thead>
 							<tbody className='admin-user-manage-data-table-body'>
-								{displayedUserSearch.map((user) => (
+								{displayedUserSearch.map((user, idx) => (
 									<tr
 										key={user._id}
 										className='admin-user-manage-data-table-row-body'
 									>
+										<td className='admin-user-manage-data-table-data highlight'>
+											{idx + 1}
+										</td>
 										<td className='admin-user-manage-data-table-data highlight'>
 											{user.username.substring(0, 12)}
 										</td>

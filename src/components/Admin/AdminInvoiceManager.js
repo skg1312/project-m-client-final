@@ -98,6 +98,9 @@ function AdminInvoiceManagement() {
 							<thead className='invoice-management-data-body-table-row-head'>
 								<tr className='invoice-management-data-body-table-row'>
 									<th className='invoice-management-data-body-table-header'>
+										SlNo.
+									</th>
+									<th className='invoice-management-data-body-table-header'>
 										Invoice No
 									</th>
 									<th className='invoice-management-data-body-table-header'>
@@ -118,11 +121,14 @@ function AdminInvoiceManagement() {
 								</tr>
 							</thead>
 							<tbody className='invoice-management-data-body-table-row-body'>
-								{displayedInvoiceSearch.map((invoice) => (
+								{displayedInvoiceSearch.map((invoice, idx) => (
 									<tr
 										key={invoice._id}
 										className='invoice-management-data-body-table-row'
 									>
+										<td className='invoice-management-data-body-table-data'>
+											{idx + 1}
+										</td>
 										<td className='invoice-management-data-body-table-data'>
 											{invoice.invoicedetails.invoiceno?.substring(0, 12) ??
 												'N/A'}

@@ -169,6 +169,7 @@ function AdminStaffManage() {
 						<table className='admin-staff-manager-data-table'>
 							<thead className='admin-staff-manager-data-table-head'>
 								<tr className='admin-staff-manager-data-table-row-head'>
+									<th className='admin-staff-manager-data-table-header'>Sl</th>
 									<th className='admin-staff-manager-data-table-header'>
 										Staff Name
 									</th>
@@ -190,11 +191,14 @@ function AdminStaffManage() {
 								</tr>
 							</thead>
 							<tbody className='admin-staff-manager-data-table-body'>
-								{displayedStaffSearch.map((staff) => (
+								{displayedStaffSearch.map((staff, idx) => (
 									<tr
 										key={staff._id}
 										className='admin-staff-manager-data-table-row-body'
 									>
+										<td className='admin-staff-manager-data-table-data highlight'>
+											{idx + 1}
+										</td>
 										<td className='admin-staff-manager-data-table-data highlight'>
 											{staff.staffname.substring(0, 12)}
 										</td>

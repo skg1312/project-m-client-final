@@ -156,6 +156,7 @@ function AdminLoadingManage() {
 						<table className='admin-loading-manage-data-table'>
 							<thead className='admin-loading-manage-data-table-head'>
 								<tr className='admin-loading-manage-data-table-row-head'>
+									<th className='admin-loading-manage-data-table-header'>Sl</th>
 									<th className='admin-loading-manage-data-table-header'>
 										Start Point
 									</th>
@@ -171,11 +172,14 @@ function AdminLoadingManage() {
 								</tr>
 							</thead>
 							<tbody className='admin-loading-manage-data-table-body'>
-								{displayedLoadingsSearch.map((loading) => (
+								{displayedLoadingsSearch.map((loading, idx) => (
 									<tr
 										key={loading._id}
 										className='admin-loading-manage-data-table-row-body'
 									>
+										<td className='admin-loading-manage-data-table-data'>
+											{idx + 1}
+										</td>
 										<td className='admin-loading-manage-data-table-data'>
 											{loading.startpoint}
 										</td>

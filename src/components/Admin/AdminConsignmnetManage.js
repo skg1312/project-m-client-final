@@ -160,6 +160,9 @@ function AdminConsignmentManage() {
 							<thead className='admin-consignment-manage-data-table-head'>
 								<tr className='admin-consignment-manage-data-table-row-head'>
 									<th className='admin-consignment-manage-data-table-header'>
+										Sl
+									</th>
+									<th className='admin-consignment-manage-data-table-header'>
 										Item Name
 									</th>
 									<th className='admin-consignment-manage-data-table-header'>
@@ -180,11 +183,14 @@ function AdminConsignmentManage() {
 								</tr>
 							</thead>
 							<tbody className='admin-consignment-manage-data-table-body'>
-								{displayedConsignedSearch.map((item) => (
+								{displayedConsignedSearch.map((item, idx) => (
 									<tr
 										key={item._id}
 										className='admin-consignment-manage-data-table-row-body'
 									>
+										<td className='admin-consignment-manage-data-table-data highlight'>
+											{idx + 1}
+										</td>
 										<td className='admin-consignment-manage-data-table-data highlight'>
 											{item.itemname}
 										</td>

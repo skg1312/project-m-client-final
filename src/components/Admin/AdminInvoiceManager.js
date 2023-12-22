@@ -98,7 +98,7 @@ function AdminInvoiceManagement() {
 							<thead className='invoice-management-data-body-table-row-head'>
 								<tr className='invoice-management-data-body-table-row'>
 									<th className='invoice-management-data-body-table-header'>
-										SlNo.
+										Sl
 									</th>
 									<th className='invoice-management-data-body-table-header'>
 										Invoice No

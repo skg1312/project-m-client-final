@@ -362,11 +362,11 @@ function AdminCompanyManage() {
 							placeholder='Contact'
 							{...formik.getFieldProps('companycontact')}
 						/>
-						{/* {formik.touched.companycontact && formik.errors.companycontact ? (
+						{formik.touched.companycontact && formik.errors.companycontact ? (
 							<div className='error-message'>
 								{formik.errors.companycontact}
 							</div>
-						) : null} */}
+						) : null}
 
 						<input
 							type='text'

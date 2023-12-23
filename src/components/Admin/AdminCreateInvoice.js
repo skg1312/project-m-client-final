@@ -77,8 +77,7 @@ function AdminCreateInvoice() {
 	const API = process.env.REACT_APP_API;
 
 	const handleChange = (e, section, field) => {
-		// const value = e.target.value;
-		const value = 'Mahaveer Trading Company';
+		const value = e.target.value;
 		setDataToSend((prevData) => ({
 			...prevData,
 			[section]: {
@@ -101,16 +100,14 @@ function AdminCreateInvoice() {
 			if (response.ok) {
 				const data = await response.json();
 				console.log('Invoice created successfully:', data);
-				toast.success('Invoice Created Successfully');
+				toast.success('Invoice created successfully');
 				setUrl(data._id);
 				setView(true);
 			} else {
 				toast.error('Invoice creation failed');
-				console.error('Invoice creation failed');
 			}
 		} catch (error) {
-			toast.error('Error creating invoice');
-			console.error('Error creating invoice:', error);
+			toast.error('Error creating invoice:', error);
 		}
 	};
 
@@ -209,7 +206,6 @@ function AdminCreateInvoice() {
 		};
 		fetchConsignments();
 	}, [API]);
-
 	useEffect(() => {
 		const fetchLoadingData = async () => {
 			try {
@@ -576,22 +572,6 @@ function AdminCreateInvoice() {
 							className='admin-create-invoice-select'
 							id='sellerid'
 							name='sellerid'
-							placeholder='Select Seller'
-							// value={{
-							// 	value: selectedSeller._id,
-							// 	label: selectedSeller.sellercompanyname,
-							// }}
-							required
-							onChange={handleSelectChangeSeller}
-							options={sellers.map((seller) => ({
-								value: seller._id,
-								label: seller.sellercompanyname,
-							}))}
-						/>
-						{/* <Select
-							className='admin-create-invoice-select'
-							id='sellerid'
-							name='sellerid'
 							// value={{
 							// 	value: selectedSeller._id,
 							// 	label: selectedSeller.sellercompanyname,
@@ -603,7 +583,7 @@ function AdminCreateInvoice() {
 								value: seller._id,
 								label: seller.sellercompanyname,
 							}))}
-						/> */}
+						/>
 					</div>
 					<div className='admin-create-invoice-form'>
 						<div className='admin-create-invoice-form-div'>
@@ -944,7 +924,6 @@ function AdminCreateInvoice() {
 										value={addedConsignment.itemname || ''}
 										onChange={handleConsignmentChange}
 										name='itemname'
-										required
 										disabled
 									/>
 								</td>
@@ -1158,9 +1137,7 @@ function AdminCreateInvoice() {
 								id='watermark'
 								name='watermark'
 								type='text'
-								placeholder='Mahaveer Trading Company'
 								required
-								disabled
 								onChange={(e) =>
 									handleChange(e, 'boardingdetails', 'watermark')
 								}

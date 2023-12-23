@@ -100,7 +100,7 @@
 	outline-offset: 2px;
 }
 
-.table-scroll {
+.table-scroll-agent {
 	height: 340px;
 	overflow-y: scroll;
 }
@@ -322,7 +322,7 @@
 		flex-direction: column;
 	}
 
-	.table-scroll {
+	.table-scroll-agent {
 		height: 320px;
 		overflow-y: scroll;
 	}

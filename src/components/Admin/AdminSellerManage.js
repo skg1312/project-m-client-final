@@ -257,7 +257,7 @@ function AdminSellerManage() {
 						value={searchInput}
 						onChange={(e) => setSearchInput(e.target.value)}
 					/>
-					<div className='table-scroll'>
+					<div className='table-scroll-agent'>
 						<table className='admin-seller-manage-data-table'>
 							<thead className='admin-seller-manage-data-table-head'>
 								<tr className='admin-seller-manage-data-table-row-head'>

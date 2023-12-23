@@ -155,7 +155,7 @@ function AdminConsignmentManage() {
 						value={searchInput}
 						onChange={(e) => setSearchInput(e.target.value)}
 					/>
-					<div className='table-scroll'>
+					<div className='table-scroll-consignment'>
 						<table className='admin-consignment-manage-data-table'>
 							<thead className='admin-consignment-manage-data-table-head'>
 								<tr className='admin-consignment-manage-data-table-row-head'>

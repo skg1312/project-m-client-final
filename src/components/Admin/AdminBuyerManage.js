@@ -256,7 +256,7 @@ function AdminBuyerManage() {
 						value={searchInput}
 						onChange={(e) => setSearchInput(e.target.value)}
 					/>
-					<div className='table-scroll'>
+					<div className='table-scroll-buyer'>
 						<table className='admin-buyer-manage-data-table'>
 							<thead className='admin-buyer-manage-data-table-head'>
 								<tr className='admin-buyer-manage-data-table-row-head'>

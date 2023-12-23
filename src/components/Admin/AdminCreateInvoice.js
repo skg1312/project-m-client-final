@@ -65,7 +65,7 @@ function AdminCreateInvoice() {
 		},
 		boardingdetails: {
 			dateofloading: '',
-			watermark: '',
+			watermark: 'Mahaveer Trading Company',
 		},
 		loadingdetails: {
 			startingpoint: '',
@@ -1137,10 +1137,10 @@ function AdminCreateInvoice() {
 								id='watermark'
 								name='watermark'
 								type='text'
-								required
-								onChange={(e) =>
-									handleChange(e, 'boardingdetails', 'watermark')
-								}
+								// required
+								placeholder='Mahaveer Trading Company'
+								value='Mahaveer Trading Company'
+								disabled
 							/>
 							{/* </div> */}
 						</div>

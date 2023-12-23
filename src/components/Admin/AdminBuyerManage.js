@@ -27,6 +27,8 @@ function AdminBuyerManage() {
 
 	const [file, setFile] = useState(null);
 	const [states, setStates] = useState([]);
+	const [selectedBuyers, setSelectedBuyers] = useState([]);
+	const [isGroupDeleteClicked, setIsGroupDeleteClicked] = useState(false);
 
 	const API = process.env.REACT_APP_API;
 
@@ -218,6 +220,66 @@ function AdminBuyerManage() {
 		formik.handleChange(event);
 	};
 
+	// don
+	const handleBuyerSelection = (buyerId) => {
+		const updatedSelectedBuyers = selectedBuyers.includes(buyerId)
+			? selectedBuyers.filter((id) => id !== buyerId)
+			: [...selectedBuyers, buyerId];
+
+		setSelectedBuyers(updatedSelectedBuyers);
+	};
+
+	const handleSelectAll = () => {
+		if (selectedBuyers.length === displayedBuyerSearch.length) {
+			setSelectedBuyers([]);
+		} else {
+			const allBuyerIds = displayedBuyerSearch.map((buyer) => buyer._id);
+			setSelectedBuyers(allBuyerIds);
+		}
+	};
+
+	const handleGroupDeleteClick = () => {
+		setIsGroupDeleteClicked(true);
+	};
+
+	const handleGroupDelete = () => {
+		const confirmDelete = window.confirm(
+			'Are you sure you want to delete selected buyers?'
+		);
+
+		if (confirmDelete) {
+			// console.log('Confirm delete');
+
+			// Create an array of promises for each buyer deletion
+			const deletePromises = selectedBuyers.map(async (buyerId) => {
+				try {
+					await axios.delete(`${API}buyer/${buyerId}`);
+					return buyerId;
+				} catch (error) {
+					console.error(`Error deleting buyer ${buyerId}:`, error);
+					return null;
+				}
+			});
+
+			// Wait for all promises to resolve
+			Promise.all(deletePromises)
+				.then((deletedBuyers) => {
+					// Filter out null values (failed deletions) and update the state
+					const updatedBuyers = buyers.filter(
+						(buyer) => !deletedBuyers.includes(buyer._id)
+					);
+					setBuyers(updatedBuyers);
+					toast.success('Selected buyers deleted successfully');
+				})
+				.catch((error) => {
+					console.error('Error deleting selected buyers:', error);
+					toast.error('Error deleting selected buyers. Please try again.');
+				});
+		}
+
+		setIsGroupDeleteClicked(false);
+	};
+
 	return (
 		<div
 			style={{
@@ -240,12 +302,32 @@ function AdminBuyerManage() {
 								accept='.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel'
 								onChange={handleFileChange}
 							/>
-							<button
-								className='admin-buyer-manage-file-upload-button'
-								onClick={handleFileUpload}
-							>
-								Upload File
-							</button>
+							<div className='upload-delete-btn-div'>
+								<button
+									className='admin-buyer-manage-file-upload-button'
+									onClick={handleFileUpload}
+								>
+									Upload File
+								</button>
+								<div className='delete-btn-div'>
+									<button
+										// style={{ marginLeft: '135px' }}
+										className='admin-buyer-manage-file-upload-button'
+										onClick={handleGroupDeleteClick}
+									>
+										Group Delete
+									</button>
+									{isGroupDeleteClicked && (
+										<button
+											style={{ marginLeft: '15px' }}
+											className='admin-buyer-manage-file-upload-button'
+											onClick={handleGroupDelete}
+										>
+											Delete Selected
+										</button>
+									)}
+								</div>
+							</div>
 						</div>
 						{/* <div>Total Buyers: {buyers.length}</div> */}
 					</div>
@@ -276,6 +358,17 @@ function AdminBuyerManage() {
 									<th className='admin-buyer-manage-data-table-header'>
 										Action
 									</th>
+									{isGroupDeleteClicked && (
+										<th className='admin-buyer-manage-data-table-header'>
+											<input
+												type='checkbox'
+												checked={
+													selectedBuyers.length === displayedBuyerSearch.length
+												}
+												onChange={() => handleSelectAll()}
+											/>
+										</th>
+									)}
 								</tr>
 							</thead>
 							<tbody className='admin-buyer-manage-data-table-body'>
@@ -335,12 +428,21 @@ function AdminBuyerManage() {
 												/>
 											</button>
 										</td>
+										{isGroupDeleteClicked && (
+											<td className='admin-buyer-manage-data-table-data'>
+												<input
+													type='checkbox'
+													checked={selectedBuyers.includes(buyer._id)}
+													onChange={() => handleBuyerSelection(buyer._id)}
+												/>
+											</td>
+										)}
 									</tr>
 								))}
 							</tbody>
 						</table>
 					</div>
-					<br />
+
 					{/* <ReactPaginate
 						className='pagination-container'
 						previousLabel='Previous'

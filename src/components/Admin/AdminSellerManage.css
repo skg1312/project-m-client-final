@@ -21,6 +21,15 @@
 	flex-direction: column;
 }
 
+.upload-delete-btn-div {
+	display: flex;
+	flex-direction: row;
+}
+
+.delete-btn-div {
+	margin-left: 50px;
+}
+
 .admin-seller-manage-file-upload {
 	padding-top: 32px;
 	padding-left: 32px;
@@ -312,6 +321,15 @@
 		margin-right: 35px;
 		border-radius: 15px;
 		border: 2px solid #d2d2d2;
+	}
+
+	.upload-delete-btn-div {
+		display: flex;
+		flex-direction: row;
+	}
+
+	.delete-btn-div {
+		margin-left: 30px;
 	}
 }
 

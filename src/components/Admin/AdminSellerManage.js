@@ -25,6 +25,9 @@ function AdminSellerManage() {
 	// });
 	const [file, setFile] = useState(null);
 	const [states, setStates] = useState([]);
+	const [selectedSellers, setSelectedSellers] = useState([]);
+	const [isGroupDeleteClicked, setIsGroupDeleteClicked] = useState(false);
+
 	const API = process.env.REACT_APP_API;
 	// const itemsPerPage = 12;
 
@@ -219,6 +222,66 @@ function AdminSellerManage() {
 		formik.handleChange(event);
 	};
 
+	// don
+	const handleSellerSelection = (sellerId) => {
+		const updatedSelectedSellers = selectedSellers.includes(sellerId)
+			? selectedSellers.filter((id) => id !== sellerId)
+			: [...selectedSellers, sellerId];
+
+		setSelectedSellers(updatedSelectedSellers);
+	};
+
+	const handleSelectAll = () => {
+		if (selectedSellers.length === displayedSellerSearch.length) {
+			setSelectedSellers([]);
+		} else {
+			const allSellerIds = displayedSellerSearch.map((seller) => seller._id);
+			setSelectedSellers(allSellerIds);
+		}
+	};
+
+	const handleGroupDeleteClick = () => {
+		setIsGroupDeleteClicked(true);
+	};
+
+	const handleGroupDelete = () => {
+		const confirmDelete = window.confirm(
+			'Are you sure you want to delete selected sellers?'
+		);
+
+		if (confirmDelete) {
+			// console.log('Confirm delete');
+
+			// Create an array of promises for each seller deletion
+			const deletePromises = selectedSellers.map(async (sellerId) => {
+				try {
+					await axios.delete(`${API}seller/${sellerId}`);
+					return sellerId;
+				} catch (error) {
+					console.error(`Error deleting seller ${sellerId}:`, error);
+					return null;
+				}
+			});
+
+			// Wait for all promises to resolve
+			Promise.all(deletePromises)
+				.then((deletedSellers) => {
+					// Filter out null values (failed deletions) and update the state
+					const updatedSellers = sellers.filter(
+						(seller) => !deletedSellers.includes(seller._id)
+					);
+					setSellers(updatedSellers);
+					toast.success('Selected sellers deleted successfully');
+				})
+				.catch((error) => {
+					console.error('Error deleting selected sellers:', error);
+					toast.error('Error deleting selected sellers. Please try again.');
+				});
+		}
+
+		setIsGroupDeleteClicked(false);
+	};
+
 	return (
 		<div
 			style={{
@@ -241,12 +304,32 @@ function AdminSellerManage() {
 								accept='.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel'
 								onChange={handleFileChange}
 							/>
-							<button
-								className='admin-seller-manage-file-upload-button'
-								onClick={handleFileUpload}
-							>
-								Upload File
-							</button>
+							<div className='upload-delete-btn-div'>
+								<button
+									className='admin-seller-manage-file-upload-button'
+									onClick={handleFileUpload}
+								>
+									Upload File
+								</button>
+								<div className='delete-btn-div'>
+									<button
+										// style={{ marginLeft: '135px' }}
+										className='admin-seller-manage-file-upload-button'
+										onClick={handleGroupDeleteClick}
+									>
+										Group Delete
+									</button>
+									{isGroupDeleteClicked && (
+										<button
+											style={{ marginLeft: '15px' }}
+											className='admin-seller-manage-file-upload-button'
+											onClick={handleGroupDelete}
+										>
+											Delete Selected
+										</button>
+									)}
+								</div>
+							</div>
 						</div>
 						{/* <div>Total Agents: {sellers.length}</div> */}
 					</div>
@@ -277,6 +360,18 @@ function AdminSellerManage() {
 									<th className='admin-seller-manage-data-table-header'>
 										Action
 									</th>
+									{isGroupDeleteClicked && (
+										<th className='admin-seller-manage-data-table-header'>
+											<input
+												type='checkbox'
+												checked={
+													selectedSellers.length ===
+													displayedSellerSearch.length
+												}
+												onChange={() => handleSelectAll()}
+											/>
+										</th>
+									)}
 								</tr>
 							</thead>
 							<tbody className='admin-seller-manage-data-table-body'>
@@ -336,6 +431,15 @@ function AdminSellerManage() {
 												/>
 											</button>
 										</td>
+										{isGroupDeleteClicked && (
+											<td className='admin-seller-manage-data-table-data'>
+												<input
+													type='checkbox'
+													checked={selectedSellers.includes(seller._id)}
+													onChange={() => handleSellerSelection(seller._id)}
+												/>
+											</td>
+										)}
 									</tr>
 								))}
 							</tbody>

@@ -165,7 +165,7 @@ function AdminStaffManage() {
 						value={searchInput} // Bind the input value to the state
 						onChange={(e) => setSearchInput(e.target.value)} // Update the searchInput state as the user types
 					/>
-					<div className='table-scroll'>
+					<div className='table-scroll-staff'>
 						<table className='admin-staff-manager-data-table'>
 							<thead className='admin-staff-manager-data-table-head'>
 								<tr className='admin-staff-manager-data-table-row-head'>

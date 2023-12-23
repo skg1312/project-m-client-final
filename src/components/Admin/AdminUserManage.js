@@ -158,7 +158,7 @@ function AdminUserManage() {
 						value={searchInput}
 						onChange={(e) => setSearchInput(e.target.value)}
 					/>
-					<div className='table-scroll'>
+					<div className='table-scroll-user'>
 						<table className='admin-user-manage-data-table'>
 							<thead className='admin-user-manage-data-table-head'>
 								<tr className='admin-user-manage-data-table-row-head'>

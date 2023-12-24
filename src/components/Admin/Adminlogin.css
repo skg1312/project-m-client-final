@@ -91,6 +91,7 @@
     line-height: normal;
     letter-spacing: 0.72px;
     margin-top: 15px;
+    cursor: pointer;
 }
 
 .Admin-login-error {
@@ -250,6 +251,7 @@
         font-weight: 500;
         line-height: normal;
         letter-spacing: 0.72px;
+        cursor: pointer;
     }
 
     .Admin-login-not-req {

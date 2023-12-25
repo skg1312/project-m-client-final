@@ -26,7 +26,7 @@ function AdminCreateInvoice() {
 
 	const [consignments, setConsignments] = useState([]);
 	const [addedConsignment, setAddedConsignment] = useState({});
-	const [selectedConsignment, setSelectedConsignment] = useState({});
+	// const [selectedConsignment, setSelectedConsignment] = useState({});
 
 	const [Loading, setLoading] = useState({});
 	const [selectedLoading, setSelectedLoading] = useState({});
@@ -343,17 +343,6 @@ function AdminCreateInvoice() {
 		}));
 	};
 
-	// const handleChange = (e, section, field) => {
-	// 	const value = e.target.value;
-	// 	setDataToSend((prevData) => ({
-	// 		...prevData,
-	// 		[section]: {
-	// 			...prevData[section],
-	// 			[field]: value,
-	// 		},
-	// 	}));
-	// };
-
 	const handleSelectChangeLoading = (selectedOption, field) => {
 		const [startingpoint, endingpoint, rate] = selectedOption.value.split('-');
 
@@ -372,30 +361,6 @@ function AdminCreateInvoice() {
 			[field]: selectedOption,
 		}));
 	};
-
-	// const handleSubmit = async (e) => {
-	// 	e.preventDefault();
-	// 	try {
-	// 		const response = await fetch(`${API}invoice`, {
-	// 			method: 'POST',
-	// 			headers: {
-	// 				'Content-Type': 'application/json',
-	// 			},
-	// 			body: JSON.stringify(dataToSend),
-	// 		});
-	// 		if (response.ok) {
-	// 			const data = await response.json();
-	// 			console.log('Invoice created successfully:', data);
-	// 			alert('Invoice Details are saved');
-	// 			setUrl(data._id);
-	// 			setView(true);
-	// 		} else {
-	// 			console.error('Invoice creation failed');
-	// 		}
-	// 	} catch (error) {
-	// 		console.error('Error creating invoice:', error);
-	// 	}
-	// };
 
 	const openPdfViewer = () => {
 		navigate(`/pdf/${url}`);

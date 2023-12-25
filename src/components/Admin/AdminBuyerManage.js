@@ -548,7 +548,7 @@ function AdminBuyerManage() {
 							disabled
 							maxLength='6'
 							className='admin-buyer-manage-form-input'
-							placeholder={`---${formik.values.buyercompanystatecode}---`}
+							placeholder={`---State Code${formik.values.buyercompanystatecode}---`}
 							{...formik.getFieldProps('buyercompanystatecode')}
 						/>
 						{formik.touched.buyercompanystatecode &&

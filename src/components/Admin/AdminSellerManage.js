@@ -550,7 +550,7 @@ function AdminSellerManage() {
 							disabled
 							maxLength='6'
 							className='admin-seller-manage-form-input'
-							placeholder={`---${formik.values.sellercompanystatecode}---`}
+							placeholder={`---State Code${formik.values.sellercompanystatecode}---`}
 							{...formik.getFieldProps('sellercompanystatecode')}
 						/>
 						{formik.touched.sellercompanystatecode &&

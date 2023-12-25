@@ -407,7 +407,7 @@ function AdminCompanyManage() {
 							maxLength='6'
 							disabled
 							className='admin-company-manager-form-input-high'
-							placeholder={`---${formik.values.companypincode}---`}
+							placeholder={`---State Code${formik.values.companypincode}---`}
 							{...formik.getFieldProps('companypincode')}
 						/>
 						{/* {formik.touched.companypincode && formik.errors.companypincode ? (

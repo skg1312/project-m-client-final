@@ -549,7 +549,7 @@ function AdminCreateInvoice() {
 									className='admin-create-invoice-form-label'
 									htmlFor='companypincode'
 								>
-									Company pincode
+									Company State Code
 								</label>
 								<input
 									className='admin-create-invoice-form-input'

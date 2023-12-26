@@ -311,7 +311,9 @@ function AdminBuyerManage() {
 								</button>
 								<div className='delete-btn-div'>
 									<button
-										// style={{ marginLeft: '135px' }}
+										style={{
+											display: isGroupDeleteClicked ? 'none' : 'inline-block',
+										}}
 										className='admin-buyer-manage-file-upload-button'
 										onClick={handleGroupDeleteClick}
 									>
@@ -319,7 +321,7 @@ function AdminBuyerManage() {
 									</button>
 									{isGroupDeleteClicked && (
 										<button
-											style={{ marginLeft: '15px' }}
+											// style={{ marginLeft: '15px' }}
 											className='admin-buyer-manage-file-upload-button'
 											onClick={handleGroupDelete}
 										>

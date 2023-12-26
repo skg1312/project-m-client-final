@@ -3,6 +3,7 @@ import './AdminCreateInvoice.css';
 import background from '../images/Desktop.png';
 import A from '../images/A.png';
 import D from '../images/D.png';
+import Close from '../images/cross_icon.jpg';
 import AdminNavbar from './AdminNavbar';
 import Select from 'react-select';
 import { useNavigate } from 'react-router-dom';
@@ -10,6 +11,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import copy from 'clipboard-copy';
 
 function AdminCreateInvoice() {
 	const navigate = useNavigate();
@@ -89,25 +91,37 @@ function AdminCreateInvoice() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		try {
-			const response = await fetch(`${API}invoice`, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(dataToSend),
-			});
-			if (response.ok) {
-				const data = await response.json();
-				console.log('Invoice created successfully:', data);
-				toast.success('Invoice created successfully');
-				setUrl(data._id);
-				setView(true);
-			} else {
-				toast.error('Invoice creation failed');
+
+		// Check the length of items in dataToSend
+		if (dataToSend && dataToSend.consignmentdetails.itemdetails.length >= 1) {
+			try {
+				const response = await fetch(`${API}invoice`, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(dataToSend),
+				});
+
+				if (response.ok) {
+					const data = await response.json();
+					console.log('Invoice created successfully:', data);
+					toast.success('Invoice created successfully');
+					setUrl(data._id);
+					setView(true);
+					setIsModalOpen(true);
+				} else {
+					toast.error('Invoice creation failed');
+				}
+			} catch (error) {
+				toast.error('Error creating invoice:', error);
 			}
-		} catch (error) {
-			toast.error('Error creating invoice:', error);
+		} else {
+			// Show an alert if the length is not greater than 1
+			// alert('Please add items before creating invoice.');
+			toast.info(
+				'Please add Items in Consignment Details before creating invoice.'
+			);
 		}
 	};
 
@@ -366,6 +380,25 @@ function AdminCreateInvoice() {
 		navigate(`/pdf/${url}`);
 	};
 
+	const [isModalOpen, setIsModalOpen] = useState(false);
+	const closePdfViewer = () => {
+		setIsModalOpen(false);
+	};
+
+	const handleCopy = () => {
+		const linkToCopy = `${API}download/${url}`; // Replace with the actual link or variable
+
+		try {
+			copy(linkToCopy);
+			alert('Link copied to clipboard!');
+			// toast.success('Link copied to clipboard!');
+		} catch (error) {
+			console.error('Unable to copy to clipboard.', error);
+			alert('Error copying to clipboard. Please try again.');
+			// toast.error('Error copying to clipboard. Please try again.');
+		}
+	};
+
 	return (
 		<div
 			style={{
@@ -376,7 +409,7 @@ function AdminCreateInvoice() {
 			<AdminNavbar />
 
 			<h1 className='admin-create-invoice-title'>CREATE INVOICE</h1>
-			<form className='admin-create-invoice-form-all' onSubmit={handleSubmit}>
+			<form className='admin-create-invoice-form-all'>
 				<div className='admin-create-invoice-container'>
 					<div className='admin-create-invoice-data'>
 						<h2 className='admin-create-invoice-subtitle'>COMPANY DETAILS</h2>
@@ -1111,17 +1144,39 @@ function AdminCreateInvoice() {
 						</div>
 					</div>
 					<div className='admin-create-invoice-data-submit'>
-						<button className='admin-create-invoice-button'>
+						<button
+							className='admin-create-invoice-button'
+							onClick={handleSubmit}
+							// onClick={() => setIsModalOpen(true)}
+						>
 							CREATE INVOICE
 						</button>
 						<br />
-						{view && (
-							<button
-								className='admin-create-invoice-button'
-								onClick={() => openPdfViewer()}
-							>
-								VIEW INVOICE
-							</button>
+						{isModalOpen && view && (
+							<div className='modal'>
+								<div className='modal-content'>
+									{/* <p className='close' onClick={() => closePdfViewer()}>
+										&times;
+									</p> */}
+									<img
+										src={Close}
+										alt='Close'
+										className='close'
+										onClick={() => closePdfViewer()}
+									/>
+									<div className='modal-btn-div'>
+										<button
+											className='modal-btn'
+											onClick={() => openPdfViewer()}
+										>
+											View Invoice
+										</button>
+										<button className='modal-btn' onClick={handleCopy}>
+											Copy Link
+										</button>
+									</div>
+								</div>
+							</div>
 						)}
 					</div>
 				</div>

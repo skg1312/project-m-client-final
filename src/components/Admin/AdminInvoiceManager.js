@@ -4,7 +4,7 @@ import './AdminInvoiceManager.css';
 import background from '../images/Desktop.png';
 // import ReactPaginate from 'react-paginate';
 import AdminNavbar from './AdminNavbar';
-import PdfViewer from './AdminInvoiceView';
+// import PdfViewer from './AdminInvoiceView';
 
 import { useNavigate } from 'react-router-dom';
 

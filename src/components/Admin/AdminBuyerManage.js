@@ -188,25 +188,85 @@ function AdminBuyerManage() {
 		}
 	};
 
-	const handleBuyerDelete = (buyerId) => {
-		const confirmDelete = window.confirm(
-			'Are you sure you want to delete this Buyer?'
-		);
+	// const handleBuyerDelete = (buyerId) => {
+	// 	const confirmDelete = window.confirm(
+	// 		'Are you sure you want to delete this Buyer?'
+	// 	);
 
-		if (confirmDelete) {
-			axios
-				.delete(`${API}buyer/${buyerId}`)
-				.then((response) => {
-					setBuyers((prevBuyers) =>
-						prevBuyers.filter((buyer) => buyer._id !== buyerId)
+	// 	if (confirmDelete) {
+	// 		axios
+	// 			.delete(`${API}buyer/${buyerId}`)
+	// 			.then((response) => {
+	// 				setBuyers((prevBuyers) =>
+	// 					prevBuyers.filter((buyer) => buyer._id !== buyerId)
+	// 				);
+	// 				toast.success('Buyer deleted successfully');
+	// 			})
+	// 			.catch((error) => {
+	// 				console.error('Error deleting buyer:', error);
+	// 				toast.error('Error deleting buyer. Please try again.');
+	// 			});
+	// 	}
+	// };
+	const handleBuyerDelete = (buyerId) => {
+		// Fetch invoices data
+		axios
+			.get(`${API}invoice`)
+			.then((invoicesResponse) => {
+				const invoicesData = invoicesResponse.data;
+				// console.log('invoicesData', invoicesData);
+
+				// Get the buyer name associated with the buyer ID
+				const buyerToDelete = buyers.find((buyer) => buyer._id === buyerId);
+				// console.log('buyerToDelete', buyerToDelete);
+
+				if (!buyerToDelete) {
+					console.error('Company not found for deletion');
+					return;
+				}
+
+				const buyerNameToDelete = buyerToDelete.buyercompanyname;
+				// console.log('buyerNameToDelete', buyerNameToDelete);
+
+				// Check if the buyer name exists in any of the invoices
+				const isBuyerReferencedInInvoices = invoicesData.some(
+					(invoice) =>
+						invoice.buyerdetails.buyercompanyname === buyerNameToDelete
+				);
+				// console.log('isBuyerReferencedInInvoices', isBuyerReferencedInInvoices);
+
+				if (isBuyerReferencedInInvoices) {
+					// If the buyer is referenced in invoices, show a message and don't delete
+					// alert('Cannot delete buyer because it is referenced in invoices');
+					toast.info(
+						'Cannot delete buyer because it is referenced in invoices'
 					);
-					toast.success('Buyer deleted successfully');
-				})
-				.catch((error) => {
-					console.error('Error deleting buyer:', error);
-					toast.error('Error deleting buyer. Please try again.');
-				});
-		}
+				} else {
+					// If the buyer is not referenced, proceed with deletion
+					const confirmDelete = window.confirm(
+						'Are you sure you want to delete this Buyer?'
+					);
+
+					if (confirmDelete) {
+						axios
+							.delete(`${API}buyer/${buyerId}`)
+							.then((response) => {
+								setBuyers((prevBuyers) =>
+									prevBuyers.filter((buyer) => buyer._id !== buyerId)
+								);
+								toast.success('Buyer deleted successfully');
+							})
+							.catch((error) => {
+								console.error('Error deleting buyer:', error);
+								toast.error('Error deleting buyer. Please try again.');
+							});
+						// console.log('deleted');
+					}
+				}
+			})
+			.catch((error) => {
+				console.error('Error fetching invoices data:', error);
+			});
 	};
 
 	const handleStateChange = (event) => {

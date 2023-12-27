@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 
 import printIcon from '../images/printer.png';
-import Download from '../images/download_icon.gif';
+// import Download from '../images/download_icon.gif';
 
 const AdminPdfViewer = () => {
 	const { selectedInvoiceId } = useParams();

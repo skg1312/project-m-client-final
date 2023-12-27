@@ -53,12 +53,12 @@ function AdminInvoiceManagement() {
 			navigate(`/pdf/${pdfUrl}`);
 		}
 	};
-	const PrintInvoice = (invoiceid) => {
-		setSelectedInvoiceId(invoiceid);
-		if (selectedInvoiceId) {
-			window.location = `${API}download/${selectedInvoiceId}`;
-		}
-	};
+	// const PrintInvoice = (invoiceid) => {
+	// 	setSelectedInvoiceId(invoiceid);
+	// 	if (selectedInvoiceId) {
+	// 		window.location = `${API}download/${selectedInvoiceId}`;
+	// 	}
+	// };
 
 	useEffect(() => {
 		axios
@@ -168,12 +168,12 @@ function AdminInvoiceManagement() {
 											>
 												View
 											</button>
-											<button
+											{/* <button
 												onClick={() => PrintInvoice(invoice._id)}
 												className='invoice-management-data-body-table-data-button'
 											>
 												Print
-											</button>
+											</button> */}
 										</td>
 									</tr>
 								))}

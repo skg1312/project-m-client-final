@@ -14,9 +14,9 @@ const AdminPdfViewer = () => {
 		window.print();
 	};
 
-	const handleDownload = () => {
-		window.location = `${API}download/${selectedInvoiceId}`;
-	};
+	// const handleDownload = () => {
+	// 	window.location = `${API}download/${selectedInvoiceId}`;
+	// };
 
 	return (
 		<div style={{ position: 'relative', width: '100%', height: '100vh' }}>
@@ -46,7 +46,7 @@ const AdminPdfViewer = () => {
 					}}
 					onClick={handlePrint}
 				/>
-				<img
+				{/* <img
 					src={Download}
 					alt='Download'
 					style={{
@@ -55,7 +55,7 @@ const AdminPdfViewer = () => {
 						cursor: 'pointer',
 					}}
 					onClick={handleDownload}
-				/>
+				/> */}
 			</div>
 		</div>
 	);

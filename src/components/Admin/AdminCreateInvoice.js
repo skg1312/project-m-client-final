@@ -77,6 +77,7 @@ function AdminCreateInvoice() {
 	});
 
 	const API = process.env.REACT_APP_API;
+	const ViewURL = 'https://project-m-client.vercel.app/';
 
 	const handleChange = (e, section, field) => {
 		const value = e.target.value;
@@ -386,7 +387,7 @@ function AdminCreateInvoice() {
 	};
 
 	const handleCopy = () => {
-		const linkToCopy = `${API}pdf/${url}`; // Replace with the actual link or variable
+		const linkToCopy = `${ViewURL}pdf/${url}`; // Replace with the actual link or variable
 
 		try {
 			copy(linkToCopy);

@@ -36,7 +36,7 @@ function AdminCreateInvoice() {
 		companydetails: {
 			companyname: '',
 			companygstno: '',
-			companycontact: '',
+			// companycontact: '',
 			companystate: '',
 			companyofficeaddress: '',
 			companypincode: '',
@@ -253,7 +253,7 @@ function AdminCreateInvoice() {
 				companyid: selectedCompany.companyid,
 				companyname: selectedCompany.companyname,
 				companyregistrationtype: selectedCompany.companyregistrationtype,
-				companygstno: selectedCompany.companygstno,
+				// companygstno: selectedCompany.companygstno,
 				companycontact: selectedCompany.companycontact,
 				companystate: selectedCompany.companystate,
 				companyofficeaddress: selectedCompany.companyofficeaddress,
@@ -478,6 +478,7 @@ function AdminCreateInvoice() {
 								/>
 							</div>
 						</div>
+{/*
 						<div className='admin-create-invoice-form-div'>
 							<div style={{ display: 'flex', flexDirection: 'column' }}>
 								<label
@@ -500,6 +501,7 @@ function AdminCreateInvoice() {
 								/>
 							</div>
 						</div>
+*/}
 						<div className='admin-create-invoice-form-div'>
 							<div style={{ display: 'flex', flexDirection: 'column' }}>
 								<label

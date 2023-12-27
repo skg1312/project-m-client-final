@@ -253,7 +253,7 @@ function AdminCreateInvoice() {
 				companyid: selectedCompany.companyid,
 				companyname: selectedCompany.companyname,
 				companyregistrationtype: selectedCompany.companyregistrationtype,
-				// companygstno: selectedCompany.companygstno,
+				companygstno: selectedCompany.companygstno,
 				companycontact: selectedCompany.companycontact,
 				companystate: selectedCompany.companystate,
 				companyofficeaddress: selectedCompany.companyofficeaddress,

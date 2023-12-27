@@ -47,12 +47,10 @@ function AdminInvoiceManagement() {
 	// };
 
 	const ViewInvoice = (invoiceid) => {
-		setSelectedInvoiceId(invoiceid);
-		if (selectedInvoiceId) {
-			const pdfUrl = `${selectedInvoiceId}`;
-			navigate(`/pdf/${pdfUrl}`);
-		}
-	};
+  setSelectedInvoiceId(invoiceid);
+  const pdfUrl = `${invoiceid}`;
+  navigate(`/pdf/${pdfUrl}`);
+};
 	// const PrintInvoice = (invoiceid) => {
 	// 	setSelectedInvoiceId(invoiceid);
 	// 	if (selectedInvoiceId) {

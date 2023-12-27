@@ -49,6 +49,7 @@ function AdminCreateInvoice() {
 		},
 		buyerdetails: {
 			buyercompanyname: '',
+			buyercompanygstno: '',
 			buyercompanyaddress: '',
 			buyercompanystatename: '',
 			buyercompanystatecode: '',
@@ -274,6 +275,7 @@ function AdminCreateInvoice() {
 				...prevData.sellerdetails,
 				sellerid: selectedSeller.sellerid,
 				sellercompanyname: selectedSeller.sellercompanyname,
+				sellercompanygstno: selectedSeller.sellercompanygstno,
 				sellercompanyaddress: selectedSeller.sellercompanyaddress,
 				sellercompanystatename: selectedSeller.sellercompanystatename,
 				sellercompanystatecode: selectedSeller.sellercompanystatecode,
@@ -292,6 +294,7 @@ function AdminCreateInvoice() {
 				...prevData.buyerdetails,
 				buyerid: selectedBuyer.buyerid,
 				buyercompanyname: selectedBuyer.buyercompanyname,
+				buyercompanygstno: selectedBuyer.buyercompanygstno,
 				buyercompanyaddress: selectedBuyer.buyercompanyaddress,
 				buyercompanystatename: selectedBuyer.buyercompanystatename,
 				buyercompanystatecode: selectedBuyer.buyercompanystatecode,

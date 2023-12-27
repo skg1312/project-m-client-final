@@ -509,9 +509,11 @@ function AdminSellerManage() {
 									<th className='admin-seller-manage-data-table-header'>
 										Company Name
 									</th>
+{/*
 									<th className='admin-seller-manage-data-table-header'>
 										GST NO
 									</th>
+*/}
 									<th className='admin-seller-manage-data-table-header'>
 										State Name
 									</th>
@@ -651,7 +653,7 @@ function AdminSellerManage() {
 								{formik.errors.sellercompanyname}
 							</div>
 						) : null}
-
+{/*
 						<input
 							type='text'
 							required
@@ -665,7 +667,7 @@ function AdminSellerManage() {
 								{formik.errors.sellercompanygstno}
 							</div>
 						) : null}
-
+*/}
 						<input
 							type='text'
 							required

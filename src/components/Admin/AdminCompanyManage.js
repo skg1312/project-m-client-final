@@ -35,7 +35,7 @@ function AdminCompanyManage() {
 			companyregistrationtype: '',
 			companypartytype: '',
 			companygstno: '',
-			companycontact: '',
+			//companycontact: '',
 			companystate: '',
 			companyofficeaddress: '',
 			companypincode: '',
@@ -282,9 +282,11 @@ function AdminCompanyManage() {
 											<th className='admin-company-manager-data-table-header'>
 												GST No
 											</th>
+					 {/*
 											<th className='admin-company-manager-data-table-header'>
 												Contact
 											</th>
+*/}
 											<th className='admin-company-manager-data-table-header'>
 												Office Address
 											</th>
@@ -308,9 +310,11 @@ function AdminCompanyManage() {
 												<td className='admin-company-manager-data-table-data'>
 													{company.companygstno.substring(0, 12)}
 												</td>
+{/*
 												<td className='admin-company-manager-data-table-data'>
 													{company.companycontact}
 												</td>
+*/}
 												<td className='admin-company-manager-data-table-data'>
 													{company.companyofficeaddress.substring(0, 12)}
 												</td>
@@ -416,7 +420,7 @@ function AdminCompanyManage() {
 						{formik.touched.companygstno && formik.errors.companygstno ? (
 							<div className='error-message'>{formik.errors.companygstno}</div>
 						) : null}
-
+{/*
 						<input
 							type='tel'
 							// required
@@ -430,6 +434,7 @@ function AdminCompanyManage() {
 								{formik.errors.companycontact}
 							</div>
 						) : null}
+*/}
 
 						<input
 							type='text'

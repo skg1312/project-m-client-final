@@ -140,22 +140,85 @@ function AdminCompanyManage() {
 	};
 
 	// Delete an existing company
+	// const handleDeleteCompany = (companyId) => {
+	// 	const confirmDelete = window.confirm(
+	// 		'Are you sure you want to delete this company?'
+	// 	);
+	// 	if (confirmDelete)
+	// 		axios
+	// 			.delete(`${API}company/${companyId}`)
+	// 			.then((response) => {
+	// 				setCompanies((prevCompanies) =>
+	// 					prevCompanies.filter((company) => company._id !== companyId)
+	// 				);
+	// 				toast.success('Company deleted successfully');
+	// 			})
+	// 			.catch((error) => {
+	// 				console.error('Error deleting company:', error);
+	// 			});
+	// };
 	const handleDeleteCompany = (companyId) => {
-		const confirmDelete = window.confirm(
-			'Are you sure you want to delete this company?'
-		);
-		if (confirmDelete)
-			axios
-				.delete(`${API}company/${companyId}`)
-				.then((response) => {
-					setCompanies((prevCompanies) =>
-						prevCompanies.filter((company) => company._id !== companyId)
+		// Fetch invoices data
+		axios
+			.get(`${API}invoice`)
+			.then((invoicesResponse) => {
+				const invoicesData = invoicesResponse.data;
+				// console.log('invoicesData', invoicesData);
+
+				// Get the company name associated with the company ID
+				const companyToDelete = companies.find(
+					(company) => company._id === companyId
+				);
+				// console.log('companyToDelete', companyToDelete);
+
+				if (!companyToDelete) {
+					console.error('Company not found for deletion');
+					return;
+				}
+
+				const companyNameToDelete = companyToDelete.companyname;
+				// console.log('companyNameToDelete', companyNameToDelete);
+
+				// Check if the company name exists in any of the invoices
+				const isCompanyReferencedInInvoices = invoicesData.some(
+					(invoice) =>
+						invoice.companydetails.companyname === companyNameToDelete
+				);
+				// console.log(
+				// 	'isCompanyReferencedInInvoices',
+				// 	isCompanyReferencedInInvoices
+				// );
+
+				if (isCompanyReferencedInInvoices) {
+					// If the company is referenced in invoices, show a message and don't delete
+					// alert('Cannot delete company because it is referenced in invoices');
+					toast.info(
+						'Cannot delete company because it is referenced in invoices'
 					);
-					toast.success('Company deleted successfully');
-				})
-				.catch((error) => {
-					console.error('Error deleting company:', error);
-				});
+				} else {
+					// If the company is not referenced, proceed with deletion
+					const confirmDelete = window.confirm(
+						'Are you sure you want to delete this company?'
+					);
+					if (confirmDelete) {
+						axios
+							.delete(`${API}company/${companyId}`)
+							.then((response) => {
+								setCompanies((prevCompanies) =>
+									prevCompanies.filter((company) => company._id !== companyId)
+								);
+								toast.success('Company deleted successfully');
+							})
+							.catch((error) => {
+								console.error('Error deleting company:', error);
+							});
+						// console.log('deleted');
+					}
+				}
+			})
+			.catch((error) => {
+				console.error('Error fetching invoices data:', error);
+			});
 	};
 
 	const handleStateChange = (event) => {

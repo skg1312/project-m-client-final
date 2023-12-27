@@ -190,25 +190,90 @@ function AdminSellerManage() {
 		}
 	};
 
-	const handleSellerDelete = (sellerId) => {
-		const confirmDelete = window.confirm(
-			'Are you sure you want to delete this Seller?'
-		);
+	// const handleSellerDelete = (sellerId) => {
+	// 	const confirmDelete = window.confirm(
+	// 		'Are you sure you want to delete this Seller?'
+	// 	);
 
-		if (confirmDelete) {
-			axios
-				.delete(`${API}seller/${sellerId}`)
-				.then((response) => {
-					setSellers((prevSellers) =>
-						prevSellers.filter((seller) => seller._id !== sellerId)
+	// 	if (confirmDelete) {
+	// 		axios
+	// 			.delete(`${API}seller/${sellerId}`)
+	// 			.then((response) => {
+	// 				setSellers((prevSellers) =>
+	// 					prevSellers.filter((seller) => seller._id !== sellerId)
+	// 				);
+	// 				toast.success('Seller deleted successfully');
+	// 			})
+	// 			.catch((error) => {
+	// 				console.error('Error deleting seller:', error);
+	// 				toast.error('Error deleting seller. Please try again.');
+	// 			});
+	// 	}
+	// };
+	const handleSellerDelete = (sellerId) => {
+		// Fetch invoices data
+		axios
+			.get(`${API}invoice`)
+			.then((invoicesResponse) => {
+				const invoicesData = invoicesResponse.data;
+				// console.log('invoicesData', invoicesData);
+
+				// Get the seller name associated with the seller ID
+				const sellerToDelete = sellers.find(
+					(seller) => seller._id === sellerId
+				);
+				// console.log('sellerToDelete', sellerToDelete);
+
+				if (!sellerToDelete) {
+					console.error('Company not found for deletion');
+					return;
+				}
+
+				const sellerNameToDelete = sellerToDelete.sellercompanyname;
+				// console.log('sellerNameToDelete', sellerNameToDelete);
+
+				// Check if the seller name exists in any of the invoices
+				const isSellerReferencedInInvoices = invoicesData.some(
+					(invoice) =>
+						invoice.sellerdetails.sellercompanyname === sellerNameToDelete
+				);
+				// console.log(
+				// 	'isSellerReferencedInInvoices',
+				// 	isSellerReferencedInInvoices
+				// );
+
+				if (isSellerReferencedInInvoices) {
+					// If the seller is referenced in invoices, show a message and don't delete
+					// alert('Cannot delete seller because it is referenced in invoices');
+					toast.info(
+						'Cannot delete seller because it is referenced in invoices'
 					);
-					toast.success('Seller deleted successfully');
-				})
-				.catch((error) => {
-					console.error('Error deleting seller:', error);
-					toast.error('Error deleting seller. Please try again.');
-				});
-		}
+				} else {
+					// If the seller is not referenced, proceed with deletion
+					const confirmDelete = window.confirm(
+						'Are you sure you want to delete this Seller?'
+					);
+
+					if (confirmDelete) {
+						axios
+							.delete(`${API}seller/${sellerId}`)
+							.then((response) => {
+								setSellers((prevSellers) =>
+									prevSellers.filter((seller) => seller._id !== sellerId)
+								);
+								toast.success('Seller deleted successfully');
+							})
+							.catch((error) => {
+								console.error('Error deleting seller:', error);
+								toast.error('Error deleting seller. Please try again.');
+							});
+						// console.log('deleted');
+					}
+				}
+			})
+			.catch((error) => {
+				console.error('Error fetching invoices data:', error);
+			});
 	};
 
 	const handleStateChange = (event) => {

@@ -110,27 +110,92 @@ function AdminConsignmentManage() {
 		setSelectedConsignmentId(null);
 	};
 
-	const handleDeleteConsignment = (consignmentId) => {
-		const confirmDelete = window.confirm(
-			'Are you sure you want to delete this Consignment?'
-		);
+	// const handleDeleteConsignment = (consignmentId) => {
+	// 	const confirmDelete = window.confirm(
+	// 		'Are you sure you want to delete this Consignment?'
+	// 	);
 
-		if (confirmDelete) {
-			axios
-				.delete(`${API}consignment/${consignmentId}`)
-				.then((response) => {
-					setConsignedItems((prevConsignedItems) =>
-						prevConsignedItems.filter(
-							(consignment) => consignment._id !== consignmentId
-						)
+	// 	if (confirmDelete) {
+	// 		axios
+	// 			.delete(`${API}consignment/${consignmentId}`)
+	// 			.then((response) => {
+	// 				setConsignedItems((prevConsignedItems) =>
+	// 					prevConsignedItems.filter(
+	// 						(consignment) => consignment._id !== consignmentId
+	// 					)
+	// 				);
+	// 				toast.success('Consignment deleted successfully');
+	// 			})
+	// 			.catch((error) => {
+	// 				console.error('Error deleting consignment:', error);
+	// 				toast.error('Error deleting consignment. Please try again.');
+	// 			});
+	// 	}
+	// };
+
+	const handleDeleteConsignment = (consignmentId) => {
+		// Fetch invoices data
+		axios
+			.get(`${API}invoice`)
+			.then((invoicesResponse) => {
+				const invoicesData = invoicesResponse.data;
+				// console.log('invoicesData', invoicesData);
+
+				// Get the consignment details associated with the consignment ID
+				const consignmentToDelete = consignedItems.find(
+					(consignment) => consignment._id === consignmentId
+				);
+				// console.log('consignmentToDelete', consignmentToDelete);
+
+				if (!consignmentToDelete) {
+					console.error('Consignment not found for deletion');
+					return;
+				}
+
+				// Check if the consignment itemname exists in any of the invoices
+				const isConsignmentReferencedInInvoices = invoicesData.some((invoice) =>
+					invoice.consignmentdetails.itemdetails.some(
+						(item) => item.itemname === consignmentToDelete.itemname
+					)
+				);
+
+				if (isConsignmentReferencedInInvoices) {
+					// If the consignment is referenced in invoices, show a message and don't delete
+					toast.info(
+						'Cannot delete consignment because it is referenced in invoices'
 					);
-					toast.success('Consignment deleted successfully');
-				})
-				.catch((error) => {
-					console.error('Error deleting consignment:', error);
-					toast.error('Error deleting consignment. Please try again.');
-				});
-		}
+				} else {
+					// If the consignment is not referenced, proceed with deletion
+					const confirmDelete = window.confirm(
+						'Are you sure you want to delete this Consignment?'
+					);
+
+					if (confirmDelete) {
+						// Make an API call to delete the consignment
+						axios
+							.delete(`${API}consignment/${consignmentId}`)
+							.then((response) => {
+								// Update the local state to reflect the removal of the consignment
+								setConsignedItems((prevConsignedItems) =>
+									prevConsignedItems.filter(
+										(consignment) => consignment._id !== consignmentId
+									)
+								);
+								// Display a success toast message
+								toast.success('Consignment deleted successfully');
+							})
+							.catch((error) => {
+								// Handle error during deletion
+								console.error('Error deleting consignment:', error);
+								toast.error('Error deleting consignment. Please try again.');
+							});
+					}
+				}
+			})
+			.catch((error) => {
+				// Handle error fetching invoices data
+				console.error('Error fetching invoices data:', error);
+			});
 	};
 
 	return (

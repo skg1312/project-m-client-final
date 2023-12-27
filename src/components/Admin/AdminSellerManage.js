@@ -309,42 +309,133 @@ function AdminSellerManage() {
 		setIsGroupDeleteClicked(true);
 	};
 
+	// const handleGroupDelete = () => {
+	// 	const confirmDelete = window.confirm(
+	// 		'Are you sure you want to delete selected sellers?'
+	// 	);
+
+	// 	if (confirmDelete) {
+	// 		// console.log('Confirm delete');
+
+	// 		// Create an array of promises for each seller deletion
+	// 		const deletePromises = selectedSellers.map(async (sellerId) => {
+	// 			try {
+	// 				await axios.delete(`${API}seller/${sellerId}`);
+	// 				return sellerId;
+	// 			} catch (error) {
+	// 				console.error(`Error deleting seller ${sellerId}:`, error);
+	// 				return null;
+	// 			}
+	// 		});
+
+	// 		// Wait for all promises to resolve
+	// 		Promise.all(deletePromises)
+	// 			.then((deletedSellers) => {
+	// 				// Filter out null values (failed deletions) and update the state
+	// 				const updatedSellers = sellers.filter(
+	// 					(seller) => !deletedSellers.includes(seller._id)
+	// 				);
+	// 				setSellers(updatedSellers);
+	// 				toast.success('Selected sellers deleted successfully');
+	// 			})
+	// 			.catch((error) => {
+	// 				console.error('Error deleting selected sellers:', error);
+	// 				toast.error('Error deleting selected sellers. Please try again.');
+	// 			});
+	// 	}
+
+	// 	setIsGroupDeleteClicked(false);
+	// };
+
 	const handleGroupDelete = () => {
-		const confirmDelete = window.confirm(
-			'Are you sure you want to delete selected sellers?'
-		);
+		// Fetch invoices data
+		axios
+			.get(`${API}invoice`)
+			.then((invoicesResponse) => {
+				const invoicesData = invoicesResponse.data;
 
-		if (confirmDelete) {
-			// console.log('Confirm delete');
+				// Filter out sellers that are referenced in invoices
+				const sellersToDeleteNotReferenced = selectedSellers.filter(
+					(sellerId) => {
+						const sellerToDelete = sellers.find(
+							(seller) => seller._id === sellerId
+						);
 
-			// Create an array of promises for each seller deletion
-			const deletePromises = selectedSellers.map(async (sellerId) => {
-				try {
-					await axios.delete(`${API}seller/${sellerId}`);
-					return sellerId;
-				} catch (error) {
-					console.error(`Error deleting seller ${sellerId}:`, error);
-					return null;
-				}
-			});
+						if (!sellerToDelete) {
+							console.error('Seller not found for deletion');
+							return false;
+						}
 
-			// Wait for all promises to resolve
-			Promise.all(deletePromises)
-				.then((deletedSellers) => {
-					// Filter out null values (failed deletions) and update the state
-					const updatedSellers = sellers.filter(
-						(seller) => !deletedSellers.includes(seller._id)
+						const sellerNameToDelete = sellerToDelete.sellercompanyname;
+
+						// Check if the seller name exists in any of the invoices
+						const isSellerReferencedInInvoices = invoicesData.some(
+							(invoice) =>
+								invoice.sellerdetails.sellercompanyname === sellerNameToDelete
+						);
+
+						return !isSellerReferencedInInvoices;
+					}
+				);
+
+				if (sellersToDeleteNotReferenced.length === 0) {
+					// All selected sellers are referenced in invoices, show a message
+					toast.info(
+						'None of the selected sellers can be deleted as they are referenced in invoices'
 					);
-					setSellers(updatedSellers);
-					toast.success('Selected sellers deleted successfully');
-				})
-				.catch((error) => {
-					console.error('Error deleting selected sellers:', error);
-					toast.error('Error deleting selected sellers. Please try again.');
-				});
-		}
+				} else {
+					// Confirm deletion for the sellers that are not referenced
+					const confirmDelete = window.confirm(
+						`Are you sure you want to delete the selected sellers?`
+					);
 
-		setIsGroupDeleteClicked(false);
+					if (confirmDelete) {
+						// Delete sellers that are not referenced
+						Promise.all(
+							sellersToDeleteNotReferenced.map((sellerId) =>
+								axios.delete(`${API}seller/${sellerId}`)
+							)
+						)
+							.then(() => {
+								// Update the state after successful deletion
+								setSellers((prevSellers) =>
+									prevSellers.filter(
+										(seller) =>
+											!sellersToDeleteNotReferenced.includes(seller._id)
+									)
+								);
+								toast.success('Selected sellers deleted successfully');
+							})
+							.catch((error) => {
+								console.error('Error deleting sellers:', error);
+								toast.error('Error deleting sellers. Please try again.');
+							});
+					}
+				}
+				// Display info about companies not deleted due to reference
+				const referencedSellersNames = selectedSellers
+					.filter(
+						(sellerId) => !sellersToDeleteNotReferenced.includes(sellerId)
+					)
+					.map((sellerId) => {
+						const sellerToDelete = sellers.find(
+							(seller) => seller._id === sellerId
+						);
+						return sellerToDelete ? sellerToDelete.sellercompanyname : '';
+					})
+					.filter(Boolean);
+
+				if (referencedSellersNames.length > 0) {
+					toast.info(
+						`The following companies were not deleted due to being referenced in invoices: ${referencedSellersNames.join(
+							', '
+						)}`
+					);
+				}
+			})
+			.catch((error) => {
+				console.error('Error fetching invoices data:', error);
+			});
 	};
 
 	return (

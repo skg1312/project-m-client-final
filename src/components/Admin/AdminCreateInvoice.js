@@ -386,7 +386,7 @@ function AdminCreateInvoice() {
 	};
 
 	const handleCopy = () => {
-		const linkToCopy = `${API}download/${url}`; // Replace with the actual link or variable
+		const linkToCopy = `${API}pdf/${url}`; // Replace with the actual link or variable
 
 		try {
 			copy(linkToCopy);

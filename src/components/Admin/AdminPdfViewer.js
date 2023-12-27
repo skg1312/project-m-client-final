@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import printIcon from '../images/printer.png';
+//import printIcon from '../images/printer.png';
 // import Download from '../images/download_icon.gif';
 
 const AdminPdfViewer = () => {
@@ -10,9 +10,9 @@ const AdminPdfViewer = () => {
 	const pdfUrl = `${API}download/${selectedInvoiceId}`;
 	// console.log('pdfUrl', pdfUrl);
 
-	const handlePrint = () => {
-		window.print();
-	};
+	//const handlePrint = () => {
+//		window.print();
+//	};
 
 	// const handleDownload = () => {
 	// 	window.location = `${API}download/${selectedInvoiceId}`;
@@ -28,6 +28,7 @@ const AdminPdfViewer = () => {
 				)}&embedded=true`}
 				style={{ width: '100%', height: '100%', border: 'none' }}
 			/>
+{/*
 			<div
 				style={{
 					position: 'absolute',
@@ -46,7 +47,7 @@ const AdminPdfViewer = () => {
 					}}
 					onClick={handlePrint}
 				/>
-				{/* <img
+				<img
 					src={Download}
 					alt='Download'
 					style={{
@@ -55,8 +56,9 @@ const AdminPdfViewer = () => {
 						cursor: 'pointer',
 					}}
 					onClick={handleDownload}
-				/> */}
+				/> 
 			</div>
+*/}
 		</div>
 	);
 };

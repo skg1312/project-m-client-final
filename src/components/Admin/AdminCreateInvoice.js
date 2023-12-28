@@ -718,6 +718,27 @@ function AdminCreateInvoice() {
 								}
 							/>
 						</div>
+<div className='admin-create-invoice-form'>
+						<div className='admin-create-invoice-form-div'>
+							<label
+								className='admin-create-invoice-form-label'
+								htmlFor='buyercompanygstno'
+							>
+								Buyer GST
+							</label>
+							<input
+								className='admin-create-invoice-form-input'
+								id='buyercompanygstno'
+								name='buyercompanygstno'
+								type='text'
+								required
+								disabled
+								value={selectedBuyer.buyercompanygstno}
+								onChange={(e) =>
+									handleChange(e, 'buyerdetails', 'buyercompanygstno')
+								}
+							/>
+						</div>
 
 						<div className='admin-create-invoice-form-div'>
 							<div style={{ display: 'flex', flexDirection: 'column' }}>

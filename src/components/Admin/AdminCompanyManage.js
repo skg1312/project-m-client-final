@@ -14,7 +14,12 @@ import CompanyImage from '../images/addComapny.png';
 
 const validationSchema = Yup.object().shape({
 	companyname: Yup.string().required('Company Name is required'),
-	companygstno: Yup.string().required('GST No is required'),
+	companygstno: Yup.string()
+		.required('GST No is required')
+		.matches(
+			/^[A-Z0-9]{15}$/,
+			'GST No must be 15 characters long and contain only uppercase letters and numerics'
+		),
 	companycontact: Yup.string().required('Contact is required'),
 	companyofficeaddress: Yup.string().required('Office Address is required'),
 	companystate: Yup.string().required('State is required'),
@@ -282,7 +287,7 @@ function AdminCompanyManage() {
 											<th className='admin-company-manager-data-table-header'>
 												GST No
 											</th>
-					 {/*
+											{/*
 											<th className='admin-company-manager-data-table-header'>
 												Contact
 											</th>
@@ -310,7 +315,7 @@ function AdminCompanyManage() {
 												<td className='admin-company-manager-data-table-data'>
 													{company.companygstno.substring(0, 12)}
 												</td>
-{/*
+												{/*
 												<td className='admin-company-manager-data-table-data'>
 													{company.companycontact}
 												</td>
@@ -420,7 +425,7 @@ function AdminCompanyManage() {
 						{formik.touched.companygstno && formik.errors.companygstno ? (
 							<div className='error-message'>{formik.errors.companygstno}</div>
 						) : null}
-{/*
+						{/*
 						<input
 							type='tel'
 							// required

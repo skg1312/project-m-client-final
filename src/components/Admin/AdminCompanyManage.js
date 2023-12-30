@@ -369,15 +369,7 @@ function AdminCompanyManage() {
 						</div>
 					) : (
 						<div className='admin-company-manager-image'>
-							<img
-								src={CompanyImage}
-								alt='add company img'
-								style={{
-									height: 'auto',
-									width: 'auto',
-									// cursor: 'pointer',
-								}}
-							/>
+							<img src={CompanyImage} alt='add company img' className='imge' />
 						</div>
 					)}
 					<br />

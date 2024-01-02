@@ -1197,7 +1197,7 @@ function AdminCreateInvoice() {
 								/>
 							</div>
 						</div>
-{/*						
+
 <div className='admin-create-invoice-form-div'>
 							
 							<label
@@ -1222,7 +1222,7 @@ value={selectedCompany.companyname}
 							
 						
 					</div>
-*/}
+
 <div className='admin-create-invoice-form-div'>
 									{/* <div style={{ display: 'flex', flexDirection: 'column' }}> */}
 								<label

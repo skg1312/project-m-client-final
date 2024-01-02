@@ -68,7 +68,7 @@ function AdminCreateInvoice() {
 		},
 		boardingdetails: {
 			dateofloading: '',
-			watermark: '',
+			// watermark: '',
 			partyref: '',
 		},
 		loadingdetails: {
@@ -368,8 +368,8 @@ function AdminCreateInvoice() {
 			...prevData,
 			loadingdetails: {
 				...prevData.loadingdetails,
-				startingpoint: startingpoint,
-				endingpoint: endingpoint,
+				startingpoint,
+				endingpoint,
 				transportationcost: rate, // Set rate to transportationcost
 			},
 		}));
@@ -1197,8 +1197,9 @@ function AdminCreateInvoice() {
 								/>
 							</div>
 						</div>
-						<div className='admin-create-invoice-form-div'>
-							{/* <div style={{ display: 'flex', flexDirection: 'column' }}> */}
+{/*						
+<div className='admin-create-invoice-form-div'>
+							
 							<label
 								className='admin-create-invoice-form-label'
 								htmlFor='watermark'
@@ -1218,9 +1219,10 @@ value={selectedCompany.companyname}
 									}
 								disabled
 							/>
-							{/* </div> */}
+							
 						
 					</div>
+*/}
 <div className='admin-create-invoice-form-div'>
 									{/* <div style={{ display: 'flex', flexDirection: 'column' }}> */}
 								<label

@@ -362,14 +362,14 @@ function AdminCreateInvoice() {
 	};
 
 	 const handleSelectChangeLoading = (selectedOption, field) => {
-    const [startingpoint, endingpoint, rate] = selectedOption.value.split('-');
+    const [startpoint, endpoint, rate] = selectedOption.value.split('-');
 
     setDataToSend((prevData) => ({
       ...prevData,
       loadingdetails: {
         ...prevData.loadingdetails,
-        startpoint : startpoint,
-        endpoint : endpoint,
+        startpoint,
+        endpoint,
         transportationcost: rate, // Set rate to transportationcost
       },
     }));
@@ -1089,9 +1089,9 @@ function AdminCreateInvoice() {
 								id='loading'
 								name='loading'
 								required
-								value={selectedLoading.startingpoint}
+								value={selectedLoading.startpoint}
 								onChange={(selectedOption) =>
-									handleSelectChangeLoading(selectedOption, 'startingpoint')
+									handleSelectChangeLoading(selectedOption, 'startpoint')
 								}
 								options={
 									Array.isArray(Loading)

@@ -1222,7 +1222,7 @@ value={selectedCompany.companyname}
 						</div>
 					</div>
 <div className='admin-create-invoice-form-div'>
-							// <div style={{ display: 'flex', flexDirection: 'column' }}>
+									{/* <div style={{ display: 'flex', flexDirection: 'column' }}> */}
 								<label
 									className='admin-create-invoice-form-label'
 									htmlFor='Party Ref.'
@@ -1239,7 +1239,7 @@ value={selectedCompany.companyname}
 										handleChange(e, 'boardingdetails', 'partyref')
 									}
 								/>
-							// </div>
+										{/* </div> */}
 						</div>
 					<div className='admin-create-invoice-data-submit'>
 						<button

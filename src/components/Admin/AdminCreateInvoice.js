@@ -72,8 +72,8 @@ function AdminCreateInvoice() {
 			partyref: '',
 		},
 		loadingdetails: {
-			startingpoint: '',
-			endingpoint: '',
+			startpoint : '',
+			endpoint : '',
 			transportationcost: '',
 		},
 	});
@@ -361,24 +361,24 @@ function AdminCreateInvoice() {
 		}));
 	};
 
-	const handleSelectChangeLoading = (selectedOption, field) => {
-		const [startingpoint, endingpoint, rate] = selectedOption.value.split('-');
+	 const handleSelectChangeLoading = (selectedOption, field) => {
+    const [startingpoint, endingpoint, rate] = selectedOption.value.split('-');
 
-		setDataToSend((prevData) => ({
-			...prevData,
-			loadingdetails: {
-				...prevData.loadingdetails,
-				startingpoint,
-				endingpoint,
-				transportationcost: rate, // Set rate to transportationcost
-			},
-		}));
+    setDataToSend((prevData) => ({
+      ...prevData,
+      loadingdetails: {
+        ...prevData.loadingdetails,
+        startpoint : startpoint,
+        endpoint : endpoint,
+        transportationcost: rate, // Set rate to transportationcost
+      },
+    }));
 
-		setSelectedLoading((prevSelected) => ({
-			...prevSelected,
-			[field]: selectedOption,
-		}));
-	};
+    setSelectedLoading((prevSelected) => ({
+      ...prevSelected,
+      [field]: selectedOption,
+    }));
+  };
 
 	const openPdfViewer = () => {
 		navigate(`/pdf/${url}`);
@@ -1108,21 +1108,21 @@ function AdminCreateInvoice() {
 							{/* <div style={{ display: 'flex', flexDirection: 'column' }}> */}
 							<label
 								className='admin-create-invoice-form-label'
-								htmlFor='transportationcost'
+								htmlFor='startpoint'
 							>
-								Transportation Cost
+								Start Point
 							</label>
 							<br />
 							<input
 								className='admin-create-invoice-form-input'
-								id='transportationcost'
-								name='transportationcost'
+								id='startpoint'
+								name='startpoin'
 								type='text'
 								required
 								disabled
-								value={`${dataToSend.loadingdetails.startingpoint}`}
+								value={`${dataToSend.loadingdetails.startpoint}`}
 								onChange={(e) =>
-									handleChange(e, 'loadingdetails', 'startingpoint')
+									handleChange(e, 'loadingdetails', 'startpoint')
 								}
 								readOnly
 							/>
@@ -1132,21 +1132,21 @@ function AdminCreateInvoice() {
 							{/* <div style={{ display: 'flex', flexDirection: 'column' }}> */}
 							<label
 								className='admin-create-invoice-form-label'
-								htmlFor='transportationcost'
+								htmlFor='endpoint'
 							>
-								Transportation Cost
+								End Point
 							</label>
 							<br />
 							<input
 								className='admin-create-invoice-form-input'
-								id='transportationcost'
-								name='transportationcost'
+								id='endpoint'
+								name='endpoint'
 								type='text'
 								required
 								disabled
-								value={`${dataToSend.loadingdetails.endingpoint}`}
+								value={`${dataToSend.loadingdetails.endpoint}`}
 								onChange={(e) =>
-									handleChange(e, 'loadingdetails', 'endingpoint')
+									handleChange(e, 'loadingdetails', 'endpoint')
 								}
 								readOnly
 							/>

@@ -68,7 +68,8 @@ function AdminCreateInvoice() {
 		},
 		boardingdetails: {
 			dateofloading: '',
-			watermark: 'Mahaveer Trading Company',
+			watermark: '',
+			partyref: '',
 		},
 		loadingdetails: {
 			startingpoint: '',
@@ -1119,7 +1120,55 @@ function AdminCreateInvoice() {
 								type='text'
 								required
 								disabled
-								value={`${dataToSend.loadingdetails.startingpoint} ${dataToSend.loadingdetails.endingpoint} ${dataToSend.loadingdetails.transportationcost}`}
+								value={`${dataToSend.loadingdetails.startingpoint}`}
+								onChange={(e) =>
+									handleChange(e, 'loadingdetails', 'startingpoint')
+								}
+								readOnly
+							/>
+							{/* </div> */}
+						</div>
+<div className='admin-create-invoice-form-div'>
+							{/* <div style={{ display: 'flex', flexDirection: 'column' }}> */}
+							<label
+								className='admin-create-invoice-form-label'
+								htmlFor='transportationcost'
+							>
+								Transportation Cost
+							</label>
+							<br />
+							<input
+								className='admin-create-invoice-form-input'
+								id='transportationcost'
+								name='transportationcost'
+								type='text'
+								required
+								disabled
+								value={`${dataToSend.loadingdetails.endingpoint}`}
+								onChange={(e) =>
+									handleChange(e, 'loadingdetails', 'endingpoint')
+								}
+								readOnly
+							/>
+							{/* </div> */}
+						</div>
+<div className='admin-create-invoice-form-div'>
+							{/* <div style={{ display: 'flex', flexDirection: 'column' }}> */}
+							<label
+								className='admin-create-invoice-form-label'
+								htmlFor='transportationcost'
+							>
+								Transportation Cost
+							</label>
+							<br />
+							<input
+								className='admin-create-invoice-form-input'
+								id='transportationcost'
+								name='transportationcost'
+								type='text'
+								required
+								disabled
+								value={`${dataToSend.loadingdetails.transportationcost}`}
 								onChange={(e) =>
 									handleChange(e, 'loadingdetails', 'transportationcost')
 								}
@@ -1164,12 +1213,35 @@ function AdminCreateInvoice() {
 								type='text'
 								// required
 								placeholder='Mahaveer Trading Company'
-								value='Mahaveer Trading Company'
+value={selectedCompany.companyname}
+								onChange={(e) =>
+										handleChange(e, 'boardingdetails', 'watermark')
+									}
 								disabled
 							/>
 							{/* </div> */}
 						</div>
 					</div>
+<div className='admin-create-invoice-form-div'>
+							<div style={{ display: 'flex', flexDirection: 'column' }}>
+								<label
+									className='admin-create-invoice-form-label'
+									htmlFor='Party Ref.'
+								>
+									Party Ref.
+								</label>
+								<input
+									className='admin-create-invoice-form-input'
+									id='partyref'
+									name='partyref'
+									type='text'
+									required
+									onChange={(e) =>
+										handleChange(e, 'boardingdetails', 'partyref')
+									}
+								/>
+							</div>
+						</div>
 					<div className='admin-create-invoice-data-submit'>
 						<button
 							className='admin-create-invoice-button'

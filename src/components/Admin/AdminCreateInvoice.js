@@ -1229,6 +1229,7 @@ value={selectedCompany.companyname}
 								>
 									Party Ref.
 								</label>
+<br />
 								<input
 									className='admin-create-invoice-form-input'
 									id='partyref'

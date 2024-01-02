@@ -1219,7 +1219,7 @@ value={selectedCompany.companyname}
 								disabled
 							/>
 							{/* </div> */}
-						</div>
+						
 					</div>
 <div className='admin-create-invoice-form-div'>
 									{/* <div style={{ display: 'flex', flexDirection: 'column' }}> */}
@@ -1241,6 +1241,7 @@ value={selectedCompany.companyname}
 								/>
 										{/* </div> */}
 						</div>
+</div>
 					<div className='admin-create-invoice-data-submit'>
 						<button
 							className='admin-create-invoice-button'

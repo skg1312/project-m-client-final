@@ -135,10 +135,11 @@ function AdminCreateInvoice() {
 				.required('Driver Number is required'),
 			vechiclenumber: Yup.string()
 				.matches(
-					/^[A-Z]{2}[0-9]{2}[A-Z]{2}[0-9]{4}$/,
-					'Invalid vehicle number. Please use the format: AB12CD3456'
+					/^[A-Z]{2}\d{2}\s[A-Z]{2}\s\d{4}$/,
+					'Invalid vehicle number. Please use the format: AB12 CD 3456'
 				)
 				.required('Vehicle Number is required'),
+
 			vechiclemodel: Yup.string().required('Vehicle Model is required'),
 		}),
 	});
@@ -858,7 +859,7 @@ function AdminCreateInvoice() {
 									type='text'
 									pattern='^[A-Z]{2}[0-9]{2}[A-Z]{2}[0-9]{4}$'
 									required
-									placeholder='Ex: AB12CD3456'
+									placeholder='Ex: AB12 CD 3456'
 									onChange={(e) => {
 										formik.handleChange(e);
 										handleChange(e, 'vehicledetails', 'vechiclenumber');

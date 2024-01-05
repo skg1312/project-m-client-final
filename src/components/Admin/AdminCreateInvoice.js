@@ -72,8 +72,8 @@ function AdminCreateInvoice() {
 			partyref: '',
 		},
 		loadingdetails: {
-			startpoint : '',
-			endpoint : '',
+			startpoint: '',
+			endpoint: '',
 			transportationcost: '',
 		},
 	});
@@ -131,7 +131,7 @@ function AdminCreateInvoice() {
 	const validationSchema = Yup.object().shape({
 		vehicledetails: Yup.object().shape({
 			drivernumber: Yup.string()
-				.matches(/[0-9]{10}/, 'Invalid mobile number')
+				.matches(/[0-9]{10}/, 'Invalid mobile number, Please enter 10-digits')
 				.required('Driver Number is required'),
 			vechiclenumber: Yup.string()
 				.matches(
@@ -361,24 +361,24 @@ function AdminCreateInvoice() {
 		}));
 	};
 
-	 const handleSelectChangeLoading = (selectedOption, field) => {
-    const [startpoint, endpoint, rate] = selectedOption.value.split('-');
+	const handleSelectChangeLoading = (selectedOption, field) => {
+		const [startpoint, endpoint, rate] = selectedOption.value.split('-');
 
-    setDataToSend((prevData) => ({
-      ...prevData,
-      loadingdetails: {
-        ...prevData.loadingdetails,
-        startpoint,
-        endpoint,
-        transportationcost: rate, // Set rate to transportationcost
-      },
-    }));
+		setDataToSend((prevData) => ({
+			...prevData,
+			loadingdetails: {
+				...prevData.loadingdetails,
+				startpoint,
+				endpoint,
+				transportationcost: rate, // Set rate to transportationcost
+			},
+		}));
 
-    setSelectedLoading((prevSelected) => ({
-      ...prevSelected,
-      [field]: selectedOption,
-    }));
-  };
+		setSelectedLoading((prevSelected) => ({
+			...prevSelected,
+			[field]: selectedOption,
+		}));
+	};
 
 	const openPdfViewer = () => {
 		navigate(`/pdf/${url}`);
@@ -479,7 +479,7 @@ function AdminCreateInvoice() {
 								/>
 							</div>
 						</div>
-{/*
+						{/*
 						<div className='admin-create-invoice-form-div'>
 							<div style={{ display: 'flex', flexDirection: 'column' }}>
 								<label
@@ -741,7 +741,7 @@ function AdminCreateInvoice() {
 								/>
 							</div>
 						</div>
-<div className='admin-create-invoice-form-div'>
+						<div className='admin-create-invoice-form-div'>
 							<div style={{ display: 'flex', flexDirection: 'column' }}>
 								<label
 									className='admin-create-invoice-form-label'
@@ -822,12 +822,13 @@ function AdminCreateInvoice() {
 									Driver Mobile Number
 								</label>
 								<input
-									className='admin-create-invoice-form-input'
+									className='admin-create-invoice-form-input-v'
 									id='drivernumber'
 									name='vehicledetails.drivernumber'
 									type='tel'
+									maxLength={10}
 									pattern='[0-9]{10}'
-									placeholder='Enter only mobile number'
+									placeholder='Enter 10-digit mobile number without +91'
 									required
 									onChange={(e) => {
 										formik.handleChange(e);
@@ -851,7 +852,7 @@ function AdminCreateInvoice() {
 									Vehicle Number
 								</label>
 								<input
-									className='admin-create-invoice-form-input'
+									className='admin-create-invoice-form-input-v'
 									id=''
 									name='vehicledetails.vechiclenumber'
 									type='text'
@@ -863,7 +864,10 @@ function AdminCreateInvoice() {
 										handleChange(e, 'vehicledetails', 'vechiclenumber');
 									}}
 									onBlur={formik.handleBlur}
-									value={formik.values.vehicledetails?.vechiclenumber || ''}
+									value={
+										formik.values.vehicledetails?.vechiclenumber.toUpperCase() ||
+										''
+									}
 								/>
 								{formik.touched.vehicledetails?.vechiclenumber &&
 									formik.errors.vehicledetails?.vechiclenumber && (
@@ -883,7 +887,7 @@ function AdminCreateInvoice() {
 								</label>
 								<br />
 								<input
-									className='admin-create-invoice-form-input'
+									className='admin-create-invoice-form-input-v'
 									id='vechiclemodel'
 									name='vehicledetails.vechiclemodel'
 									type='text'
@@ -893,7 +897,10 @@ function AdminCreateInvoice() {
 										handleChange(e, 'vehicledetails', 'vechiclemodel');
 									}}
 									onBlur={formik.handleBlur}
-									value={formik.values.vehicledetails?.vechiclemodel || ''}
+									value={
+										formik.values.vehicledetails?.vechiclemodel.toUpperCase() ||
+										''
+									}
 								/>
 								{formik.touched.vehicledetails?.vechiclemodel &&
 									formik.errors.vehicledetails?.vechiclemodel && (
@@ -1128,7 +1135,7 @@ function AdminCreateInvoice() {
 							/>
 							{/* </div> */}
 						</div>
-<div className='admin-create-invoice-form-div'>
+						<div className='admin-create-invoice-form-div'>
 							{/* <div style={{ display: 'flex', flexDirection: 'column' }}> */}
 							<label
 								className='admin-create-invoice-form-label'
@@ -1145,14 +1152,12 @@ function AdminCreateInvoice() {
 								required
 								disabled
 								value={`${dataToSend.loadingdetails.endpoint}`}
-								onChange={(e) =>
-									handleChange(e, 'loadingdetails', 'endpoint')
-								}
+								onChange={(e) => handleChange(e, 'loadingdetails', 'endpoint')}
 								readOnly
 							/>
 							{/* </div> */}
 						</div>
-<div className='admin-create-invoice-form-div'>
+						<div className='admin-create-invoice-form-div'>
 							{/* <div style={{ display: 'flex', flexDirection: 'column' }}> */}
 							<label
 								className='admin-create-invoice-form-label'
@@ -1198,8 +1203,7 @@ function AdminCreateInvoice() {
 							</div>
 						</div>
 
-<div className='admin-create-invoice-form-div'>
-							
+						<div className='admin-create-invoice-form-div'>
 							<label
 								className='admin-create-invoice-form-label'
 								htmlFor='watermark'
@@ -1213,38 +1217,47 @@ function AdminCreateInvoice() {
 								name='watermark'
 								type='text'
 								required
-value={selectedCompany.companyname}
+								value={selectedCompany.companyname}
 								onChange={(e) =>
-										handleChange(e, 'boardingdetails', 'watermark')
-									}
+									handleChange(e, 'boardingdetails', 'watermark')
+								}
 								disabled
 							/>
-							
-						
-					</div>
-
-<div className='admin-create-invoice-form-div'>
-									{/* <div style={{ display: 'flex', flexDirection: 'column' }}> */}
-								<label
-									className='admin-create-invoice-form-label'
-									htmlFor='Party Ref.'
-								>
-									Party Ref.
-								</label>
-<br />
-								<input
-									className='admin-create-invoice-form-input'
-									id='partyref'
-									name='partyref'
-									type='text'
-									required
-									onChange={(e) =>
-										handleChange(e, 'boardingdetails', 'partyref')
-									}
-								/>
-										{/* </div> */}
 						</div>
-</div>
+
+						<div className='admin-create-invoice-form-div'>
+							{/* <div style={{ display: 'flex', flexDirection: 'column' }}> */}
+							<label
+								className='admin-create-invoice-form-label'
+								htmlFor='Party Ref.'
+							>
+								Party Ref.
+							</label>
+							<br />
+							<input
+								className='admin-create-invoice-form-input-v'
+								id='partyref'
+								name='partyref'
+								type='text'
+								required
+								onChange={(e) =>
+									handleChange(
+										{
+											...e,
+											target: {
+												...e.target,
+												value: e.target.value.toUpperCase(),
+											},
+										},
+										'boardingdetails',
+										'partyref'
+									)
+								}
+							/>
+
+							{/* </div> */}
+						</div>
+					</div>
 					<div className='admin-create-invoice-data-submit'>
 						<button
 							className='admin-create-invoice-button'

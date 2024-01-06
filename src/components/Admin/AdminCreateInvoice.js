@@ -16,8 +16,6 @@ import { useAdminAuth } from './AdminAuth';
 
 function AdminCreateInvoice() {
 	const auth = useAdminAuth();
-console.log(auth);
-	console.log(auth.admin);
 	console.log(auth.admin.adminname);
 	const navigate = useNavigate();
 	const [view, setView] = useState(false);
@@ -104,7 +102,7 @@ console.log(auth);
 		    ...prevData,
 		    invoicedetails: {
 		      ...prevData.invoicedetails,
-		      invoicemakername: auth.adminname,
+		      invoicemakername: auth.admin.adminname,
 		    },
 		  }));
 		// Check the length of items in dataToSend

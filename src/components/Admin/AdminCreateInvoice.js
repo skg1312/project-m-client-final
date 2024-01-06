@@ -16,7 +16,6 @@ import { useAdminAuth } from './AdminAuth';
 
 function AdminCreateInvoice() {
 	const auth = useAdminAuth();
-	console.log(auth.admin.adminname);
 	const navigate = useNavigate();
 	const [view, setView] = useState(false);
 	const [url, setUrl] = useState([]);
@@ -68,7 +67,7 @@ function AdminCreateInvoice() {
 		invoicedetails: {
 			invoiceno: '',
 			invoicedate: '',
-			invoicemakername : '',
+			invoicemakername : auth.admin.adminname,
 		},
 		boardingdetails: {
 			dateofloading: '',
@@ -98,13 +97,6 @@ function AdminCreateInvoice() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		setDataToSend((prevData) => ({
-		    ...prevData,
-		    invoicedetails: {
-		      ...prevData.invoicedetails,
-		      invoicemakername: auth.admin.adminname,
-		    },
-		  }));
 		// Check the length of items in dataToSend
 		if (dataToSend && dataToSend.consignmentdetails.itemdetails.length >= 1) {
 			try {

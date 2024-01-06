@@ -34,10 +34,11 @@ function AdminLogin() {
 				(item) => item.adminemail === Email && item.adminpassword === password
 			);
 
-		if (matchFound) {
-			auth.adminlogin(Email, password);
-			navigate('/admindashboard');
-		} else {
+			if (matchFound) {
+			        const admin = auth.adminlist.find((item) => item.adminemail === Email);
+			        auth.adminlogin(admin.adminname, admin.adminemail, admin.adminpassword);
+			        navigate('/admindashboard');
+			    } else {
 			setUserlist(false);
 		}
 	};

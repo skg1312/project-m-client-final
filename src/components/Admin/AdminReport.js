@@ -674,8 +674,8 @@ function AdminReports() {
 				);
 				newWindow.document.write(
 					`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
-						dataItem.companydetails && dataItem.companydetails.companyname
-							? dataItem.companydetails.companyname.substring(0, 12)
+						dataItem.invoicedetails && dataItem.invoicedetails.invoicemakername
+							? dataItem.invoicedetails.invoicemakername.substring(0, 12)
 							: 'N/A'
 					}</td>`
 				);

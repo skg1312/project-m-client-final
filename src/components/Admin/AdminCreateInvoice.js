@@ -67,7 +67,7 @@ function AdminCreateInvoice() {
 		invoicedetails: {
 			invoiceno: '',
 			invoicedate: '',
-			invoicemakername : auth.admin.adminname,
+			invoicemakername : '',
 		},
 		boardingdetails: {
 			dateofloading: '',
@@ -97,6 +97,18 @@ function AdminCreateInvoice() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+				setDataToSend((prevData) => ({
+		    ...prevData,
+		    invoicedetails: {
+		        ...prevData.invoicedetails,
+		        invoicemakername: auth.admin.adminname,
+		    },
+		}));
+		
+		console.log(dataToSend.invoicedetails.invoicemakername);
+		console.log(dataToSend.invoicedetails);
+
+
 		// Check the length of items in dataToSend
 		if (dataToSend && dataToSend.consignmentdetails.itemdetails.length >= 1) {
 			try {

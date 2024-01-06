@@ -15,6 +15,7 @@ const AdminAuthProvider = (props) => {
 
     const saveAdminToLocalStorage = (admin) => {
         localStorage.setItem("admin", JSON.stringify(admin));
+        console.log(admin);
     };
 
     const adminlogin = (adminname, adminemail, adminpassword) => {

@@ -107,7 +107,7 @@ function AdminCreateInvoice() {
 		
 		console.log(dataToSend.invoicedetails.invoicemakername);
 		console.log(dataToSend.invoicedetails);
-
+console.log(dataToSend.invoicedetails.invoicemakername);
 
 		// Check the length of items in dataToSend
 		if (dataToSend && dataToSend.consignmentdetails.itemdetails.length >= 1) {

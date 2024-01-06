@@ -104,7 +104,7 @@ function AdminCreateInvoice() {
 		        invoicemakername: auth.admin.adminname,
 		    },
 		}));
-		
+		console.log(auth.admin.adminname);
 		console.log(dataToSend.invoicedetails.invoicemakername);
 		console.log(dataToSend.invoicedetails);
 console.log(dataToSend.invoicedetails.invoicemakername);

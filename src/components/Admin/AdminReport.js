@@ -1602,9 +1602,9 @@ function AdminReports() {
 																	: 'N/A'}
 															</td>
 															<td className='reports-data-body-table-load-body-row-item'>
-																{invoice.companydetails &&
-																invoice.companydetails.companyname
-																	? invoice.companydetails.companyname.substring(
+																{invoice.invoicedetails &&
+																invoice.invoicedetails.invoicemakername
+																	? invoice.invoicedetails.invoicemakername.substring(
 																			0,
 																			12
 																	  )

@@ -166,13 +166,13 @@ function AdminReports() {
 
 		htmlContent += '<tr style="background-color: #fcec03;">';
 		htmlContent +=
-			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Agent Name</th>';
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Agent Name</th>';
 		htmlContent +=
-			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Date</th>';
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Date</th>';
 		htmlContent +=
-			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Quantity</th>';
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Quantity</th>';
 		htmlContent +=
-			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Place</th>';
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Place</th>';
 		htmlContent += '</tr>';
 
 		let totalQuantity = 0;
@@ -498,19 +498,19 @@ function AdminReports() {
 		// Table header
 		newWindow.document.write('<tr style="background-color: #fcec03;">');
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Invoice NO</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Invoice NO</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Date</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Date</th>'
 		);
 		// newWindow.document.write(
-		// 	'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Total Cost</th>'
+		// 	'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Total Cost</th>'
 		// );
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Company Name</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Company Name</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">No of Items</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">No of Items</th>'
 		);
 		newWindow.document.write('</tr>');
 
@@ -585,34 +585,34 @@ function AdminReports() {
 		// Table header
 		newWindow.document.write('<tr style="background-color: #fcec03;">');
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Date</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Date</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Buyer</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Buyer</th>'
 		);
 		// newWindow.document.write(
-		// 	'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Total Cost</th>'
+		// 	'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Total Cost</th>'
 		// );
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Load From</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Load From</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Destination</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Destination</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Motor Vehicle No</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Motor Vehicle No</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Total Qty</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Total Qty</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Ref. Code</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Ref. Code</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Bill Maker Name</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Bill Maker Name</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Rate</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Rate</th>'
 		);
 		newWindow.document.write('</tr>');
 
@@ -710,19 +710,19 @@ function AdminReports() {
 		// Table header
 		newWindow.document.write('<tr style="background-color: #fcec03;">');
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Date</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Date</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Invoice NO</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Invoice NO</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Order Date</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Order Date</th>'
 		);
 		// newWindow.document.write(
-		// 	'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Total Cost</th>'
+		// 	'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Total Cost</th>'
 		// );
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">No of Items</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">No of Items</th>'
 		);
 		newWindow.document.write('</tr>');
 
@@ -804,22 +804,22 @@ function AdminReports() {
 		// Table header
 		newWindow.document.write('<tr style="background-color: #fcec03;">');
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Date</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Date</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Invoice No</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Invoice No</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Item Name</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Item Name</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Item Amount</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Item Amount</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Item Tax</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Item Tax</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Item Quantity</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Item Quantity</th>'
 		);
 
 		newWindow.document.write('</tr>');
@@ -894,25 +894,25 @@ function AdminReports() {
 		// Table header
 		newWindow.document.write('<tr style="background-color: #fcec03;">');
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Date</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Date</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Invoice No</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Invoice No</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Vehicle</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Vehicle</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Transportation Cost</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Transportation Cost</th>'
 		);
 		// newWindow.document.write(
-		// 	'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Total Cost</th>'
+		// 	'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Total Cost</th>'
 		// );
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Driver</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Driver</th>'
 		);
 		// newWindow.document.write(
-		// 	'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Weight</th>'
+		// 	'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Weight</th>'
 		// );
 		newWindow.document.write('</tr>');
 
@@ -989,22 +989,22 @@ function AdminReports() {
 		// Table header
 		newWindow.document.write('<tr style="background-color: #fcec03;">');
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Date</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Date</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Invoice No</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Invoice No</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Driver</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Driver</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Vehicle</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Vehicle</th>'
 		);
 		// newWindow.document.write(
-		// 	'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Total Cost</th>'
+		// 	'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Total Cost</th>'
 		// );
 		// newWindow.document.write(
-		// 	'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Driver License No</th>'
+		// 	'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Driver License No</th>'
 		// );
 		newWindow.document.write('</tr>');
 

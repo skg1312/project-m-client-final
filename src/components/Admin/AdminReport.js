@@ -164,23 +164,23 @@ function AdminReports() {
 		htmlContent +=
 			'<table style="width: 70%; margin: 0 auto; border-collapse: collapse; border: 1px solid #ddd;">';
 
-		htmlContent += '<tr style="background-color: #f2f2f2;">';
+		htmlContent += '<tr style="background-color: #fcec03;">';
 		htmlContent +=
-			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Agent Name</th>';
+			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Agent Name</th>';
 		htmlContent +=
-			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Date</th>';
+			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Date</th>';
 		htmlContent +=
-			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Quantity</th>';
+			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Quantity</th>';
 		htmlContent +=
-			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Place</th>';
+			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Place</th>';
 		htmlContent += '</tr>';
 
 		let totalQuantity = 0;
 
 		data.forEach((dataItem, index) => {
 			htmlContent += '<tr>';
-			htmlContent += `<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${dataItem.sellerdetails.sellercompanyname}</td>`;
-			htmlContent += `<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+			htmlContent += `<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${dataItem.sellerdetails.sellercompanyname}</td>`;
+			htmlContent += `<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
 				dataItem.invoicedetails && dataItem.invoicedetails.invoicedate
 					? dataItem.invoicedetails.invoicedate.substring(0, 10)
 					: 'N/A'
@@ -190,8 +190,8 @@ function AdminReports() {
 					? dataItem.consignmentdetails.itemdetails[0]?.itemquantity
 					: 0;
 			totalQuantity += itemQuantity;
-			htmlContent += `<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${itemQuantity}</td>`;
-			htmlContent += `<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${dataItem.sellerdetails.sellercompanystatename}</td>`;
+			htmlContent += `<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${itemQuantity}</td>`;
+			htmlContent += `<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${dataItem.sellerdetails.sellercompanystatename}</td>`;
 			htmlContent += '</tr>';
 		});
 
@@ -496,35 +496,35 @@ function AdminReports() {
 		);
 
 		// Table header
-		newWindow.document.write('<tr style="background-color: #f2f2f2;">');
+		newWindow.document.write('<tr style="background-color: #fcec03;">');
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Invoice NO</th>'
+			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Invoice NO</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Date</th>'
+			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Date</th>'
 		);
 		// newWindow.document.write(
-		// 	'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Total Cost</th>'
+		// 	'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Total Cost</th>'
 		// );
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Company Name</th>'
+			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Company Name</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">No of Items</th>'
+			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">No of Items</th>'
 		);
 		newWindow.document.write('</tr>');
 
 		filteredDataByDate.forEach((dataItem, index) => {
 			newWindow.document.write('<tr>');
 			newWindow.document.write(
-				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+				`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
 					dataItem.invoicedetails && dataItem.invoicedetails.invoiceno
 						? dataItem.invoicedetails.invoiceno.substring(0, 12)
 						: 'N/A'
 				}</td>`
 			);
 			newWindow.document.write(
-				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+				`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
 					dataItem.invoicedetails && dataItem.invoicedetails.invoicedate
 						? new Date(dataItem.invoicedetails.invoicedate).toLocaleDateString(
 								'en-GB',
@@ -538,21 +538,21 @@ function AdminReports() {
 				}</td>`
 			);
 			// newWindow.document.write(
-			// 	`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+			// 	`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
 			// 		dataItem.boardingdetails && dataItem.boardingdetails.totalcost
 			// 			? dataItem.boardingdetails.totalcost
 			// 			: 'N/A'
 			// 	}</td>`
 			// );
 			newWindow.document.write(
-				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+				`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
 					dataItem.companydetails && dataItem.companydetails.companyname
 						? dataItem.companydetails.companyname.substring(0, 12)
 						: 'N/A'
 				}</td>`
 			);
 			newWindow.document.write(
-				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+				`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
 					dataItem.consignmentdetails &&
 					dataItem.consignmentdetails.itemdetails &&
 					dataItem.consignmentdetails.itemdetails.length
@@ -561,6 +561,131 @@ function AdminReports() {
 				}</td>`
 			);
 			newWindow.document.write('</tr>');
+		});
+
+		newWindow.document.write('</table>');
+
+		newWindow.document.write('</body></html>');
+	};
+
+	//for showing data of mis section by date
+	const handleShowMisDataByDate = () => {
+		const newWindow = window.open('', '_blank');
+		newWindow.document.write(
+			'<html><head><title>MIS Details</title></head><body>'
+		);
+
+		newWindow.document.write(
+			'<h2 style="text-align: center; font-size: 40px;">MIS Details</h2>'
+		);
+		newWindow.document.write(
+			'<table style="width: 70%; margin: 0 auto; border-collapse: collapse; border: 1px solid #ddd;">'
+		);
+
+		// Table header
+		newWindow.document.write('<tr style="background-color: #fcec03;">');
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Date</th>'
+		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Buyer</th>'
+		);
+		// newWindow.document.write(
+		// 	'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Total Cost</th>'
+		// );
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Load From</th>'
+		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Destination</th>'
+		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Motor Vehicle No</th>'
+		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Total Qty</th>'
+		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Ref. Code</th>'
+		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Bill Maker Name</th>'
+		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Rate</th>'
+		);
+		newWindow.document.write('</tr>');
+
+		filteredDataByDate.forEach((dataItem, index) => {
+			dataItem.consignmentdetails.itemdetails.forEach((item, index) => {
+				newWindow.document.write('<tr>');
+				newWindow.document.write(
+					`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
+						dataItem.invoicedetails && dataItem.invoicedetails.invoicedate
+							? new Date(
+									dataItem.invoicedetails.invoicedate
+							  ).toLocaleDateString('en-GB', {
+									day: '2-digit',
+									month: '2-digit',
+									year: 'numeric',
+							  })
+							: 'N/A'
+					}</td>`
+				);
+				newWindow.document.write(
+					`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
+						dataItem.buyerdetails && dataItem.buyerdetails.buyercompanyname
+							? dataItem.buyerdetails.buyercompanyname.substring(0, 12)
+							: 'N/A'
+					}</td>`
+				);
+				newWindow.document.write(
+					`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
+						dataItem.loadingdetails && dataItem.loadingdetails.startpoint
+							? dataItem.loadingdetails.startpoint.substring(0, 12)
+							: 'N/A'
+					}</td>`
+				);
+				newWindow.document.write(
+					`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
+						dataItem.loadingdetails && dataItem.loadingdetails.endpoint
+							? dataItem.loadingdetails.endpoint.substring(0, 12)
+							: 'N/A'
+					}</td>`
+				);
+				newWindow.document.write(
+					`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
+						dataItem.vehicledetails && dataItem.vehicledetails.vechiclenumber
+							? dataItem.vehicledetails.vechiclenumber.substring(0, 12)
+							: 'N/A'
+					}</td>`
+				);
+				newWindow.document.write(
+					`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
+						item.itemquantity ? item.itemquantity : 'N/A'
+					}</td>`
+				);
+				newWindow.document.write(
+					`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
+						dataItem.boardingdetails && dataItem.boardingdetails.partyref
+							? dataItem.boardingdetails.partyref.substring(0, 12)
+							: 'N/A'
+					}</td>`
+				);
+				newWindow.document.write(
+					`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
+						dataItem.companydetails && dataItem.companydetails.companyname
+							? dataItem.companydetails.companyname.substring(0, 12)
+							: 'N/A'
+					}</td>`
+				);
+				newWindow.document.write(
+					`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
+						item.itemtaxrate ? item.itemtaxrate : 'N/A'
+					}</td>`
+				);
+				newWindow.document.write('</tr>');
+			});
 		});
 
 		newWindow.document.write('</table>');
@@ -583,28 +708,28 @@ function AdminReports() {
 		);
 
 		// Table header
-		newWindow.document.write('<tr style="background-color: #f2f2f2;">');
+		newWindow.document.write('<tr style="background-color: #fcec03;">');
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Date</th>'
+			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Date</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Invoice NO</th>'
+			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Invoice NO</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Order Date</th>'
+			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Order Date</th>'
 		);
 		// newWindow.document.write(
-		// 	'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Total Cost</th>'
+		// 	'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Total Cost</th>'
 		// );
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">No of Items</th>'
+			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">No of Items</th>'
 		);
 		newWindow.document.write('</tr>');
 
 		filteredDataByDate.forEach((dataItem, index) => {
 			newWindow.document.write('<tr>');
 			newWindow.document.write(
-				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+				`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
 					dataItem.invoicedetails.invoicedate
 						? new Date(dataItem.invoicedetails.invoicedate).toLocaleDateString(
 								'en-GB',
@@ -618,14 +743,14 @@ function AdminReports() {
 				}</td>`
 			);
 			newWindow.document.write(
-				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+				`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
 					dataItem.invoicedetails && dataItem.invoicedetails.invoiceno
 						? dataItem.invoicedetails.invoiceno.substring(0, 12)
 						: 'N/A'
 				}</td>`
 			);
 			newWindow.document.write(
-				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+				`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
 					dataItem.invoicedetails.invoicedate
 						? new Date(dataItem.invoicedetails.invoicedate).toLocaleDateString(
 								'en-GB',
@@ -639,14 +764,14 @@ function AdminReports() {
 				}</td>`
 			);
 			// newWindow.document.write(
-			// 	`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+			// 	`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
 			// 		dataItem.boardingdetails.totalcost
 			// 			? dataItem.boardingdetails.totalcost
 			// 			: 'N/A'
 			// 	}</td>`
 			// );
 			newWindow.document.write(
-				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+				`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
 					dataItem.consignmentdetails &&
 					dataItem.consignmentdetails.itemdetails &&
 					dataItem.consignmentdetails.itemdetails.length
@@ -677,24 +802,24 @@ function AdminReports() {
 		);
 
 		// Table header
-		newWindow.document.write('<tr style="background-color: #f2f2f2;">');
+		newWindow.document.write('<tr style="background-color: #fcec03;">');
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Date</th>'
+			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Date</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Invoice No</th>'
+			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Invoice No</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Item Name</th>'
+			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Item Name</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Item Amount</th>'
+			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Item Amount</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Item Tax</th>'
+			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Item Tax</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Item Quantity</th>'
+			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Item Quantity</th>'
 		);
 
 		newWindow.document.write('</tr>');
@@ -703,7 +828,7 @@ function AdminReports() {
 			dataItem.consignmentdetails.itemdetails.forEach((item, index) => {
 				newWindow.document.write('<tr>');
 				newWindow.document.write(
-					`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+					`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
 						dataItem.invoicedetails && dataItem.invoicedetails.invoicedate
 							? new Date(
 									dataItem.invoicedetails.invoicedate
@@ -716,7 +841,7 @@ function AdminReports() {
 					}</td>`
 				);
 				newWindow.document.write(
-					`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+					`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
 						dataItem.invoicedetails && dataItem.invoicedetails.invoiceno
 							? dataItem.invoicedetails.invoiceno.substring(0, 12)
 							: 'N/A'
@@ -724,22 +849,22 @@ function AdminReports() {
 				);
 
 				newWindow.document.write(
-					`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+					`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
 						item.itemname ? item.itemname : 'N/A'
 					}</td>`
 				);
 				newWindow.document.write(
-					`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+					`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
 						item.itemprice ? item.itemprice : 'N/A'
 					}</td>`
 				);
 				newWindow.document.write(
-					`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+					`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
 						item.itemtaxrate ? item.itemtaxrate : 'N/A'
 					}</td>`
 				);
 				newWindow.document.write(
-					`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+					`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
 						item.itemquantity ? item.itemquantity : 'N/A'
 					}</td>`
 				);
@@ -767,34 +892,34 @@ function AdminReports() {
 		);
 
 		// Table header
-		newWindow.document.write('<tr style="background-color: #f2f2f2;">');
+		newWindow.document.write('<tr style="background-color: #fcec03;">');
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Date</th>'
+			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Date</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Invoice No</th>'
+			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Invoice No</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Vehicle</th>'
+			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Vehicle</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Transportation Cost</th>'
+			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Transportation Cost</th>'
 		);
 		// newWindow.document.write(
-		// 	'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Total Cost</th>'
+		// 	'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Total Cost</th>'
 		// );
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Driver</th>'
+			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Driver</th>'
 		);
 		// newWindow.document.write(
-		// 	'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Weight</th>'
+		// 	'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Weight</th>'
 		// );
 		newWindow.document.write('</tr>');
 
 		filteredDataByDate.forEach((dataItem, index) => {
 			newWindow.document.write('<tr>');
 			newWindow.document.write(
-				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+				`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
 					dataItem.invoicedetails && dataItem.invoicedetails.invoicedate
 						? new Date(dataItem.invoicedetails.invoicedate).toLocaleDateString(
 								'en-GB',
@@ -808,34 +933,34 @@ function AdminReports() {
 				}</td>`
 			);
 			newWindow.document.write(
-				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+				`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
 					dataItem.invoicedetails && dataItem.invoicedetails.invoiceno
 						? dataItem.invoicedetails.invoiceno.substring(0, 12)
 						: 'N/A'
 				}</td>`
 			);
 			newWindow.document.write(
-				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+				`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
 					dataItem.vehicledetails.vechiclemodel?.substring(0, 12) ?? 'N/A'
 				}</td>`
 			);
 			newWindow.document.write(
-				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+				`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
 					dataItem.loadingdetails.transportationcost ?? 'N/A'
 				}</td>`
 			);
 			// newWindow.document.write(
-			// 	`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+			// 	`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
 			// 		dataItem.boardingdetails.totalcost?.substring(0, 12) ?? 'N/A'
 			// 	}</td>`
 			// );
 			newWindow.document.write(
-				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+				`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
 					dataItem.vehicledetails.drivernumber ?? 'N/A'
 				}</td>`
 			);
 			// newWindow.document.write(
-			// 	`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+			// 	`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
 			// 		dataItem.boardingdetails.weight?.substring(0, 12) ?? 'N/A'
 			// 	}</td>`
 			// );
@@ -862,31 +987,31 @@ function AdminReports() {
 		);
 
 		// Table header
-		newWindow.document.write('<tr style="background-color: #f2f2f2;">');
+		newWindow.document.write('<tr style="background-color: #fcec03;">');
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Date</th>'
+			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Date</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Invoice No</th>'
+			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Invoice No</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Driver</th>'
+			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Driver</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Vehicle</th>'
+			'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Vehicle</th>'
 		);
 		// newWindow.document.write(
-		// 	'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Total Cost</th>'
+		// 	'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Total Cost</th>'
 		// );
 		// newWindow.document.write(
-		// 	'<th style="padding: 8px; font-size: 24px; text-align: center; border: 1px solid #ddd;">Driver License No</th>'
+		// 	'<th style="padding: 8px; font-size: 22px; text-align: center; border: 1px solid #ddd;">Driver License No</th>'
 		// );
 		newWindow.document.write('</tr>');
 
 		filteredDataByDate.forEach((dataItem, index) => {
 			newWindow.document.write('<tr>');
 			newWindow.document.write(
-				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+				`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
 					dataItem.invoicedetails && dataItem.invoicedetails.invoicedate
 						? new Date(dataItem.invoicedetails.invoicedate).toLocaleDateString(
 								'en-GB',
@@ -900,29 +1025,29 @@ function AdminReports() {
 				}</td>`
 			);
 			newWindow.document.write(
-				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+				`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
 					dataItem.invoicedetails && dataItem.invoicedetails.invoiceno
 						? dataItem.invoicedetails.invoiceno.substring(0, 12)
 						: 'N/A'
 				}</td>`
 			);
 			newWindow.document.write(
-				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+				`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
 					dataItem.vehicledetails.drivernumber ?? 'N/A'
 				}</td>`
 			);
 			newWindow.document.write(
-				`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+				`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
 					dataItem.vehicledetails.vechiclemodel?.substring(0, 12) ?? 'N/A'
 				}</td>`
 			);
 			// newWindow.document.write(
-			// 	`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+			// 	`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
 			// 		dataItem.boardingdetails.totalcost?.substring(0, 12) ?? 'N/A'
 			// 	}</td>`
 			// );
 			// newWindow.document.write(
-			// 	`<td style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">${
+			// 	`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
 			// 		dataItem.vehicledetails.driverlicenseno?.substring(0, 12) ?? 'N/A'
 			// 	}</td>`
 			// );
@@ -974,6 +1099,61 @@ function AdminReports() {
 
 				// console.log(filteredLoadData);
 				setExportedData(filteredLoadData);
+				break;
+			case 'mis':
+				const filteredMisData = displayedInvoiceSearch.map((invoice) => ({
+					'Invoice No':
+						invoice.invoicedetails && invoice.invoicedetails.invoiceno
+							? invoice.invoicedetails.invoiceno
+							: 'N/A',
+					Buyer:
+						invoice.buyerdetails && invoice.buyerdetails.buyercompanyname
+							? invoice.buyerdetails.buyercompanyname
+							: 'N/A',
+					'Load From':
+						invoice.loadingdetails && invoice.loadingdetails.startpoint
+							? invoice.loadingdetails.startpoint
+							: 'N/A',
+					Destination:
+						invoice.loadingdetails && invoice.loadingdetails.endpoint
+							? invoice.loadingdetails.endpoint
+							: 'N/A',
+					'Motor vehicle No':
+						invoice.vehicledetails && invoice.vehicledetails.vechiclenumber
+							? invoice.vehicledetails.vechiclenumber
+							: 'N/A',
+					'Ref. Code':
+						invoice.boardingdetails && invoice.boardingdetails.partyref
+							? invoice.boardingdetails.partyref
+							: 'N/A',
+					Date:
+						invoice.invoicedetails && invoice.invoicedetails.invoicedate
+							? new Date(invoice.invoicedetails.invoicedate).toLocaleDateString(
+									'en-GB',
+									{
+										day: '2-digit',
+										month: '2-digit',
+										year: 'numeric',
+									}
+							  )
+							: 'N/A',
+					'Total Cost':
+						invoice.boardingdetails && invoice.boardingdetails.totalcost
+							? invoice.boardingdetails.totalcost
+							: 'N/A',
+					'Company Name':
+						invoice.companydetails && invoice.companydetails.companyname
+							? invoice.companydetails.companyname
+							: 'N/A',
+					'No of Items':
+						invoice.consignmentdetails &&
+						invoice.consignmentdetails.itemdetails.length
+							? invoice.consignmentdetails.itemdetails.length
+							: '0',
+				}));
+
+				// console.log(filteredMisData);
+				setExportedData(filteredMisData);
 				break;
 			case 'day':
 				const filteredDayData = displayedInvoiceSearch.map((invoice) => ({
@@ -1048,6 +1228,40 @@ function AdminReports() {
 			default:
 				break;
 		}
+	};
+
+	const exportMisReport = () => {
+		const filteredMisDataData = displayedInvoiceSearch.map((invoice) => ({
+			'Invoice No':
+				invoice.invoicedetails && invoice.invoicedetails.invoiceno
+					? invoice.invoicedetails.invoiceno
+					: 'N/A',
+			Date:
+				invoice.invoicedetails && invoice.invoicedetails.invoicedate
+					? new Date(invoice.invoicedetails.invoicedate).toLocaleDateString(
+							'en-GB',
+							{
+								day: '2-digit',
+								month: '2-digit',
+								year: 'numeric',
+							}
+					  )
+					: 'N/A',
+			'Total Cost':
+				invoice.boardingdetails && invoice.boardingdetails.totalcost
+					? invoice.boardingdetails.totalcost
+					: 'N/A',
+			'Company Name':
+				invoice.companydetails && invoice.companydetails.companyname
+					? invoice.companydetails.companyname
+					: 'N/A',
+			'No of Items':
+				invoice.consignmentdetails &&
+				invoice.consignmentdetails.itemdetails.length
+					? invoice.consignmentdetails.itemdetails.length
+					: '0',
+		}));
+		setExportedData(filteredMisDataData);
 	};
 
 	const exportLoadReport = () => {
@@ -1179,6 +1393,16 @@ function AdminReports() {
 						</button>
 						<button
 							className='reports-data-header-button'
+							value='mis'
+							onClick={() => {
+								changeTable('mis');
+								exportMisReport();
+							}}
+						>
+							MIS Report
+						</button>
+						<button
+							className='reports-data-header-button'
 							value='day'
 							onClick={() => {
 								changeTable('day');
@@ -1250,6 +1474,154 @@ function AdminReports() {
 					</div>
 
 					<div className='reports-data-body-container'>
+						{value === 'mis' && (
+							<div className='data-show-div'>
+								<div style={{ margin: '10px' }}>
+									<div className='date-div'>
+										<label className='date-label'>From:</label>
+										<input
+											className='date-select'
+											type='date'
+											value={startDate}
+											onChange={handleFromDateSelect}
+										/>
+										<label className='date-label'>To:</label>
+										<input
+											className='date-select'
+											type='date'
+											value={endDate}
+											onChange={handleToDateSelect}
+										/>
+										{/* Button for Date Range */}
+										<button
+											className='show-date-data-btn'
+											onClick={handleShowMisDataByDate}
+										>
+											Show
+										</button>
+									</div>
+								</div>
+								<div className='reports-data-body'>
+									<table className='reports-data-body-table-load'>
+										<thead className='reports-data-body-table-load-head'>
+											<tr className='reports-data-body-table-load-head-row'>
+												<th className='reports-data-body-table-load-head-row-item'>
+													Date
+												</th>
+												<th className='reports-data-body-table-load-head-row-item'>
+													Buyer
+												</th>
+												<th className='reports-data-body-table-load-head-row-item'>
+													Load From
+												</th>
+												<th className='reports-data-body-table-load-head-row-item'>
+													Destination
+												</th>
+												<th className='reports-data-body-table-load-head-row-item'>
+													Motor Vehicle No
+												</th>
+												<th className='reports-data-body-table-load-head-row-item'>
+													Total Qty
+												</th>
+												<th className='reports-data-body-table-load-head-row-item'>
+													Ref. Code
+												</th>
+												<th className='reports-data-body-table-load-head-row-item'>
+													Bill Maker Name
+												</th>
+												<th className='reports-data-body-table-load-head-row-item'>
+													Rate
+												</th>
+											</tr>
+										</thead>
+										<tbody className='reports-data-body-table-item-body'>
+											{displayedInvoiceSearch.map((invoice) =>
+												invoice.consignmentdetails.itemdetails.map(
+													(item, index) => (
+														<tr
+															key={index}
+															className='reports-data-body-table-item-body-row'
+														>
+															<td className='reports-data-body-table-day-body-row-item'>
+																{invoice.invoicedetails.invoicedate
+																	? new Date(
+																			invoice.invoicedetails.invoicedate
+																	  ).toLocaleDateString('en-GB', {
+																			day: '2-digit',
+																			month: '2-digit',
+																			year: 'numeric',
+																	  })
+																	: 'N/A'}
+															</td>
+															<td className='reports-data-body-table-load-body-row-item'>
+																{invoice.buyerdetails &&
+																invoice.buyerdetails.buyercompanyname
+																	? invoice.buyerdetails.buyercompanyname.substring(
+																			0,
+																			12
+																	  )
+																	: 'N/A'}
+															</td>
+															<td className='reports-data-body-table-load-body-row-item'>
+																{invoice.loadingdetails &&
+																invoice.loadingdetails.startpoint
+																	? invoice.loadingdetails.startpoint.substring(
+																			0,
+																			12
+																	  )
+																	: 'N/A'}
+															</td>
+															<td className='reports-data-body-table-load-body-row-item'>
+																{invoice.loadingdetails &&
+																invoice.loadingdetails.endpoint
+																	? invoice.loadingdetails.endpoint.substring(
+																			0,
+																			12
+																	  )
+																	: 'N/A'}
+															</td>
+															<td className='reports-data-body-table-load-body-row-item'>
+																{invoice.vehicledetails &&
+																invoice.vehicledetails.vechiclenumber
+																	? invoice.vehicledetails.vechiclenumber.substring(
+																			0,
+																			12
+																	  )
+																	: 'N/A'}
+															</td>
+															<td className='reports-data-body-table-item-body-row-item'>
+																{item.itemquantity ? item.itemquantity : 'N/A'}
+															</td>
+															<td className='reports-data-body-table-load-body-row-item'>
+																{invoice.boardingdetails &&
+																invoice.boardingdetails.partyref
+																	? invoice.boardingdetails.partyref.substring(
+																			0,
+																			12
+																	  )
+																	: 'N/A'}
+															</td>
+															<td className='reports-data-body-table-load-body-row-item'>
+																{invoice.companydetails &&
+																invoice.companydetails.companyname
+																	? invoice.companydetails.companyname.substring(
+																			0,
+																			12
+																	  )
+																	: 'N/A'}
+															</td>
+															<td className='reports-data-body-table-item-body-row-item'>
+																{item.itemtaxrate ? item.itemtaxrate : 'N/A'}
+															</td>
+														</tr>
+													)
+												)
+											)}
+										</tbody>
+									</table>
+								</div>
+							</div>
+						)}
 						{value === 'load' && (
 							<div className='data-show-div'>
 								<div style={{ margin: '10px' }}>

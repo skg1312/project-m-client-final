@@ -101,14 +101,9 @@ function AdminCreateInvoice() {
 		    ...prevData,
 		    invoicedetails: {
 		        ...prevData.invoicedetails,
-		        invoicemakername: auth.admin.adminname,
+		        invoicemakername: auth.adminname,
 		    },
 		}));
-		console.log(auth.admin.adminname);
-		console.log(dataToSend.invoicedetails.invoicemakername);
-		console.log(dataToSend.invoicedetails);
-console.log(dataToSend.invoicedetails.invoicemakername);
-
 		// Check the length of items in dataToSend
 		if (dataToSend && dataToSend.consignmentdetails.itemdetails.length >= 1) {
 			try {

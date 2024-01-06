@@ -12,8 +12,13 @@ import * as Yup from 'yup';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import copy from 'clipboard-copy';
+import { useAdminAuth } from './AdminAuth';
 
 function AdminCreateInvoice() {
+	const auth = useAdminAuth();
+console.log(auth);
+	console.log(auth.admin);
+	console.log(auth.admin.adminname);
 	const navigate = useNavigate();
 	const [view, setView] = useState(false);
 	const [url, setUrl] = useState([]);
@@ -65,6 +70,7 @@ function AdminCreateInvoice() {
 		invoicedetails: {
 			invoiceno: '',
 			invoicedate: '',
+			invoicemakername : '',
 		},
 		boardingdetails: {
 			dateofloading: '',
@@ -94,7 +100,13 @@ function AdminCreateInvoice() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-
+		setDataToSend((prevData) => ({
+		    ...prevData,
+		    invoicedetails: {
+		      ...prevData.invoicedetails,
+		      invoicemakername: auth.adminname,
+		    },
+		  }));
 		// Check the length of items in dataToSend
 		if (dataToSend && dataToSend.consignmentdetails.itemdetails.length >= 1) {
 			try {

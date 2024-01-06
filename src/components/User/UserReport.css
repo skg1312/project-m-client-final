@@ -15,8 +15,6 @@
 .reports-data-header {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    border-radius: 100px;
-    border: 1px solid #5925DC;
     width: 60%;
     height: 40px;
     margin: auto;
@@ -509,15 +507,24 @@
     }
 
     .reports-data-header {
-        display: grid;
+        /* display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-        border-radius: 100px;
-        border: 1px solid #5925DC;
-        width: 95%;
+        width: 99%;
         height: 52px;
         margin: auto 5px;
         font-family: "Urbanist";
         font-size: 15px;
+        font-style: bold;
+        font-weight: 600;
+        line-height: 28px;
+        letter-spacing: -0.289px; */
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        width: 90%;
+        height: 40px;
+        margin: auto;
+        font-family: "Urbanist";
+        font-size: 20px;
         font-style: bold;
         font-weight: 600;
         line-height: 28px;
@@ -529,6 +536,8 @@
         color: #5925DC;
         border: 1px solid #5925DC;
         font-size: 9px;
+        padding: 0;
+        margin: 0;
     }
 
     .export-button {

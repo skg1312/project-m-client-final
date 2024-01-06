@@ -16,6 +16,7 @@ import { useAdminAuth } from './AdminAuth';
 
 function AdminCreateInvoice() {
 	const auth = useAdminAuth();
+console.log(auth.adminname);
 	const navigate = useNavigate();
 	const [view, setView] = useState(false);
 	const [url, setUrl] = useState([]);

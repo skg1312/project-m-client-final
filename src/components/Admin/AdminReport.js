@@ -590,6 +590,9 @@ function AdminReports() {
 		newWindow.document.write(
 			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Buyer</th>'
 		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Agent</th>'
+		);
 		// newWindow.document.write(
 		// 	'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Total Cost</th>'
 		// );
@@ -636,6 +639,13 @@ function AdminReports() {
 					`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
 						dataItem.buyerdetails && dataItem.buyerdetails.buyercompanyname
 							? dataItem.buyerdetails.buyercompanyname.substring(0, 12)
+							: 'N/A'
+					}</td>`
+				);
+				newWindow.document.write(
+					`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
+						dataItem.sellerdetails && dataItem.sellerdetails.sellercompanyname
+							? dataItem.sellerdetails.sellercompanyname.substring(0, 12)
 							: 'N/A'
 					}</td>`
 				);
@@ -1512,6 +1522,9 @@ function AdminReports() {
 													Buyer
 												</th>
 												<th className='reports-data-body-table-load-head-row-item'>
+													Agent
+												</th>
+												<th className='reports-data-body-table-load-head-row-item'>
 													Load From
 												</th>
 												<th className='reports-data-body-table-load-head-row-item'>
@@ -1557,6 +1570,15 @@ function AdminReports() {
 																{invoice.buyerdetails &&
 																invoice.buyerdetails.buyercompanyname
 																	? invoice.buyerdetails.buyercompanyname.substring(
+																			0,
+																			12
+																	  )
+																	: 'N/A'}
+															</td>
+															<td className='reports-data-body-table-load-body-row-item'>
+																{invoice.sellerdetails &&
+																invoice.sellerdetails.sellercompanyname
+																	? invoice.sellerdetails.sellercompanyname.substring(
 																			0,
 																			12
 																	  )

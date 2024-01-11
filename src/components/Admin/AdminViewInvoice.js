@@ -1,10 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './AdminViewInvoice.css';
+import axios from 'axios';
 
 const AdminViewInvoice = () => {
 	const { id } = useParams();
-	const [invoices, setInvoices] = useState({});
+	const [invoice, setInvoice] = useState([]);
+
+	const API = process.env.REACT_APP_API;
+
+	useEffect(() => {
+		axios
+			.get(`${API}invoice`)
+			.then((response) => {
+				setInvoice(response.data);
+			})
+			.catch((error) => {
+				console.error('Error fetching Invoice data:', error);
+			});
+	}, [API]);
+
+	console.log('invoice', invoice);
 
 	return (
 		<div className='invoice'>

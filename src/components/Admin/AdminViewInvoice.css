@@ -1,0 +1,246 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  padding-top: 25px;
+  height: 100vh;
+}
+
+.invoice {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 10px 20px 1px 20px;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  background-color: #fff;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.qr img {
+  margin-left: 100px;
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  top: 25%;
+}
+
+.qr {
+  width: 45%;
+  margin-top: -4%;
+  margin-left: 55%;
+}
+
+.right {
+  border-bottom: 2px solid black;
+  font-size: 10px;
+  margin-left: 55%;
+  /* margin-left: 73.5%; */
+  margin-top: -3.5%;
+  border-top: 2px solid black;
+}
+
+.left {
+  border-top: 2px solid black;
+  font-size: 10px;
+  text-align: left;
+  /* margin-left: 73.5%; */
+  width: 45%;
+  margin-top: -0.5%;
+  border-bottom: 2px solid black;
+}
+
+table {
+  width: 100%;
+  font-size: small;
+}
+
+.additional-charges,
+.total {
+  margin-top: 10px;
+  font-size: 10px;
+}
+
+.total {
+  text-align: right;
+  font-weight: bold;
+  margin-top: -3%;
+}
+
+.amount-in-words {
+  margin-top: 10px;
+  font-style: italic;
+}
+
+@media screen and (max-width: 600px) {
+  .invoice {
+    padding: 10px;
+  }
+
+  .qr,
+  .right {
+    text-align: center;
+  }
+
+  th,
+  td {
+    padding: 4px;
+  }
+
+  .additional-charges,
+  .total,
+  .amount-in-words {
+    margin-top: 10px;
+  }
+}
+
+.logo img {
+  width: 10%;
+  height: 10%;
+}
+
+.comAddress {
+  display: flex;
+}
+
+.comAddress p {
+  display: flex;
+}
+
+.companyname {
+  font-size: 15px;
+  font-weight: bold;
+  margin-left: 12%;
+  margin-top: -10%;
+}
+
+.companyname1 {
+  margin-top: -5%;
+  margin-left: 12%;
+  width: 55%;
+  font-size: 12px;
+}
+
+h5 {
+  text-align: center;
+}
+
+.alignleft {
+  display: flex;
+  border-bottom: 2px solid black;
+  width: 45%;
+  font-size: 9px;
+  margin-top: 1.5%;
+}
+
+.alignright {
+  display: flex;
+  margin-left: 55%;
+  margin-top: -16%;
+  border-bottom: 2px solid black;
+  font-size: 9px;
+  width: 45%;
+}
+
+
+
+td {
+  text-align: center;
+  font-size: 0.5rem;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table,
+th,
+td {
+  border: 1px solid #000;
+}
+
+th {
+  font-size: 0.5rem;
+  text-align: center;
+}
+
+.bottomleft {
+  display: flex;
+}
+
+.bottomright {
+  display: flex;
+  margin-left: 80%;
+}
+
+.center {
+  margin-top: -2%;
+  text-align: center;
+}
+
+.table2 {
+  margin-top: -4%;
+}
+
+#background {
+  margin-left: 10%;
+  margin-top: 25%;
+  height: 100%;
+  padding-top: 6%;
+  padding-right: 5%;
+  position: absolute;
+  display: block;
+  width: 80%;
+  opacity: 0.7;
+
+  text-align: start;
+  background-color: transparent;
+}
+
+#bg-text {
+  color: lightgrey;
+  font-size: 27px;
+  transform: rotate(300deg);
+  -webkit-transform: rotate(300deg);
+  opacity: 0.7;
+  filter: alpha(opacity=40);
+  background-color: transparent;
+}
+
+table:nth-of-type(1) thead th:nth-child(2),
+table:nth-of-type(2) thead th:nth-child(2) {
+  /* DESCRIPTION OF GOODS column for both tables */
+  width: 40%;
+  /* Adjust the width as needed */
+}
+
+table:nth-of-type(1) thead th:nth-child(4),
+table:nth-of-type(2) thead th:nth-child(4) {
+  /* QUANTITY column for both tables */
+  width: 10%;
+  /* Adjust the width as needed */
+}
+
+.d-flex {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+.disfont {
+  font-size: 0.5rem;
+}
+
+.border-bottom {
+  border-bottom: 1px solid black;
+}
+
+.line-text {
+  font-size: 9px;
+  margin-top: 5px;
+}
+
+.table01 {
+  margin-top: -3%;
+}

@@ -82,7 +82,7 @@ function AdminBuyerManage() {
 	// Formik and Yup Validation
 	const formik = useFormik({
 		initialValues: {
-			buyerid: '',
+			// buyerid: '',
 			buyercompanyname: '',
 			buyercompanygstno: '',
 			buyercompanyaddress: '',
@@ -90,7 +90,7 @@ function AdminBuyerManage() {
 			buyercompanystatecode: '',
 		},
 		validationSchema: Yup.object({
-			buyerid: Yup.string().required('Buyer ID is required'),
+			// buyerid: Yup.string().required('Buyer ID is required'),
 			buyercompanyname: Yup.string().required('Company Name is required'),
 			buyercompanygstno: Yup.string()
 				.required('GST No is required')
@@ -616,7 +616,7 @@ function AdminBuyerManage() {
 						className='admin-buyer-manage-form-form'
 						onSubmit={formik.handleSubmit}
 					>
-						<input
+						{/* <input
 							type='text'
 							required
 							className='admin-buyer-manage-form-input'
@@ -625,7 +625,7 @@ function AdminBuyerManage() {
 						/>
 						{formik.touched.buyerid && formik.errors.buyerid ? (
 							<div className='error-message'>{formik.errors.buyerid}</div>
-						) : null}
+						) : null} */}
 
 						<input
 							type='text'

@@ -80,7 +80,7 @@ function AdminSellerManage() {
 	// Formik and Yup Validation
 	const formik = useFormik({
 		initialValues: {
-			sellerid: '',
+			// sellerid: '',
 			sellercompanyname: '',
 			// sellercompanygstno: '',
 			sellercompanyaddress: '',
@@ -88,7 +88,7 @@ function AdminSellerManage() {
 			sellercompanystatecode: '',
 		},
 		validationSchema: Yup.object({
-			sellerid: Yup.string().required('Agent ID is required'),
+			// sellerid: Yup.string().required('Agent ID is required'),
 			sellercompanyname: Yup.string().required('Company Name is required'),
 			// sellercompanygstno: Yup.string().required('GST Number is required'),
 			sellercompanyaddress: Yup.string().required(
@@ -503,9 +503,9 @@ function AdminSellerManage() {
 							<thead className='admin-seller-manage-data-table-head'>
 								<tr className='admin-seller-manage-data-table-row-head'>
 									<th className='admin-seller-manage-data-table-header'>Sl</th>
-									<th className='admin-seller-manage-data-table-header'>
+									{/* <th className='admin-seller-manage-data-table-header'>
 										Agents Id
-									</th>
+									</th> */}
 									<th className='admin-seller-manage-data-table-header'>
 										Company Name
 									</th>
@@ -516,6 +516,9 @@ function AdminSellerManage() {
 */}
 									<th className='admin-seller-manage-data-table-header'>
 										State Name
+									</th>
+									<th className='admin-seller-manage-data-table-header'>
+										State Code
 									</th>
 									<th className='admin-seller-manage-data-table-header'>
 										Action
@@ -543,9 +546,9 @@ function AdminSellerManage() {
 										<td className='admin-seller-manage-data-table-data highlight'>
 											{idx + 1}
 										</td>
-										<td className='admin-seller-manage-data-table-data highlight'>
+										{/* <td className='admin-seller-manage-data-table-data highlight'>
 											{seller.sellerid?.substring(0, 12) ?? 'N/A'}
-										</td>
+										</td> */}
 										<td className='admin-seller-manage-data-table-data'>
 											{seller.sellercompanyname?.substring(0, 18) ?? 'N/A'}
 										</td>
@@ -554,6 +557,9 @@ function AdminSellerManage() {
 										</td> */}
 										<td className='admin-seller-manage-data-table-data'>
 											{seller.sellercompanystatename?.substring(0, 12) ?? 'N/A'}
+										</td>
+										<td className='admin-seller-manage-data-table-data'>
+											{seller.sellercompanystatecode?.substring(0, 12) ?? 'N/A'}
 										</td>
 										<td className='admin-seller-manage-data-table-data'>
 											<button
@@ -629,7 +635,7 @@ function AdminSellerManage() {
 						className='admin-seller-manage-form-form'
 						onSubmit={formik.handleSubmit}
 					>
-						<input
+						{/* <input
 							type='text'
 							required
 							className='admin-seller-manage-form-input'
@@ -638,7 +644,7 @@ function AdminSellerManage() {
 						/>
 						{formik.touched.sellerid && formik.errors.sellerid ? (
 							<div className='error-message'>{formik.errors.sellerid}</div>
-						) : null}
+						) : null} */}
 
 						<input
 							type='text'

@@ -67,7 +67,7 @@ function AdminCreateInvoice() {
 		invoicedetails: {
 			invoiceno: '',
 			invoicedate: '',
-			invoicemakername : auth.admin.adminname,
+			invoicemakername: auth.admin.adminname,
 		},
 		boardingdetails: {
 			dateofloading: '',

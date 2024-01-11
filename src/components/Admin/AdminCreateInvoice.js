@@ -915,7 +915,9 @@ function AdminCreateInvoice() {
 						</div>
 					</div>
 					<div className='admin-create-invoice-data'>
-						<h2 className='admin-create-invoice-subtitle'>ITEM DETAILS</h2>
+						<h2 className='admin-create-invoice-subtitle'>
+							CONSIGNMENT DETAILS
+						</h2>
 						<select
 							className='admin-create-invoice-select'
 							id='consignmentid'

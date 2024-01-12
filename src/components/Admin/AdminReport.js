@@ -503,9 +503,9 @@ function AdminReports() {
 		newWindow.document.write(
 			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Date</th>'
 		);
-		// newWindow.document.write(
-		// 	'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Total Cost</th>'
-		// );
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Transportation Cost</th>'
+		);
 		newWindow.document.write(
 			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Company Name</th>'
 		);
@@ -537,13 +537,13 @@ function AdminReports() {
 						: 'N/A'
 				}</td>`
 			);
-			// newWindow.document.write(
-			// 	`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
-			// 		dataItem.boardingdetails && dataItem.boardingdetails.totalcost
-			// 			? dataItem.boardingdetails.totalcost
-			// 			: 'N/A'
-			// 	}</td>`
-			// );
+			newWindow.document.write(
+				`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
+					dataItem.loadingdetails && dataItem.loadingdetails.transportationcost
+						? dataItem.loadingdetails.transportationcost
+						: 'N/A'
+				}</td>`
+			);
 			newWindow.document.write(
 				`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
 					dataItem.companydetails && dataItem.companydetails.companyname
@@ -593,9 +593,6 @@ function AdminReports() {
 		newWindow.document.write(
 			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Agent</th>'
 		);
-		// newWindow.document.write(
-		// 	'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Total Cost</th>'
-		// );
 		newWindow.document.write(
 			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Load From</th>'
 		);
@@ -720,19 +717,19 @@ function AdminReports() {
 		// Table header
 		newWindow.document.write('<tr style="background-color: #fcec03;">');
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Date</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Created Date</th>'
 		);
 		newWindow.document.write(
 			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Invoice NO</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Order Date</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Invoice Date</th>'
 		);
-		// newWindow.document.write(
-		// 	'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Total Cost</th>'
-		// );
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">No of Items</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Transportaion Cost</th>'
+		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Loading Date</th>'
 		);
 		newWindow.document.write('</tr>');
 
@@ -740,15 +737,14 @@ function AdminReports() {
 			newWindow.document.write('<tr>');
 			newWindow.document.write(
 				`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
-					dataItem.invoicedetails.invoicedate
-						? new Date(dataItem.invoicedetails.invoicedate).toLocaleDateString(
-								'en-GB',
-								{
-									day: '2-digit',
-									month: '2-digit',
-									year: 'numeric',
-								}
-						  )
+					dataItem.invoicedetails.invoicecreatedate
+						? new Date(
+								dataItem.invoicedetails.invoicecreatedate
+						  ).toLocaleDateString('en-GB', {
+								day: '2-digit',
+								month: '2-digit',
+								year: 'numeric',
+						  })
 						: 'N/A'
 				}</td>`
 			);
@@ -759,6 +755,7 @@ function AdminReports() {
 						: 'N/A'
 				}</td>`
 			);
+
 			newWindow.document.write(
 				`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
 					dataItem.invoicedetails.invoicedate
@@ -773,19 +770,23 @@ function AdminReports() {
 						: 'N/A'
 				}</td>`
 			);
-			// newWindow.document.write(
-			// 	`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
-			// 		dataItem.boardingdetails.totalcost
-			// 			? dataItem.boardingdetails.totalcost
-			// 			: 'N/A'
-			// 	}</td>`
-			// );
 			newWindow.document.write(
 				`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
-					dataItem.consignmentdetails &&
-					dataItem.consignmentdetails.itemdetails &&
-					dataItem.consignmentdetails.itemdetails.length
-						? dataItem.consignmentdetails.itemdetails.length
+					dataItem.loadingdetails.transportationcost
+						? dataItem.loadingdetails.transportationcost
+						: 'N/A'
+				}</td>`
+			);
+			newWindow.document.write(
+				`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
+					dataItem.boardingdetails.dateofloading
+						? new Date(
+								dataItem.boardingdetails.dateofloading
+						  ).toLocaleDateString('en-GB', {
+								day: '2-digit',
+								month: '2-digit',
+								year: 'numeric',
+						  })
 						: 'N/A'
 				}</td>`
 			);
@@ -904,30 +905,34 @@ function AdminReports() {
 		// Table header
 		newWindow.document.write('<tr style="background-color: #fcec03;">');
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Date</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Vehicle No</th>'
+		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Invoice Date</th>'
 		);
 		newWindow.document.write(
 			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Invoice No</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Vehicle</th>'
-		);
-		newWindow.document.write(
 			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Transportation Cost</th>'
 		);
-		// newWindow.document.write(
-		// 	'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Total Cost</th>'
-		// );
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Driver</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Driver Number</th>'
 		);
-		// newWindow.document.write(
-		// 	'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Weight</th>'
-		// );
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Vehicle Model</th>'
+		);
 		newWindow.document.write('</tr>');
 
 		filteredDataByDate.forEach((dataItem, index) => {
 			newWindow.document.write('<tr>');
+			newWindow.document.write(
+				`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
+					dataItem.vehicledetails && dataItem.vehicledetails.vechiclenumber
+						? dataItem.vehicledetails.vechiclenumber.substring(0, 12)
+						: 'N/A'
+				}</td>`
+			);
 			newWindow.document.write(
 				`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
 					dataItem.invoicedetails && dataItem.invoicedetails.invoicedate
@@ -951,29 +956,25 @@ function AdminReports() {
 			);
 			newWindow.document.write(
 				`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
-					dataItem.vehicledetails.vechiclemodel?.substring(0, 12) ?? 'N/A'
+					dataItem.loadingdetails.transportationcost
+						? dataItem.loadingdetails.transportationcost
+						: 'N/A'
 				}</td>`
 			);
 			newWindow.document.write(
 				`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
-					dataItem.loadingdetails.transportationcost ?? 'N/A'
+					dataItem.vehicledetails && dataItem.vehicledetails.drivernumber
+						? dataItem.vehicledetails.drivernumber
+						: 'N/A'
 				}</td>`
 			);
-			// newWindow.document.write(
-			// 	`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
-			// 		dataItem.boardingdetails.totalcost?.substring(0, 12) ?? 'N/A'
-			// 	}</td>`
-			// );
 			newWindow.document.write(
 				`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
-					dataItem.vehicledetails.drivernumber ?? 'N/A'
+					dataItem.vehicledetails && dataItem.vehicledetails.vechiclemodel
+						? dataItem.vehicledetails.vechiclemodel.substring(0, 12)
+						: 'N/A'
 				}</td>`
 			);
-			// newWindow.document.write(
-			// 	`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
-			// 		dataItem.boardingdetails.weight?.substring(0, 12) ?? 'N/A'
-			// 	}</td>`
-			// );
 			newWindow.document.write('</tr>');
 		});
 
@@ -999,27 +1000,51 @@ function AdminReports() {
 		// Table header
 		newWindow.document.write('<tr style="background-color: #fcec03;">');
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Date</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Driver Name</th>'
+		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Vehicle No</th>'
 		);
 		newWindow.document.write(
 			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Invoice No</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Driver</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Invoice Date</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Vehicle</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Transportation Cost</th>'
 		);
-		// newWindow.document.write(
-		// 	'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Total Cost</th>'
-		// );
-		// newWindow.document.write(
-		// 	'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Driver License No</th>'
-		// );
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Vehicle Model</th>'
+		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">No of Items</th>'
+		);
 		newWindow.document.write('</tr>');
 
 		filteredDataByDate.forEach((dataItem, index) => {
 			newWindow.document.write('<tr>');
+			newWindow.document.write(
+				`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
+					dataItem.vehicledetails && dataItem.vehicledetails.drivernumber
+						? dataItem.vehicledetails.drivernumber
+						: 'N/A'
+				}</td>`
+			);
+			newWindow.document.write(
+				`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
+					dataItem.vehicledetails && dataItem.vehicledetails.vechiclenumber
+						? dataItem.vehicledetails.vechiclenumber.substring(0, 12)
+						: 'N/A'
+				}</td>`
+			);
+			newWindow.document.write(
+				`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
+					dataItem.invoicedetails && dataItem.invoicedetails.invoiceno
+						? dataItem.invoicedetails.invoiceno.substring(0, 12)
+						: 'N/A'
+				}</td>`
+			);
 			newWindow.document.write(
 				`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
 					dataItem.invoicedetails && dataItem.invoicedetails.invoicedate
@@ -1036,31 +1061,28 @@ function AdminReports() {
 			);
 			newWindow.document.write(
 				`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
-					dataItem.invoicedetails && dataItem.invoicedetails.invoiceno
-						? dataItem.invoicedetails.invoiceno.substring(0, 12)
+					dataItem.loadingdetails.transportationcost
+						? dataItem.loadingdetails.transportationcost
 						: 'N/A'
 				}</td>`
 			);
 			newWindow.document.write(
 				`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
-					dataItem.vehicledetails.drivernumber ?? 'N/A'
+					dataItem.vehicledetails && dataItem.vehicledetails.vechiclemodel
+						? dataItem.vehicledetails.vechiclemodel.substring(0, 12)
+						: 'N/A'
 				}</td>`
 			);
 			newWindow.document.write(
 				`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
-					dataItem.vehicledetails.vechiclemodel?.substring(0, 12) ?? 'N/A'
+					dataItem.consignmentdetails &&
+					dataItem.consignmentdetails.itemdetails &&
+					dataItem.consignmentdetails.itemdetails.length
+						? dataItem.consignmentdetails.itemdetails.length
+						: 'N/A'
 				}</td>`
 			);
-			// newWindow.document.write(
-			// 	`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
-			// 		dataItem.boardingdetails.totalcost?.substring(0, 12) ?? 'N/A'
-			// 	}</td>`
-			// );
-			// newWindow.document.write(
-			// 	`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
-			// 		dataItem.vehicledetails.driverlicenseno?.substring(0, 12) ?? 'N/A'
-			// 	}</td>`
-			// );
+
 			newWindow.document.write('</tr>');
 		});
 
@@ -1073,71 +1095,94 @@ function AdminReports() {
 		const inputValue = e.target.value;
 		setSearchInput(inputValue);
 
-		// Filter or update exportedData based on the search input
 		switch (value) {
 			case 'load':
 				const filteredLoadData = displayedInvoiceSearch.map((invoice) => ({
-					'Invoice No':
-						invoice.invoicedetails && invoice.invoicedetails.invoiceno
-							? invoice.invoicedetails.invoiceno
-							: 'N/A',
-					Date:
-						invoice.invoicedetails && invoice.invoicedetails.invoicedate
-							? new Date(invoice.invoicedetails.invoicedate).toLocaleDateString(
-									'en-GB',
-									{
-										day: '2-digit',
-										month: '2-digit',
-										year: 'numeric',
-									}
-							  )
-							: 'N/A',
-					'Total Cost':
-						invoice.boardingdetails && invoice.boardingdetails.totalcost
-							? invoice.boardingdetails.totalcost
-							: 'N/A',
-					'Company Name':
-						invoice.companydetails && invoice.companydetails.companyname
-							? invoice.companydetails.companyname
-							: 'N/A',
-					'No of Items':
-						invoice.consignmentdetails &&
-						invoice.consignmentdetails.itemdetails.length
-							? invoice.consignmentdetails.itemdetails.length
-							: '0',
+					'Invoice No': invoice.invoicedetails?.invoiceno ?? 'N/A',
+					Date: invoice.invoicedetails?.invoicedate
+						? new Date(invoice.invoicedetails.invoicedate).toLocaleDateString(
+								'en-GB',
+								{
+									day: '2-digit',
+									month: '2-digit',
+									year: 'numeric',
+								}
+						  )
+						: 'N/A',
+					'Total Cost': invoice.loadingdetails?.transportationcost ?? 'N/A',
+					'Company Name': invoice.companydetails?.companyname ?? 'N/A',
+					'No of Items': invoice.consignmentdetails?.itemdetails.length ?? '0',
 				}));
 
-				// console.log(filteredLoadData);
 				setExportedData(filteredLoadData);
 				break;
 			case 'mis':
 				const filteredMisData = displayedInvoiceSearch.map((invoice) => ({
-					'Invoice No':
-						invoice.invoicedetails && invoice.invoicedetails.invoiceno
-							? invoice.invoicedetails.invoiceno
-							: 'N/A',
-					Buyer:
-						invoice.buyerdetails && invoice.buyerdetails.buyercompanyname
-							? invoice.buyerdetails.buyercompanyname
-							: 'N/A',
-					'Load From':
-						invoice.loadingdetails && invoice.loadingdetails.startpoint
-							? invoice.loadingdetails.startpoint
-							: 'N/A',
-					Destination:
-						invoice.loadingdetails && invoice.loadingdetails.endpoint
-							? invoice.loadingdetails.endpoint
-							: 'N/A',
-					'Motor vehicle No':
-						invoice.vehicledetails && invoice.vehicledetails.vechiclenumber
-							? invoice.vehicledetails.vechiclenumber
-							: 'N/A',
-					'Ref. Code':
-						invoice.boardingdetails && invoice.boardingdetails.partyref
-							? invoice.boardingdetails.partyref
-							: 'N/A',
-					Date:
-						invoice.invoicedetails && invoice.invoicedetails.invoicedate
+					'Invoice No': invoice.invoicedetails?.invoiceno ?? 'N/A',
+					Agent: invoice.sellerdetails?.sellercompanyname ?? 'N/A',
+					Buyer: invoice.buyerdetails?.buyercompanyname ?? 'N/A',
+					'Load From': invoice.loadingdetails?.startpoint ?? 'N/A',
+					Destination: invoice.loadingdetails?.endpoint ?? 'N/A',
+					'Motor vehicle No': invoice.vehicledetails?.vechiclenumber ?? 'N/A',
+					'Ref. Code': invoice.boardingdetails?.partyref ?? 'N/A',
+					Date: invoice.invoicedetails?.invoicedate
+						? new Date(invoice.invoicedetails.invoicedate).toLocaleDateString(
+								'en-GB',
+								{
+									day: '2-digit',
+									month: '2-digit',
+									year: 'numeric',
+								}
+						  )
+						: 'N/A',
+					'Total Cost': invoice.loadingdetails?.transportationcost ?? 'N/A',
+					'Company Name': invoice.companydetails?.companyname ?? 'N/A',
+					'No of Items': invoice.consignmentdetails?.itemdetails.length ?? '0',
+				}));
+
+				setExportedData(filteredMisData);
+				break;
+			case 'day':
+				const filteredDayData = displayedInvoiceSearch.map((invoice) => ({
+					'Created Date': invoice.invoicedetails?.invoicecreatedate
+						? new Date(
+								invoice.invoicedetails.invoicecreatedate
+						  ).toLocaleDateString('en-GB', {
+								day: '2-digit',
+								month: '2-digit',
+								year: 'numeric',
+						  })
+						: 'N/A',
+					'Invoice No': invoice.invoicedetails?.invoiceno ?? 'N/A',
+					'Invoice Date': invoice.invoicedetails?.invoicedate
+						? new Date(invoice.invoicedetails.invoicedate).toLocaleDateString(
+								'en-GB',
+								{
+									day: '2-digit',
+									month: '2-digit',
+									year: 'numeric',
+								}
+						  )
+						: 'N/A',
+					'Transportation Cost':
+						invoice.loadingdetails?.transportationcost ?? 'N/A',
+					'Loading Date': invoice.boardingdetails?.dateofloading
+						? new Date(
+								invoice.boardingdetails.dateofloading
+						  ).toLocaleDateString('en-GB', {
+								day: '2-digit',
+								month: '2-digit',
+								year: 'numeric',
+						  })
+						: 'N/A',
+				}));
+
+				setExportedData(filteredDayData);
+				break;
+			case 'item':
+				const filteredItemData = displayedInvoiceSearch.flatMap((invoice) =>
+					invoice.consignmentdetails?.itemdetails.map((item) => ({
+						'Invoice Date': invoice.invoicedetails?.invoicedate
 							? new Date(invoice.invoicedetails.invoicedate).toLocaleDateString(
 									'en-GB',
 									{
@@ -1147,92 +1192,74 @@ function AdminReports() {
 									}
 							  )
 							: 'N/A',
-					'Total Cost':
-						invoice.boardingdetails && invoice.boardingdetails.totalcost
-							? invoice.boardingdetails.totalcost
-							: 'N/A',
-					'Company Name':
-						invoice.companydetails && invoice.companydetails.companyname
-							? invoice.companydetails.companyname
-							: 'N/A',
-					'No of Items':
-						invoice.consignmentdetails &&
-						invoice.consignmentdetails.itemdetails.length
-							? invoice.consignmentdetails.itemdetails.length
-							: '0',
-				}));
-
-				// console.log(filteredMisData);
-				setExportedData(filteredMisData);
-				break;
-			case 'day':
-				const filteredDayData = displayedInvoiceSearch.map((invoice) => ({
-					Date:
-						invoice.invoicedetails && invoice.invoicedetails.invoiceno
-							? invoice.invoicedetails.invoiceno.substring(0, 12)
-							: 'N/A',
-					'Invoice no': invoice.invoicedetails.invoiceno,
-					'Order Date': invoice.invoicedetails.ordereddate,
-					'Total Cost': invoice.boardingdetails.totalcost,
-					'Delivery Note Date': invoice.invoicedetails.deliverynotedate,
-				}));
-				// console.log(filteredDayData);
-				setExportedData(filteredDayData);
-				break;
-			case 'item':
-				const filteredItemData = displayedInvoiceSearch.flatMap((invoice) =>
-					invoice.consignmentdetails.itemdetails.map((item) => ({
+						'Invoice No': invoice.invoicedetails?.invoiceno ?? 'N/A',
 						'Item Name': item.itemname,
 						'Item Amount': item.itemprice,
 						'Item Tax': item.itemtaxrate,
 						'Item Quantity': item.itemquantity,
-						'Invoice No':
-							invoice.invoicedetails && invoice.invoicedetails.invoiceno
-								? invoice.invoicedetails.invoiceno.substring(0, 12)
-								: 'N/A',
 					}))
 				);
-				// console.log(filteredItemData);
+
 				setExportedData(filteredItemData);
 				break;
 			case 'agent':
 				const filteredAgentData = displayedInvoiceSearch.map((invoice) => ({
 					'Agent Company Name':
-						invoice.sellerdetails.sellercompanyname?.substring(0, 12) ?? '<N/A',
+						invoice.sellerdetails?.sellercompanyname?.substring(0, 12) ?? 'N/A',
 					'Item Quantity':
-						invoice.consignmentdetails.itemdetails[0]?.itemquantity ?? '<N/A',
+						invoice.consignmentdetails?.itemdetails[0]?.itemquantity ?? 'N/A',
 					'Invoice Date':
-						invoice.invoicedetails?.invoicedate?.substring(0, 12) ?? '<N/A',
+						invoice.invoicedetails?.invoicedate?.substring(0, 12) ?? 'N/A',
 					'Anget Company State Name':
-						invoice.sellerdetails.sellercompanystatename?.substring(0, 12) ??
-						'<N/A',
+						invoice.sellerdetails?.sellercompanystatename?.substring(0, 12) ??
+						'N/A',
 				}));
-				// console.log(filteredAgentData);
+
 				setExportedData(filteredAgentData);
 				break;
 			case 'vechicle':
 				const filteredVehicleData = displayedInvoiceSearch.map((invoice) => ({
-					Vehicle: invoice.vehicledetails.vehiclenumber,
-					'Transportation Cost': invoice.boardingdetails.transportationcost,
-					'Total Cost': invoice.boardingdetails.totalcost,
-					Driver: invoice.vehicledetails.drivername,
-					Weight: invoice.boardingdetails.weight,
+					'Vehicle No': invoice.vehicledetails?.vechiclenumber ?? 'N/A',
+					'Invoice Date': invoice.invoicedetails?.invoicedate
+						? new Date(invoice.invoicedetails.invoicedate).toLocaleDateString(
+								'en-GB',
+								{
+									day: '2-digit',
+									month: '2-digit',
+									year: 'numeric',
+								}
+						  )
+						: 'N/A',
+					'Invoice No': invoice.invoicedetails?.invoiceno ?? 'N/A',
+					'Transportation Cost':
+						invoice.loadingdetails?.transportationcost ?? 'N/A',
+					'Driver Number': invoice.vehicledetails?.drivernumber ?? 'N/A',
+					'Vehicle Model': invoice.vehicledetails?.vechiclemodel ?? 'N/A',
 				}));
-				// console.log(filteredVehicleData);
+
 				setExportedData(filteredVehicleData);
 				break;
 			case 'driver':
 				const filteredDriverData = displayedInvoiceSearch.map((invoice) => ({
-					Driver: invoice.vehicledetails.drivername,
-					Vehicle: invoice.vehicledetails.vehiclenumber,
-					'Invoice No':
-						invoice.invoicedetails && invoice.invoicedetails.invoiceno
-							? invoice.invoicedetails.invoiceno.substring(0, 12)
-							: 'N/A',
-					'Total Cost': invoice.boardingdetails.totalcost,
-					'Driver License No': invoice.vehicledetails.driverlicenseno,
+					'Driver Number': invoice.vehicledetails?.drivernumber ?? 'N/A',
+					'Vehicle No': invoice.vehicledetails?.vechiclenumber ?? 'N/A',
+					'Invoice No': invoice.invoicedetails?.invoiceno ?? 'N/A',
+					'Invoice Date': invoice.invoicedetails?.invoicedate
+						? new Date(invoice.invoicedetails.invoicedate).toLocaleDateString(
+								'en-GB',
+								{
+									day: '2-digit',
+									month: '2-digit',
+									year: 'numeric',
+								}
+						  )
+						: 'N/A',
+					'Transportation Cost':
+						invoice.loadingdetails?.transportationcost ?? 'N/A',
+					'Vehicle Model': invoice.vehicledetails?.vechiclemodel ?? 'N/A',
+					'No of Items': invoice.consignmentdetails?.itemdetails.length ?? '0',
 				}));
-				// console.log(filteredDriverData);
+
 				setExportedData(filteredDriverData);
 				break;
 			default:
@@ -1242,10 +1269,6 @@ function AdminReports() {
 
 	const exportMisReport = () => {
 		const filteredMisDataData = displayedInvoiceSearch.map((invoice) => ({
-			'Invoice No':
-				invoice.invoicedetails && invoice.invoicedetails.invoiceno
-					? invoice.invoicedetails.invoiceno
-					: 'N/A',
 			Date:
 				invoice.invoicedetails && invoice.invoicedetails.invoicedate
 					? new Date(invoice.invoicedetails.invoicedate).toLocaleDateString(
@@ -1257,19 +1280,38 @@ function AdminReports() {
 							}
 					  )
 					: 'N/A',
-			'Total Cost':
-				invoice.boardingdetails && invoice.boardingdetails.totalcost
-					? invoice.boardingdetails.totalcost
+			'Buyer Name':
+				invoice.buyerdetails && invoice.buyerdetails.buyercompanyname
+					? invoice.buyerdetails.buyercompanyname
 					: 'N/A',
-			'Company Name':
-				invoice.companydetails && invoice.companydetails.companyname
-					? invoice.companydetails.companyname
+			'Load From':
+				invoice.loadingdetails && invoice.loadingdetails.startpoint
+					? invoice.loadingdetails.startpoint
 					: 'N/A',
-			'No of Items':
-				invoice.consignmentdetails &&
-				invoice.consignmentdetails.itemdetails.length
-					? invoice.consignmentdetails.itemdetails.length
+			Destination:
+				invoice.loadingdetails && invoice.loadingdetails.endpoint
+					? invoice.loadingdetails.endpoint
+					: 'N/A',
+			'Motor vehicle No':
+				invoice.vehicledetails && invoice.vehicledetails.vechiclenumber
+					? invoice.vehicledetails.vechiclenumber
+					: 'N/A',
+			'Total Quantity':
+				invoice.consignmentdetails && invoice.consignmentdetails.itemdetails[0]
+					? invoice.consignmentdetails.itemdetails[0].itemquantity
 					: '0',
+			'Ref. Code':
+				invoice.boardingdetails && invoice.boardingdetails.partyref
+					? invoice.boardingdetails.partyref
+					: 'N/A',
+			'Bill Maker Name':
+				invoice.invoicedetails && invoice.invoicedetails.invoicemakername
+					? invoice.invoicedetails.invoicemakername
+					: 'N/A',
+			Rate:
+				invoice.consignmentdetails && invoice.consignmentdetails.itemdetails[0]
+					? invoice.consignmentdetails.itemdetails[0].itemprice
+					: 'N/A',
 		}));
 		setExportedData(filteredMisDataData);
 	};
@@ -1291,9 +1333,9 @@ function AdminReports() {
 							}
 					  )
 					: 'N/A',
-			'Total Cost':
-				invoice.boardingdetails && invoice.boardingdetails.totalcost
-					? invoice.boardingdetails.totalcost
+			'Transportation Cost':
+				invoice.loadingdetails && invoice.loadingdetails.transportationcost
+					? invoice.loadingdetails.transportationcost
 					: 'N/A',
 			'Company Name':
 				invoice.companydetails && invoice.companydetails.companyname
@@ -1310,14 +1352,46 @@ function AdminReports() {
 
 	const exportDayWiseReport = () => {
 		const filteredDayData = displayedInvoiceSearch.map((invoice) => ({
-			Date:
-				invoice.invoicedetails && invoice.invoicedetails.invoiceno
-					? invoice.invoicedetails.invoiceno.substring(0, 12)
+			'Created Date':
+				invoice.invoicedetails && invoice.invoicedetails.invoicecreatedate
+					? new Date(
+							invoice.invoicedetails.invoicecreatedate
+					  ).toLocaleDateString('en-GB', {
+							day: '2-digit',
+							month: '2-digit',
+							year: 'numeric',
+					  })
 					: 'N/A',
-			'Invoice no': invoice.invoicedetails.invoiceno,
-			'Order Date': invoice.invoicedetails.ordereddate,
-			'Total Cost': invoice.boardingdetails.totalcost,
-			'Delivery Note Date': invoice.invoicedetails.deliverynotedate,
+			'Invoice No':
+				invoice.invoicedetails && invoice.invoicedetails.invoiceno
+					? invoice.invoicedetails.invoiceno
+					: 'N/A',
+			'Invoice Date':
+				invoice.invoicedetails && invoice.invoicedetails.invoicedate
+					? new Date(invoice.invoicedetails.invoicedate).toLocaleDateString(
+							'en-GB',
+							{
+								day: '2-digit',
+								month: '2-digit',
+								year: 'numeric',
+							}
+					  )
+					: 'N/A',
+			'Transportation Cost':
+				invoice.loadingdetails && invoice.loadingdetails.transportationcost
+					? invoice.loadingdetails.transportationcost
+					: 'N/A',
+			'Loading Date':
+				invoice.boardingdetails && invoice.boardingdetails.dateofloading
+					? new Date(invoice.boardingdetails.dateofloading).toLocaleDateString(
+							'en-GB',
+							{
+								day: '2-digit',
+								month: '2-digit',
+								year: 'numeric',
+							}
+					  )
+					: 'N/A',
 		}));
 		setExportedData(filteredDayData);
 	};
@@ -1325,14 +1399,25 @@ function AdminReports() {
 	const exportItemWiseReport = () => {
 		const filteredItemData = displayedInvoiceSearch.flatMap((invoice) =>
 			invoice.consignmentdetails.itemdetails.map((item) => ({
+				'Invoice Date':
+					invoice.invoicedetails && invoice.invoicedetails.invoicedate
+						? new Date(invoice.invoicedetails.invoicedate).toLocaleDateString(
+								'en-GB',
+								{
+									day: '2-digit',
+									month: '2-digit',
+									year: 'numeric',
+								}
+						  )
+						: 'N/A',
+				'Invoice No':
+					invoice.invoicedetails && invoice.invoicedetails.invoiceno
+						? invoice.invoicedetails.invoiceno
+						: 'N/A',
 				'Item Name': item.itemname,
 				'Item Amount': item.itemprice,
 				'Item Tax': item.itemtaxrate,
 				'Item Quantity': item.itemquantity,
-				'Invoice No':
-					invoice.invoicedetails && invoice.invoicedetails.invoiceno
-						? invoice.invoicedetails.invoiceno.substring(0, 12)
-						: 'N/A',
 			}))
 		);
 		setExportedData(filteredItemData);
@@ -1340,40 +1425,90 @@ function AdminReports() {
 
 	const exportVehicleWiseReport = () => {
 		const filteredVehicleData = displayedInvoiceSearch.map((invoice) => ({
-			Vehicle: invoice.vehicledetails.vehiclenumber,
-			'Transportation Cost': invoice.boardingdetails.transportationcost,
-			'Total Cost': invoice.boardingdetails.totalcost,
-			Driver: invoice.vehicledetails.drivername,
-			Weight: invoice.boardingdetails.weight,
+			'Vehicle No':
+				invoice.vehicledetails && invoice.vehicledetails.vechiclenumber
+					? invoice.vehicledetails.vechiclenumber
+					: 'N/A',
+			'Invoice Date':
+				invoice.invoicedetails && invoice.invoicedetails.invoicedate
+					? new Date(invoice.invoicedetails.invoicedate).toLocaleDateString(
+							'en-GB',
+							{
+								day: '2-digit',
+								month: '2-digit',
+								year: 'numeric',
+							}
+					  )
+					: 'N/A',
+			'Invoice No':
+				invoice.invoicedetails && invoice.invoicedetails.invoiceno
+					? invoice.invoicedetails.invoiceno
+					: 'N/A',
+			'Transportation Cost':
+				invoice.loadingdetails && invoice.loadingdetails.transportationcost
+					? invoice.loadingdetails.transportationcost
+					: 'N/A',
+			'Driver Number':
+				invoice.vehicledetails && invoice.vehicledetails.drivernumber
+					? invoice.vehicledetails.drivernumber
+					: 'N/A',
+			'Vehicle Model':
+				invoice.vehicledetails && invoice.vehicledetails.vechiclemodel
+					? invoice.vehicledetails.vechiclemodel
+					: 'N/A',
 		}));
 		setExportedData(filteredVehicleData);
 	};
 
 	const exportDriverWiseReport = () => {
 		const filteredDriverData = displayedInvoiceSearch.map((invoice) => ({
-			Driver: invoice.vehicledetails.drivername,
-			Vehicle: invoice.vehicledetails.vehiclenumber,
+			'Driver Number':
+				invoice.vehicledetails && invoice.vehicledetails.drivernumber
+					? invoice.vehicledetails.drivernumber
+					: 'N/A',
+			'Vehicle No':
+				invoice.vehicledetails && invoice.vehicledetails.vechiclenumber
+					? invoice.vehicledetails.vechiclenumber
+					: 'N/A',
 			'Invoice No':
 				invoice.invoicedetails && invoice.invoicedetails.invoiceno
-					? invoice.invoicedetails.invoiceno.substring(0, 12)
+					? invoice.invoicedetails.invoiceno
 					: 'N/A',
-			'Total Cost': invoice.boardingdetails.totalcost,
-			'Driver License No': invoice.vehicledetails.driverlicenseno,
+			'Invoice Date':
+				invoice.invoicedetails && invoice.invoicedetails.invoicedate
+					? new Date(invoice.invoicedetails.invoicedate).toLocaleDateString(
+							'en-GB',
+							{
+								day: '2-digit',
+								month: '2-digit',
+								year: 'numeric',
+							}
+					  )
+					: 'N/A',
+			'Transportation Cost':
+				invoice.loadingdetails && invoice.loadingdetails.transportationcost
+					? invoice.loadingdetails.transportationcost
+					: 'N/A',
+			'Vehicle Model':
+				invoice.vehicledetails && invoice.vehicledetails.vechiclemodel
+					? invoice.vehicledetails.vechiclemodel
+					: 'N/A',
+			'No of Items':
+				invoice.consignmentdetails &&
+				invoice.consignmentdetails.itemdetails.length
+					? invoice.consignmentdetails.itemdetails.length
+					: '0',
 		}));
 		setExportedData(filteredDriverData);
 	};
 
 	const exportAgentWiseReport = () => {
 		const filteredAgentData = displayedInvoiceSearch.map((invoice) => ({
-			'Agent Company Name':
-				invoice.sellerdetails.sellercompanyname?.substring(0, 12) ?? '<N/A',
-			'Item Quantity':
-				invoice.consignmentdetails.itemdetails[0]?.itemquantity ?? '<N/A',
-			'Invoice Date':
-				invoice.invoicedetails?.invoicedate?.substring(0, 12) ?? '<N/A',
+			'Agent Company Name': invoice.sellerdetails?.sellercompanyname ?? '<N/A',
+			'Item Quantity': invoice.consignmentdetails?.itemdetails[0] ?? '<N/A',
+			'Invoice Date': invoice.invoicedetails?.invoicedate ?? '<N/A',
 			'Anget Company State Name':
-				invoice.sellerdetails.sellercompanystatename?.substring(0, 12) ??
-				'<N/A',
+				invoice.sellerdetails?.sellercompanystatename ?? '<N/A',
 		}));
 		setExportedData(filteredAgentData);
 	};
@@ -1681,9 +1816,9 @@ function AdminReports() {
 												<th className='reports-data-body-table-load-head-row-item'>
 													Date
 												</th>
-												{/* <th className='reports-data-body-table-load-head-row-item'>
-													Total Cost
-												</th> */}
+												<th className='reports-data-body-table-load-head-row-item'>
+													Transportation Cost
+												</th>
 												<th className='reports-data-body-table-load-head-row-item'>
 													Company Name
 												</th>
@@ -1719,12 +1854,12 @@ function AdminReports() {
 															  })
 															: 'N/A'}
 													</td>
-													{/* <td className='reports-data-body-table-load-body-row-item'>
-														{invoice.boardingdetails &&
-														invoice.boardingdetails.totalcost
-															? invoice.boardingdetails.totalcost
+													<td className='reports-data-body-table-load-body-row-item'>
+														{invoice.loadingdetails &&
+														invoice.loadingdetails.transportationcost
+															? invoice.loadingdetails.transportationcost
 															: 'N/A'}
-													</td> */}
+													</td>
 													<td className='reports-data-body-table-load-body-row-item'>
 														{invoice.companydetails &&
 														invoice.companydetails.companyname
@@ -1780,22 +1915,19 @@ function AdminReports() {
 										<thead className='reports-data-body-table-day-head'>
 											<tr className='reports-data-body-table-day-head-row'>
 												<th className='reports-data-body-table-day-head-row-item'>
-													Date
+													Created Date
 												</th>
 												<th className='reports-data-body-table-day-head-row-item'>
 													Invoice no
 												</th>
 												<th className='reports-data-body-table-day-head-row-item'>
-													Order Date
-												</th>
-												{/* <th className='reports-data-body-table-day-head-row-item'>
-													Total Cost
+													Invoice Date
 												</th>
 												<th className='reports-data-body-table-day-head-row-item'>
-													Delivery Note Date
-												</th> */}
+													Transportaion Cost
+												</th>
 												<th className='reports-data-body-table-day-head-row-item'>
-													No of Items
+													Loading Date
 												</th>
 											</tr>
 										</thead>
@@ -1806,9 +1938,9 @@ function AdminReports() {
 													className='reports-data-body-table-day-body-row'
 												>
 													<td className='reports-data-body-table-day-body-row-item'>
-														{invoice.invoicedetails.invoicedate
+														{invoice.invoicedetails.invoicecreatedate
 															? new Date(
-																	invoice.invoicedetails.invoicedate
+																	invoice.invoicedetails.invoicecreatedate
 															  ).toLocaleDateString('en-GB', {
 																	day: '2-digit',
 																	month: '2-digit',
@@ -1836,27 +1968,20 @@ function AdminReports() {
 															  })
 															: 'N/A'}
 													</td>
-													{/* <td className='reports-data-body-table-day-body-row-item'>
-														{invoice.boardingdetails.totalcost
-															? invoice.boardingdetails.totalcost
+													<td className='reports-data-body-table-day-body-row-item'>
+														{invoice.loadingdetails.transportationcost
+															? invoice.loadingdetails.transportationcost
 															: 'N/A'}
 													</td>
 													<td className='reports-data-body-table-day-body-row-item'>
-														{invoice.invoicedetails.deliverynotedate
+														{invoice.boardingdetails.dateofloading
 															? new Date(
-																	invoice.invoicedetails.deliverynotedate
+																	invoice.boardingdetails.dateofloading
 															  ).toLocaleDateString('en-GB', {
 																	day: '2-digit',
 																	month: '2-digit',
 																	year: 'numeric',
 															  })
-															: 'N/A'}
-													</td> */}
-													<td className='reports-data-body-table-load-body-row-item'>
-														{invoice.consignmentdetails &&
-														invoice.consignmentdetails.itemdetails &&
-														invoice.consignmentdetails.itemdetails.length
-															? invoice.consignmentdetails.itemdetails.length
 															: 'N/A'}
 													</td>
 												</tr>
@@ -1998,26 +2123,23 @@ function AdminReports() {
 										<thead className='reports-data-body-table-vechicle-head'>
 											<tr className='reports-data-body-table-vechicle-head-row'>
 												<th className='reports-data-body-table-day-head-row-item'>
-													Date
+													Vehicle No
 												</th>
 												<th className='reports-data-body-table-item-head-row-item'>
-													Invoice No
+													Invoice Date
 												</th>
 												<th className='reports-data-body-table-vechicle-head-row-item'>
-													Vehicle
+													Invoice No
 												</th>
 												<th className='reports-data-body-table-vechicle-head-row-item'>
 													Transportation Cost
 												</th>
-												{/* <th className='reports-data-body-table-vechicle-head-row-item'>
-													Total Cost
-												</th> */}
 												<th className='reports-data-body-table-vechicle-head-row-item'>
-													Driver
+													Driver Number
 												</th>
-												{/* <th className='reports-data-body-table-vechicle-head-row-item'>
-													Weight
-												</th> */}
+												<th className='reports-data-body-table-vechicle-head-row-item'>
+													Vehicle Model
+												</th>
 											</tr>
 										</thead>
 
@@ -2027,6 +2149,13 @@ function AdminReports() {
 													key={invoice._id}
 													className='reports-data-body-table-vechicle-body-row'
 												>
+													<td className='reports-data-body-table-load-body-row-item'>
+														{invoice.vehicledetails.vechiclenumber &&
+														invoice.vehicledetails.vechiclenumber
+															? invoice.vehicledetails.vechiclenumber
+															: 'N/A'}
+													</td>
+
 													<td className='reports-data-body-table-day-body-row-item'>
 														{invoice.invoicedetails.invoicedate
 															? new Date(
@@ -2047,28 +2176,23 @@ function AdminReports() {
 															  )
 															: 'N/A'}
 													</td>
-													<td className='reports-data-body-table-vechicle-body-row-item'>
-														{invoice.vehicledetails.vechiclemodel?.substring(
-															0,
-															12
-														) ?? 'N/A'}
+													<td className='reports-data-body-table-day-body-row-item'>
+														{invoice.loadingdetails.transportationcost
+															? invoice.loadingdetails.transportationcost
+															: 'N/A'}
 													</td>
-													<td className='reports-data-body-table-vechicle-body-row-item'>
-														{invoice.loadingdetails.transportationcost ?? 'N/A'}
+													<td className='reports-data-body-table-load-body-row-item'>
+														{invoice.vehicledetails.drivernumber &&
+														invoice.vehicledetails.drivernumber
+															? invoice.vehicledetails.drivernumber
+															: 'N/A'}
 													</td>
-													{/* <td className='reports-data-body-table-vechicle-body-row-item'>
-														{invoice.boardingdetails.totalcost?.substring(
-															0,
-															12
-														) ?? 'N/A'}
-													</td> */}
-													<td className='reports-data-body-table-vechicle-body-row-item'>
-														{invoice.vehicledetails.drivernumber ?? 'N/A'}
+													<td className='reports-data-body-table-load-body-row-item'>
+														{invoice.vehicledetails.vechiclemodel &&
+														invoice.vehicledetails.vechiclemodel
+															? invoice.vehicledetails.vechiclemodel
+															: 'N/A'}
 													</td>
-													{/* <td className='reports-data-body-table-vechicle-body-row-item'>
-														{invoice.boardingdetails.weight?.substring(0, 12) ??
-															'N/A'}
-													</td> */}
 												</tr>
 											))}
 										</tbody>
@@ -2107,24 +2231,27 @@ function AdminReports() {
 									<table className='reports-data-body-table-driver'>
 										<thead className='reports-data-body-table-driver-head'>
 											<tr className='reports-data-body-table-driver-head-row'>
-												<th className='reports-data-body-table-day-head-row-item'>
-													Date
+												<th className='reports-data-body-table-driver-head-row-item'>
+													Driver Number
+												</th>
+												<th className='reports-data-body-table-driver-head-row-item'>
+													Vehicle No
 												</th>
 												<th className='reports-data-body-table-driver-head-row-item'>
 													Invoice No
 												</th>
-												<th className='reports-data-body-table-driver-head-row-item'>
-													Driver
+												<th className='reports-data-body-table-day-head-row-item'>
+													Date
 												</th>
 												<th className='reports-data-body-table-driver-head-row-item'>
-													Vehicle
-												</th>
-												{/* <th className='reports-data-body-table-driver-head-row-item'>
-													Total Cost
+													Transportaion Cost
 												</th>
 												<th className='reports-data-body-table-driver-head-row-item'>
-													Driver License No
-												</th> */}
+													Vehicle Model
+												</th>
+												<th className='reports-data-body-table-driver-head-row-item'>
+													No of Items
+												</th>
 											</tr>
 										</thead>
 										<tbody className='reports-data-body-table-driver-body'>
@@ -2133,15 +2260,16 @@ function AdminReports() {
 													key={invoice._id}
 													className='reports-data-body-table-driver-body-row'
 												>
-													<td className='reports-data-body-table-day-body-row-item'>
-														{invoice.invoicedetails.invoicedate
-															? new Date(
-																	invoice.invoicedetails.invoicedate
-															  ).toLocaleDateString('en-GB', {
-																	day: '2-digit',
-																	month: '2-digit',
-																	year: 'numeric',
-															  })
+													<td className='reports-data-body-table-load-body-row-item'>
+														{invoice.vehicledetails.drivernumber &&
+														invoice.vehicledetails.drivernumber
+															? invoice.vehicledetails.drivernumber
+															: 'N/A'}
+													</td>
+													<td className='reports-data-body-table-load-body-row-item'>
+														{invoice.vehicledetails.vechiclenumber &&
+														invoice.vehicledetails.vechiclenumber
+															? invoice.vehicledetails.vechiclenumber
 															: 'N/A'}
 													</td>
 													<td className='reports-data-body-table-load-body-row-item'>
@@ -2153,27 +2281,37 @@ function AdminReports() {
 															  )
 															: 'N/A'}
 													</td>
-													<td className='reports-data-body-table-driver-body-row-item'>
-														{invoice.vehicledetails.drivernumber ?? 'N/A'}
+													<td className='reports-data-body-table-day-body-row-item'>
+														{invoice.invoicedetails.invoicedate
+															? new Date(
+																	invoice.invoicedetails.invoicedate
+															  ).toLocaleDateString('en-GB', {
+																	day: '2-digit',
+																	month: '2-digit',
+																	year: 'numeric',
+															  })
+															: 'N/A'}
 													</td>
-													<td className='reports-data-body-table-driver-body-row-item'>
-														{invoice.vehicledetails.vechiclemodel?.substring(
-															0,
-															12
-														) ?? 'N/A'}
+
+													<td className='reports-data-body-table-day-body-row-item'>
+														{invoice.loadingdetails.transportationcost
+															? invoice.loadingdetails.transportationcost
+															: 'N/A'}
 													</td>
-													{/* <td className='reports-data-body-table-driver-body-row-item'>
-														{invoice.boardingdetails.totalcost?.substring(
-															0,
-															12
-														) ?? 'N/A'}
+
+													<td className='reports-data-body-table-load-body-row-item'>
+														{invoice.vehicledetails.vechiclemodel &&
+														invoice.vehicledetails.vechiclemodel
+															? invoice.vehicledetails.vechiclemodel
+															: 'N/A'}
 													</td>
-													<td className='reports-data-body-table-driver-body-row-item'>
-														{invoice.vehicledetails.driverlicenseno?.substring(
-															0,
-															12
-														) ?? 'N/A'}
-													</td> */}
+													<td className='reports-data-body-table-load-body-row-item'>
+														{invoice.consignmentdetails &&
+														invoice.consignmentdetails.itemdetails &&
+														invoice.consignmentdetails.itemdetails.length
+															? invoice.consignmentdetails.itemdetails.length
+															: 'N/A'}
+													</td>
 												</tr>
 											))}
 										</tbody>

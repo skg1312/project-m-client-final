@@ -21,8 +21,8 @@ function AdminLoadingManage() {
 	const API = process.env.REACT_APP_API;
 
 	const validationSchema = Yup.object().shape({
-		startpoint: Yup.string().required('Start Point is required'),
-		endpoint: Yup.string().required('End Point is required'),
+		startstate: Yup.string().required('Start State is required'),
+		endstate: Yup.string().required('End State is required'),
 		rate: Yup.number()
 			.required('Rate is required')
 			.positive('Rate must be positive'),
@@ -35,8 +35,8 @@ function AdminLoadingManage() {
 
 	const formik = useFormik({
 		initialValues: {
-			startpoint: '',
-			endpoint: '',
+			startstate: '',
+			endstate: '',
 			rate: '',
 		},
 		validationSchema: validationSchema,
@@ -64,8 +64,10 @@ function AdminLoadingManage() {
 	const sortedStates = [...states].reverse();
 	const displayedLoadingsSearch = sortedLoadings.filter(
 		(item) =>
-			item.startpoint.toLowerCase().includes(searchInput.toLowerCase()) ||
-			item.endpoint.toLowerCase().includes(searchInput.toLowerCase())
+			(item.startstate &&
+				item.startstate.toLowerCase().includes(searchInput.toLowerCase())) ||
+			(item.endstate &&
+				item.endstate.toLowerCase().includes(searchInput.toLowerCase()))
 	);
 	const displayedStatesSearch = sortedStates.filter(
 		(item) =>
@@ -94,6 +96,7 @@ function AdminLoadingManage() {
 				console.error('Error fetching loading data:', error);
 			});
 	}, [API]);
+	console.log(loadings);
 	useEffect(() => {
 		axios
 			.get(`${API}state`)
@@ -111,8 +114,8 @@ function AdminLoadingManage() {
 		);
 		setSelectedLoadingId(loadingUpdateId);
 		formik.setValues({
-			startpoint: selectedLoading.startpoint,
-			endpoint: selectedLoading.endpoint,
+			startstate: selectedLoading.startstate,
+			endstate: selectedLoading.endstate,
 			rate: selectedLoading.rate,
 		});
 	};
@@ -169,6 +172,7 @@ function AdminLoadingManage() {
 	};
 
 	const handleFormSubmit = (formData) => {
+		console.log(formData);
 		if (selectedLoadingId) {
 			axios
 				.put(`${API}load/${selectedLoadingId}`, formData)
@@ -260,10 +264,10 @@ function AdminLoadingManage() {
 								<tr className='admin-loading-manage-data-table-row-head'>
 									<th className='admin-loading-manage-data-table-header'>Sl</th>
 									<th className='admin-loading-manage-data-table-header'>
-										Start Point
+										Start State
 									</th>
 									<th className='admin-loading-manage-data-table-header'>
-										End Point
+										End State
 									</th>
 									<th className='admin-loading-manage-data-table-header'>
 										Rate
@@ -283,10 +287,10 @@ function AdminLoadingManage() {
 											{idx + 1}
 										</td>
 										<td className='admin-loading-manage-data-table-data'>
-											{loading.startpoint}
+											{loading.startstate}
 										</td>
 										<td className='admin-loading-manage-data-table-data'>
-											{loading.endpoint}
+											{loading.endstate}
 										</td>
 										<td className='admin-loading-manage-data-table-data'>
 											{loading.rate}
@@ -359,28 +363,28 @@ function AdminLoadingManage() {
 						<input
 							type='text'
 							className='admin-loading-manage-form-input-high'
-							placeholder='Start Point'
+							placeholder='Start State'
 							required
-							name='startpoint'
-							value={formik.values.startpoint}
+							name='startstate'
+							value={formik.values.startstate}
 							onChange={formik.handleChange}
 							onBlur={formik.handleBlur}
 						/>
-						{formik.touched.startpoint && formik.errors.startpoint && (
-							<div className='error-message'>{formik.errors.startpoint}</div>
+						{formik.touched.startstate && formik.errors.startstate && (
+							<div className='error-message'>{formik.errors.startstate}</div>
 						)}
 						<input
 							type='text'
 							className='admin-loading-manage-form-input-high'
-							placeholder='End Point'
+							placeholder='End State'
 							required
-							name='endpoint'
-							value={formik.values.endpoint}
+							name='endstate'
+							value={formik.values.endstate}
 							onChange={formik.handleChange}
 							onBlur={formik.handleBlur}
 						/>
-						{formik.touched.endpoint && formik.errors.endpoint && (
-							<div className='error-message'>{formik.errors.endpoint}</div>
+						{formik.touched.endstate && formik.errors.endstate && (
+							<div className='error-message'>{formik.errors.endstate}</div>
 						)}
 						<input
 							type='number'

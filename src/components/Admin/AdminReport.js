@@ -1284,6 +1284,11 @@ function AdminReports() {
 				invoice.buyerdetails && invoice.buyerdetails.buyercompanyname
 					? invoice.buyerdetails.buyercompanyname
 					: 'N/A',
+'Agent Name':
+				invoice.sellerdetails && invoice.sellerdetails.sellercompanyname
+					? invoice.sellerdetails.sellercompanyname
+					: 'N/A',
+
 			'Load From':
 				invoice.loadingdetails && invoice.loadingdetails.startpoint
 					? invoice.loadingdetails.startpoint

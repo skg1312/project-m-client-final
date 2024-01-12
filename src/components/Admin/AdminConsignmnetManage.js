@@ -210,9 +210,7 @@ function AdminConsignmentManage() {
 			<AdminNavbar />
 			<div className='admin-consignment-manage'>
 				<div className='admin-consignment-manage-data'>
-					<h1 className='admin-consignment-manage-data-title'>
-						ALL CONSIGNMENTS
-					</h1>
+					<h1 className='admin-consignment-manage-data-title'>ALL ITEMS</h1>
 					<input
 						type='text'
 						placeholder='Search Item Name...'
@@ -331,7 +329,7 @@ function AdminConsignmentManage() {
 				</div>
 				<div className='admin-consignment-manage-form'>
 					<h1 className='admin-consignment-manage-form-title'>
-						{selectedConsignmentId ? 'UPDATE CONSIGNMENT' : 'ADD CONSIGNMENT'}
+						{selectedConsignmentId ? 'UPDATE ITEM' : 'ADD ITEM'}
 					</h1>
 					<form
 						className='admin-consignment-manage-form-form'

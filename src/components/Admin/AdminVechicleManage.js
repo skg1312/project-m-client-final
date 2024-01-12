@@ -96,7 +96,6 @@ function AdminLoadingManage() {
 				console.error('Error fetching loading data:', error);
 			});
 	}, [API]);
-	console.log(loadings);
 	useEffect(() => {
 		axios
 			.get(`${API}state`)

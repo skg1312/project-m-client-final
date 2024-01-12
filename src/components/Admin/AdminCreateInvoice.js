@@ -927,7 +927,7 @@ function AdminCreateInvoice() {
 							onChange={handleSelectChangeConsignment}
 							required
 						>
-							<option value=''>Select Consignment ID</option>
+							<option value=''>Select Item</option>
 							{consignments.map((consignment) => (
 								<option key={consignment._id} value={consignment._id}>
 									{consignment.itemname}

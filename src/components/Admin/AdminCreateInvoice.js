@@ -75,6 +75,8 @@ function AdminCreateInvoice() {
 			partyref: '',
 		},
 		loadingdetails: {
+			startstate: '',
+			endstate: '',
 			startpoint: '',
 			endpoint: '',
 			transportationcost: '',
@@ -96,6 +98,7 @@ function AdminCreateInvoice() {
 	};
 
 	const handleSubmit = async (e) => {
+		console.log(dataToSend);
 		e.preventDefault();
 		// Check the length of items in dataToSend
 		if (dataToSend && dataToSend.consignmentdetails.itemdetails.length >= 1) {
@@ -365,14 +368,14 @@ function AdminCreateInvoice() {
 	};
 
 	const handleSelectChangeLoading = (selectedOption, field) => {
-		const [startpoint, endpoint, rate] = selectedOption.value.split('-');
+		const [startstate, endstate, rate] = selectedOption.value.split('-');
 
 		setDataToSend((prevData) => ({
 			...prevData,
 			loadingdetails: {
 				...prevData.loadingdetails,
-				startpoint,
-				endpoint,
+				startstate,
+				endstate,
 				transportationcost: rate, // Set rate to transportationcost
 			},
 		}));
@@ -1097,21 +1100,67 @@ function AdminCreateInvoice() {
 								id='loading'
 								name='loading'
 								required
-								value={selectedLoading.startpoint}
+								value={selectedLoading.startstate}
 								onChange={(selectedOption) =>
-									handleSelectChangeLoading(selectedOption, 'startpoint')
+									handleSelectChangeLoading(selectedOption, 'startstate')
 								}
 								options={
 									Array.isArray(Loading)
 										? Loading.map((item) => ({
-												value: `${item.startpoint}-${item.endpoint}-${item.rate}`,
-												label: `${item.startpoint} to ${item.endpoint}`,
+												value: `${item.startstate}-${item.endstate}-${item.rate}`,
+												label: `${item.startstate} to ${item.endstate}`,
 										  }))
 										: []
 								}
 							/>
 						</div>
 
+						<div className='admin-create-invoice-form-div'>
+							{/* <div style={{ display: 'flex', flexDirection: 'column' }}> */}
+							<label
+								className='admin-create-invoice-form-label'
+								htmlFor='startstate'
+							>
+								Start State
+							</label>
+							<br />
+							<input
+								className='admin-create-invoice-form-input'
+								id='startstate'
+								name='startstate'
+								type='text'
+								required
+								disabled
+								value={`${dataToSend.loadingdetails.startstate}`}
+								onChange={(e) =>
+									handleChange(e, 'loadingdetails', 'startstate')
+								}
+								readOnly
+							/>
+							{/* </div> */}
+						</div>
+						<div className='admin-create-invoice-form-div'>
+							{/* <div style={{ display: 'flex', flexDirection: 'column' }}> */}
+							<label
+								className='admin-create-invoice-form-label'
+								htmlFor='endstate'
+							>
+								End State
+							</label>
+							<br />
+							<input
+								className='admin-create-invoice-form-input'
+								id='endstate'
+								name='endstate'
+								type='text'
+								required
+								disabled
+								value={`${dataToSend.loadingdetails.endstate}`}
+								onChange={(e) => handleChange(e, 'loadingdetails', 'endstate')}
+								readOnly
+							/>
+							{/* </div> */}
+						</div>
 						<div className='admin-create-invoice-form-div'>
 							{/* <div style={{ display: 'flex', flexDirection: 'column' }}> */}
 							<label
@@ -1124,15 +1173,12 @@ function AdminCreateInvoice() {
 							<input
 								className='admin-create-invoice-form-input'
 								id='startpoint'
-								name='startpoin'
+								name='startpoint'
 								type='text'
 								required
-								disabled
-								value={`${dataToSend.loadingdetails.startpoint}`}
 								onChange={(e) =>
 									handleChange(e, 'loadingdetails', 'startpoint')
 								}
-								readOnly
 							/>
 							{/* </div> */}
 						</div>
@@ -1151,10 +1197,7 @@ function AdminCreateInvoice() {
 								name='endpoint'
 								type='text'
 								required
-								disabled
-								value={`${dataToSend.loadingdetails.endpoint}`}
 								onChange={(e) => handleChange(e, 'loadingdetails', 'endpoint')}
-								readOnly
 							/>
 							{/* </div> */}
 						</div>

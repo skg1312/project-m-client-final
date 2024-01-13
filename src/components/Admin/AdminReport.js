@@ -688,7 +688,10 @@ function AdminReports() {
 				);
 				newWindow.document.write(
 					`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
-						item.itemtaxrate ? item.itemtaxrate : 'N/A'
+						dataItem.loadingdetails &&
+						dataItem.loadingdetails.transportationcost
+							? dataItem.loadingdetails.transportationcost
+							: 'N/A'
 					}</td>`
 				);
 				newWindow.document.write('</tr>');
@@ -1284,7 +1287,7 @@ function AdminReports() {
 				invoice.buyerdetails && invoice.buyerdetails.buyercompanyname
 					? invoice.buyerdetails.buyercompanyname
 					: 'N/A',
-'Agent Name':
+			'Agent Name':
 				invoice.sellerdetails && invoice.sellerdetails.sellercompanyname
 					? invoice.sellerdetails.sellercompanyname
 					: 'N/A',
@@ -1773,7 +1776,10 @@ function AdminReports() {
 																	: 'N/A'}
 															</td>
 															<td className='reports-data-body-table-item-body-row-item'>
-																{item.itemtaxrate ? item.itemtaxrate : 'N/A'}
+																{invoice.loadingdetails &&
+																invoice.loadingdetails.transportationcost
+																	? invoice.loadingdetails.transportationcost
+																	: 'N/A'}
 															</td>
 														</tr>
 													)

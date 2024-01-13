@@ -98,8 +98,8 @@ function AdminCreateInvoice() {
 	};
 
 	const handleSubmit = async (e) => {
-		console.log(dataToSend);
 		e.preventDefault();
+		console.log(dataToSend);
 		// Check the length of items in dataToSend
 		if (dataToSend && dataToSend.consignmentdetails.itemdetails.length >= 1) {
 			try {
@@ -419,7 +419,7 @@ function AdminCreateInvoice() {
 			<AdminNavbar />
 
 			<h1 className='admin-create-invoice-title'>CREATE INVOICE</h1>
-			<form className='admin-create-invoice-form-all'>
+			<form className='admin-create-invoice-form-all' onSubmit={handleSubmit}>
 				<div className='admin-create-invoice-container'>
 					<div className='admin-create-invoice-data'>
 						<h2 className='admin-create-invoice-subtitle'>COMPANY DETAILS</h2>
@@ -862,7 +862,7 @@ function AdminCreateInvoice() {
 									id=''
 									name='vehicledetails.vechiclenumber'
 									type='text'
-									pattern='^[A-Z]{2}[0-9]{2}[A-Z]{2}[0-9]{4}$'
+									// pattern='^[A-Z]{2}[0-9]{2}[A-Z]{2}[0-9]{4}$'
 									required
 									placeholder='Ex: AB12 CD 3456'
 									onChange={(e) => {
@@ -1327,7 +1327,7 @@ function AdminCreateInvoice() {
 					<div className='admin-create-invoice-data-submit'>
 						<button
 							className='admin-create-invoice-button'
-							onClick={handleSubmit}
+							// onClick={handleSubmit}
 							// onClick={() => setIsModalOpen(true)}
 						>
 							CREATE INVOICE

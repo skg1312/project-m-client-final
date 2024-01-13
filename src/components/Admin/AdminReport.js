@@ -36,18 +36,30 @@ function AdminReports() {
 		const invoiceDate =
 			(item.invoicedetails && item.invoicedetails.invoicedate) || '';
 		const vehicleNumber =
-			(item.vehicledetails && item.vehicledetails.vehiclenumber) || '';
+			(item.vehicledetails && item.vehicledetails.vechiclenumber) || '';
 		const driverName =
 			(item.vehicledetails && item.vehicledetails.drivername) || '';
 		const itemName =
 			(item.consignmentdetails.itemdetails[0] &&
 				item.consignmentdetails.itemdetails[0].itemname) ||
 			'';
+		const buyerCompanyName =
+			(item.buyerdetails && item.buyerdetails.buyercompanyname) || '';
+		const buyerCompanyState =
+			(item.buyerdetails && item.buyerdetails.buyercompanystatename) || '';
 		const agentCompanyName =
 			(item.sellerdetails && item.sellerdetails.sellercompanyname) || ''; // **Include Agent Company Name field**
 		const agentCompanyState =
 			(item.sellerdetails && item.sellerdetails.sellercompanystatename) || ''; // **Include Agent Company State Name**
 		const searchLowerCase = searchInput?.toLowerCase();
+		const loadFrom =
+			(item.loadingdetails && item.loadingdetails.startpoint) || '';
+		const destination =
+			(item.loadingdetails && item.loadingdetails.endpoint) || '';
+		const refCode =
+			(item.boardingdetails && item.boardingdetails.partyref) || '';
+		const billMakerName =
+			(item.invoicedetails && item.invoicedetails.invoicemakername) || '';
 
 		if (
 			invoiceNo.toLowerCase().includes(searchInput?.toLowerCase()) ||
@@ -56,8 +68,14 @@ function AdminReports() {
 			vehicleNumber.toLowerCase().includes(searchInput?.toLowerCase()) ||
 			driverName.toLowerCase().includes(searchInput?.toLowerCase()) ||
 			itemName.toLowerCase().includes(searchLowerCase) ||
+			buyerCompanyName.toLowerCase().includes(searchLowerCase) ||
+			buyerCompanyState.toLowerCase().includes(searchLowerCase) ||
 			agentCompanyName.toLowerCase().includes(searchLowerCase) || // **Check Agent Company Name**
-			agentCompanyState.toLowerCase().includes(searchLowerCase) // **Check Agent Company State Name**
+			agentCompanyState.toLowerCase().includes(searchLowerCase) || // **Check Agent Company State Name**
+			loadFrom.toLowerCase().includes(searchLowerCase) ||
+			destination.toLowerCase().includes(searchLowerCase) ||
+			refCode.toLowerCase().includes(searchLowerCase) ||
+			billMakerName.toLowerCase().includes(searchLowerCase)
 		) {
 			return true;
 		}
@@ -588,10 +606,10 @@ function AdminReports() {
 			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Date</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Buyer</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Agent</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Agent</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Buyer</th>'
 		);
 		newWindow.document.write(
 			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Load From</th>'
@@ -634,15 +652,15 @@ function AdminReports() {
 				);
 				newWindow.document.write(
 					`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
-						dataItem.buyerdetails && dataItem.buyerdetails.buyercompanyname
-							? dataItem.buyerdetails.buyercompanyname.substring(0, 12)
+						dataItem.sellerdetails && dataItem.sellerdetails.sellercompanyname
+							? dataItem.sellerdetails.sellercompanyname.substring(0, 12)
 							: 'N/A'
 					}</td>`
 				);
 				newWindow.document.write(
 					`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
-						dataItem.sellerdetails && dataItem.sellerdetails.sellercompanyname
-							? dataItem.sellerdetails.sellercompanyname.substring(0, 12)
+						dataItem.buyerdetails && dataItem.buyerdetails.buyercompanyname
+							? dataItem.buyerdetails.buyercompanyname.substring(0, 12)
 							: 'N/A'
 					}</td>`
 				);
@@ -1662,10 +1680,10 @@ function AdminReports() {
 													Date
 												</th>
 												<th className='reports-data-body-table-load-head-row-item'>
-													Buyer
+													Agent
 												</th>
 												<th className='reports-data-body-table-load-head-row-item'>
-													Agent
+													Buyer
 												</th>
 												<th className='reports-data-body-table-load-head-row-item'>
 													Load From
@@ -1710,18 +1728,18 @@ function AdminReports() {
 																	: 'N/A'}
 															</td>
 															<td className='reports-data-body-table-load-body-row-item'>
-																{invoice.buyerdetails &&
-																invoice.buyerdetails.buyercompanyname
-																	? invoice.buyerdetails.buyercompanyname.substring(
+																{invoice.sellerdetails &&
+																invoice.sellerdetails.sellercompanyname
+																	? invoice.sellerdetails.sellercompanyname.substring(
 																			0,
 																			12
 																	  )
 																	: 'N/A'}
 															</td>
 															<td className='reports-data-body-table-load-body-row-item'>
-																{invoice.sellerdetails &&
-																invoice.sellerdetails.sellercompanyname
-																	? invoice.sellerdetails.sellercompanyname.substring(
+																{invoice.buyerdetails &&
+																invoice.buyerdetails.buyercompanyname
+																	? invoice.buyerdetails.buyercompanyname.substring(
 																			0,
 																			12
 																	  )

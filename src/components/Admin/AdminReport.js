@@ -588,6 +588,57 @@ function AdminReports() {
 
 	//for showing data of mis section by date
 	const handleShowMisDataByDate = () => {
+		let datatoIterate;
+
+		if (filteredDataByDate) {
+			datatoIterate = filteredDataByDate;
+		}
+		if (searchInput !== '' && displayedInvoiceSearch) {
+			datatoIterate = displayedInvoiceSearch;
+		}
+		if (searchInput !== '' && displayedInvoiceSearch && filteredDataByDate) {
+			datatoIterate = displayedInvoiceSearch
+				.filter((item) => {
+					const itemDate = new Date(item.invoicedetails.invoicedate);
+
+					// Check if startDate and endDate are valid date strings
+					const isStartDateValid =
+						startDate !== '' && !isNaN(new Date(startDate).getTime());
+					const isEndDateValid =
+						endDate !== '' && !isNaN(new Date(endDate).getTime());
+
+					if (
+						(isStartDateValid && itemDate >= new Date(startDate)) ||
+						!isStartDateValid
+					) {
+						if (
+							(isEndDateValid && itemDate <= new Date(endDate)) ||
+							!isEndDateValid
+						) {
+							return true;
+						}
+					}
+
+					return false;
+				})
+				.map((item) => {
+					const toDate = endDate
+						? new Date(endDate) // Create a new date object from the endDate
+						: null;
+
+					if (toDate) {
+						// Add one day to the toDate
+						toDate.setDate(toDate.getDate() + 1);
+					}
+
+					return {
+						...item,
+						fromDate: startDate || null,
+						toDate: toDate || null,
+					};
+				});
+		}
+
 		const newWindow = window.open('', '_blank');
 		newWindow.document.write(
 			'<html><head><title>MIS Details</title></head><body>'
@@ -634,7 +685,7 @@ function AdminReports() {
 		);
 		newWindow.document.write('</tr>');
 
-		filteredDataByDate.forEach((dataItem, index) => {
+		datatoIterate.forEach((dataItem, index) => {
 			dataItem.consignmentdetails.itemdetails.forEach((item, index) => {
 				newWindow.document.write('<tr>');
 				newWindow.document.write(

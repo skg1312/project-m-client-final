@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './AdminVechicleManage.css';
 import './AdminStateManage.css';
+import './AdminPartyRefManage.css';
 import axios from 'axios';
 import background from '../images/Desktop.png';
 // import ReactPaginate from 'react-paginate';
@@ -17,7 +18,9 @@ function AdminLoadingManage() {
 	// const [pageNumber, setPageNumber] = useState(0);
 	const [selectedLoadingId, setSelectedLoadingId] = useState(null);
 	const [states, setStates] = useState([]);
+	const [parties, setParties] = useState([]);
 	const [selectedStateId, setSelectedStateId] = useState(null);
+	const [selectedPartyId, setSelectedPartyId] = useState(null);
 	const API = process.env.REACT_APP_API;
 
 	const validationSchema = Yup.object().shape({
@@ -31,6 +34,11 @@ function AdminLoadingManage() {
 	const stateValidationSchema = Yup.object().shape({
 		statename: Yup.string().required('State Name is required'),
 		statecode: Yup.string().required('State Code is required'),
+	});
+
+	const partyValidationSchema = Yup.object().shape({
+		partyname: Yup.string().required('Party Name is required'),
+		partycode: Yup.string().required('Party Code is required'),
 	});
 
 	const formik = useFormik({
@@ -56,12 +64,25 @@ function AdminLoadingManage() {
 		},
 	});
 
+	const partyFormik = useFormik({
+		initialValues: {
+			partyname: '',
+			partycode: '',
+		},
+		partyValidationSchema: partyValidationSchema,
+		onSubmit: (values) => {
+			handlePartyFormSubmit(values);
+		},
+	});
+
 	// const itemsPerPage = 12;
 	const [searchInput, setSearchInput] = useState('');
 	const [searchStateInput, setSearchStateInput] = useState('');
+	const [searchPartyInput, setSearchPartyInput] = useState('');
 
 	const sortedLoadings = [...loadings].reverse();
 	const sortedStates = [...states].reverse();
+	const sortedParties = [...parties].reverse();
 	const displayedLoadingsSearch = sortedLoadings.filter(
 		(item) =>
 			(item.startstate &&
@@ -77,6 +98,15 @@ function AdminLoadingManage() {
 					.includes(searchStateInput.toLowerCase())) ||
 			(item.statecode &&
 				item.statecode.toLowerCase().includes(searchStateInput.toLowerCase()))
+	);
+	const displayedPartiesSearch = sortedParties.filter(
+		(item) =>
+			(item.partyname &&
+				item.partyname
+					.toLowerCase()
+					.includes(searchPartyInput.toLowerCase())) ||
+			(item.partycode &&
+				item.partycode.toLowerCase().includes(searchPartyInput.toLowerCase()))
 	);
 	// 	.slice(pageNumber * itemsPerPage, (pageNumber + 1) * itemsPerPage);
 
@@ -126,6 +156,14 @@ function AdminLoadingManage() {
 			statecode: selectedState.statecode,
 		});
 	};
+	const handlePartyUpdate = (partyUpdateId) => {
+		const selectedParty = states.find((party) => party._id === partyUpdateId);
+		setSelectedStateId(partyUpdateId);
+		stateFormik.setValues({
+			partyname: selectedParty.partyname,
+			partycode: selectedParty.partycode,
+		});
+	};
 
 	const handleLoadingDelete = (loadingDeleteId) => {
 		const isConfirmed = window.confirm(
@@ -169,6 +207,27 @@ function AdminLoadingManage() {
 				});
 		}
 	};
+	const handlePartyDelete = (partyDeleteId) => {
+		const isConfirmed = window.confirm(
+			'Are you sure you want to delete this party?'
+		);
+
+		if (isConfirmed) {
+			axios
+				.delete(`${API}party/${partyDeleteId}`)
+				.then(() => {
+					console.log('Party deleted successfully');
+					setParties((prevParties) =>
+						prevParties.filter((party) => party._id !== partyDeleteId)
+					);
+					toast.success('Party Deleted Successfully');
+				})
+				.catch((error) => {
+					console.error('Error deleting party:', error);
+					toast.error('Error deleting party. Please try again.');
+				});
+		}
+	};
 
 	const handleFormSubmit = (formData) => {
 		console.log(formData);
@@ -205,6 +264,39 @@ function AdminLoadingManage() {
 	};
 
 	const handleStateFormSubmit = (formData) => {
+		if (selectedStateId) {
+			axios
+				.put(`${API}state/${selectedStateId}`, formData)
+				.then((response) => {
+					setStates((prevStates) =>
+						prevStates.map((state) =>
+							state._id === selectedStateId ? response.data : state
+						)
+					);
+					toast.success('State Details are Updated Successfully');
+				})
+				.catch((error) => {
+					console.error('Error updating state:', error);
+					toast.error('Error updating state. Please try again.');
+				});
+		} else {
+			axios
+				.post(`${API}state`, formData)
+				.then((response) => {
+					setStates((prevStates) => [...prevStates, response.data]);
+					toast.success('State Details are Saved Successfully');
+				})
+				.catch((error) => {
+					console.error('Error creating state:', error);
+					toast.error('Error creating state. Please try again.');
+				});
+		}
+
+		stateFormik.resetForm();
+		setSelectedStateId(null);
+	};
+
+	const handlePartyFormSubmit = (formData) => {
 		if (selectedStateId) {
 			axios
 				.put(`${API}state/${selectedStateId}`, formData)
@@ -554,6 +646,159 @@ function AdminLoadingManage() {
 							disabled={stateFormik.isSubmitting || !stateFormik.isValid}
 						>
 							{selectedStateId ? 'Update' : 'Add'}
+						</button>
+					</form>
+				</div>
+			</div>
+			<br />
+			<div className='admin-party-ref-manage'>
+				<div className='admin-party-ref-manage-data'>
+					<h1 className='admin-party-ref-manage-data-title'>
+						ALL PARTY REFERENCES
+					</h1>
+					<input
+						type='text'
+						placeholder='Search Party...'
+						className='admin-user-manage-form-input'
+						value={searchPartyInput}
+						onChange={(e) => setSearchPartyInput(e.target.value)}
+					/>
+					<div className='table-scroll'>
+						<table className='admin-party-ref-manage-data-table'>
+							<thead className='admin-party-ref-manage-data-table-head'>
+								<tr className='admin-party-ref-manage-data-table-row-head'>
+									<th className='admin-party-ref-manage-data-table-header'>
+										Sl
+									</th>
+									<th className='admin-party-ref-manage-data-table-header'>
+										Party Name
+									</th>
+									<th className='admin-party-ref-manage-data-table-header'>
+										Party Code
+									</th>
+									<th className='admin-party-ref-manage-data-table-header'>
+										Action
+									</th>
+								</tr>
+							</thead>
+							<tbody className='admin-party-ref-manage-data-table-body'>
+								{displayedPartiesSearch.map((party, idx) => (
+									<tr
+										key={party._id}
+										className='admin-party-ref-manage-data-table-row-body'
+									>
+										<td className='admin-party-ref-manage-data-table-data'>
+											{idx + 1}
+										</td>
+										<td className='admin-party-ref-manage-data-table-data'>
+											{party.partyname}
+											{/* {party.partyname.substring(0, 23)} */}
+										</td>
+										<td className='admin-party-ref-manage-data-table-data'>
+											{party.partycode}
+										</td>
+										<td className='admin-party-ref-manage-data-table-data'>
+											<button
+												style={{
+													background: 'none',
+													border: 'none',
+												}}
+												onClick={() => handlePartyUpdate(party._id)}
+											>
+												<img
+													src={E}
+													alt='Update'
+													style={{
+														height: '15px',
+														width: '15px',
+														cursor: 'pointer',
+													}}
+												/>
+											</button>
+											<button
+												style={{
+													background: 'none',
+													border: 'none',
+												}}
+												onClick={() => handlePartyDelete(party._id)}
+											>
+												<img
+													src={D}
+													alt='delete'
+													style={{
+														height: '15px',
+														width: '15px',
+														cursor: 'pointer',
+													}}
+												/>
+											</button>
+										</td>
+									</tr>
+								))}
+							</tbody>
+						</table>
+					</div>
+					<br />
+					{/* <ReactPaginate
+            className='pagination-container'
+            previousLabel='Previous'
+            nextLabel='Next'
+            pageCount={pageCount}
+            onPageChange={changePage}
+            containerClassName='pagination'
+            previousLinkClassName='previous-page'
+            nextLinkClassName='next-page'
+            disabledClassName='pagination-button disabled'
+            activeClassName='pagination-button active'
+            pageClassName='pagination-button'
+            breakClassName='pagination-space'
+          /> */}
+				</div>
+				<div className='admin-party-ref-manage-form'>
+					<h1 className='admin-party-ref-manage-form-title'>
+						{selectedStateId ? 'UPDATE PARTY REFERENCE' : 'ADD PARTY REFERENCE'}
+					</h1>
+					<form
+						className='admin-party-ref-manage-form-form'
+						onSubmit={partyFormik.handleSubmit}
+					>
+						<input
+							type='text'
+							className='admin-party-ref-manage-form-input-high'
+							placeholder='Party Name'
+							required
+							name='partyname'
+							value={partyFormik.values.partyname}
+							onChange={partyFormik.handleChange}
+							onBlur={partyFormik.handleBlur}
+						/>
+						{partyFormik.touched.partyname && partyFormik.errors.partyname && (
+							<div className='error-message'>
+								{partyFormik.errors.partyname}
+							</div>
+						)}
+						<input
+							type='text'
+							className='admin-party-ref-manage-form-input-high'
+							placeholder='Party Code'
+							required
+							name='partycode'
+							value={partyFormik.values.partycode}
+							onChange={partyFormik.handleChange}
+							onBlur={partyFormik.handleBlur}
+						/>
+						{partyFormik.touched.partycode && partyFormik.errors.partycode && (
+							<div className='error-message'>
+								{partyFormik.errors.partycode}
+							</div>
+						)}
+						<br />
+						<button
+							type='submit'
+							className='admin-party-ref-manage-form-button'
+							disabled={partyFormik.isSubmitting || !partyFormik.isValid}
+						>
+							{selectedPartyId ? 'Update' : 'Add'}
 						</button>
 					</form>
 				</div>

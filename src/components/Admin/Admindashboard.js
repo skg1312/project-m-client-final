@@ -92,7 +92,7 @@ function Admindashboard() {
 						>
 							<div className='admin-card-box'>
 								<img src={vs} alt='' className='admin-dashboard-button-icon' />
-								<span>MANAGE LOADING</span>
+								<span>MANAGE OTHERS</span>
 							</div>
 						</button>
 						<button

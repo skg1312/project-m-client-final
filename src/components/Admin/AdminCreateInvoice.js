@@ -46,6 +46,7 @@ function AdminCreateInvoice() {
 		sellerdetails: {
 			sellercompanyname: '',
 			sellercompanyaddress: '',
+			sellercompanygstno: '',
 			sellercompanystatename: '',
 			sellercompanystatecode: '',
 		},
@@ -99,7 +100,6 @@ function AdminCreateInvoice() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log(dataToSend);
 		// Check the length of items in dataToSend
 		if (dataToSend && dataToSend.consignmentdetails.itemdetails.length >= 1) {
 			try {
@@ -283,6 +283,7 @@ function AdminCreateInvoice() {
 				sellerid: selectedSeller.sellerid,
 				sellercompanyname: selectedSeller.sellercompanyname,
 				sellercompanyaddress: selectedSeller.sellercompanyaddress,
+				sellercompanygstno: selectedSeller.sellercompanygstno,
 				sellercompanystatename: selectedSeller.sellercompanystatename,
 				sellercompanystatecode: selectedSeller.sellercompanystatecode,
 			},
@@ -766,6 +767,28 @@ function AdminCreateInvoice() {
 									value={selectedSeller.sellercompanyaddress}
 									onChange={(e) =>
 										handleChange(e, 'sellerdetails', 'sellercompanyaddress')
+									}
+								/>
+							</div>
+						</div>
+						<div className='admin-create-invoice-form-div'>
+							<div style={{ display: 'flex', flexDirection: 'column' }}>
+								<label
+									className='admin-create-invoice-form-label'
+									htmlFor='buyercompanygstno'
+								>
+									Agent GST No
+								</label>
+								<input
+									className='admin-create-invoice-form-input'
+									id='sellercompanygstno'
+									name='sellercompanygstno'
+									type='text'
+									required
+									disabled
+									value={selectedSeller.sellercompanygstno}
+									onChange={(e) =>
+										handleChange(e, 'sellerdetails', 'sellercompanygstno')
 									}
 								/>
 							</div>
@@ -1326,6 +1349,7 @@ function AdminCreateInvoice() {
 					</div>
 					<div className='admin-create-invoice-data-submit'>
 						<button
+							type='submit'
 							className='admin-create-invoice-button'
 							// onClick={handleSubmit}
 							// onClick={() => setIsModalOpen(true)}
@@ -1352,7 +1376,11 @@ function AdminCreateInvoice() {
 										>
 											View Invoice
 										</button>
-										<button className='modal-btn' onClick={handleCopy}>
+										<button
+											className='modal-btn'
+											type='button'
+											onClick={handleCopy}
+										>
 											Copy Link
 										</button>
 									</div>

@@ -41,7 +41,7 @@ function AdminCreateInvoice() {
 			// companycontact: '',
 			companystate: '',
 			companyofficeaddress: '',
-			companypincode: '',
+			companystatecode: '',
 		},
 		sellerdetails: {
 			sellercompanyname: '',

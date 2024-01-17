@@ -131,7 +131,7 @@ function Admindashboard() {
 									alt='mv'
 									className='admin-dashboard-button-icon'
 								/>
-								<span>MANAGE AGENTS</span>
+								<span>MANAGE CONSIGNEES</span>
 							</div>
 						</button>
 						<button

@@ -43,7 +43,7 @@ function AdminNavbar() {
 						className='admin-logout-button-value-no-img'
 						onClick={() => navigate('/adminsellman')}
 					>
-						AGENT
+						CONSIGNEE
 					</button>
 					<button
 						className='admin-logout-button-value-no-img'

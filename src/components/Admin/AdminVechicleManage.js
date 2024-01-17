@@ -168,14 +168,13 @@ function AdminLoadingManage() {
 		});
 	};
 	const handlePartyUpdate = (partyUpdateId) => {
-		const selectedParty = parties.find((party) => party._id === partyUpdateId);
-		setSelectedPartyId(partyUpdateId);
-		stateFormik.setValues({
-			partyname: selectedParty.partyname,
-			partyrefno: selectedParty.partyrefno,
-		});
-	};
-
+	const selectedParty = parties.find((party) => party._id === partyUpdateId);
+	setSelectedPartyId(partyUpdateId);
+	partyFormik.setValues({
+		partyname: selectedParty.partyname,
+		partyrefno: selectedParty.partyrefno,
+	});
+};
 	const handleLoadingDelete = (loadingDeleteId) => {
 		const isConfirmed = window.confirm(
 			'Are you sure you want to delete this loading?'
@@ -219,26 +218,26 @@ function AdminLoadingManage() {
 		}
 	};
 	const handlePartyDelete = (partyDeleteId) => {
-		const isConfirmed = window.confirm(
-			'Are you sure you want to delete this party?'
-		);
+	const isConfirmed = window.confirm('Are you sure you want to delete this party?');
 
-		if (isConfirmed) {
-			axios
-				.delete(`${API}party/${partyDeleteId}`)
-				.then(() => {
-					console.log('Party deleted successfully');
-					setParties((prevParties) =>
-						prevParties.filter((party) => party._id !== partyDeleteId)
-					);
-					toast.success('Party Deleted Successfully');
-				})
-				.catch((error) => {
-					console.error('Error deleting party:', error);
-					toast.error('Error deleting party. Please try again.');
-				});
-		}
-	};
+	if (isConfirmed) {
+		axios
+			.delete(`${API}party/${partyDeleteId}`)
+			.then(() => {
+				console.log('Party deleted successfully');
+				setParties((prevParties) =>
+					prevParties.filter((party) => party._id !== partyDeleteId)
+				);
+				toast.success('Party Deleted Successfully');
+				partyFormik.resetForm(); // Reset the form after deletion
+				setSelectedPartyId(null);
+			})
+			.catch((error) => {
+				console.error('Error deleting party:', error);
+				toast.error('Error deleting party. Please try again.');
+			});
+	}
+};
 
 	const handleFormSubmit = (formData) => {
 		console.log(formData);

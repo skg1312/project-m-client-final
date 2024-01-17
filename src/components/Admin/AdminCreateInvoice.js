@@ -34,6 +34,8 @@ function AdminCreateInvoice() {
 
 	const [Loading, setLoading] = useState({});
 	const [selectedLoading, setSelectedLoading] = useState({});
+	const [parties, setParties] = useState([]);
+	const [selectedParty, setSelectedParty] = useState({});
 	const [dataToSend, setDataToSend] = useState({
 		companydetails: {
 			companyname: '',
@@ -42,6 +44,7 @@ function AdminCreateInvoice() {
 			companystate: '',
 			companyofficeaddress: '',
 			companystatecode: '',
+			companypincode: '',
 		},
 		sellerdetails: {
 			sellercompanyname: '',
@@ -66,6 +69,7 @@ function AdminCreateInvoice() {
 			itemdetails: [],
 		},
 		invoicedetails: {
+			invoiceid: '',
 			invoiceno: '',
 			invoicedate: '',
 			invoicemakername: auth.admin.adminname,
@@ -246,6 +250,23 @@ function AdminCreateInvoice() {
 
 		fetchLoadingData();
 	}, [API]);
+	useEffect(() => {
+		const fetchPartyData = async () => {
+			try {
+				const response = await fetch(`${API}party`);
+				if (response.ok) {
+					const data = await response.json();
+					setParties(data);
+				} else {
+					console.error('Failed to fetch party data');
+				}
+			} catch (error) {
+				console.error('Error fetching party data:', error);
+			}
+		};
+
+		fetchPartyData();
+	}, [API]);
 
 	const handleSelectChangeCompany = (e) => {
 		const selectedCompanyId = e.target.value;
@@ -385,6 +406,27 @@ function AdminCreateInvoice() {
 			...prevSelected,
 			[field]: selectedOption,
 		}));
+	};
+
+	const handleSelectChangeParty = (selectedOption) => {
+		// const [partyrefno] = selectedOption.value.split('-');
+		console.log(selectedOption);
+
+		const selectedPartyId = selectedOption.value;
+		const selectedParty = parties.find(
+			(party) => party._id === selectedPartyId
+		);
+		console.log(selectedParty);
+		console.log(selectedParty.partyrefno);
+
+		setDataToSend((prevData) => ({
+			...prevData,
+			boardingdetails: {
+				...prevData.boardingdetails,
+				partyref: selectedParty.partyrefno,
+			},
+		}));
+		setSelectedParty(selectedParty);
 	};
 
 	const openPdfViewer = () => {
@@ -1090,7 +1132,24 @@ function AdminCreateInvoice() {
 						<div className='admin-create-invoice-form-div'>
 							<label
 								className='admin-create-invoice-form-label'
-								htmlFor='invoicedate'
+								htmlFor='invoiceid'
+							>
+								Invoice ID
+							</label>
+							<br />
+							<input
+								className='admin-create-invoice-form-input'
+								id='invoiceid'
+								name='invoiceid'
+								required
+								type='text'
+								onChange={(e) => handleChange(e, 'invoicedetails', 'invoiceid')}
+							/>
+						</div>
+						<div className='admin-create-invoice-form-div'>
+							<label
+								className='admin-create-invoice-form-label'
+								htmlFor='invoiceid'
 							>
 								Invoice Date
 							</label>
@@ -1323,7 +1382,7 @@ function AdminCreateInvoice() {
 								Party Ref.
 							</label>
 							<br />
-							<input
+							{/* <input
 								className='admin-create-invoice-form-input-v'
 								id='partyref'
 								name='partyref'
@@ -1342,6 +1401,22 @@ function AdminCreateInvoice() {
 										'partyref'
 									)
 								}
+							/> */}
+							<Select
+								className='admin-create-invoice-form-input-v'
+								id='partyid'
+								name='partyid'
+								placeholder='Select Party'
+								// value={{
+								// 	value: selectedBuyer._id,
+								// 	label: selectedBuyer.buyercompanyname,
+								// }}
+								required
+								onChange={handleSelectChangeParty}
+								options={parties.map((party) => ({
+									value: party._id,
+									label: party.partyname,
+								}))}
 							/>
 
 							{/* </div> */}

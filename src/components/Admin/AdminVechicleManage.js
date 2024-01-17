@@ -38,7 +38,7 @@ function AdminLoadingManage() {
 
 	const partyValidationSchema = Yup.object().shape({
 		partyname: Yup.string().required('Party Name is required'),
-		partycode: Yup.string().required('Party Code is required'),
+		partyrefno: Yup.string().required('Party Code is required'),
 	});
 
 	const formik = useFormik({
@@ -67,7 +67,7 @@ function AdminLoadingManage() {
 	const partyFormik = useFormik({
 		initialValues: {
 			partyname: '',
-			partycode: '',
+			partyrefno: '',
 		},
 		partyValidationSchema: partyValidationSchema,
 		onSubmit: (values) => {
@@ -105,8 +105,8 @@ function AdminLoadingManage() {
 				item.partyname
 					.toLowerCase()
 					.includes(searchPartyInput.toLowerCase())) ||
-			(item.partycode &&
-				item.partycode.toLowerCase().includes(searchPartyInput.toLowerCase()))
+			(item.partyrefno &&
+				item.partyrefno.toLowerCase().includes(searchPartyInput.toLowerCase()))
 	);
 	// 	.slice(pageNumber * itemsPerPage, (pageNumber + 1) * itemsPerPage);
 
@@ -136,6 +136,17 @@ function AdminLoadingManage() {
 				console.error('Error fetching state data:', error);
 			});
 	}, [API]);
+	useEffect(() => {
+		axios
+			.get(`${API}party`)
+			.then((response) => {
+				setParties(response.data);
+			})
+			.catch((error) => {
+				console.error('Error fetching party data:', error);
+			});
+	}, [API]);
+	console.log(parties);
 
 	const handleLoadingUpdate = (loadingUpdateId) => {
 		const selectedLoading = loadings.find(
@@ -157,11 +168,11 @@ function AdminLoadingManage() {
 		});
 	};
 	const handlePartyUpdate = (partyUpdateId) => {
-		const selectedParty = states.find((party) => party._id === partyUpdateId);
-		setSelectedStateId(partyUpdateId);
+		const selectedParty = parties.find((party) => party._id === partyUpdateId);
+		setSelectedPartyId(partyUpdateId);
 		stateFormik.setValues({
 			partyname: selectedParty.partyname,
-			partycode: selectedParty.partycode,
+			partyrefno: selectedParty.partyrefno,
 		});
 	};
 
@@ -297,36 +308,36 @@ function AdminLoadingManage() {
 	};
 
 	const handlePartyFormSubmit = (formData) => {
-		if (selectedStateId) {
+		if (selectedPartyId) {
 			axios
-				.put(`${API}state/${selectedStateId}`, formData)
+				.put(`${API}party/${selectedPartyId}`, formData)
 				.then((response) => {
-					setStates((prevStates) =>
-						prevStates.map((state) =>
-							state._id === selectedStateId ? response.data : state
+					setParties((prevParties) =>
+						prevParties.map((party) =>
+							party._id === selectedPartyId ? response.data : party
 						)
 					);
-					toast.success('State Details are Updated Successfully');
+					toast.success('Party Details are Updated Successfully');
 				})
 				.catch((error) => {
-					console.error('Error updating state:', error);
-					toast.error('Error updating state. Please try again.');
+					console.error('Error updating party:', error);
+					toast.error('Error updating party. Please try again.');
 				});
 		} else {
 			axios
-				.post(`${API}state`, formData)
+				.post(`${API}party`, formData)
 				.then((response) => {
-					setStates((prevStates) => [...prevStates, response.data]);
-					toast.success('State Details are Saved Successfully');
+					setParties((prevParties) => [...prevParties, response.data]);
+					toast.success('Party Details are Saved Successfully');
 				})
 				.catch((error) => {
-					console.error('Error creating state:', error);
-					toast.error('Error creating state. Please try again.');
+					console.error('Error creating party:', error);
+					toast.error('Error creating party. Please try again.');
 				});
 		}
 
-		stateFormik.resetForm();
-		setSelectedStateId(null);
+		partyFormik.resetForm();
+		setSelectedPartyId(null);
 	};
 
 	return (
@@ -692,10 +703,9 @@ function AdminLoadingManage() {
 										</td>
 										<td className='admin-party-ref-manage-data-table-data'>
 											{party.partyname}
-											{/* {party.partyname.substring(0, 23)} */}
 										</td>
 										<td className='admin-party-ref-manage-data-table-data'>
-											{party.partycode}
+											{party.partyrefno}
 										</td>
 										<td className='admin-party-ref-manage-data-table-data'>
 											<button
@@ -739,24 +749,10 @@ function AdminLoadingManage() {
 						</table>
 					</div>
 					<br />
-					{/* <ReactPaginate
-            className='pagination-container'
-            previousLabel='Previous'
-            nextLabel='Next'
-            pageCount={pageCount}
-            onPageChange={changePage}
-            containerClassName='pagination'
-            previousLinkClassName='previous-page'
-            nextLinkClassName='next-page'
-            disabledClassName='pagination-button disabled'
-            activeClassName='pagination-button active'
-            pageClassName='pagination-button'
-            breakClassName='pagination-space'
-          /> */}
 				</div>
 				<div className='admin-party-ref-manage-form'>
 					<h1 className='admin-party-ref-manage-form-title'>
-						{selectedStateId ? 'UPDATE PARTY REFERENCE' : 'ADD PARTY REFERENCE'}
+						{selectedPartyId ? 'UPDATE PARTY REFERENCE' : 'ADD PARTY REFERENCE'}
 					</h1>
 					<form
 						className='admin-party-ref-manage-form-form'
@@ -782,16 +778,17 @@ function AdminLoadingManage() {
 							className='admin-party-ref-manage-form-input-high'
 							placeholder='Party Code'
 							required
-							name='partycode'
-							value={partyFormik.values.partycode}
+							name='partyrefno'
+							value={partyFormik.values.partyrefno}
 							onChange={partyFormik.handleChange}
 							onBlur={partyFormik.handleBlur}
 						/>
-						{partyFormik.touched.partycode && partyFormik.errors.partycode && (
-							<div className='error-message'>
-								{partyFormik.errors.partycode}
-							</div>
-						)}
+						{partyFormik.touched.partyrefno &&
+							partyFormik.errors.partyrefno && (
+								<div className='error-message'>
+									{partyFormik.errors.partyrefno}
+								</div>
+							)}
 						<br />
 						<button
 							type='submit'

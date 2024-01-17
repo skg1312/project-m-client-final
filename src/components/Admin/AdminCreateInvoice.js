@@ -144,7 +144,7 @@ function AdminCreateInvoice() {
 				.required('Driver Number is required'),
 			vechiclenumber: Yup.string()
 				.matches(
-					/^[A-Z]{2}\d{2}\s[A-Z]{2}\s\d{4}$/,
+					/^[A-Za-z]{2}\d{2}\s[A-Z]{2}\s\d{4}$/,
 					'Invalid vehicle number. Please use the format: AB12 CD 3456'
 				)
 				.required('Vehicle Number is required'),
@@ -745,7 +745,7 @@ function AdminCreateInvoice() {
 						</div>
 					</div>
 					<div className='admin-create-invoice-data'>
-						<h2 className='admin-create-invoice-subtitle'>AGENT DETAILS</h2>
+						<h2 className='admin-create-invoice-subtitle'>CONSIGNEE DETAILS</h2>
 						<Select
 							className='admin-create-invoice-select'
 							id='sellerid'
@@ -755,7 +755,7 @@ function AdminCreateInvoice() {
 							// 	label: selectedSeller.sellercompanyname,
 							// }}
 							required
-							placeholder='Select Agent'
+							placeholder='Select Consignee'
 							onChange={handleSelectChangeSeller}
 							options={sellers.map((seller) => ({
 								value: seller._id,
@@ -770,7 +770,7 @@ function AdminCreateInvoice() {
 									className='admin-create-invoice-form-label'
 									htmlFor='sellercompanyname'
 								>
-									Agent Company Name
+									Consignee Company Name
 								</label>
 								<input
 									className='admin-create-invoice-form-input'
@@ -792,7 +792,7 @@ function AdminCreateInvoice() {
 									className='admin-create-invoice-form-label'
 									htmlFor='sellercompanyaddress'
 								>
-									Agent Company Address
+									Consignee Company Address
 								</label>
 								<input
 									className='admin-create-invoice-form-input'
@@ -814,7 +814,7 @@ function AdminCreateInvoice() {
 									className='admin-create-invoice-form-label'
 									htmlFor='buyercompanygstno'
 								>
-									Agent GST No
+									Consignee GST No
 								</label>
 								<input
 									className='admin-create-invoice-form-input'
@@ -836,7 +836,7 @@ function AdminCreateInvoice() {
 									className='admin-create-invoice-form-label'
 									htmlFor='sellercompanystatename'
 								>
-									Agent Company State Name
+									Consignee Company State Name
 								</label>
 								<input
 									className='admin-create-invoice-form-input'
@@ -858,7 +858,7 @@ function AdminCreateInvoice() {
 									className='admin-create-invoice-form-label'
 									htmlFor='sellercompanystatecode'
 								>
-									Agent Company State Code
+									Consignee Company State Code
 								</label>
 								<input
 									className='admin-create-invoice-form-input'

@@ -457,7 +457,7 @@ function AdminSellerManage() {
 			<div className='admin-seller-manage'>
 				<div className='admin-seller-manage-data'>
 					<div className='admin-seller-manage-data-header'>
-						<h1 className='admin-seller-manage-data-title'>ALL AGENTS</h1>
+						<h1 className='admin-seller-manage-data-title'>ALL CONSIGNEES</h1>
 						<div className='admin-seller-manage-file-upload'>
 							<input
 								className='admin-seller-manage-file-upload-input'
@@ -634,7 +634,7 @@ function AdminSellerManage() {
 				</div>
 				<div className='admin-seller-manage-form'>
 					<h1 className='admin-seller-manage-form-title'>
-						{selectedSellerId ? 'UPDATE AGENT' : 'ADD AGENT'}
+						{selectedSellerId ? 'UPDATE CONSIGNEE' : 'ADD CONSIGNEE'}
 					</h1>
 					<form
 						className='admin-seller-manage-form-form'

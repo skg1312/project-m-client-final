@@ -770,6 +770,8 @@ function AdminReports() {
 		newWindow.document.write('</table>');
 
 		newWindow.document.write('</body></html>');
+
+		newWindow.print();
 	};
 
 	//for showing data of Day section by date

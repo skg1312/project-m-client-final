@@ -45,7 +45,9 @@ import UserInvoiceDashboard from './components/User/UserInvoiceDashboard';
 import UserInvoiceManagement from './components/User/UserInvoiceManage';
 import UserReports from './components/User/UserReport';
 import UserCreateInvoice from './components/User/UserCreateInvoice';
-import PdfViewer from './components/Admin/AdminPdfViewer';
+import AdminPdfViewer from './components/Admin/AdminPdfViewer';
+import PdfViewer from './components/Admin/PdfViewer';
+import PdfViewer2 from './components/Admin/PdfViewer2';
 import StaffPdfViewer from './components/Staff/StaffInvoiceView';
 import UserPdfViewer from './components/User/UserInvoiceView';
 
@@ -65,7 +67,10 @@ function App() {
 								</ReqAdminAuth>
 							}
 						/>
-						<Route path='/pdf/:selectedInvoiceId' element={<PdfViewer />} />
+						<Route
+							path='/pdf/:selectedInvoiceId'
+							element={<AdminPdfViewer />}
+						/>
 						<Route
 							path='/admininvdash'
 							element={
@@ -158,9 +163,17 @@ function App() {
 							path='/admininvview'
 							element={
 								<ReqAdminAuth>
-									<PdfViewer />
+									<AdminPdfViewer />
 								</ReqAdminAuth>
 							}
+						/>
+						<Route
+							path='/pdf/:selectedInvoiceId/:timestamp'
+							element={<PdfViewer />}
+						/>
+						<Route
+							path='/pdf2/:selectedInvoiceId/:timestamp'
+							element={<PdfViewer2 />}
 						/>
 					</Routes>
 				</AdminAuthProvider>

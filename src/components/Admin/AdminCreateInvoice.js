@@ -409,15 +409,10 @@ function AdminCreateInvoice() {
 	};
 
 	const handleSelectChangeParty = (selectedOption) => {
-		// const [partyrefno] = selectedOption.value.split('-');
-		console.log(selectedOption);
-
 		const selectedPartyId = selectedOption.value;
 		const selectedParty = parties.find(
 			(party) => party._id === selectedPartyId
 		);
-		console.log(selectedParty);
-		console.log(selectedParty.partyrefno);
 
 		setDataToSend((prevData) => ({
 			...prevData,

@@ -63,57 +63,57 @@ function AdminInvoiceManagement() {
 		setSelectedOption(event.target.value);
 	};
 
+	// const handleCopy = () => {
+	// 	closePdfViewer();
+	// };
+
 	const handleCopy = () => {
-		closePdfViewer();
+		if (selectedOption === 'Original') {
+			handleOriginalCopy();
+		} else {
+			handleDuplicateCopy();
+		}
 	};
 
-	// const handleCopy = () => {
-	// 	if (selectedOption === 'Original') {
-	// 		handleOriginalCopy();
-	// 	} else {
-	// 		handleDuplicateCopy();
-	// 	}
-	// };
+	const handleOriginalCopy = () => {
+		const expirationTimestamp = Date.now() + 5 * 24 * 60 * 60 * 1000;
+		const id = selectedInvoiceId;
+		console.log(`${API}/download/${id}`);
+		const pdfUrl = `${id}/${expirationTimestamp}`;
 
-	// const handleOriginalCopy = () => {
-	// 	const expirationTimestamp = Date.now() + 5 * 24 * 60 * 60 * 1000;
-	// 	const id = selectedInvoiceId;
-	// 	console.log(`${API}/download/${id}`);
-	// 	const pdfUrl = `${id}/${expirationTimestamp}`;
+		console.log('Handling Original Invoice Copy');
+		const linkToCopy = `${ViewURL}pdf/${pdfUrl}`;
 
-	// 	console.log('Handling Original Invoice Copy');
-	// 	const linkToCopy = `${ViewURL}pdf/${pdfUrl}`; // Replace with the actual link or variable
+		try {
+			copy(linkToCopy);
+			alert('Link copied to clipboard!');
+			// toast.success('Link copied to clipboard!');
+		} catch (error) {
+			console.error('Unable to copy to clipboard.', error);
+			alert('Error copying to clipboard. Please try again.');
+			// toast.error('Error copying to clipboard. Please try again.');
+		}
+	};
 
-	// 	try {
-	// 		copy(linkToCopy);
-	// 		alert('Link copied to clipboard!');
-	// 		// toast.success('Link copied to clipboard!');
-	// 	} catch (error) {
-	// 		console.error('Unable to copy to clipboard.', error);
-	// 		alert('Error copying to clipboard. Please try again.');
-	// 		// toast.error('Error copying to clipboard. Please try again.');
-	// 	}
-	// };
+	const handleDuplicateCopy = () => {
+		const expirationTimestamp = Date.now() + 5 * 24 * 60 * 60 * 1000;
+		const id = selectedInvoiceId;
+		console.log(`${API}/download/${id}`);
+		const pdfUrl = `${id}/${expirationTimestamp}`;
 
-	// const handleDuplicateCopy = () => {
-	// 	const expirationTimestamp = Date.now() + 5 * 24 * 60 * 60 * 1000;
-	// 	const id = selectedInvoiceId;
-	// 	console.log(`${API}/download/${id}`);
-	// 	const pdfUrl = `${id}/${expirationTimestamp}`;
+		console.log('Handling Original Invoice Copy');
+		const linkToCopy = `${ViewURL}pdf2/${pdfUrl}`;
 
-	// 	console.log('Handling Original Invoice Copy');
-	// 	const linkToCopy = `${ViewURL}pdf2/${pdfUrl}`;
-
-	// 	try {
-	// 		copy(linkToCopy);
-	// 		alert('Link copied to clipboard!');
-	// 		// toast.success('Link copied to clipboard!');
-	// 	} catch (error) {
-	// 		console.error('Unable to copy to clipboard.', error);
-	// 		alert('Error copying to clipboard. Please try again.');
-	// 		// toast.error('Error copying to clipboard. Please try again.');
-	// 	}
-	// };
+		try {
+			copy(linkToCopy);
+			alert('Link copied to clipboard!');
+			// toast.success('Link copied to clipboard!');
+		} catch (error) {
+			console.error('Unable to copy to clipboard.', error);
+			alert('Error copying to clipboard. Please try again.');
+			// toast.error('Error copying to clipboard. Please try again.');
+		}
+	};
 
 	const ViewInvoice = (invoiceid) => {
 		setSelectedInvoiceId(invoiceid);

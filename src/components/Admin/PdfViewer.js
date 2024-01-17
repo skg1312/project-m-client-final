@@ -86,6 +86,7 @@ const PdfViewer = () => {
 				alignItems: 'center',
 				height: '100vh',
 				flexDirection: 'column',
+				marginTop: '150px',
 			}}
 		>
 			{showPrintSaveOptions && (

@@ -922,7 +922,7 @@ function AdminCreateInvoice() {
 									id=''
 									name='vehicledetails.vechiclenumber'
 									type='text'
-									// pattern='^[A-Z]{2}[0-9]{2}[A-Z]{2}[0-9]{4}$'
+									pattern='^[A-Za-z]{2}\d{2}\s[A-Z]{2}\s\d{4}$'
 									required
 									placeholder='Ex: AB12 CD 3456'
 									onChange={(e) => {

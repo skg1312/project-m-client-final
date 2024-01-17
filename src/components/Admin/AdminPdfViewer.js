@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 const AdminPdfViewer = () => {
 	const { selectedInvoiceId } = useParams();
 	const API = process.env.REACT_APP_API;
-	const pdfUrl = `${API}download2/${selectedInvoiceId}`;
+	const pdfUrl = `${API}download/${selectedInvoiceId}`;
 	// console.log('pdfUrl', pdfUrl);
 
 	//const handlePrint = () => {

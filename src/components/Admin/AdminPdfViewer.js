@@ -7,15 +7,15 @@ import { useParams } from 'react-router-dom';
 const AdminPdfViewer = () => {
 	const { selectedInvoiceId } = useParams();
 	const API = process.env.REACT_APP_API;
-	const pdfUrl = `${API}download/${selectedInvoiceId}`;
+	const pdfUrl = `${API}download2/${selectedInvoiceId}`;
 	// console.log('pdfUrl', pdfUrl);
 
 	//const handlePrint = () => {
-//		window.print();
-//	};
+	//		window.print();
+	//	};
 
 	// const handleDownload = () => {
-	// 	window.location = `${API}download/${selectedInvoiceId}`;
+	// 	window.location = ${API}download/${selectedInvoiceId};
 	// };
 
 	return (
@@ -28,7 +28,7 @@ const AdminPdfViewer = () => {
 				)}&embedded=true`}
 				style={{ width: '100%', height: '100%', border: 'none' }}
 			/>
-{/*
+			{/*
 			<div
 				style={{
 					position: 'absolute',

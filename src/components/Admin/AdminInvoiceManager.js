@@ -5,8 +5,10 @@ import background from '../images/Desktop.png';
 // import ReactPaginate from 'react-paginate';
 import AdminNavbar from './AdminNavbar';
 // import PdfViewer from './AdminInvoiceView';
-
+import Modal from 'react-modal';
 import { useNavigate } from 'react-router-dom';
+import Close from '../images/cross_icon.jpg';
+import copy from 'clipboard-copy';
 
 function AdminInvoiceManagement() {
 	const navigate = useNavigate();
@@ -16,6 +18,7 @@ function AdminInvoiceManagement() {
 	const [searchInput, setSearchInput] = useState('');
 
 	const API = process.env.REACT_APP_API;
+	const ViewURL = 'https://project-m-client.vercel.app/';
 	// const itemsPerPage = 10;
 
 	const sortedInvoice = [...invoice].reverse();
@@ -45,16 +48,113 @@ function AdminInvoiceManagement() {
 	// const changePage = ({ selected }) => {
 	// 	setPageNumber(selected);
 	// };
+	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [selectedOption, setSelectedOption] = useState('Original');
+
+	const openPdfViewer = () => {
+		setIsModalOpen(true);
+	};
+
+	const closePdfViewer = () => {
+		setIsModalOpen(false);
+	};
+
+	const handleOptionChange = (event) => {
+		setSelectedOption(event.target.value);
+	};
+
+	const handleCopy = () => {
+		closePdfViewer();
+	};
+
+	// const handleCopy = () => {
+	// 	if (selectedOption === 'Original') {
+	// 		handleOriginalCopy();
+	// 	} else {
+	// 		handleDuplicateCopy();
+	// 	}
+	// };
+
+	// const handleOriginalCopy = () => {
+	// 	const expirationTimestamp = Date.now() + 5 * 24 * 60 * 60 * 1000;
+	// 	const id = selectedInvoiceId;
+	// 	console.log(`${API}/download/${id}`);
+	// 	const pdfUrl = `${id}/${expirationTimestamp}`;
+
+	// 	console.log('Handling Original Invoice Copy');
+	// 	const linkToCopy = `${ViewURL}pdf/${pdfUrl}`; // Replace with the actual link or variable
+
+	// 	try {
+	// 		copy(linkToCopy);
+	// 		alert('Link copied to clipboard!');
+	// 		// toast.success('Link copied to clipboard!');
+	// 	} catch (error) {
+	// 		console.error('Unable to copy to clipboard.', error);
+	// 		alert('Error copying to clipboard. Please try again.');
+	// 		// toast.error('Error copying to clipboard. Please try again.');
+	// 	}
+	// };
+
+	// const handleDuplicateCopy = () => {
+	// 	const expirationTimestamp = Date.now() + 5 * 24 * 60 * 60 * 1000;
+	// 	const id = selectedInvoiceId;
+	// 	console.log(`${API}/download/${id}`);
+	// 	const pdfUrl = `${id}/${expirationTimestamp}`;
+
+	// 	console.log('Handling Original Invoice Copy');
+	// 	const linkToCopy = `${ViewURL}pdf2/${pdfUrl}`;
+
+	// 	try {
+	// 		copy(linkToCopy);
+	// 		alert('Link copied to clipboard!');
+	// 		// toast.success('Link copied to clipboard!');
+	// 	} catch (error) {
+	// 		console.error('Unable to copy to clipboard.', error);
+	// 		alert('Error copying to clipboard. Please try again.');
+	// 		// toast.error('Error copying to clipboard. Please try again.');
+	// 	}
+	// };
 
 	const ViewInvoice = (invoiceid) => {
-  setSelectedInvoiceId(invoiceid);
-  const pdfUrl = `${invoiceid}`;
-  navigate(`/pdf/${pdfUrl}`);
-};
+		setSelectedInvoiceId(invoiceid);
+		openPdfViewer();
+	};
+
+	const handleInvoiceChoice = () => {
+		if (selectedOption === 'Original') {
+			handleOriginalInvoice();
+		} else {
+			handleDuplicateInvoice();
+		}
+		closePdfViewer();
+	};
+
+	const handleOriginalInvoice = () => {
+		const expirationTimestamp = Date.now() + 5 * 24 * 60 * 60 * 1000;
+		const id = selectedInvoiceId;
+		console.log(`${API}/download/${id}`);
+		const pdfUrl = `${id}/${expirationTimestamp}`;
+		// Assuming 'navigate' is a function for navigating in your application
+		// You may need to replace it with the appropriate navigation logic
+		navigate(`/pdf/${pdfUrl}`);
+		console.log('Handling Original Invoice');
+	};
+
+	const handleDuplicateInvoice = () => {
+		const expirationTimestamp = Date.now() + 5 * 24 * 60 * 60 * 1000;
+		const id = selectedInvoiceId;
+		console.log(`${API}/download2/${id}`);
+		const pdfUrl = `${id}/${expirationTimestamp}`;
+		// Assuming 'navigate' is a function for navigating in your application
+		// You may need to replace it with the appropriate navigation logic
+		navigate(`/pdf2/${pdfUrl}`);
+		console.log('Handling Duplicate Invoice');
+	};
+
 	// const PrintInvoice = (invoiceid) => {
 	// 	setSelectedInvoiceId(invoiceid);
 	// 	if (selectedInvoiceId) {
-	// 		window.location = `${API}download/${selectedInvoiceId}`;
+	// 		window.location = ${API}download/${selectedInvoiceId};
 	// 	}
 	// };
 
@@ -166,6 +266,48 @@ function AdminInvoiceManagement() {
 											>
 												View
 											</button>
+											{isModalOpen && (
+												<div className='modal'>
+													<div className='modal-content'>
+														<img
+															src={Close}
+															alt='Close'
+															className='close-modal'
+															onClick={() => closePdfViewer()}
+														/>
+														<div className='modal-btn-div'>
+															<label className='type-select'>
+																Select an option:
+															</label>
+															<select
+																className='type-select'
+																value={selectedOption}
+																onChange={handleOptionChange}
+															>
+																<option value='Original'>Original</option>
+																<option value='Duplicate'>Duplicate</option>
+															</select>
+														</div>
+														<div className='modal-btn-div-pdf'>
+															<button
+																className='modal-btn'
+																onClick={handleInvoiceChoice}
+															>
+																{selectedOption === 'Original'
+																	? 'View Original'
+																	: 'View Duplicate'}{' '}
+																Invoice
+															</button>
+															<button
+																className='modal-btn'
+																onClick={handleCopy}
+															>
+																Copy Link
+															</button>
+														</div>
+													</div>
+												</div>
+											)}
 											{/* <button
 												onClick={() => PrintInvoice(invoice._id)}
 												className='invoice-management-data-body-table-data-button'

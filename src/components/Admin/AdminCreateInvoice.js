@@ -89,10 +89,37 @@ function AdminCreateInvoice() {
 	});
 
 	const API = process.env.REACT_APP_API;
-	const ViewURL = 'https://project-m-client.vercel.app/';
+	// const ViewURL = 'https://project-m-client.vercel.app/';
+	const pdfUrlOriginal = `${API}download/${url}`;
+	const ViewURLOriginal = `https://docs.google.com/viewer?url=${encodeURIComponent(
+		pdfUrlOriginal
+	)}&embedded=true`;
 
 	const handleChange = (e, section, field) => {
 		const value = e.target.value;
+		setDataToSend((prevData) => ({
+			...prevData,
+			[section]: {
+				...prevData[section],
+				[field]: value,
+			},
+		}));
+	};
+
+	const handleVehicleNumChange = (e, section, field) => {
+		let value = e.target.value;
+
+		// Remove existing spaces
+		value = value.replace(/\s/g, '');
+
+		// Inserting a space after the first 4 characters
+		value = value.substring(0, 4) + ' ' + value.substring(4);
+
+		// Inserting a space after the next 2 characters
+		value = value.substring(0, 7) + ' ' + value.substring(7);
+
+		console.log(value);
+
 		setDataToSend((prevData) => ({
 			...prevData,
 			[section]: {
@@ -106,6 +133,7 @@ function AdminCreateInvoice() {
 		e.preventDefault();
 		// Check the length of items in dataToSend
 		if (dataToSend && dataToSend.consignmentdetails.itemdetails.length >= 1) {
+			// console.log(dataToSend);
 			try {
 				const response = await fetch(`${API}invoice`, {
 					method: 'POST',
@@ -114,7 +142,6 @@ function AdminCreateInvoice() {
 					},
 					body: JSON.stringify(dataToSend),
 				});
-
 				if (response.ok) {
 					const data = await response.json();
 					console.log('Invoice created successfully:', data);
@@ -144,8 +171,8 @@ function AdminCreateInvoice() {
 				.required('Driver Number is required'),
 			vechiclenumber: Yup.string()
 				.matches(
-					/^[A-Za-z]{2}\d{2}\s[A-Z]{2}\s\d{4}$/,
-					'Invalid vehicle number. Please use the format: AB12 CD 3456'
+					/^[A-Za-z]{2}\d{2}[A-Za-z]{2}\d{4}$/,
+					'Invalid vehicle number. Please use the format: AB12CD3456'
 				)
 				.required('Vehicle Number is required'),
 
@@ -434,7 +461,7 @@ function AdminCreateInvoice() {
 	};
 
 	const handleCopy = () => {
-		const linkToCopy = `${ViewURL}pdf/${url}`; // Replace with the actual link or variable
+		const linkToCopy = `${ViewURLOriginal}`; // Replace with the actual link or variable
 
 		try {
 			copy(linkToCopy);
@@ -922,12 +949,16 @@ function AdminCreateInvoice() {
 									id=''
 									name='vehicledetails.vechiclenumber'
 									type='text'
-									pattern='^[A-Za-z]{2}\d{2}\s[A-Z]{2}\s\d{4}$'
+									// pattern='^[A-Za-z]{2}\d{2}\s[A-Z]{2}\s\d{4}$'
 									required
-									placeholder='Ex: AB12 CD 3456'
+									placeholder='Ex: AB12CD3456'
 									onChange={(e) => {
 										formik.handleChange(e);
-										handleChange(e, 'vehicledetails', 'vechiclenumber');
+										handleVehicleNumChange(
+											e,
+											'vehicledetails',
+											'vechiclenumber'
+										);
 									}}
 									onBlur={formik.handleBlur}
 									value={

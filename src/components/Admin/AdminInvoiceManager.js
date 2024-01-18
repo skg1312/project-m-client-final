@@ -18,7 +18,14 @@ function AdminInvoiceManagement() {
 	const [searchInput, setSearchInput] = useState('');
 
 	const API = process.env.REACT_APP_API;
-	const ViewURL = 'https://project-m-client.vercel.app/';
+	const pdfUrlOriginal = `${API}download/${selectedInvoiceId}`;
+	const pdfUrlDuplicate = `${API}download2/${selectedInvoiceId}`;
+	const ViewURLOriginal = `https://docs.google.com/viewer?url=${encodeURIComponent(
+		pdfUrlOriginal
+	)}&embedded=true`;
+	const ViewURLDuplicate = `https://docs.google.com/viewer?url=${encodeURIComponent(
+		pdfUrlDuplicate
+	)}&embedded=true`;
 	// const itemsPerPage = 10;
 
 	const sortedInvoice = [...invoice].reverse();
@@ -49,7 +56,7 @@ function AdminInvoiceManagement() {
 	// 	setPageNumber(selected);
 	// };
 	const [isModalOpen, setIsModalOpen] = useState(false);
-	const [selectedOption, setSelectedOption] = useState('Original');
+	// const [selectedOption, setSelectedOption] = useState('Original');
 
 	const openPdfViewer = () => {
 		setIsModalOpen(true);
@@ -59,21 +66,21 @@ function AdminInvoiceManagement() {
 		setIsModalOpen(false);
 	};
 
-	const handleOptionChange = (event) => {
-		setSelectedOption(event.target.value);
-	};
+	// const handleOptionChange = (event) => {
+	// 	setSelectedOption(event.target.value);
+	// };
 
 	// const handleCopy = () => {
 	// 	closePdfViewer();
 	// };
 
-	const handleCopy = () => {
-		if (selectedOption === 'Original') {
-			handleOriginalCopy();
-		} else {
-			handleDuplicateCopy();
-		}
-	};
+	// const handleCopy = () => {
+	// 	if (selectedOption === 'Original') {
+	// 		handleOriginalCopy();
+	// 	} else {
+	// 		handleDuplicateCopy();
+	// 	}
+	// };
 
 	const handleOriginalCopy = () => {
 		const expirationTimestamp = Date.now() + 5 * 24 * 60 * 60 * 1000;
@@ -82,8 +89,7 @@ function AdminInvoiceManagement() {
 		const pdfUrl = `${id}/${expirationTimestamp}`;
 
 		console.log('Handling Original Invoice Copy');
-		const linkToCopy = `${ViewURL}pdf/${pdfUrl}`;
-
+		const linkToCopy = `${ViewURLOriginal}`;
 		try {
 			copy(linkToCopy);
 			alert('Link copied to clipboard!');
@@ -102,7 +108,7 @@ function AdminInvoiceManagement() {
 		const pdfUrl = `${id}/${expirationTimestamp}`;
 
 		console.log('Handling Original Invoice Copy');
-		const linkToCopy = `${ViewURL}pdf2/${pdfUrl}`;
+		const linkToCopy = `${ViewURLDuplicate}`;
 
 		try {
 			copy(linkToCopy);
@@ -120,14 +126,14 @@ function AdminInvoiceManagement() {
 		openPdfViewer();
 	};
 
-	const handleInvoiceChoice = () => {
-		if (selectedOption === 'Original') {
-			handleOriginalInvoice();
-		} else {
-			handleDuplicateInvoice();
-		}
-		closePdfViewer();
-	};
+	// const handleInvoiceChoice = () => {
+	// 	if (selectedOption === 'Original') {
+	// 		handleOriginalInvoice();
+	// 	} else {
+	// 		handleDuplicateInvoice();
+	// 	}
+	// 	closePdfViewer();
+	// };
 
 	const handleOriginalInvoice = () => {
 		const expirationTimestamp = Date.now() + 5 * 24 * 60 * 60 * 1000;
@@ -275,7 +281,7 @@ function AdminInvoiceManagement() {
 															className='close-modal'
 															onClick={() => closePdfViewer()}
 														/>
-														<div className='modal-btn-div'>
+														{/* <div className='modal-btn-div'>
 															<label className='type-select'>
 																Select an option:
 															</label>
@@ -287,23 +293,42 @@ function AdminInvoiceManagement() {
 																<option value='Original'>Original</option>
 																<option value='Duplicate'>Duplicate</option>
 															</select>
-														</div>
+														</div> */}
 														<div className='modal-btn-div-pdf'>
-															<button
-																className='modal-btn'
-																onClick={handleInvoiceChoice}
-															>
-																{selectedOption === 'Original'
+															<div style={{ display: 'flex', gap: '30px' }}>
+																<button
+																	className='modal-btn'
+																	onClick={handleOriginalInvoice}
+																>
+																	{/* {selectedOption === 'Original'
 																	? 'View Original'
-																	: 'View Duplicate'}{' '}
-																Invoice
-															</button>
-															<button
-																className='modal-btn'
-																onClick={handleCopy}
-															>
-																Copy Link
-															</button>
+																	: 'View Duplicate'}{' '} */}
+																	View Original Invoice
+																</button>
+																<button
+																	className='modal-btn'
+																	onClick={handleOriginalCopy}
+																>
+																	Copy Link
+																</button>
+															</div>
+															<div style={{ display: 'flex', gap: '30px' }}>
+																<button
+																	className='modal-btn'
+																	onClick={handleDuplicateInvoice}
+																>
+																	{/* {selectedOption === 'Original'
+																	? 'View Original'
+																	: 'View Duplicate'}{' '} */}
+																	VIew Duplicate Invoice
+																</button>
+																<button
+																	className='modal-btn'
+																	onClick={handleDuplicateCopy}
+																>
+																	Copy Link
+																</button>
+															</div>
 														</div>
 													</div>
 												</div>

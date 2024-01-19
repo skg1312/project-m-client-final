@@ -40,6 +40,16 @@ function AdminBuyerManage() {
 	const [searchInput, setSearchInput] = useState('');
 
 	const sortedBuyers = [...buyers].reverse();
+	sortedBuyers.sort((a, b) => {
+		if (a.buyercompanyname < b.buyercompanyname) {
+			return -1;
+		}
+		if (a.buyercompanyname > b.buyercompanyname) {
+			return 1;
+		}
+		return 0; // names are equal
+	});
+
 	const displayedBuyerSearch = sortedBuyers.filter((item) => {
 		const buyerCompanyName = item.buyercompanyname || '';
 

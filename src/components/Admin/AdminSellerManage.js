@@ -38,6 +38,16 @@ function AdminSellerManage() {
 	const [searchInput, setSearchInput] = useState('');
 
 	const sortedSellers = [...sellers].reverse();
+	sortedSellers.sort((a, b) => {
+		if (a.sellercompanyname < b.sellercompanyname) {
+			return -1;
+		}
+		if (a.sellercompanyname > b.sellercompanyname) {
+			return 1;
+		}
+		return 0; // names are equal
+	});
+
 	const displayedSellerSearch = sortedSellers.filter((item) => {
 		const sellerCompanyName = item.sellercompanyname || '';
 

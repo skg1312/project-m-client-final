@@ -30,18 +30,18 @@ function AdminInvoiceManagement() {
 
 	const sortedInvoice = [...invoice].reverse();
 	const displayedInvoiceSearch = sortedInvoice.filter((item) => {
-		const invoiceNo = item.invoicedetails?.invoiceno || '';
-		const companyName = item.companydetails?.companyname || '';
-		const vehicleNumber = item.vehicledetails?.vehiclenumber || '';
+		// const invoiceNo = item.invoicedetails?.invoiceno || '';
+		// const companyName = item.companydetails?.companyname || '';
+		const vehicleNumber = item.vehicledetails?.vechiclenumber || '';
 
 		// Check if the search criteria is null or cannot be converted to lowercase
 		if (
-			(invoiceNo &&
-				invoiceNo.toLowerCase().includes(searchInput?.toLowerCase() ?? '')) ||
-			(companyName &&
-				companyName.toLowerCase().includes(searchInput?.toLowerCase() ?? '')) ||
-			(vehicleNumber &&
-				vehicleNumber.toLowerCase().includes(searchInput?.toLowerCase() ?? ''))
+			// (invoiceNo &&
+			// 	invoiceNo.toLowerCase().includes(searchInput?.toLowerCase() ?? '')) ||
+			// (companyName &&
+			// 	companyName.toLowerCase().includes(searchInput?.toLowerCase() ?? '')) ||
+			vehicleNumber &&
+			vehicleNumber.toLowerCase().includes(searchInput?.toLowerCase() ?? '')
 		) {
 			return true;
 		}
@@ -191,7 +191,7 @@ function AdminInvoiceManagement() {
 						All Invoice
 						<input
 							type='text'
-							placeholder='Search Invoice...'
+							placeholder='Search Invoice Vehicle Number...'
 							className='invoice-manage-search-input'
 							value={searchInput}
 							onChange={(e) => setSearchInput(e.target.value)}

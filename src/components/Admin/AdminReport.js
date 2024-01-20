@@ -14,8 +14,14 @@ function AdminReports() {
 	const [exportedData, setExportedData] = useState([]);
 	const [selectedAgentOption, setSelectedAgentOption] = useState('');
 	const [agentData, setAgentData] = useState('');
-	const [startDate, setStartDate] = useState('');
-	const [endDate, setEndDate] = useState('');
+	// Get today's date in the format "YYYY-MM-DD"
+	const today = new Date().toISOString().split('T')[0];
+	const [startDate, setStartDate] = useState(today);
+	// Get tomorrow's date in the format "YYYY-MM-DD"
+	const tomorrow = new Date();
+	tomorrow.setDate(new Date().getDate() + 1);
+	const tomorrowFormatted = tomorrow.toISOString().split('T')[0];
+	const [endDate, setEndDate] = useState(tomorrowFormatted);
 	// const [selectedDateOption, setSelectedDateOption] = useState('');
 	// const [filteredDateSelectData, setFilteredDateSelectData] = useState([]);
 	// const [dateData, setDateData] = useState([]);
@@ -52,14 +58,6 @@ function AdminReports() {
 		const agentCompanyState =
 			(item.sellerdetails && item.sellerdetails.sellercompanystatename) || ''; // **Include Agent Company State Name**
 		const searchLowerCase = searchInput?.toLowerCase();
-		const loadFrom =
-			(item.loadingdetails && item.loadingdetails.startpoint) || '';
-		const destination =
-			(item.loadingdetails && item.loadingdetails.endpoint) || '';
-		const refCode =
-			(item.boardingdetails && item.boardingdetails.partyref) || '';
-		const billMakerName =
-			(item.invoicedetails && item.invoicedetails.invoicemakername) || '';
 
 		if (
 			invoiceNo.toLowerCase().includes(searchInput?.toLowerCase()) ||
@@ -71,11 +69,7 @@ function AdminReports() {
 			buyerCompanyName.toLowerCase().includes(searchLowerCase) ||
 			buyerCompanyState.toLowerCase().includes(searchLowerCase) ||
 			agentCompanyName.toLowerCase().includes(searchLowerCase) || // **Check Agent Company Name**
-			agentCompanyState.toLowerCase().includes(searchLowerCase) || // **Check Agent Company State Name**
-			loadFrom.toLowerCase().includes(searchLowerCase) ||
-			destination.toLowerCase().includes(searchLowerCase) ||
-			refCode.toLowerCase().includes(searchLowerCase) ||
-			billMakerName.toLowerCase().includes(searchLowerCase)
+			agentCompanyState.toLowerCase().includes(searchLowerCase) // **Check Agent Company State Name**
 		) {
 			return true;
 		}
@@ -89,6 +83,18 @@ function AdminReports() {
 	// const changePage = ({ selected }) => {
 	// 	setPageNumber(selected);
 	// };
+
+	const displayedMisInvoiceSearch = sortedInvoice.filter((item) => {
+		const refCode =
+			(item.boardingdetails && item.boardingdetails.partyref) || '';
+		const searchLowerCase = searchInput?.toLowerCase();
+
+		if (refCode.toLowerCase().includes(searchLowerCase)) {
+			return true;
+		}
+
+		return false;
+	});
 
 	useEffect(() => {
 		axios
@@ -522,10 +528,10 @@ function AdminReports() {
 			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Date</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Transportation Cost</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Company Name</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Company Name</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Transportation Cost</th>'
 		);
 		newWindow.document.write(
 			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">No of Items</th>'
@@ -557,15 +563,15 @@ function AdminReports() {
 			);
 			newWindow.document.write(
 				`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
-					dataItem.loadingdetails && dataItem.loadingdetails.transportationcost
-						? dataItem.loadingdetails.transportationcost
+					dataItem.companydetails && dataItem.companydetails.companyname
+						? dataItem.companydetails.companyname.substring(0, 12)
 						: 'N/A'
 				}</td>`
 			);
 			newWindow.document.write(
 				`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
-					dataItem.companydetails && dataItem.companydetails.companyname
-						? dataItem.companydetails.companyname.substring(0, 12)
+					dataItem.loadingdetails && dataItem.loadingdetails.transportationcost
+						? dataItem.loadingdetails.transportationcost
 						: 'N/A'
 				}</td>`
 			);
@@ -593,11 +599,11 @@ function AdminReports() {
 		if (filteredDataByDate) {
 			datatoIterate = filteredDataByDate;
 		}
-		if (searchInput !== '' && displayedInvoiceSearch) {
-			datatoIterate = displayedInvoiceSearch;
+		if (searchInput !== '' && displayedMisInvoiceSearch) {
+			datatoIterate = displayedMisInvoiceSearch;
 		}
-		if (searchInput !== '' && displayedInvoiceSearch && filteredDataByDate) {
-			datatoIterate = displayedInvoiceSearch
+		if (searchInput !== '' && displayedMisInvoiceSearch && filteredDataByDate) {
+			datatoIterate = displayedMisInvoiceSearch
 				.filter((item) => {
 					const itemDate = new Date(item.invoicedetails.invoicedate);
 
@@ -1191,7 +1197,7 @@ function AdminReports() {
 				setExportedData(filteredLoadData);
 				break;
 			case 'mis':
-				const filteredMisData = displayedInvoiceSearch.map((invoice) => ({
+				const filteredMisData = displayedMisInvoiceSearch.map((invoice) => ({
 					'Invoice No': invoice.invoicedetails?.invoiceno ?? 'N/A',
 					Agent: invoice.sellerdetails?.sellercompanyname ?? 'N/A',
 					Buyer: invoice.buyerdetails?.buyercompanyname ?? 'N/A',
@@ -1342,55 +1348,55 @@ function AdminReports() {
 	};
 
 	const exportMisReport = () => {
-		const filteredMisDataData = displayedInvoiceSearch.map((invoice) => ({
-			Date:
-				invoice.invoicedetails && invoice.invoicedetails.invoicedate
-					? new Date(invoice.invoicedetails.invoicedate).toLocaleDateString(
-							'en-GB',
-							{
-								day: '2-digit',
-								month: '2-digit',
-								year: 'numeric',
-							}
-					  )
-					: 'N/A',
-			'Buyer Name':
-				invoice.buyerdetails && invoice.buyerdetails.buyercompanyname
-					? invoice.buyerdetails.buyercompanyname
-					: 'N/A',
-			'Agent Name':
-				invoice.sellerdetails && invoice.sellerdetails.sellercompanyname
-					? invoice.sellerdetails.sellercompanyname
-					: 'N/A',
+		const filteredMisDataData = displayedMisInvoiceSearch.map((invoice) => ({
+			// Date:
+			// 	invoice.invoicedetails && invoice.invoicedetails.invoicedate
+			// 		? new Date(invoice.invoicedetails.invoicedate).toLocaleDateString(
+			// 				'en-GB',
+			// 				{
+			// 					day: '2-digit',
+			// 					month: '2-digit',
+			// 					year: 'numeric',
+			// 				}
+			// 		  )
+			// 		: 'N/A',
+			// 'Buyer Name':
+			// 	invoice.buyerdetails && invoice.buyerdetails.buyercompanyname
+			// 		? invoice.buyerdetails.buyercompanyname
+			// 		: 'N/A',
+			// 'Agent Name':
+			// 	invoice.sellerdetails && invoice.sellerdetails.sellercompanyname
+			// 		? invoice.sellerdetails.sellercompanyname
+			// 		: 'N/A',
 
-			'Load From':
-				invoice.loadingdetails && invoice.loadingdetails.startpoint
-					? invoice.loadingdetails.startpoint
-					: 'N/A',
-			Destination:
-				invoice.loadingdetails && invoice.loadingdetails.endpoint
-					? invoice.loadingdetails.endpoint
-					: 'N/A',
-			'Motor vehicle No':
-				invoice.vehicledetails && invoice.vehicledetails.vechiclenumber
-					? invoice.vehicledetails.vechiclenumber
-					: 'N/A',
-			'Total Quantity':
-				invoice.consignmentdetails && invoice.consignmentdetails.itemdetails[0]
-					? invoice.consignmentdetails.itemdetails[0].itemquantity
-					: '0',
+			// 'Load From':
+			// 	invoice.loadingdetails && invoice.loadingdetails.startpoint
+			// 		? invoice.loadingdetails.startpoint
+			// 		: 'N/A',
+			// Destination:
+			// 	invoice.loadingdetails && invoice.loadingdetails.endpoint
+			// 		? invoice.loadingdetails.endpoint
+			// 		: 'N/A',
+			// 'Motor vehicle No':
+			// 	invoice.vehicledetails && invoice.vehicledetails.vechiclenumber
+			// 		? invoice.vehicledetails.vechiclenumber
+			// 		: 'N/A',
+			// 'Total Quantity':
+			// 	invoice.consignmentdetails && invoice.consignmentdetails.itemdetails[0]
+			// 		? invoice.consignmentdetails.itemdetails[0].itemquantity
+			// 		: '0',
 			'Ref. Code':
 				invoice.boardingdetails && invoice.boardingdetails.partyref
 					? invoice.boardingdetails.partyref
 					: 'N/A',
-			'Bill Maker Name':
-				invoice.invoicedetails && invoice.invoicedetails.invoicemakername
-					? invoice.invoicedetails.invoicemakername
-					: 'N/A',
-			Rate:
-				invoice.consignmentdetails && invoice.consignmentdetails.itemdetails[0]
-					? invoice.consignmentdetails.itemdetails[0].itemprice
-					: 'N/A',
+			// 'Bill Maker Name':
+			// 	invoice.invoicedetails && invoice.invoicedetails.invoicemakername
+			// 		? invoice.invoicedetails.invoicemakername
+			// 		: 'N/A',
+			// Rate:
+			// 	invoice.consignmentdetails && invoice.consignmentdetails.itemdetails[0]
+			// 		? invoice.consignmentdetails.itemdetails[0].itemprice
+			// 		: 'N/A',
 		}));
 		setExportedData(filteredMisDataData);
 	};
@@ -1676,30 +1682,30 @@ function AdminReports() {
 							Driver Wise Report
 						</button>
 					</div>
-					<div className='reports-data-top'>
-						<div className='reports-data-search'>
-							<input
-								type='text'
-								placeholder='Search Invoice...'
-								className='reports-search-input'
-								value={searchInput}
-								onChange={handleSearchInputChange}
-							/>
-						</div>
-
-						<CSVLink
-							data={exportedData}
-							filename={`exported_data_${new Date().toISOString()}.csv`}
-							className='export-button'
-							target='_blank'
-						>
-							Export
-						</CSVLink>
-					</div>
 
 					<div className='reports-data-body-container'>
 						{value === 'mis' && (
 							<div className='data-show-div'>
+								<div className='reports-data-top'>
+									<div className='reports-data-search'>
+										<input
+											type='text'
+											placeholder='Search Invoice Ref.Code...'
+											className='reports-search-input'
+											value={searchInput}
+											onChange={handleSearchInputChange}
+										/>
+									</div>
+
+									<CSVLink
+										data={exportedData}
+										filename={`exported_data_${new Date().toISOString()}.csv`}
+										className='export-button'
+										target='_blank'
+									>
+										Export
+									</CSVLink>
+								</div>
 								<div style={{ margin: '10px' }}>
 									<div className='date-div'>
 										<label className='date-label'>From:</label>
@@ -1762,7 +1768,7 @@ function AdminReports() {
 											</tr>
 										</thead>
 										<tbody className='reports-data-body-table-item-body'>
-											{displayedInvoiceSearch.map((invoice) =>
+											{displayedMisInvoiceSearch.map((invoice) =>
 												invoice.consignmentdetails.itemdetails.map(
 													(item, index) => (
 														<tr
@@ -1863,6 +1869,26 @@ function AdminReports() {
 						)}
 						{value === 'load' && (
 							<div className='data-show-div'>
+								<div className='reports-data-top'>
+									<div className='reports-data-search'>
+										<input
+											type='text'
+											placeholder='Search Invoice...'
+											className='reports-search-input'
+											value={searchInput}
+											onChange={handleSearchInputChange}
+										/>
+									</div>
+
+									<CSVLink
+										data={exportedData}
+										filename={`exported_data_${new Date().toISOString()}.csv`}
+										className='export-button'
+										target='_blank'
+									>
+										Export
+									</CSVLink>
+								</div>
 								<div style={{ margin: '10px' }}>
 									<div className='date-div'>
 										<label className='date-label'>From:</label>
@@ -1899,10 +1925,10 @@ function AdminReports() {
 													Date
 												</th>
 												<th className='reports-data-body-table-load-head-row-item'>
-													Transportation Cost
+													Company Name
 												</th>
 												<th className='reports-data-body-table-load-head-row-item'>
-													Company Name
+													Transportation Cost
 												</th>
 												<th className='reports-data-body-table-load-head-row-item'>
 													No of Items
@@ -1937,18 +1963,18 @@ function AdminReports() {
 															: 'N/A'}
 													</td>
 													<td className='reports-data-body-table-load-body-row-item'>
-														{invoice.loadingdetails &&
-														invoice.loadingdetails.transportationcost
-															? invoice.loadingdetails.transportationcost
-															: 'N/A'}
-													</td>
-													<td className='reports-data-body-table-load-body-row-item'>
 														{invoice.companydetails &&
 														invoice.companydetails.companyname
 															? invoice.companydetails.companyname.substring(
 																	0,
 																	12
 															  )
+															: 'N/A'}
+													</td>
+													<td className='reports-data-body-table-load-body-row-item'>
+														{invoice.loadingdetails &&
+														invoice.loadingdetails.transportationcost
+															? invoice.loadingdetails.transportationcost
 															: 'N/A'}
 													</td>
 													<td className='reports-data-body-table-load-body-row-item'>
@@ -1967,6 +1993,26 @@ function AdminReports() {
 						)}
 						{value === 'day' && (
 							<div className='data-show-div'>
+								<div className='reports-data-top'>
+									<div className='reports-data-search'>
+										<input
+											type='text'
+											placeholder='Search Invoice...'
+											className='reports-search-input'
+											value={searchInput}
+											onChange={handleSearchInputChange}
+										/>
+									</div>
+
+									<CSVLink
+										data={exportedData}
+										filename={`exported_data_${new Date().toISOString()}.csv`}
+										className='export-button'
+										target='_blank'
+									>
+										Export
+									</CSVLink>
+								</div>
 								<div style={{ margin: '10px' }}>
 									<div className='date-div'>
 										<label className='date-label'>From:</label>
@@ -2075,6 +2121,26 @@ function AdminReports() {
 						)}
 						{value === 'item' && (
 							<div className='data-show-div'>
+								<div className='reports-data-top'>
+									<div className='reports-data-search'>
+										<input
+											type='text'
+											placeholder='Search Invoice...'
+											className='reports-search-input'
+											value={searchInput}
+											onChange={handleSearchInputChange}
+										/>
+									</div>
+
+									<CSVLink
+										data={exportedData}
+										filename={`exported_data_${new Date().toISOString()}.csv`}
+										className='export-button'
+										target='_blank'
+									>
+										Export
+									</CSVLink>
+								</div>
 								<div style={{ margin: '10px' }}>
 									<div className='date-div'>
 										<label className='date-label'>From:</label>
@@ -2175,6 +2241,26 @@ function AdminReports() {
 						)}
 						{value === 'vechicle' && (
 							<div className='data-show-div'>
+								<div className='reports-data-top'>
+									<div className='reports-data-search'>
+										<input
+											type='text'
+											placeholder='Search Invoice...'
+											className='reports-search-input'
+											value={searchInput}
+											onChange={handleSearchInputChange}
+										/>
+									</div>
+
+									<CSVLink
+										data={exportedData}
+										filename={`exported_data_${new Date().toISOString()}.csv`}
+										className='export-button'
+										target='_blank'
+									>
+										Export
+									</CSVLink>
+								</div>
 								<div style={{ margin: '10px' }}>
 									<div className='date-div'>
 										<label className='date-label'>From:</label>
@@ -2284,6 +2370,26 @@ function AdminReports() {
 						)}
 						{value === 'driver' && (
 							<div className='data-show-div'>
+								<div className='reports-data-top'>
+									<div className='reports-data-search'>
+										<input
+											type='text'
+											placeholder='Search Invoice...'
+											className='reports-search-input'
+											value={searchInput}
+											onChange={handleSearchInputChange}
+										/>
+									</div>
+
+									<CSVLink
+										data={exportedData}
+										filename={`exported_data_${new Date().toISOString()}.csv`}
+										className='export-button'
+										target='_blank'
+									>
+										Export
+									</CSVLink>
+								</div>
 								<div style={{ margin: '10px' }}>
 									<div className='date-div'>
 										<label className='date-label'>From:</label>
@@ -2403,6 +2509,26 @@ function AdminReports() {
 						)}
 						{value === 'agent' && (
 							<div className='data-show-div'>
+								<div className='reports-data-top'>
+									<div className='reports-data-search'>
+										<input
+											type='text'
+											placeholder='Search Invoice...'
+											className='reports-search-input'
+											value={searchInput}
+											onChange={handleSearchInputChange}
+										/>
+									</div>
+
+									<CSVLink
+										data={exportedData}
+										filename={`exported_data_${new Date().toISOString()}.csv`}
+										className='export-button'
+										target='_blank'
+									>
+										Export
+									</CSVLink>
+								</div>
 								<div style={{ margin: '10px' }} className='agent-div'>
 									{/* Select Input */}
 									<div className='agent-in-div'>

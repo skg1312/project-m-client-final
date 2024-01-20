@@ -36,6 +36,40 @@ function AdminCreateInvoice() {
 	const [selectedLoading, setSelectedLoading] = useState({});
 	const [parties, setParties] = useState([]);
 	const [selectedParty, setSelectedParty] = useState({});
+
+	//Sort Companies Alphabetically
+	companies.sort((a, b) => {
+		if (a.companyname < b.companyname) {
+			return -1;
+		}
+		if (a.companyname > b.companyname) {
+			return 1;
+		}
+		return 0; // names are equal
+	});
+
+	//Sort Buyer Companies Alphabetically
+	buyers.sort((a, b) => {
+		if (a.buyercompanyname < b.buyercompanyname) {
+			return -1;
+		}
+		if (a.buyercompanyname > b.buyercompanyname) {
+			return 1;
+		}
+		return 0; // names are equal
+	});
+
+	//Sort Seller Companies Alphabetically
+	sellers.sort((a, b) => {
+		if (a.sellercompanyname < b.sellercompanyname) {
+			return -1;
+		}
+		if (a.sellercompanyname > b.sellercompanyname) {
+			return 1;
+		}
+		return 0; // names are equal
+	});
+
 	const [dataToSend, setDataToSend] = useState({
 		companydetails: {
 			companyname: '',

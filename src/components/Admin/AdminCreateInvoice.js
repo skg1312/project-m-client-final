@@ -37,6 +37,10 @@ function AdminCreateInvoice() {
 	const [parties, setParties] = useState([]);
 	const [selectedParty, setSelectedParty] = useState({});
 
+	// //Default Date value
+	// const [invoicedate, setInvoicedate] = useState(getTodayDate());
+	// const [dateofloading, setDateofloading] = useState(getTodayDate());
+
 	//Sort Companies Alphabetically
 	companies.sort((a, b) => {
 		if (a.companyname < b.companyname) {
@@ -105,11 +109,11 @@ function AdminCreateInvoice() {
 		invoicedetails: {
 			invoiceid: '',
 			invoiceno: '',
-			invoicedate: '',
+			invoicedate: getTodayDate(),
 			invoicemakername: auth.admin.adminname,
 		},
 		boardingdetails: {
-			dateofloading: '',
+			dateofloading: getTodayDate(),
 			// watermark: '',
 			partyref: '',
 		},
@@ -121,6 +125,14 @@ function AdminCreateInvoice() {
 			transportationcost: '',
 		},
 	});
+
+	function getTodayDate() {
+		const today = new Date();
+		const year = today.getFullYear();
+		const month = String(today.getMonth() + 1).padStart(2, '0');
+		const day = String(today.getDate()).padStart(2, '0');
+		return `${year}-${month}-${day}`;
+	}
 
 	const API = process.env.REACT_APP_API;
 	// const ViewURL = 'https://project-m-client.vercel.app/';
@@ -1220,6 +1232,7 @@ function AdminCreateInvoice() {
 								name='invoicedate'
 								required
 								type='date'
+								value={dataToSend.invoicedetails.invoicedate}
 								onChange={(e) =>
 									handleChange(e, 'invoicedetails', 'invoicedate')
 								}
@@ -1404,6 +1417,7 @@ function AdminCreateInvoice() {
 									name='dateofloading'
 									type='date'
 									required
+									value={dataToSend.boardingdetails.dateofloading}
 									onChange={(e) =>
 										handleChange(e, 'boardingdetails', 'dateofloading')
 									}

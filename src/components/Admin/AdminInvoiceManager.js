@@ -220,6 +220,9 @@ function AdminInvoiceManagement() {
 										Transportation Cost
 									</th>
 									<th className='invoice-management-data-body-table-header'>
+										Weight
+									</th>
+									<th className='invoice-management-data-body-table-header'>
 										Action
 									</th>
 								</tr>
@@ -263,6 +266,11 @@ function AdminInvoiceManagement() {
 										<td className='invoice-management-data-body-table-data'>
 											{invoice.loadingdetails?.transportationcost
 												? invoice.loadingdetails.transportationcost
+												: 'N/A'}
+										</td>
+										<td className='invoice-management-data-body-table-data'>
+											{invoice.invoicedetails?.itemweight
+												? invoice.invoicedetails.itemweight
 												: 'N/A'}
 										</td>
 										<td className='invoice-management-data-body-table-data'>

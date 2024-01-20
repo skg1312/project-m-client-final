@@ -47,6 +47,8 @@ function AdminConsignmentManage() {
 			itemhsn: '',
 			itemprice: '',
 			itemtaxrate: '',
+			itemdesc: '',
+			// itemweight: '',
 		},
 		validationSchema: Yup.object({
 			itemname: Yup.string().required('Item Name is required'),
@@ -54,6 +56,8 @@ function AdminConsignmentManage() {
 			itemhsn: Yup.number().required('Item HSN is required'),
 			itemprice: Yup.number().required('Item Price is required'),
 			itemtaxrate: Yup.number().required('Item Tax Rate is required'),
+			itemdesc: Yup.string().required('Item Description is required'),
+			// itemweight: Yup.number().required('Item Weight is required'),
 		}),
 		onSubmit: (values) => {
 			handleFormSubmit(values);
@@ -241,6 +245,12 @@ function AdminConsignmentManage() {
 										Item Tax Rate
 									</th>
 									<th className='admin-consignment-manage-data-table-header'>
+										Item Description
+									</th>
+									{/* <th className='admin-consignment-manage-data-table-header'>
+										Item Weight
+									</th> */}
+									<th className='admin-consignment-manage-data-table-header'>
 										Action
 									</th>
 								</tr>
@@ -255,20 +265,36 @@ function AdminConsignmentManage() {
 											{idx + 1}
 										</td>
 										<td className='admin-consignment-manage-data-table-data highlight'>
-											{item.itemname}
+											{item.itemname && item.itemname ? item.itemname : 'N/A'}
 										</td>
 										<td className='admin-consignment-manage-data-table-data'>
-											{item.itemquantity}
+											{item.itemquantity && item.itemquantity
+												? item.itemquantity
+												: 'N/A'}
 										</td>
 										<td className='admin-consignment-manage-data-table-data'>
-											{item.itemhsn}
+											{item.itemhsn && item.itemhsn ? item.itemhsn : 'N/A'}
 										</td>
 										<td className='admin-consignment-manage-data-table-data'>
-											{item.itemprice}
+											{item.itemprice && item.itemprice
+												? item.itemprice
+												: 'N/A'}
 										</td>
 										<td className='admin-consignment-manage-data-table-data'>
-											{item.itemtaxrate}
+											{item.itemtaxrate && item.itemtaxrate
+												? item.itemtaxrate
+												: 'N/A'}
 										</td>
+										<td className='admin-consignment-manage-data-table-data'>
+											{item.itemdesc && item.itemdesc
+												? item.itemdesc.substring(0, 15)
+												: 'N/A'}
+										</td>
+										{/* <td className='admin-consignment-manage-data-table-data'>
+											{item.itemweight && item.itemweight
+												? item.itemweight
+												: 'N/A'}
+										</td> */}
 										<td className='admin-consignment-manage-data-table-data'>
 											<button
 												style={{
@@ -392,6 +418,29 @@ function AdminConsignmentManage() {
 						/>
 						{formik.touched.itemtaxrate && formik.errors.itemtaxrate ? (
 							<div className='error-message'>{formik.errors.itemtaxrate}</div>
+						) : null}
+
+						{/* <input
+							type='number'
+							pattern='[0-9]*'
+							required
+							className='admin-consignment-manage-form-input'
+							placeholder='Item Weight (KGs)'
+							{...formik.getFieldProps('itemweight')}
+						/>
+						{formik.touched.itemweight && formik.errors.itemweight ? (
+							<div className='error-message'>{formik.errors.itemweight}</div>
+						) : null} */}
+
+						<input
+							type='text'
+							required
+							className='admin-consignment-manage-form-input'
+							placeholder='Item Description'
+							{...formik.getFieldProps('itemdesc')}
+						/>
+						{formik.touched.itemdesc && formik.errors.itemdesc ? (
+							<div className='error-message'>{formik.errors.itemdesc}</div>
 						) : null}
 
 						<br />

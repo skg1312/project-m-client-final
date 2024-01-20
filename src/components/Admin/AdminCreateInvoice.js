@@ -74,6 +74,17 @@ function AdminCreateInvoice() {
 		return 0; // names are equal
 	});
 
+	//Sort Parties Alphabetically
+	parties.sort((a, b) => {
+		if (a.partyname < b.partyname) {
+			return -1;
+		}
+		if (a.partyname > b.partyname) {
+			return 1;
+		}
+		return 0; // names are equal
+	});
+
 	const [dataToSend, setDataToSend] = useState({
 		companydetails: {
 			companyname: '',

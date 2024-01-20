@@ -188,37 +188,38 @@ function AdminCreateInvoice() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		// Check the length of items in dataToSend
-		if (dataToSend && dataToSend.consignmentdetails.itemdetails.length >= 1) {
-			// console.log(dataToSend);
-			try {
-				const response = await fetch(`${API}invoice`, {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify(dataToSend),
-				});
-				if (response.ok) {
-					const data = await response.json();
-					console.log('Invoice created successfully:', data);
-					toast.success('Invoice created successfully');
-					setUrl(data._id);
-					setView(true);
-					setIsModalOpen(true);
-				} else {
-					toast.error('Invoice creation failed');
-				}
-			} catch (error) {
-				toast.error('Error creating invoice:', error);
-			}
-		} else {
-			// Show an alert if the length is not greater than 1
-			// alert('Please add items before creating invoice.');
-			toast.info(
-				'Please add Items in Consignment Details before creating invoice.'
-			);
-		}
+		console.log(dataToSend);
+		// // Check the length of items in dataToSend
+		// if (dataToSend && dataToSend.consignmentdetails.itemdetails.length >= 1) {
+		// 	// console.log(dataToSend);
+		// 	try {
+		// 		const response = await fetch(`${API}invoice`, {
+		// 			method: 'POST',
+		// 			headers: {
+		// 				'Content-Type': 'application/json',
+		// 			},
+		// 			body: JSON.stringify(dataToSend),
+		// 		});
+		// 		if (response.ok) {
+		// 			const data = await response.json();
+		// 			console.log('Invoice created successfully:', data);
+		// 			toast.success('Invoice created successfully');
+		// 			setUrl(data._id);
+		// 			setView(true);
+		// 			setIsModalOpen(true);
+		// 		} else {
+		// 			toast.error('Invoice creation failed');
+		// 		}
+		// 	} catch (error) {
+		// 		toast.error('Error creating invoice:', error);
+		// 	}
+		// } else {
+		// 	// Show an alert if the length is not greater than 1
+		// 	// alert('Please add items before creating invoice.');
+		// 	toast.info(
+		// 		'Please add Items in Consignment Details before creating invoice.'
+		// 	);
+		// }
 	};
 
 	const validationSchema = Yup.object().shape({
@@ -375,6 +376,46 @@ function AdminCreateInvoice() {
 		setSelectedCompany(selectedCompany);
 	};
 
+	// const handleSelectChangeSeller = (selectedOption) => {
+	// 	const selectedSellerId = selectedOption.value;
+	// 	const selectedSeller = sellers.find(
+	// 		(seller) => seller._id === selectedSellerId
+	// 	);
+
+	// 	setDataToSend((prevData) => ({
+	// 		...prevData,
+	// 		sellerdetails: {
+	// 			...prevData.sellerdetails,
+	// 			sellerid: selectedSeller.sellerid,
+	// 			sellercompanyname: selectedSeller.sellercompanyname,
+	// 			sellercompanyaddress: selectedSeller.sellercompanyaddress,
+	// 			sellercompanygstno: selectedSeller.sellercompanygstno,
+	// 			sellercompanystatename: selectedSeller.sellercompanystatename,
+	// 			sellercompanystatecode: selectedSeller.sellercompanystatecode,
+	// 		},
+	// 	}));
+	// 	setSelectedSeller(selectedSeller);
+	// };
+
+	// const handleSelectChangeBuyer = (selectedOption) => {
+	// 	const selectedBuyerId = selectedOption.value;
+	// 	const selectedBuyer = buyers.find((buyer) => buyer._id === selectedBuyerId);
+
+	// 	setDataToSend((prevData) => ({
+	// 		...prevData,
+	// 		buyerdetails: {
+	// 			...prevData.buyerdetails,
+	// 			buyerid: selectedBuyer.buyerid,
+	// 			buyercompanyname: selectedBuyer.buyercompanyname,
+	// 			buyercompanygstno: selectedBuyer.buyercompanygstno,
+	// 			buyercompanyaddress: selectedBuyer.buyercompanyaddress,
+	// 			buyercompanystatename: selectedBuyer.buyercompanystatename,
+	// 			buyercompanystatecode: selectedBuyer.buyercompanystatecode,
+	// 		},
+	// 	}));
+	// 	setSelectedBuyer(selectedBuyer);
+	// };
+
 	const handleSelectChangeSeller = (selectedOption) => {
 		const selectedSellerId = selectedOption.value;
 		const selectedSeller = sellers.find(
@@ -400,20 +441,41 @@ function AdminCreateInvoice() {
 		const selectedBuyerId = selectedOption.value;
 		const selectedBuyer = buyers.find((buyer) => buyer._id === selectedBuyerId);
 
+		setSellers((prevSellers) => [...prevSellers]); // Keep sellers as is
+		setBuyers((prevBuyers) => [...prevBuyers]); // Keep buyers as is
 		setDataToSend((prevData) => ({
 			...prevData,
 			buyerdetails: {
 				...prevData.buyerdetails,
 				buyerid: selectedBuyer.buyerid,
 				buyercompanyname: selectedBuyer.buyercompanyname,
-				buyercompanygstno: selectedBuyer.buyercompanygstno,
 				buyercompanyaddress: selectedBuyer.buyercompanyaddress,
+				buyercompanygstno: selectedBuyer.buyercompanygstno,
 				buyercompanystatename: selectedBuyer.buyercompanystatename,
 				buyercompanystatecode: selectedBuyer.buyercompanystatecode,
 			},
+			sellerdetails: {
+				// Update seller details to match buyer
+				sellerid: selectedBuyer.buyerid,
+				sellercompanyname: selectedBuyer.buyercompanyname,
+				sellercompanyaddress: selectedBuyer.buyercompanyaddress,
+				sellercompanygstno: selectedBuyer.buyercompanygstno,
+				sellercompanystatename: selectedBuyer.buyercompanystatename,
+				sellercompanystatecode: selectedBuyer.buyercompanystatecode,
+			},
 		}));
 		setSelectedBuyer(selectedBuyer);
+		setSelectedSeller({
+			// Set selected seller to match buyer
+			sellerid: selectedBuyer.buyerid,
+			sellercompanyname: selectedBuyer.buyercompanyname,
+			sellercompanyaddress: selectedBuyer.buyercompanyaddress,
+			sellercompanygstno: selectedBuyer.buyercompanygstno,
+			sellercompanystatename: selectedBuyer.buyercompanystatename,
+			sellercompanystatecode: selectedBuyer.buyercompanystatecode,
+		});
 	};
+
 	const handleSelectChangeConsignment = (e) => {
 		const selectedConsignmentId = e.target.value;
 		const selectedConsignment = consignments.find(
@@ -700,7 +762,7 @@ function AdminCreateInvoice() {
 					</div>
 					<div className='admin-create-invoice-data'>
 						<h2 className='admin-create-invoice-subtitle'>BUYER DETAILS</h2>
-						<Select
+						{/* <Select
 							className='admin-create-invoice-select'
 							id='buyerid'
 							name='buyerid'
@@ -709,6 +771,18 @@ function AdminCreateInvoice() {
 							// 	value: selectedBuyer._id,
 							// 	label: selectedBuyer.buyercompanyname,
 							// }}
+							required
+							onChange={handleSelectChangeBuyer}
+							options={buyers.map((buyer) => ({
+								value: buyer._id,
+								label: buyer.buyercompanyname,
+							}))}
+						/> */}
+						<Select
+							className='admin-create-invoice-select'
+							id='buyerid'
+							name='buyerid'
+							placeholder='Select Buyer'
 							required
 							onChange={handleSelectChangeBuyer}
 							options={buyers.map((buyer) => ({
@@ -830,7 +904,7 @@ function AdminCreateInvoice() {
 					</div>
 					<div className='admin-create-invoice-data'>
 						<h2 className='admin-create-invoice-subtitle'>CONSIGNEE DETAILS</h2>
-						<Select
+						{/* <Select
 							className='admin-create-invoice-select'
 							id='sellerid'
 							name='sellerid'
@@ -839,6 +913,18 @@ function AdminCreateInvoice() {
 							// 	label: selectedSeller.sellercompanyname,
 							// }}
 							required
+							placeholder='Select Consignee'
+							onChange={handleSelectChangeSeller}
+							options={sellers.map((seller) => ({
+								value: seller._id,
+								label: seller.sellercompanyname,
+							}))}
+						/> */}
+						<Select
+							className='admin-create-invoice-select'
+							id='sellerid'
+							name='sellerid'
+							// required
 							placeholder='Select Consignee'
 							onChange={handleSelectChangeSeller}
 							options={sellers.map((seller) => ({

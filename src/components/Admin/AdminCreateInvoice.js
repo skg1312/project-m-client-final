@@ -188,38 +188,38 @@ function AdminCreateInvoice() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log(dataToSend);
-		// // Check the length of items in dataToSend
-		// if (dataToSend && dataToSend.consignmentdetails.itemdetails.length >= 1) {
-		// 	// console.log(dataToSend);
-		// 	try {
-		// 		const response = await fetch(`${API}invoice`, {
-		// 			method: 'POST',
-		// 			headers: {
-		// 				'Content-Type': 'application/json',
-		// 			},
-		// 			body: JSON.stringify(dataToSend),
-		// 		});
-		// 		if (response.ok) {
-		// 			const data = await response.json();
-		// 			console.log('Invoice created successfully:', data);
-		// 			toast.success('Invoice created successfully');
-		// 			setUrl(data._id);
-		// 			setView(true);
-		// 			setIsModalOpen(true);
-		// 		} else {
-		// 			toast.error('Invoice creation failed');
-		// 		}
-		// 	} catch (error) {
-		// 		toast.error('Error creating invoice:', error);
-		// 	}
-		// } else {
-		// 	// Show an alert if the length is not greater than 1
-		// 	// alert('Please add items before creating invoice.');
-		// 	toast.info(
-		// 		'Please add Items in Consignment Details before creating invoice.'
-		// 	);
-		// }
+
+		// Check the length of items in dataToSend
+		if (dataToSend && dataToSend.consignmentdetails.itemdetails.length >= 1) {
+			// console.log(dataToSend);
+			try {
+				const response = await fetch(`${API}invoice`, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(dataToSend),
+				});
+				if (response.ok) {
+					const data = await response.json();
+					console.log('Invoice created successfully:', data);
+					toast.success('Invoice created successfully');
+					setUrl(data._id);
+					setView(true);
+					setIsModalOpen(true);
+				} else {
+					toast.error('Invoice creation failed');
+				}
+			} catch (error) {
+				toast.error('Error creating invoice:', error);
+			}
+		} else {
+			// Show an alert if the length is not greater than 1
+			// alert('Please add items before creating invoice.');
+			toast.info(
+				'Please add Items in Consignment Details before creating invoice.'
+			);
+		}
 	};
 
 	const validationSchema = Yup.object().shape({

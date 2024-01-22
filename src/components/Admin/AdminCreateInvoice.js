@@ -188,6 +188,7 @@ function AdminCreateInvoice() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		// console.log(dataToSend);
 
 		// Check the length of items in dataToSend
 		if (dataToSend && dataToSend.consignmentdetails.itemdetails.length >= 1) {
@@ -491,7 +492,8 @@ function AdminCreateInvoice() {
 			!addedConsignment.itemquantity ||
 			!addedConsignment.itemhsn ||
 			!addedConsignment.itemprice ||
-			!addedConsignment.itemtaxrate
+			!addedConsignment.itemtaxrate ||
+			!addedConsignment.itemweight
 		) {
 			return;
 		}
@@ -508,6 +510,7 @@ function AdminCreateInvoice() {
 						itemhsn: addedConsignment.itemhsn,
 						itemprice: addedConsignment.itemprice,
 						itemtaxrate: addedConsignment.itemtaxrate,
+						itemweight: addedConsignment.itemweight,
 					},
 				],
 			},
@@ -1183,6 +1186,9 @@ function AdminCreateInvoice() {
 								<th className='admin-create-invoice-table-row-th'>
 									Item Tax Rate
 								</th>
+								<th className='admin-create-invoice-table-row-th'>
+									Item Weight
+								</th>
 								<th className='admin-create-invoice-table-row-th'>Action</th>
 							</tr>
 						</thead>
@@ -1235,6 +1241,15 @@ function AdminCreateInvoice() {
 									/>
 								</td>
 								<td className='admin-create-invoice-table-row-body-td'>
+									<input
+										className='admin-create-invoice-table-consigment-input'
+										type='number'
+										value={addedConsignment.itemweight || ''}
+										onChange={handleConsignmentChange}
+										name='itemweight'
+									/>
+								</td>
+								<td className='admin-create-invoice-table-row-body-td'>
 									<button
 										type='button'
 										className='admin-create-invoice-table-consigment-button'
@@ -1244,7 +1259,8 @@ function AdminCreateInvoice() {
 											!addedConsignment.itemquantity ||
 											!addedConsignment.itemhsn ||
 											!addedConsignment.itemprice ||
-											!addedConsignment.itemtaxrate
+											!addedConsignment.itemtaxrate ||
+											!addedConsignment.itemweight
 										}
 									>
 										<img
@@ -1276,6 +1292,9 @@ function AdminCreateInvoice() {
 									</td>
 									<td className='admin-create-invoice-table-consigment-value'>
 										{item.itemtaxrate}
+									</td>
+									<td className='admin-create-invoice-table-consigment-value'>
+										{item.itemweight}
 									</td>
 									<td className='admin-create-invoice-table-consigment-value'>
 										<button

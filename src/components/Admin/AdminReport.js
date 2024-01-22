@@ -689,6 +689,9 @@ function AdminReports() {
 		newWindow.document.write(
 			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Rate</th>'
 		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Total</th>'
+		);
 		newWindow.document.write('</tr>');
 
 		datatoIterate.forEach((dataItem, index) => {
@@ -769,6 +772,15 @@ function AdminReports() {
 							: 'N/A'
 					}</td>`
 				);
+				newWindow.document.write(
+					`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
+						typeof item.itemtaxrate === 'number' &&
+						typeof item.itemweight === 'number'
+							? item.itemtaxrate * item.itemweight
+							: 'N/A'
+					}</td>`
+				);
+
 				newWindow.document.write('</tr>');
 			});
 		});
@@ -1765,6 +1777,9 @@ function AdminReports() {
 												<th className='reports-data-body-table-load-head-row-item'>
 													Rate
 												</th>
+												<th className='reports-data-body-table-load-head-row-item'>
+													Total
+												</th>
 											</tr>
 										</thead>
 										<tbody className='reports-data-body-table-item-body'>
@@ -1856,6 +1871,12 @@ function AdminReports() {
 																{invoice.loadingdetails &&
 																invoice.loadingdetails.transportationcost
 																	? invoice.loadingdetails.transportationcost
+																	: 'N/A'}
+															</td>
+															<td className='reports-data-body-table-item-body-row-item'>
+																{typeof item.itemtaxrate === 'number' &&
+																typeof item.itemweight === 'number'
+																	? item.itemtaxrate * item.itemweight
 																	: 'N/A'}
 															</td>
 														</tr>

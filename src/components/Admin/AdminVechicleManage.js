@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './AdminVechicleManage.css';
 import './AdminStateManage.css';
 import './AdminPartyRefManage.css';
+import './AdminBuyerManage.css';
 import axios from 'axios';
 import background from '../images/Desktop.png';
 // import ReactPaginate from 'react-paginate';
@@ -15,12 +16,14 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function AdminLoadingManage() {
 	const [loadings, setLoadings] = useState([]);
+	const [file, setFile] = useState(null);
 	// const [pageNumber, setPageNumber] = useState(0);
 	const [selectedLoadingId, setSelectedLoadingId] = useState(null);
 	const [states, setStates] = useState([]);
 	const [parties, setParties] = useState([]);
 	const [selectedStateId, setSelectedStateId] = useState(null);
 	const [selectedPartyId, setSelectedPartyId] = useState(null);
+	const [isGroupDeleteClicked, setIsGroupDeleteClicked] = useState(false);
 	const API = process.env.REACT_APP_API;
 
 	const validationSchema = Yup.object().shape({
@@ -338,6 +341,41 @@ function AdminLoadingManage() {
 
 		partyFormik.resetForm();
 		setSelectedPartyId(null);
+	};
+
+	const handleFileChange = (event) => {
+		const selectedFile = event.target.files[0];
+
+		if (selectedFile) {
+			toast.info(`Selected file: ${selectedFile.name}`);
+		}
+
+		setFile(selectedFile);
+	};
+
+	const handleFileUpload = async () => {
+		try {
+			if (!file) {
+				toast.error('Please select a file before uploading.');
+				return;
+			}
+
+			const formData = new FormData();
+			formData.append('file', file);
+
+			const response = await axios.post(`${API}party/upload`, formData, {
+				headers: {
+					'Content-Type': 'multipart/form-data',
+				},
+			});
+
+			console.log('File uploaded successfully:', response.data);
+			toast.success('File is Uploaded Successfully');
+			window.location.reload();
+		} catch (error) {
+			console.error('Error uploading file:', error);
+			toast.error('Error uploading file. Please try again.');
+		}
 	};
 
 	return (
@@ -667,6 +705,42 @@ function AdminLoadingManage() {
 					<h1 className='admin-party-ref-manage-data-title'>
 						ALL PARTY REFERENCES
 					</h1>
+					<div className='admin-buyer-manage-file-upload'>
+						<input
+							className='admin-buyer-manage-file-upload-input'
+							type='file'
+							accept='.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel'
+							onChange={handleFileChange}
+						/>
+						<div className='upload-delete-btn-div'>
+							<button
+								className='admin-buyer-manage-file-upload-button'
+								onClick={handleFileUpload}
+							>
+								Upload File
+							</button>
+							{/* <div className='delete-btn-div'>
+								<button
+									style={{
+										display: isGroupDeleteClicked ? 'none' : 'inline-block',
+									}}
+									className='admin-buyer-manage-file-upload-button'
+									onClick={handleGroupDeleteClick}
+								>
+									Group Delete
+								</button>
+								{isGroupDeleteClicked && (
+									<button
+										// style={{ marginLeft: '15px' }}
+										className='admin-buyer-manage-file-upload-button'
+										onClick={handleGroupDelete}
+									>
+										Delete Selected
+									</button>
+								)}
+							</div> */}
+						</div>
+					</div>
 					<input
 						type='text'
 						placeholder='Search Party...'

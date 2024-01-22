@@ -233,6 +233,9 @@ function AdminConsignmentManage() {
 										Item Name
 									</th>
 									<th className='admin-consignment-manage-data-table-header'>
+										Item Description
+									</th>
+									<th className='admin-consignment-manage-data-table-header'>
 										Item Quantity
 									</th>
 									<th className='admin-consignment-manage-data-table-header'>
@@ -243,9 +246,6 @@ function AdminConsignmentManage() {
 									</th>
 									<th className='admin-consignment-manage-data-table-header'>
 										Item Tax Rate
-									</th>
-									<th className='admin-consignment-manage-data-table-header'>
-										Item Description
 									</th>
 									{/* <th className='admin-consignment-manage-data-table-header'>
 										Item Weight
@@ -268,6 +268,11 @@ function AdminConsignmentManage() {
 											{item.itemname && item.itemname ? item.itemname : 'N/A'}
 										</td>
 										<td className='admin-consignment-manage-data-table-data'>
+											{item.itemdesc && item.itemdesc
+												? item.itemdesc.substring(0, 15)
+												: 'N/A'}
+										</td>
+										<td className='admin-consignment-manage-data-table-data'>
 											{item.itemquantity && item.itemquantity
 												? item.itemquantity
 												: 'N/A'}
@@ -283,11 +288,6 @@ function AdminConsignmentManage() {
 										<td className='admin-consignment-manage-data-table-data'>
 											{item.itemtaxrate && item.itemtaxrate
 												? item.itemtaxrate
-												: 'N/A'}
-										</td>
-										<td className='admin-consignment-manage-data-table-data'>
-											{item.itemdesc && item.itemdesc
-												? item.itemdesc.substring(0, 15)
 												: 'N/A'}
 										</td>
 										{/* <td className='admin-consignment-manage-data-table-data'>
@@ -373,6 +373,17 @@ function AdminConsignmentManage() {
 						) : null}
 
 						<input
+							type='text'
+							required
+							className='admin-consignment-manage-form-input'
+							placeholder='Item Description'
+							{...formik.getFieldProps('itemdesc')}
+						/>
+						{formik.touched.itemdesc && formik.errors.itemdesc ? (
+							<div className='error-message'>{formik.errors.itemdesc}</div>
+						) : null}
+
+						<input
 							type='number'
 							required
 							pattern='[0-9]*'
@@ -431,17 +442,6 @@ function AdminConsignmentManage() {
 						{formik.touched.itemweight && formik.errors.itemweight ? (
 							<div className='error-message'>{formik.errors.itemweight}</div>
 						) : null} */}
-
-						<input
-							type='text'
-							required
-							className='admin-consignment-manage-form-input'
-							placeholder='Item Description'
-							{...formik.getFieldProps('itemdesc')}
-						/>
-						{formik.touched.itemdesc && formik.errors.itemdesc ? (
-							<div className='error-message'>{formik.errors.itemdesc}</div>
-						) : null}
 
 						<br />
 						<button

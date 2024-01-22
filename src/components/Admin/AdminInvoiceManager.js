@@ -5,27 +5,28 @@ import background from '../images/Desktop.png';
 // import ReactPaginate from 'react-paginate';
 import AdminNavbar from './AdminNavbar';
 // import PdfViewer from './AdminInvoiceView';
-import Modal from 'react-modal';
-import { useNavigate } from 'react-router-dom';
-import Close from '../images/cross_icon.jpg';
-import copy from 'clipboard-copy';
+// import Modal from 'react-modal';
+// import { useNavigate } from 'react-router-dom';
+// import Close from '../images/cross_icon.jpg';
+// import copy from 'clipboard-copy';
+import InvoiceAccordion from './InvoiceAccordion';
 
 function AdminInvoiceManagement() {
-	const navigate = useNavigate();
+	// const navigate = useNavigate();
 	const [invoice, setInvoice] = useState([]);
 	// const [pageNumber, setPageNumber] = useState(0);
-	const [selectedInvoiceId, setSelectedInvoiceId] = useState(null);
+	// const [selectedInvoiceId, setSelectedInvoiceId] = useState(null);
 	const [searchInput, setSearchInput] = useState('');
 
 	const API = process.env.REACT_APP_API;
-	const pdfUrlOriginal = `${API}download/${selectedInvoiceId}`;
-	const pdfUrlDuplicate = `${API}download2/${selectedInvoiceId}`;
-	const ViewURLOriginal = `https://docs.google.com/viewer?url=${encodeURIComponent(
-		pdfUrlOriginal
-	)}&embedded=true`;
-	const ViewURLDuplicate = `https://docs.google.com/viewer?url=${encodeURIComponent(
-		pdfUrlDuplicate
-	)}&embedded=true`;
+	// const pdfUrlOriginal = `${API}download/${selectedInvoiceId}`;
+	// const pdfUrlDuplicate = `${API}download2/${selectedInvoiceId}`;
+	// const ViewURLOriginal = `https://docs.google.com/viewer?url=${encodeURIComponent(
+	// 	pdfUrlOriginal
+	// )}&embedded=true`;
+	// const ViewURLDuplicate = `https://docs.google.com/viewer?url=${encodeURIComponent(
+	// 	pdfUrlDuplicate
+	// )}&embedded=true`;
 	// const itemsPerPage = 10;
 
 	const sortedInvoice = [...invoice].reverse();
@@ -55,16 +56,17 @@ function AdminInvoiceManagement() {
 	// const changePage = ({ selected }) => {
 	// 	setPageNumber(selected);
 	// };
-	const [isModalOpen, setIsModalOpen] = useState(false);
+	// const [isModalOpen, setIsModalOpen] = useState(false);
+	// const [isAccordionOpen, setAccordionOpen] = useState(false);
 	// const [selectedOption, setSelectedOption] = useState('Original');
 
-	const openPdfViewer = () => {
-		setIsModalOpen(true);
-	};
+	// const openPdfViewer = () => {
+	// 	setAccordionOpen(!isAccordionOpen);
+	// };
 
-	const closePdfViewer = () => {
-		setIsModalOpen(false);
-	};
+	// const closePdfViewer = () => {
+	// 	setIsModalOpen(false);
+	// };
 
 	// const handleOptionChange = (event) => {
 	// 	setSelectedOption(event.target.value);
@@ -82,49 +84,49 @@ function AdminInvoiceManagement() {
 	// 	}
 	// };
 
-	const handleOriginalCopy = () => {
-		const expirationTimestamp = Date.now() + 5 * 24 * 60 * 60 * 1000;
-		const id = selectedInvoiceId;
-		console.log(`${API}/download/${id}`);
-		const pdfUrl = `${id}/${expirationTimestamp}`;
+	// const handleOriginalCopy = () => {
+	// 	const expirationTimestamp = Date.now() + 5 * 24 * 60 * 60 * 1000;
+	// 	const id = selectedInvoiceId;
+	// 	console.log(`${API}/download/${id}`);
+	// 	const pdfUrl = `${id}/${expirationTimestamp}`;
 
-		console.log('Handling Original Invoice Copy');
-		const linkToCopy = `${ViewURLOriginal}`;
-		try {
-			copy(linkToCopy);
-			alert('Link copied to clipboard!');
-			// toast.success('Link copied to clipboard!');
-		} catch (error) {
-			console.error('Unable to copy to clipboard.', error);
-			alert('Error copying to clipboard. Please try again.');
-			// toast.error('Error copying to clipboard. Please try again.');
-		}
-	};
+	// 	console.log('Handling Original Invoice Copy');
+	// 	const linkToCopy = `${ViewURLOriginal}`;
+	// 	try {
+	// 		copy(linkToCopy);
+	// 		alert('Link copied to clipboard!');
+	// 		// toast.success('Link copied to clipboard!');
+	// 	} catch (error) {
+	// 		console.error('Unable to copy to clipboard.', error);
+	// 		alert('Error copying to clipboard. Please try again.');
+	// 		// toast.error('Error copying to clipboard. Please try again.');
+	// 	}
+	// };
 
-	const handleDuplicateCopy = () => {
-		const expirationTimestamp = Date.now() + 5 * 24 * 60 * 60 * 1000;
-		const id = selectedInvoiceId;
-		console.log(`${API}/download/${id}`);
-		const pdfUrl = `${id}/${expirationTimestamp}`;
+	// const handleDuplicateCopy = () => {
+	// 	const expirationTimestamp = Date.now() + 5 * 24 * 60 * 60 * 1000;
+	// 	const id = selectedInvoiceId;
+	// 	console.log(`${API}/download/${id}`);
+	// 	const pdfUrl = `${id}/${expirationTimestamp}`;
 
-		console.log('Handling Original Invoice Copy');
-		const linkToCopy = `${ViewURLDuplicate}`;
+	// 	console.log('Handling Original Invoice Copy');
+	// 	const linkToCopy = `${ViewURLDuplicate}`;
 
-		try {
-			copy(linkToCopy);
-			alert('Link copied to clipboard!');
-			// toast.success('Link copied to clipboard!');
-		} catch (error) {
-			console.error('Unable to copy to clipboard.', error);
-			alert('Error copying to clipboard. Please try again.');
-			// toast.error('Error copying to clipboard. Please try again.');
-		}
-	};
+	// 	try {
+	// 		copy(linkToCopy);
+	// 		alert('Link copied to clipboard!');
+	// 		// toast.success('Link copied to clipboard!');
+	// 	} catch (error) {
+	// 		console.error('Unable to copy to clipboard.', error);
+	// 		alert('Error copying to clipboard. Please try again.');
+	// 		// toast.error('Error copying to clipboard. Please try again.');
+	// 	}
+	// };
 
-	const ViewInvoice = (invoiceid) => {
-		setSelectedInvoiceId(invoiceid);
-		openPdfViewer();
-	};
+	// const ViewInvoice = (invoiceid) => {
+	// 	setSelectedInvoiceId(invoiceid);
+	// 	openPdfViewer();
+	// };
 
 	// const handleInvoiceChoice = () => {
 	// 	if (selectedOption === 'Original') {
@@ -135,27 +137,27 @@ function AdminInvoiceManagement() {
 	// 	closePdfViewer();
 	// };
 
-	const handleOriginalInvoice = () => {
-		const expirationTimestamp = Date.now() + 5 * 24 * 60 * 60 * 1000;
-		const id = selectedInvoiceId;
-		console.log(`${API}/download/${id}`);
-		const pdfUrl = `${id}/${expirationTimestamp}`;
-		// Assuming 'navigate' is a function for navigating in your application
-		// You may need to replace it with the appropriate navigation logic
-		navigate(`/pdf/${pdfUrl}`);
-		console.log('Handling Original Invoice');
-	};
+	// const handleOriginalInvoice = () => {
+	// 	const expirationTimestamp = Date.now() + 5 * 24 * 60 * 60 * 1000;
+	// 	const id = selectedInvoiceId;
+	// 	console.log(`${API}/download/${id}`);
+	// 	const pdfUrl = `${id}/${expirationTimestamp}`;
+	// 	// Assuming 'navigate' is a function for navigating in your application
+	// 	// You may need to replace it with the appropriate navigation logic
+	// 	navigate(`/pdf/${pdfUrl}`);
+	// 	console.log('Handling Original Invoice');
+	// };
 
-	const handleDuplicateInvoice = () => {
-		const expirationTimestamp = Date.now() + 5 * 24 * 60 * 60 * 1000;
-		const id = selectedInvoiceId;
-		console.log(`${API}/download2/${id}`);
-		const pdfUrl = `${id}/${expirationTimestamp}`;
-		// Assuming 'navigate' is a function for navigating in your application
-		// You may need to replace it with the appropriate navigation logic
-		navigate(`/pdf2/${pdfUrl}`);
-		console.log('Handling Duplicate Invoice');
-	};
+	// const handleDuplicateInvoice = () => {
+	// 	const expirationTimestamp = Date.now() + 5 * 24 * 60 * 60 * 1000;
+	// 	const id = selectedInvoiceId;
+	// 	console.log(`${API}/download2/${id}`);
+	// 	const pdfUrl = `${id}/${expirationTimestamp}`;
+	// 	// Assuming 'navigate' is a function for navigating in your application
+	// 	// You may need to replace it with the appropriate navigation logic
+	// 	navigate(`/pdf2/${pdfUrl}`);
+	// 	console.log('Handling Duplicate Invoice');
+	// };
 
 	// const PrintInvoice = (invoiceid) => {
 	// 	setSelectedInvoiceId(invoiceid);
@@ -274,13 +276,36 @@ function AdminInvoiceManagement() {
 												: 'N/A'}
 										</td>
 										<td className='invoice-management-data-body-table-data'>
-											<button
+											{/* <button
 												onClick={() => ViewInvoice(invoice._id)}
 												className='invoice-management-data-body-table-data-button'
 											>
 												View
-											</button>
-											{isModalOpen && (
+											</button> */}
+											<InvoiceAccordion invoice={invoice._id} />
+											{/* {isAccordionOpen && (
+												<div className='accordion-popover'>
+													<div className='modal-content-invoice'>
+														<div className='modal-btn-div-pdf-invoice'>
+															<div style={{ display: 'flex', gap: '30px' }}>
+																<button
+																	className='modal-btn-invoice'
+																	onClick={handleOriginalInvoice}
+																>
+																	View Original Invoice
+																</button>
+																<button
+																	className='modal-btn-invoice'
+																	onClick={handleOriginalCopy}
+																>
+																	Copy Link
+																</button>
+															</div>
+														</div>
+													</div>
+												</div>
+											)} */}
+											{/* {isModalOpen && (
 												<div className='modal'>
 													<div className='modal-content'>
 														<img
@@ -289,28 +314,12 @@ function AdminInvoiceManagement() {
 															className='close-modal'
 															onClick={() => closePdfViewer()}
 														/>
-														{/* <div className='modal-btn-div'>
-															<label className='type-select'>
-																Select an option:
-															</label>
-															<select
-																className='type-select'
-																value={selectedOption}
-																onChange={handleOptionChange}
-															>
-																<option value='Original'>Original</option>
-																<option value='Duplicate'>Duplicate</option>
-															</select>
-														</div> */}
 														<div className='modal-btn-div-pdf'>
 															<div style={{ display: 'flex', gap: '30px' }}>
 																<button
 																	className='modal-btn'
 																	onClick={handleOriginalInvoice}
 																>
-																	{/* {selectedOption === 'Original'
-																	? 'View Original'
-																	: 'View Duplicate'}{' '} */}
 																	View Original Invoice
 																</button>
 																<button
@@ -320,33 +329,10 @@ function AdminInvoiceManagement() {
 																	Copy Link
 																</button>
 															</div>
-															<div style={{ display: 'flex', gap: '30px' }}>
-																<button
-																	className='modal-btn'
-																	onClick={handleDuplicateInvoice}
-																>
-																	{/* {selectedOption === 'Original'
-																	? 'View Original'
-																	: 'View Duplicate'}{' '} */}
-																	VIew Duplicate Invoice
-																</button>
-																<button
-																	className='modal-btn'
-																	onClick={handleDuplicateCopy}
-																>
-																	Copy Link
-																</button>
-															</div>
 														</div>
 													</div>
 												</div>
-											)}
-											{/* <button
-												onClick={() => PrintInvoice(invoice._id)}
-												className='invoice-management-data-body-table-data-button'
-											>
-												Print
-											</button> */}
+											)} */}
 										</td>
 									</tr>
 								))}

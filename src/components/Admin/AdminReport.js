@@ -1738,9 +1738,9 @@ function AdminReports() {
 	// 	}));
 
 	// };
-	const handleConsignmentChange = (e, section, field) => {
+	const handleConsignmentChange = (e, section, field, itemId) => {
 		const value = e.target.value;
-		const itemId = selectedInvoiceId.consignmentdetails?.itemdetails._id;
+
 		// Check if the field is 'itemquantity' and update it accordingly
 		if (section === 'consignmentdetails' && field === 'itemquantity') {
 			setDataToSend((prevData) => ({
@@ -1782,9 +1782,12 @@ function AdminReports() {
 		setSelectedParty(selectedParty);
 	};
 
-	const toggleModal = (invoiceUpdateId) => {
+	const [itemID, setItemID] = useState('');
+
+	const toggleModal = (invoiceUpdateId, itemUpdateId) => {
 		setIsModalVisible(!isModalVisible);
 		setSelectedInvoiceId(invoiceUpdateId);
+		setItemID(itemUpdateId);
 
 		const selectedInvoice = invoice.find(
 			(invoice) => invoice._id === invoiceUpdateId
@@ -2103,7 +2106,9 @@ function AdminReports() {
 																		background: 'none',
 																		border: 'none',
 																	}}
-																	onClick={() => toggleModal(invoice._id)}
+																	onClick={() =>
+																		toggleModal(invoice._id, item._id)
+																	}
 																>
 																	<img
 																		src={E}
@@ -2167,7 +2172,8 @@ function AdminReports() {
 																						handleConsignmentChange(
 																							e,
 																							'consignmentdetails',
-																							'itemquantity'
+																							'itemquantity',
+																							itemID
 																						)
 																					}
 																					name='itemquantity'

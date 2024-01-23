@@ -687,7 +687,13 @@ function AdminReports() {
 			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Bill Maker Name</th>'
 		);
 		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Rate</th>'
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Transportaion Cost</th>'
+		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Item Weight</th>'
+		);
+		newWindow.document.write(
+			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Item Rate</th>'
 		);
 		newWindow.document.write(
 			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Total</th>'
@@ -770,6 +776,16 @@ function AdminReports() {
 						dataItem.loadingdetails.transportationcost
 							? dataItem.loadingdetails.transportationcost
 							: 'N/A'
+					}</td>`
+				);
+				newWindow.document.write(
+					`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
+						item.itemweight ? item.itemweight : 'N/A'
+					}</td>`
+				);
+				newWindow.document.write(
+					`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
+						item.itemtaxrate ? item.itemtaxrate : 'N/A'
 					}</td>`
 				);
 				newWindow.document.write(
@@ -1210,13 +1226,6 @@ function AdminReports() {
 				break;
 			case 'mis':
 				const filteredMisData = displayedMisInvoiceSearch.map((invoice) => ({
-					'Invoice No': invoice.invoicedetails?.invoiceno ?? 'N/A',
-					Agent: invoice.sellerdetails?.sellercompanyname ?? 'N/A',
-					Buyer: invoice.buyerdetails?.buyercompanyname ?? 'N/A',
-					'Load From': invoice.loadingdetails?.startpoint ?? 'N/A',
-					Destination: invoice.loadingdetails?.endpoint ?? 'N/A',
-					'Motor vehicle No': invoice.vehicledetails?.vechiclenumber ?? 'N/A',
-					'Ref. Code': invoice.boardingdetails?.partyref ?? 'N/A',
 					Date: invoice.invoicedetails?.invoicedate
 						? new Date(invoice.invoicedetails.invoicedate).toLocaleDateString(
 								'en-GB',
@@ -1227,9 +1236,29 @@ function AdminReports() {
 								}
 						  )
 						: 'N/A',
-					'Total Cost': invoice.loadingdetails?.transportationcost ?? 'N/A',
-					'Company Name': invoice.companydetails?.companyname ?? 'N/A',
-					'No of Items': invoice.consignmentdetails?.itemdetails.length ?? '0',
+					Agent: invoice.sellerdetails?.sellercompanyname ?? 'N/A',
+					Buyer: invoice.buyerdetails?.buyercompanyname ?? 'N/A',
+					'Load From': invoice.loadingdetails?.startpoint ?? 'N/A',
+					Destination: invoice.loadingdetails?.endpoint ?? 'N/A',
+					'Motor vehicle No': invoice.vehicledetails?.vechiclenumber ?? 'N/A',
+					'Total Qty':
+						invoice.consignmentdetails.itemdetails[0].itemquantity ?? 'N/A',
+					'Ref. Code': invoice.boardingdetails?.partyref ?? 'N/A',
+					'Bill Maker Name': invoice.companydetails?.companyname ?? 'N/A',
+					'Transportation Cost':
+						invoice.loadingdetails?.transportationcost ?? 'N/A',
+					'Item Weight':
+						invoice.consignmentdetails.itemdetails[0].itemweight ?? 'N/A',
+					'Item Rate':
+						invoice.consignmentdetails.itemdetails[0].itemtaxrate ?? 'N/A',
+					Total:
+						typeof invoice.consignmentdetails.itemdetails[0].itemtaxrate ===
+							'number' &&
+						typeof invoice.consignmentdetails.itemdetails[0].itemweight ===
+							'number'
+							? invoice.consignmentdetails.itemdetails[0].itemweight *
+							  invoice.consignmentdetails.itemdetails[0].itemtaxrate
+							: 'N/A',
 				}));
 
 				setExportedData(filteredMisData);
@@ -1775,7 +1804,13 @@ function AdminReports() {
 													Bill Maker Name
 												</th>
 												<th className='reports-data-body-table-load-head-row-item'>
-													Rate
+													Transportaion Cost
+												</th>
+												<th className='reports-data-body-table-load-head-row-item'>
+													Item Weight
+												</th>
+												<th className='reports-data-body-table-load-head-row-item'>
+													Iten Rate
 												</th>
 												<th className='reports-data-body-table-load-head-row-item'>
 													Total
@@ -1872,6 +1907,12 @@ function AdminReports() {
 																invoice.loadingdetails.transportationcost
 																	? invoice.loadingdetails.transportationcost
 																	: 'N/A'}
+															</td>
+															<td className='reports-data-body-table-item-body-row-item'>
+																{item.itemweight ? item.itemweight : 'N/A'}
+															</td>
+															<td className='reports-data-body-table-item-body-row-item'>
+																{item.itemtaxrate ? item.itemtaxrate : 'N/A'}
 															</td>
 															<td className='reports-data-body-table-item-body-row-item'>
 																{typeof item.itemtaxrate === 'number' &&

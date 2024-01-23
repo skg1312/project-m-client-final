@@ -2,12 +2,22 @@ import React, { useEffect, useState } from 'react';
 import './AdminReport.css';
 import background from '../images/Desktop.png';
 import axios from 'axios';
+import E from '../images/E.png';
 // import ReactPaginate from 'react-paginate';
 import { CSVLink } from 'react-csv';
 import AdminNavbar from './AdminNavbar';
+import Close from '../images/cross_icon.jpg';
+import Select from 'react-select';
+import { toast, ToastContainer } from 'react-toastify';
 
 function AdminReports() {
 	const [invoice, setInvoice] = useState([]);
+	const [parties, setParties] = useState([]);
+	const [selectedInvoiceId, setSelectedInvoiceId] = useState(null);
+	const [selectedOption, setSelectedOption] = useState('');
+	const [textInputValue, setTextInputValue] = useState('');
+	const [isModalVisible, setIsModalVisible] = useState(false);
+
 	// const [pageNumber, setPageNumber] = useState(0);
 	const [searchInput, setSearchInput] = useState('');
 	const [value, setValue] = useState('');
@@ -84,6 +94,17 @@ function AdminReports() {
 	// 	setPageNumber(selected);
 	// };
 
+	//Sort Parties Alphabetically
+	parties.sort((a, b) => {
+		if (a.partyname < b.partyname) {
+			return -1;
+		}
+		if (a.partyname > b.partyname) {
+			return 1;
+		}
+		return 0; // names are equal
+	});
+
 	const displayedMisInvoiceSearch = sortedInvoice.filter((item) => {
 		const refCode =
 			(item.boardingdetails && item.boardingdetails.partyref) || '';
@@ -105,6 +126,23 @@ function AdminReports() {
 			.catch((error) => {
 				console.error('Error fetching Invoice data:', error);
 			});
+	}, [API]);
+	useEffect(() => {
+		const fetchPartyData = async () => {
+			try {
+				const response = await fetch(`${API}party`);
+				if (response.ok) {
+					const data = await response.json();
+					setParties(data);
+				} else {
+					console.error('Failed to fetch party data');
+				}
+			} catch (error) {
+				console.error('Error fetching party data:', error);
+			}
+		};
+
+		fetchPartyData();
 	}, [API]);
 
 	const handleShowButtonClick = () => {
@@ -1638,6 +1676,142 @@ function AdminReports() {
 		}));
 		setExportedData(filteredAgentData);
 	};
+	const [dataToSend, setDataToSend] = useState({
+		companydetails: {
+			companyname: '',
+			companygstno: '',
+			// companycontact: '',
+			companystate: '',
+			companyofficeaddress: '',
+			companystatecode: '',
+			companypincode: '',
+		},
+		sellerdetails: {
+			sellercompanyname: '',
+			sellercompanyaddress: '',
+			sellercompanygstno: '',
+			sellercompanystatename: '',
+			sellercompanystatecode: '',
+		},
+		buyerdetails: {
+			buyercompanyname: '',
+			buyercompanygstno: '',
+			buyercompanyaddress: '',
+			buyercompanystatename: '',
+			buyercompanystatecode: '',
+		},
+		vehicledetails: {
+			drivernumber: '',
+			vechiclenumber: '',
+			vechiclemodel: '',
+		},
+		consignmentdetails: {
+			itemdetails: [],
+		},
+		invoicedetails: {
+			invoiceid: '',
+			invoiceno: '',
+			invoicedate: '',
+			invoicemakername: '',
+		},
+		boardingdetails: {
+			dateofloading: '',
+			// watermark: '',
+			partyref: '',
+		},
+		loadingdetails: {
+			startstate: '',
+			endstate: '',
+			startpoint: '',
+			endpoint: '',
+			transportationcost: '',
+		},
+	});
+
+	// const [addedConsignment, setAddedConsignment] = useState({});
+
+	// const handleConsignmentChange = (e) => {
+	// 	const value = e.target.value;
+	// 	setAddedConsignment((prevAdded) => ({
+	// 		...prevAdded,
+	// 		[e.target.name]: value,
+	// 	}));
+
+	// };
+	const handleConsignmentChange = (e, section, field) => {
+		const value = e.target.value;
+		const itemId = selectedInvoiceId.consignmentdetails?.itemdetails._id;
+		// Check if the field is 'itemquantity' and update it accordingly
+		if (section === 'consignmentdetails' && field === 'itemquantity') {
+			setDataToSend((prevData) => ({
+				...prevData,
+				[section]: {
+					...prevData[section],
+					itemdetails: prevData[section].itemdetails.map((item) =>
+						item._id === itemId ? { ...item, [field]: value } : item
+					),
+				},
+			}));
+		} else {
+			// For other fields, update the data as before
+			setDataToSend((prevData) => ({
+				...prevData,
+				[section]: {
+					...prevData[section],
+					[field]: value,
+				},
+			}));
+		}
+	};
+
+	const [selectedParty, setSelectedParty] = useState({});
+
+	const handleSelectChangeParty = (selectedOption) => {
+		const selectedPartyId = selectedOption.value;
+		const selectedParty = parties.find(
+			(party) => party._id === selectedPartyId
+		);
+
+		setDataToSend((prevData) => ({
+			...prevData,
+			boardingdetails: {
+				...prevData.boardingdetails,
+				partyref: selectedParty.partyrefno,
+			},
+		}));
+		setSelectedParty(selectedParty);
+	};
+
+	const toggleModal = (invoiceUpdateId) => {
+		setIsModalVisible(!isModalVisible);
+		setSelectedInvoiceId(invoiceUpdateId);
+
+		const selectedInvoice = invoice.find(
+			(invoice) => invoice._id === invoiceUpdateId
+		);
+		// formik.setValues({ ...selectedInvoice });
+		setDataToSend(selectedInvoice);
+	};
+
+	const handleUpdate = () => {
+		axios
+			.put(`${API}invoice/${selectedInvoiceId}`, dataToSend)
+			.then((response) => {
+				setInvoice((prevInvoices) =>
+					prevInvoices.map((invoice) =>
+						invoice._id === selectedInvoiceId ? response.data : invoice
+					)
+				);
+
+				toast.success('Invoice Details are Updated Successfully');
+			})
+			.catch((error) => {
+				console.error('Error updating invoice:', error);
+				toast.error('Error In Updating the Invoice');
+			});
+		console.log(dataToSend);
+		setIsModalVisible(false);
+	};
 
 	return (
 		<div
@@ -1815,6 +1989,9 @@ function AdminReports() {
 												<th className='reports-data-body-table-load-head-row-item'>
 													Total
 												</th>
+												<th className='reports-data-body-table-load-head-row-item'>
+													Action
+												</th>
 											</tr>
 										</thead>
 										<tbody className='reports-data-body-table-item-body'>
@@ -1919,6 +2096,92 @@ function AdminReports() {
 																typeof item.itemweight === 'number'
 																	? item.itemtaxrate * item.itemweight
 																	: 'N/A'}
+															</td>
+															<td className='reports-data-body-table-item-body-row-item'>
+																<button
+																	style={{
+																		background: 'none',
+																		border: 'none',
+																	}}
+																	onClick={() => toggleModal(invoice._id)}
+																>
+																	<img
+																		src={E}
+																		alt='Update'
+																		style={{
+																			height: '15px',
+																			width: '15px',
+																			cursor: 'pointer',
+																		}}
+																	/>
+																</button>
+																{isModalVisible && (
+																	<div className='modal'>
+																		<div className='modal-content-mis'>
+																			<img
+																				src={Close}
+																				alt='Close'
+																				className='close-mis'
+																				onClick={() =>
+																					setIsModalVisible(!isModalVisible)
+																				}
+																			/>
+																			<div className='modal-btn-div-mis'>
+																				<label
+																					className='admin-create-invoice-form-label'
+																					htmlFor='Party Ref.'
+																				>
+																					Party Ref:
+																				</label>
+																				<Select
+																					className='admin-create-invoice-form-input-v'
+																					id='partyid'
+																					name='partyid'
+																					placeholder='Select Party'
+																					// value={{
+																					// 	value: selectedBuyer._id,
+																					// 	label: selectedBuyer.buyercompanyname,
+																					// }}
+																					required
+																					onChange={handleSelectChangeParty}
+																					options={parties.map((party) => ({
+																						value: party._id,
+																						label: party.partyname,
+																					}))}
+																				/>
+																			</div>
+																			<div className='modal-btn-div-mis'>
+																				<label
+																					className='admin-create-invoice-form-label'
+																					htmlFor='Party Ref.'
+																				>
+																					Quantity:
+																				</label>
+																				<input
+																					className='admin-create-invoice-form-input'
+																					type='number'
+																					// value={
+																					// 	addedConsignment.itemquantity || ''
+																					// }
+																					onChange={(e) =>
+																						handleConsignmentChange(
+																							e,
+																							'consignmentdetails',
+																							'itemquantity'
+																						)
+																					}
+																					name='itemquantity'
+																				/>
+																			</div>
+																			<button
+																				className='modal-btn'
+																				onClick={handleUpdate}
+																			>
+																				Update
+																			</button>
+																		</div>
+																	</div>
+																)}
 															</td>
 														</tr>
 													)
@@ -2723,6 +2986,7 @@ function AdminReports() {
 					/> */}
 				</div>
 			</div>
+			<ToastContainer position='top-right' autoClose={3000} />
 		</div>
 	);
 }

@@ -12,6 +12,33 @@
 	height: 700px;
 }
 
+.close-mis {
+	position: absolute;
+	cursor: pointer;
+	width: 30px;
+	height: 30px;
+	margin-left: 40%;
+	color: #333;
+}
+
+.modal-content-mis {
+	background: #fff;
+	/* White background for the modal */
+	padding: 20px;
+	border-radius: 8px;
+	position: relative;
+	width: 450px;
+	height: 250px;
+}
+
+.modal-btn-div-mis {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 15px;
+	margin-top: 10%;
+}
+
 .reports-data-header {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;

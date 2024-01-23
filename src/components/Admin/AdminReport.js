@@ -738,9 +738,12 @@ function AdminReports() {
 		);
 		newWindow.document.write('</tr>');
 
+		let totalAmount = 0;
+
 		datatoIterate.forEach((dataItem, index) => {
 			dataItem.consignmentdetails.itemdetails.forEach((item, index) => {
 				newWindow.document.write('<tr>');
+
 				newWindow.document.write(
 					`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
 						dataItem.invoicedetails && dataItem.invoicedetails.invoicedate
@@ -834,12 +837,24 @@ function AdminReports() {
 							: 'N/A'
 					}</td>`
 				);
+				// Calculate and update the total amount
+				const itemTotal =
+					typeof item.itemtaxrate === 'number' &&
+					typeof item.itemweight === 'number'
+						? item.itemtaxrate * item.itemweight
+						: 0;
+
+				totalAmount += itemTotal;
 
 				newWindow.document.write('</tr>');
 			});
 		});
 
 		newWindow.document.write('</table>');
+		// Display the total amount using h2 after the table
+		newWindow.document.write(
+			`<h3 style="text-align: center; font-size: 20px; margin-top: 20px;">Total Amount to be Paid: ${totalAmount}</h3>`
+		);
 
 		newWindow.document.write('</body></html>');
 

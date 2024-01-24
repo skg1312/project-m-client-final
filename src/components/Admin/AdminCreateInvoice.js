@@ -3,6 +3,7 @@ import './AdminCreateInvoice.css';
 import background from '../images/Desktop.png';
 import A from '../images/A.png';
 import D from '../images/D.png';
+import C from '../images/C.png';
 import Close from '../images/cross_icon.jpg';
 import AdminNavbar from './AdminNavbar';
 import Select from 'react-select';
@@ -588,6 +589,30 @@ function AdminCreateInvoice() {
 		try {
 			copy(linkToCopy);
 			alert('Link copied to clipboard!');
+			// toast.success('Link copied to clipboard!');
+		} catch (error) {
+			console.error('Unable to copy to clipboard.', error);
+			alert('Error copying to clipboard. Please try again.');
+			// toast.error('Error copying to clipboard. Please try again.');
+		}
+	};
+
+	const code =
+		dataToSend.vehicledetails.drivernumber +
+		' ' +
+		dataToSend.loadingdetails.endpoint.toUpperCase() +
+		' ' +
+		dataToSend.boardingdetails.partyref.toUpperCase() +
+		' ' +
+		dataToSend.loadingdetails.startpoint.toUpperCase() +
+		' ' +
+		dataToSend.vehicledetails.vechiclenumber.substring(8, 12);
+
+	const handleCodeCopy = () => {
+		const linkToCopy = `${code}`;
+		try {
+			copy(linkToCopy);
+			alert('Code copied to clipboard!');
 			// toast.success('Link copied to clipboard!');
 		} catch (error) {
 			console.error('Unable to copy to clipboard.', error);
@@ -1662,6 +1687,24 @@ function AdminCreateInvoice() {
 												12
 											)}
 										</p>
+										<button
+											type='button'
+											style={{
+												background: 'none',
+												border: 'none',
+											}}
+											onClick={handleCodeCopy}
+										>
+											<img
+												src={C}
+												alt='Update'
+												style={{
+													height: '25px',
+													width: '25px',
+													cursor: 'pointer',
+												}}
+											/>
+										</button>
 									</div>
 								</div>
 							</div>

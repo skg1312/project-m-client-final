@@ -1278,43 +1278,50 @@ function AdminReports() {
 				setExportedData(filteredLoadData);
 				break;
 			case 'mis':
-				const filteredMisData = displayedMisInvoiceSearch.map((invoice) => ({
-					Date: invoice.invoicedetails?.invoicedate
-						? new Date(invoice.invoicedetails.invoicedate).toLocaleDateString(
-								'en-GB',
-								{
-									day: '2-digit',
-									month: '2-digit',
-									year: 'numeric',
-								}
-						  )
-						: 'N/A',
-					Agent: invoice.sellerdetails?.sellercompanyname ?? 'N/A',
-					Buyer: invoice.buyerdetails?.buyercompanyname ?? 'N/A',
-					'Load From': invoice.loadingdetails?.startpoint ?? 'N/A',
-					Destination: invoice.loadingdetails?.endpoint ?? 'N/A',
-					'Motor vehicle No': invoice.vehicledetails?.vechiclenumber ?? 'N/A',
-					'Total Qty':
-						invoice.consignmentdetails.itemdetails[0].itemquantity ?? 'N/A',
-					'Ref. Code': invoice.boardingdetails?.partyref ?? 'N/A',
-					'Bill Maker Name': invoice.companydetails?.companyname ?? 'N/A',
-					'Transportation Cost':
-						invoice.loadingdetails?.transportationcost ?? 'N/A',
-					'Item Weight':
-						invoice.consignmentdetails.itemdetails[0].itemweight ?? 'N/A',
-					'Item Rate':
-						invoice.consignmentdetails.itemdetails[0].itemtaxrate ?? 'N/A',
-					Total:
-						typeof invoice.consignmentdetails.itemdetails[0].itemtaxrate ===
-							'number' &&
-						typeof invoice.consignmentdetails.itemdetails[0].itemweight ===
-							'number'
-							? invoice.consignmentdetails.itemdetails[0].itemweight *
-							  invoice.consignmentdetails.itemdetails[0].itemtaxrate
-							: 'N/A',
-				}));
+				const filteredMisData = displayedMisInvoiceSearch.map((invoice) =>
+					(invoice.consignmentdetails?.itemdetails || []).map(
+						(item, index) => ({
+							Date: invoice.invoicedetails?.invoicedate
+								? new Date(
+										invoice.invoicedetails.invoicedate
+								  ).toLocaleDateString('en-GB', {
+										day: '2-digit',
+										month: '2-digit',
+										year: 'numeric',
+								  })
+								: 'N/A',
+							Agent: invoice.sellerdetails?.sellercompanyname ?? 'N/A',
+							Buyer: invoice.buyerdetails?.buyercompanyname ?? 'N/A',
+							'Load From': invoice.loadingdetails?.startpoint ?? 'N/A',
+							Destination: invoice.loadingdetails?.endpoint ?? 'N/A',
+							'Motor vehicle No':
+								invoice.vehicledetails?.vechiclenumber ?? 'N/A',
+							'Total Qty': item?.itemquantity ?? 'N/A',
+							'Ref. Code': invoice.boardingdetails?.partyref ?? 'N/A',
+							'Bill Maker Name': invoice.companydetails?.companyname ?? 'N/A',
+							'Transportation Cost':
+								invoice.loadingdetails?.transportationcost ?? 'N/A',
+							'Item Weight': item?.itemweight ?? 'N/A',
+							'Item Rate': item?.itemtaxrate ?? 'N/A',
+							Total:
+								typeof item?.itemtaxrate === 'number' &&
+								typeof item?.itemweight === 'number'
+									? item.itemtaxrate * item.itemweight
+									: 'N/A',
+						})
+					)
+				);
 
-				setExportedData(filteredMisData);
+				const columnNames = Object.keys(filteredMisData[0][0]); // Extract column names from the first item
+
+				const flattenedData = [
+					columnNames, // First row with column names
+					...filteredMisData.flatMap((invoice) =>
+						invoice.map((item) => Object.values(item))
+					),
+				];
+
+				setExportedData(flattenedData);
 				break;
 			case 'day':
 				const filteredDayData = displayedInvoiceSearch.map((invoice) => ({

@@ -221,9 +221,9 @@ function AdminInvoiceManagement() {
 									<th className='invoice-management-data-body-table-header'>
 										Transportation Cost
 									</th>
-									{/* <th className='invoice-management-data-body-table-header'>
-										Weight
-									</th> */}
+									<th className='invoice-management-data-body-table-header'>
+										Code
+									</th>
 									<th className='invoice-management-data-body-table-header'>
 										Action
 									</th>
@@ -270,11 +270,20 @@ function AdminInvoiceManagement() {
 												? invoice.loadingdetails.transportationcost
 												: 'N/A'}
 										</td>
-										{/* <td className='invoice-management-data-body-table-data'>
-											{invoice.invoicedetails?.itemweight
-												? invoice.invoicedetails.itemweight
+										<td className='invoice-management-data-body-table-data'>
+											{invoice
+												? invoice.vehicledetails.drivernumber +
+												  ' ' +
+												  invoice.loadingdetails.endpoint.toUpperCase() +
+												  ' ' +
+												  invoice.boardingdetails.partyref.toUpperCase() +
+												  ' ' +
+												  invoice.loadingdetails.startpoint.toUpperCase() +
+												  ' ' +
+												  invoice.vehicledetails.vechiclenumber.substring(8, 12)
 												: 'N/A'}
-										</td> */}
+										</td>
+
 										<td className='invoice-management-data-body-table-data'>
 											{/* <button
 												onClick={() => ViewInvoice(invoice._id)}
@@ -282,7 +291,20 @@ function AdminInvoiceManagement() {
 											>
 												View
 											</button> */}
-											<InvoiceAccordion invoice={invoice._id} />
+											<InvoiceAccordion
+												invoice={invoice._id}
+												code={
+													invoice.vehicledetails.drivernumber +
+													' ' +
+													invoice.loadingdetails.endpoint.toUpperCase() +
+													' ' +
+													invoice.boardingdetails.partyref.toUpperCase() +
+													' ' +
+													invoice.loadingdetails.startpoint.toUpperCase() +
+													' ' +
+													invoice.vehicledetails.vechiclenumber.substring(8, 12)
+												}
+											/>
 											{/* {isAccordionOpen && (
 												<div className='accordion-popover'>
 													<div className='modal-content-invoice'>

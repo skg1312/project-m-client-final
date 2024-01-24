@@ -4,16 +4,17 @@ import copy from 'clipboard-copy';
 import './AdminInvoiceManager.css';
 // import Close from 'path/to/close-icon'; // Update the path to your close icon
 
-const InvoiceAccordion = ({ invoice }) => {
+const InvoiceAccordion = ({ invoice, code }) => {
 	const [isAccordionOpen, setAccordionOpen] = useState(false);
 	const navigate = useNavigate();
 	const API = process.env.REACT_APP_API;
 	const selectedInvoiceId = invoice;
+	const selectedCode = code;
+
 	const pdfUrlOriginal = `${API}download/${selectedInvoiceId}`;
 	const ViewURLOriginal = `https://docs.google.com/viewer?url=${encodeURIComponent(
 		pdfUrlOriginal
 	)}&embedded=true`;
-	console.log('selectedInvoiceId', selectedInvoiceId);
 
 	const toggleAccordion = () => {
 		setAccordionOpen(!isAccordionOpen);
@@ -49,6 +50,20 @@ const InvoiceAccordion = ({ invoice }) => {
 		}
 	};
 
+	const handleCodeCopy = () => {
+		const code = selectedCode;
+		const linkToCopy = `${code}`;
+		try {
+			copy(linkToCopy);
+			alert('Code copied to clipboard!');
+			// toast.success('Link copied to clipboard!');
+		} catch (error) {
+			console.error('Unable to copy to clipboard.', error);
+			alert('Error copying to clipboard. Please try again.');
+			// toast.error('Error copying to clipboard. Please try again.');
+		}
+	};
+
 	return (
 		<div>
 			<button
@@ -64,6 +79,9 @@ const InvoiceAccordion = ({ invoice }) => {
 							</button>
 							<button className='modal-btn-inv' onClick={handleOriginalCopy}>
 								Copy Link
+							</button>
+							<button className='modal-btn-inv' onClick={handleCodeCopy}>
+								Copy Code
 							</button>
 						</div>
 					</div>

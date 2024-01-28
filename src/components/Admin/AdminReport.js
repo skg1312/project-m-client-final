@@ -1305,7 +1305,7 @@ function AdminReports() {
 							'Transportation Cost':invoice.loadingdetails?.transportationcost ?? 'N/A',
 							Total:
 								typeof item?.itemquantity === 'number' &&
-								typeofinvoice.loadingdetails?.transportationcost  === 'number'
+								typeof invoice.loadingdetails?.transportationcost  === 'number'
 									? item?.itemquantity * invoice.loadingdetails?.transportationcost 
 									: 'N/A',
 						})

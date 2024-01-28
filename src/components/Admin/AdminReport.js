@@ -727,9 +727,9 @@ function AdminReports() {
 		newWindow.document.write(
 			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Transportaion Cost</th>'
 		);
-		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Item Weight</th>'
-		);
+		// newWindow.document.write(
+		// 	'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Item Weight</th>'
+		// );
 		newWindow.document.write(
 			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Item Rate</th>'
 		);
@@ -819,11 +819,11 @@ function AdminReports() {
 							: 'N/A'
 					}</td>`
 				);
-				newWindow.document.write(
-					`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
-						item.itemweight ? item.itemweight : 'N/A'
-					}</td>`
-				);
+				// newWindow.document.write(
+				// 	`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
+				// 		item.itemweight ? item.itemweight : 'N/A'
+				// 	}</td>`
+				// );
 				newWindow.document.write(
 					`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
 						item.itemtaxrate ? item.itemtaxrate : 'N/A'
@@ -2005,11 +2005,13 @@ function AdminReports() {
 												<th className='reports-data-body-table-load-head-row-item'>
 													Transportaion Cost
 												</th>
+{/*
 												<th className='reports-data-body-table-load-head-row-item'>
 													Item Weight
 												</th>
+*/}
 												<th className='reports-data-body-table-load-head-row-item'>
-													Iten Rate
+													Item Rate
 												</th>
 												<th className='reports-data-body-table-load-head-row-item'>
 													Total

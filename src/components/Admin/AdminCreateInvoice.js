@@ -1319,7 +1319,7 @@ function AdminCreateInvoice() {
 									<td className='admin-create-invoice-table-consigment-value'>
 										{item.itemname}
 									</td>
-									<td className='admin-create-invoice-table-consignment-value'>
+									<td className='admin-create-invoice-table-consignment-value color'>
   										{item.itemdesc.substring(0, 10)}
 									</td>
 									<td className='admin-create-invoice-table-consigment-value'>

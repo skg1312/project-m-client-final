@@ -490,6 +490,7 @@ function AdminCreateInvoice() {
 	const ConsignmentsAdd = () => {
 		if (
 			!addedConsignment.itemname ||
+			!addedConsignment.itemdesc ||
 			!addedConsignment.itemquantity ||
 			!addedConsignment.itemhsn ||
 			!addedConsignment.itemprice ||
@@ -507,6 +508,7 @@ function AdminCreateInvoice() {
 					...prevData.consignmentdetails.itemdetails,
 					{
 						itemname: addedConsignment.itemname,
+						itemdesc: addedConsignment.itemdesc,
 						itemquantity: addedConsignment.itemquantity,
 						itemhsn: addedConsignment.itemhsn,
 						itemprice: addedConsignment.itemprice,
@@ -1201,6 +1203,7 @@ function AdminCreateInvoice() {
 						<thead className='admin-create-invoice-table-thead'>
 							<tr className='admin-create-invoice-table-row-head'>
 								<th className='admin-create-invoice-table-row-th'>Item Name</th>
+								<th className='admin-create-invoice-table-row-th'>Item Desc</th>
 								<th className='admin-create-invoice-table-row-th'>
 									Item Quantity
 								</th>
@@ -1227,6 +1230,15 @@ function AdminCreateInvoice() {
 										onChange={handleConsignmentChange}
 										name='itemname'
 										disabled
+									/>
+								</td>
+								<td className='admin-create-invoice-table-row-body-td'>
+									<input
+										className='admin-create-invoice-table-consigment-input'
+										type='text'
+										value={addedConsignment.itemdesc || ''}
+										onChange={handleConsignmentChange}
+										name='itemdesc'
 									/>
 								</td>
 								<td className='admin-create-invoice-table-row-body-td'>
@@ -1281,6 +1293,7 @@ function AdminCreateInvoice() {
 										onClick={ConsignmentsAdd}
 										disabled={
 											!addedConsignment.itemname ||
+											!addedConsignment.itemdesc ||
 											!addedConsignment.itemquantity ||
 											!addedConsignment.itemhsn ||
 											!addedConsignment.itemprice ||
@@ -1305,6 +1318,9 @@ function AdminCreateInvoice() {
 								<tr key={index} className='admin-create-invoice-table-row-body'>
 									<td className='admin-create-invoice-table-consigment-value'>
 										{item.itemname}
+									</td>
+									<td className='admin-create-invoice-table-consignment-value'>
+  										{item.itemdesc.substring(0, 10)}
 									</td>
 									<td className='admin-create-invoice-table-consigment-value'>
 										{item.itemquantity}

@@ -831,17 +831,17 @@ function AdminReports() {
 				);
 				newWindow.document.write(
 					`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
-						typeof item.itemtaxrate === 'number' &&
-						typeof item.itemweight === 'number'
-							? item.itemtaxrate * item.itemweight
+						typeof item.itemquantity === 'number' &&
+						typeof dataItem.loadingdetails.transportationcost === 'number'
+							? item.itemquantity * dataItem.loadingdetails.transportationcost
 							: 'N/A'
 					}</td>`
 				);
 				// Calculate and update the total amount
 				const itemTotal =
-					typeof item.itemtaxrate === 'number' &&
-					typeof item.itemweight === 'number'
-						? item.itemtaxrate * item.itemweight
+					typeof item.itemquantity === 'number' &&
+					typeof dataItem.loadingdetails.transportationcost === 'number'
+						? item.itemquantity * dataItem.loadingdetails.transportationcost
 						: 0;
 
 				totalAmount += itemTotal;
@@ -1301,12 +1301,12 @@ function AdminReports() {
 							'Bill Maker Name': invoice.companydetails?.companyname ?? 'N/A',
 							'Transportation Cost':
 								invoice.loadingdetails?.transportationcost ?? 'N/A',
-							'Item Weight': item?.itemweight ?? 'N/A',
-							'Item Rate': item?.itemtaxrate ?? 'N/A',
+							'Item Quality': item?.itemquantity ?? 'N/A',
+							'Transportation Cost':invoice.loadingdetails?.transportationcost ?? 'N/A',
 							Total:
-								typeof item?.itemtaxrate === 'number' &&
-								typeof item?.itemweight === 'number'
-									? item.itemtaxrate * item.itemweight
+								typeof item?.itemquantity === 'number' &&
+								typeofinvoice.loadingdetails?.transportationcost  === 'number'
+									? item?.itemquantity * invoice.loadingdetails?.transportationcost 
 									: 'N/A',
 						})
 					)
@@ -2111,15 +2111,19 @@ function AdminReports() {
 																	: 'N/A'}
 															</td>
 															<td className='reports-data-body-table-item-body-row-item'>
-																{item.itemweight ? item.itemweight : 'N/A'}
+																{item.itemquantity ? item.itemquantity : 'N/A'}
 															</td>
 															<td className='reports-data-body-table-item-body-row-item'>
-																{item.itemtaxrate ? item.itemtaxrate : 'N/A'}
+																{invoice.loadingdetails &&
+																invoice.loadingdetails.transportationcost
+																	? invoice.loadingdetails.transportationcost
+																	: 'N/A'}
 															</td>
 															<td className='reports-data-body-table-item-body-row-item'>
-																{typeof item.itemtaxrate === 'number' &&
-																typeof item.itemweight === 'number'
-																	? item.itemtaxrate * item.itemweight
+																{
+																typeof item.itemquantity=== 'number' &&
+																typeof invoice.loadingdetails.transportationcost === 'number'
+																	? item.itemquantity * invoice.loadingdetails.transportationcost
 																	: 'N/A'}
 															</td>
 															<td className='reports-data-body-table-item-body-row-item'>

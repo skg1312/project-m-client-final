@@ -1336,12 +1336,7 @@ function AdminCreateInvoice() {
 									</td>
 									<td className='admin-create-invoice-table-consigment-value'>
 										{item.itemtaxrate}
-									</td>
-(/*
-									<td className='admin-create-invoice-table-consigment-value'>
-										{item.itemweight}
-	  </td>
-*/}									
+									</td>							
 
 									<td className='admin-create-invoice-table-consigment-value'>
 										<button

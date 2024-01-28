@@ -494,8 +494,8 @@ function AdminCreateInvoice() {
 			!addedConsignment.itemquantity ||
 			!addedConsignment.itemhsn ||
 			!addedConsignment.itemprice ||
-			!addedConsignment.itemtaxrate ||
-			!addedConsignment.itemweight
+			!addedConsignment.itemtaxrate 
+			// !addedConsignment.itemweight
 		) {
 			return;
 		}
@@ -513,7 +513,7 @@ function AdminCreateInvoice() {
 						itemhsn: addedConsignment.itemhsn,
 						itemprice: addedConsignment.itemprice,
 						itemtaxrate: addedConsignment.itemtaxrate,
-						itemweight: addedConsignment.itemweight,
+						// itemweight: addedConsignment.itemweight,
 					},
 				],
 			},
@@ -1214,9 +1214,11 @@ function AdminCreateInvoice() {
 								<th className='admin-create-invoice-table-row-th'>
 									Item Tax Rate
 								</th>
-								<th className='admin-create-invoice-table-row-th'>
+{/*
+<th className='admin-create-invoice-table-row-th'>
 									Item Weight
 								</th>
+*/}
 								<th className='admin-create-invoice-table-row-th'>Action</th>
 							</tr>
 						</thead>
@@ -1277,6 +1279,7 @@ function AdminCreateInvoice() {
 										name='itemtaxrate'
 									/>
 								</td>
+{/*
 								<td className='admin-create-invoice-table-row-body-td'>
 									<input
 										className='admin-create-invoice-table-consigment-input'
@@ -1286,6 +1289,7 @@ function AdminCreateInvoice() {
 										name='itemweight'
 									/>
 								</td>
+*/}
 								<td className='admin-create-invoice-table-row-body-td'>
 									<button
 										type='button'
@@ -1297,8 +1301,7 @@ function AdminCreateInvoice() {
 											!addedConsignment.itemquantity ||
 											!addedConsignment.itemhsn ||
 											!addedConsignment.itemprice ||
-											!addedConsignment.itemtaxrate ||
-											!addedConsignment.itemweight
+											!addedConsignment.itemtaxrate 
 										}
 									>
 										<img
@@ -1334,9 +1337,12 @@ function AdminCreateInvoice() {
 									<td className='admin-create-invoice-table-consigment-value'>
 										{item.itemtaxrate}
 									</td>
+(/*
 									<td className='admin-create-invoice-table-consigment-value'>
 										{item.itemweight}
-									</td>
+	  </td>
+*/}									
+
 									<td className='admin-create-invoice-table-consigment-value'>
 										<button
 											className='admin-create-invoice-table-consigment-button'

@@ -730,9 +730,9 @@ function AdminReports() {
 		// newWindow.document.write(
 		// 	'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Item Weight</th>'
 		// );
-		newWindow.document.write(
-			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Item Rate</th>'
-		);
+		// newWindow.document.write(
+		// 	'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Item Rate</th>'
+		// );
 		newWindow.document.write(
 			'<th style="padding: 8px; font-size: 20px; text-align: center; border: 1px solid #ddd;">Total</th>'
 		);
@@ -824,11 +824,11 @@ function AdminReports() {
 				// 		item.itemweight ? item.itemweight : 'N/A'
 				// 	}</td>`
 				// );
-				newWindow.document.write(
-					`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
-						item.itemtaxrate ? item.itemtaxrate : 'N/A'
-					}</td>`
-				);
+				// newWindow.document.write(
+				// 	`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
+				// 		item.itemtaxrate ? item.itemtaxrate : 'N/A'
+				// 	}</td>`
+				// );
 				newWindow.document.write(
 					`<td style="padding: 8px; font-size: 16px; text-align: center; border: 1px solid #ddd;">${
 						typeof item.itemquantity === 'number' &&
@@ -2011,10 +2011,11 @@ function AdminReports() {
 												<th className='reports-data-body-table-load-head-row-item'>
 													Item Weight
 												</th>
-*/}
+
 												<th className='reports-data-body-table-load-head-row-item'>
 													Item Rate
 												</th>
+												*/}
 												<th className='reports-data-body-table-load-head-row-item'>
 													Total
 												</th>
@@ -2114,12 +2115,13 @@ function AdminReports() {
 																	? invoice.loadingdetails.transportationcost
 																	: 'N/A'}
 															</td>
+{/*
 															<td className='reports-data-body-table-item-body-row-item'>
 													{
 item.itemtaxrate ? item.itemtaxrate : 'N/A' 
 }
 															</td>
-															{/* <td className='reports-data-body-table-item-body-row-item'>
+															 <td className='reports-data-body-table-item-body-row-item'>
 																{invoice.loadingdetails &&
 																invoice.loadingdetails.transportationcost
 																	? invoice.loadingdetails.transportationcost

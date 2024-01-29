@@ -2115,7 +2115,9 @@ function AdminReports() {
 																	: 'N/A'}
 															</td>
 															<td className='reports-data-body-table-item-body-row-item'>
-																{item.itemrate ? item.itemrate : 'N/A'}
+													{
+item.itemtaxrate ? item.itemtaxrate : 'N/A' 
+}
 															</td>
 															{/* <td className='reports-data-body-table-item-body-row-item'>
 																{invoice.loadingdetails &&

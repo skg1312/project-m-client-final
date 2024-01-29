@@ -1302,11 +1302,13 @@ function AdminReports() {
 							'Transportation Cost':
 								invoice.loadingdetails?.transportationcost ?? 'N/A',
 							'Item Quality': item?.itemquantity ?? 'N/A',
-							'Transportation Cost':invoice.loadingdetails?.transportationcost ?? 'N/A',
+							'Transportation Cost':
+								invoice.loadingdetails?.transportationcost ?? 'N/A',
 							Total:
 								typeof item?.itemquantity === 'number' &&
-								typeof invoice.loadingdetails?.transportationcost  === 'number'
-									? item?.itemquantity * invoice.loadingdetails?.transportationcost 
+								typeof invoice.loadingdetails?.transportationcost === 'number'
+									? item?.itemquantity *
+									  invoice.loadingdetails?.transportationcost
 									: 'N/A',
 						})
 					)
@@ -2005,7 +2007,7 @@ function AdminReports() {
 												<th className='reports-data-body-table-load-head-row-item'>
 													Transportaion Cost
 												</th>
-{/*
+												{/*
 												<th className='reports-data-body-table-load-head-row-item'>
 													Item Weight
 												</th>
@@ -2115,17 +2117,18 @@ function AdminReports() {
 															<td className='reports-data-body-table-item-body-row-item'>
 																{item.itemquantity ? item.itemquantity : 'N/A'}
 															</td>
-															<td className='reports-data-body-table-item-body-row-item'>
+															{/* <td className='reports-data-body-table-item-body-row-item'>
 																{invoice.loadingdetails &&
 																invoice.loadingdetails.transportationcost
 																	? invoice.loadingdetails.transportationcost
 																	: 'N/A'}
-															</td>
+															</td> */}
 															<td className='reports-data-body-table-item-body-row-item'>
-																{
-																typeof item.itemquantity=== 'number' &&
-																typeof invoice.loadingdetails.transportationcost === 'number'
-																	? item.itemquantity * invoice.loadingdetails.transportationcost
+																{typeof item.itemquantity === 'number' &&
+																typeof invoice.loadingdetails
+																	.transportationcost === 'number'
+																	? item.itemquantity *
+																	  invoice.loadingdetails.transportationcost
 																	: 'N/A'}
 															</td>
 															<td className='reports-data-body-table-item-body-row-item'>

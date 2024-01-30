@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import copy from 'clipboard-copy';
 import './AdminInvoiceManager.css';
@@ -34,8 +35,25 @@ const InvoiceAccordion = ({ invoice, code }) => {
 	const handleOriginalCopy = () => {
 		const expirationTimestamp = Date.now() + 5 * 24 * 60 * 60 * 1000;
 		const id = selectedInvoiceId;
-		console.log(`${API}/download/${id}`);
+		console.log(`${API}download/${id}`);
 		const pdfUrl = `${id}/${expirationTimestamp}`;
+
+		axios({
+			method: "get",
+			url: "https://cutt.ly/api/api.php",
+			headers: { "Access-Control-Allow-Origin": "*" },
+			params: {
+			  key: "cca6beb8678c86f36e42d2f0b013c5265e254",
+			  short: `${API}download/${id}`,
+			  name: ""
+			}
+		  })
+			.then((res) => {
+			  console.log(res);
+			})
+			.catch((err) => {
+			  console.log(err);
+			});
 
 		console.log('Handling Original Invoice Copy');
 		const linkToCopy = `${ViewURLOriginal}`;

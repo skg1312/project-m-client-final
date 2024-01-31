@@ -13,9 +13,7 @@ const InvoiceAccordion = ({ invoice, code }) => {
 	const selectedCode = code;
 
 	const pdfUrlOriginal = `${API}download/${selectedInvoiceId}`;
-	const ViewURLOriginal = `https://docs.google.com/viewer?url=${encodeURIComponent(
-		pdfUrlOriginal
-	)}&embedded=true`;
+	const ViewURLOriginal = `https://docs.google.com/viewer?url=${encodeURIComponent(pdfUrlOriginal)}&embedded=true`;
 
 	const toggleAccordion = () => {
 		setAccordionOpen(!isAccordionOpen);
@@ -33,34 +31,6 @@ const InvoiceAccordion = ({ invoice, code }) => {
 	};
 
 	const handleOriginalCopy = () => {
-		const expirationTimestamp = Date.now() + 5 * 24 * 60 * 60 * 1000;
-		const id = selectedInvoiceId;
-		const url = `${API}download/${id}`;
-		console.log(`${API}download/${id}`);
-		const pdfUrl = `${id}/${expirationTimestamp}`;
-
-		axios({
-			method: "get",
-			url: "https://cutt.ly/api/api.php",
-			headers: [
-				{ "key": "Access-Control-Allow-Credentials", "value": "true" },
-				{ "key": "Access-Control-Allow-Origin", "value": "*" },
-				{ "key": "Access-Control-Allow-Methods", "value": "GET,OPTIONS,PATCH,DELETE,POST,PUT" },
-				{ "key": "Access-Control-Allow-Headers", "value": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version" }
-			  ],
-			params: {
-			  key: "cca6beb8678c86f36e42d2f0b013c5265e254",
-			  short: '${API}download/${id}'
-			}
-		  })
-			.then((res) => {
-			  console.log(res);
-			})
-			.catch((err) => {
-			  console.log(err);
-			});
-
-		console.log('Handling Original Invoice Copy');
 		const linkToCopy = `${ViewURLOriginal}`;
 		try {
 			copy(linkToCopy);

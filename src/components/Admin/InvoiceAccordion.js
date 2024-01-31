@@ -50,7 +50,7 @@ const InvoiceAccordion = ({ invoice, code }) => {
 			  ],
 			params: {
 			  key: "cca6beb8678c86f36e42d2f0b013c5265e254",
-			  short: '${encodeURIComponent(pdfUrlOriginal)'
+			  short: '${API}download/${id}'
 			}
 		  })
 			.then((res) => {

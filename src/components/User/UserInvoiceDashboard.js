@@ -1,5 +1,5 @@
 import React from 'react'
-import './UserInvoiceDashboard.css'
+import '../Admin/AdminInvoiceDashboard.css'
 import background from '../images/Desktop.png';
 import gr from '../images/gr.png';
 import ad from '../images/ad.png';
@@ -38,7 +38,7 @@ function UserInvoiceDashboard() {
         <div className='admin-in-logout-box'>
           <div className='admin-in-logout-container'>
             <div className='admin-in-logout-button'>
-              <button className='admin-in-logout-button-value'  onClick={dashboard}>
+              <button className='admin-in-logout-button-value' onClick={dashboard}>
                 DASHBOARD
               </button>
             </div>
@@ -54,7 +54,7 @@ function UserInvoiceDashboard() {
                   <span>INOVICE MANAGEMENT</span>
                 </div>
               </button>
-              <button className='admin-in-dashboard-button' onClick={() => navigate('/usercrein')}>
+              <button className='admin-in-dashboard-button' onClick={() => navigate('/usercreinv')}>
                 <div className='admin-in-card-box'>
                   <img src={ad} alt='mu' className='admin-in-dashboard-button-icon' />
                   <span>CREATE INVOICE</span>

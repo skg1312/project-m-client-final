@@ -1,5 +1,5 @@
 import React from 'react'
-import './StaffInvoiceDashboard.css'
+import '../Admin/AdminInvoiceDashboard.css'
 import background from '../images/Desktop.png';
 import gr from '../images/gr.png';
 import ad from '../images/ad.png';
@@ -9,21 +9,21 @@ import { useStaffAuth } from './StaffAuth';
 function StaffInvoiceDashboard() {
   const navigate = useNavigate();
   const auth = useStaffAuth();
-    const dashboard = () => {
-        switch (auth.access) {
-            case 'Super-Staff':
-          navigate('/staffsuperdash');
-          break;
-        case 'HO-Staff':
-          navigate('/staffhodash');
-          break;
-        case 'Staff':
-          navigate('/staffgendash');
-          break;
-        default:
-          break;
-        }
-    }
+  const dashboard = () => {
+      switch (auth.access) {
+          case 'Super-Staff':
+        navigate('/staffsuperdash');
+        break;
+      case 'HO-Staff':
+        navigate('/staffhodash');
+        break;
+      case 'Staff':
+        navigate('/staffgendash');
+        break;
+      default:
+        break;
+      }
+  }
   return (
     <div
       style={{
@@ -38,7 +38,7 @@ function StaffInvoiceDashboard() {
         <div className='admin-in-logout-box'>
           <div className='admin-in-logout-container'>
             <div className='admin-in-logout-button'>
-              <button className='admin-in-logout-button-value'  onClick={dashboard}>
+              <button className='admin-in-logout-button-value' onClick={dashboard}>
                 DASHBOARD
               </button>
             </div>
@@ -48,13 +48,13 @@ function StaffInvoiceDashboard() {
         <h1 className='admin-in-dashboard-title'>MAIN MENU</h1>
           <div className='admin-in-dashboard-buttons'>
             <div className='admin-in-dashboard-buttons-row'>
-            <button className='admin-in-dashboard-button' onClick={() => navigate('/staffinman')}>
+              <button className='admin-in-dashboard-button' onClick={() => navigate('/staffinman')}>
                 <div className='admin-in-card-box'>
                   <img src={gr} alt='gr' className='admin-in-dashboard-button-icon' />
                   <span>INOVICE MANAGEMENT</span>
                 </div>
               </button>
-              <button className='admin-in-dashboard-button' onClick={() => navigate('/staffcrein')}>
+              <button className='admin-in-dashboard-button' onClick={() => navigate('/staffcreinv')}>
                 <div className='admin-in-card-box'>
                   <img src={ad} alt='mu' className='admin-in-dashboard-button-icon' />
                   <span>CREATE INVOICE</span>

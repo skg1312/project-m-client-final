@@ -26,7 +26,7 @@ import StaffBuyerManage from './components/Staff/StaffBuyerManage';
 import StaffSellerManage from './components/Staff/StaffSellerManage';
 import StaffCompanyManage from './components/Staff/StaffCompanyManage';
 import StaffConsignmentManage from './components/Staff/StaffConsignmentManage';
-import StaffVechicleManage from './components/Staff/StaffVechicleManage';
+import StaffLoadingManage from './components/Staff/StaffVechicleManage';
 import UserBuyerManage from './components/User/UserBuyerManage';
 import UserSellerManage from './components/User/UserSellerManage';
 import UserCompanyManage from './components/User/UserCompanyManage';
@@ -223,7 +223,7 @@ function App() {
 							}
 						/>
 						<Route
-							path='/staffcrein'
+							path='/staffcreinv'
 							element={
 								<ReqStaffAuth>
 									<StaffCreateInvoice />
@@ -274,7 +274,7 @@ function App() {
 							path='/staffvecman'
 							element={
 								<ReqStaffAuth>
-									<StaffVechicleManage />
+									<StaffLoadingManage />
 								</ReqStaffAuth>
 							}
 						/>
@@ -382,7 +382,7 @@ function App() {
 							}
 						/>
 						<Route
-							path='/usercrein'
+							path='/usercreinv'
 							element={
 								<ReqUserAuth>
 									<UserCreateInvoice />

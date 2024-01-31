@@ -1,5 +1,5 @@
 import React from 'react';
-import './UserNavbar.css';
+import '../Admin/AdminNavbar.css';
 import { useNavigate } from 'react-router-dom';
 import { useUserAuth } from './UserAuth';
 
@@ -22,71 +22,82 @@ function UserNavbar() {
 		}
 	};
 
+	const handleLogout = () => {
+		auth.userlogout();
+	};
+
 	return (
-		<div className='user-logout-box-nav'>
-			<div className='user-logout-container-nav'>
-				<div className='user-logout-button-nav'>
-					{auth.access === 'Super-User' || auth.access === 'HO-User' ? (
-						<button
-							className='user-logout-button-value-no-img'
-							onClick={() => navigate('/usercomman')}
-						>
-							COMPANY
-						</button>
-					) : (
-						<button className='disabled' disabled></button>
-					)}
-					{auth.access === 'Super-User' || auth.access === 'HO-User' ? (
-						<button
-							className='user-logout-button-value-no-img'
-							onClick={() => navigate('/usersellman')}
-						>
-							AGENT
-						</button>
-					) : (
-						<button className='disabled' disabled></button>
-					)}
-					{auth.access === 'Super-User' || auth.access === 'HO-User' ? (
-						<button
-							className='user-logout-button-value-no-img'
-							onClick={() => navigate('/userbuyman')}
-						>
-							BUYER
-						</button>
-					) : (
-						<button className='disabled' disabled></button>
-					)}
+		<div className='admin-logout-box-nav'>
+			<div className='admin-logout-container-nav'>
+				<div className='admin-logout-button-nav'>
 					<button
-						className='user-logout-button-value-no-img'
+						className='admin-logout-button-value-no-img'
+						onClick={() => navigate('/usergenrep')}
+					>
+						REPORTS
+					</button>
+{/*
+					<button
+						className='admin-logout-button-value-no-img'
+						onClick={() => navigate('/adminuserman')}
+					>
+						USERS
+					</button>
+					<button
+						className='admin-logout-button-value-no-img'
+						onClick={() => navigate('/adminstaffman')}
+					>
+						STAFF
+					</button>
+         
+					<button
+						className='admin-logout-button-value-no-img'
+						onClick={() => navigate('/staffcomman')}
+					>
+						COMPANY
+					</button>
+					 */}
+					<button
+						className='admin-logout-button-value-no-img'
+						onClick={() => navigate('/usersellman')}
+					>
+						CONSIGNEE
+					</button>
+					<button
+						className='admin-logout-button-value-no-img'
+						onClick={() => navigate('/userbuyman')}
+					>
+						BUYER
+					</button>
+					<button
+						className='admin-logout-button-value-no-img'
 						onClick={() => navigate('/userconman')}
 					>
-						CONSIGNMENT
+						ITEMS
 					</button>
-					{auth.access === 'Super-User' ? (
-						<button
-							className='user-logout-button-value-no-img'
-							onClick={() => navigate('/uservecman')}
-						>
-							VEHICLES
-						</button>
-					) : (
-						<button className='disabled' disabled></button>
-					)}
-					{auth.access === 'Super-User' ? (
-						<button
-							className='user-logout-button-value-no-img'
-							onClick={() => navigate('/userinvdash')}
-						>
-							INOVICE
-						</button>
-					) : (
-						<button className='disabled' disabled></button>
-					)}
 					<button
-						className='user-logout-button-value-no-img'
+						className='admin-logout-button-value-no-img'
+						onClick={() => navigate('/uservecman')}
+					>
+						OTHERS
+					</button>
+					<button
+						className='admin-logout-button-value-no-img'
+						onClick={() => navigate('/userinvdash')}
+					>
+						INOVICE
+					</button>
+					<button
+						className='admin-logout-button-value-no-img'
 						onClick={dashboard}
 					>
 						DASHBOARD
+					</button>
+					<button
+						className='admin-logout-button-value-no-img'
+						onClick={handleLogout}
+					>
+						LOGOUT
 					</button>
 				</div>
 			</div>

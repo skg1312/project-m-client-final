@@ -100,12 +100,12 @@ function AdminSellerManage() {
 		validationSchema: Yup.object({
 			// sellerid: Yup.string().required('Agent ID is required'),
 			sellercompanyname: Yup.string().required('Company Name is required'),
-			sellercompanygstno: Yup.string()
-				.required('GST No is required')
-				.matches(
-					/^[A-Z0-9]{15}$/,
-					'GST No must be 15 characters long and contain only uppercase letters and numerics'
-				),
+			// sellercompanygstno: Yup.string()
+			// 	.required('GST No is required')
+			// 	.matches(
+			// 		/^[A-Z0-9]{15}$/,
+			// 		'GST No must be 15 characters long and contain only uppercase letters and numerics'
+			// 	),
 			sellercompanyaddress: Yup.string().required(
 				'Company Address is required'
 			),
@@ -677,7 +677,7 @@ function AdminSellerManage() {
 
 						<input
 							type='text'
-							required
+							// required
 							className='admin-seller-manage-form-input'
 							placeholder='Company GST Number'
 							{...formik.getFieldProps('sellercompanygstno')}

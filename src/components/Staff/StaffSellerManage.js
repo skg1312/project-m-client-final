@@ -100,12 +100,12 @@ function StaffSellerManage() {
 		validationSchema: Yup.object({
 			// sellerid: Yup.string().required('Agent ID is required'),
 			sellercompanyname: Yup.string().required('Company Name is required'),
-			sellercompanygstno: Yup.string()
-				.required('GST No is required')
-				.matches(
-					/^[A-Z0-9]{15}$/,
-					'GST No must be 15 characters long and contain only uppercase letters and numerics'
-				),
+			// sellercompanygstno: Yup.string()
+			// 	.required('GST No is required')
+			// 	.matches(
+			// 		/^[A-Z0-9]{15}$/,
+			// 		'GST No must be 15 characters long and contain only uppercase letters and numerics'
+			// 	),
 			sellercompanyaddress: Yup.string().required(
 				'Company Address is required'
 			),
@@ -468,7 +468,7 @@ function StaffSellerManage() {
 				<div className='admin-seller-manage-data'>
 					<div className='admin-seller-manage-data-header'>
 						<h1 className='admin-seller-manage-data-title'>ALL CONSIGNEES</h1>
-          {/*
+						{/*
 						<div className='admin-seller-manage-file-upload'>
 							<input
 								className='admin-seller-manage-file-upload-input'
@@ -596,7 +596,7 @@ function StaffSellerManage() {
 													}}
 												/>
 											</button>
-{/*
+											{/*
 											<button
 												style={{
 													background: 'none',
@@ -681,7 +681,7 @@ function StaffSellerManage() {
 
 						<input
 							type='text'
-							required
+							// required
 							className='admin-seller-manage-form-input'
 							placeholder='Company GST Number'
 							{...formik.getFieldProps('sellercompanygstno')}

@@ -227,7 +227,7 @@ function AdminCreateInvoice() {
 	const validationSchema = Yup.object().shape({
 		vehicledetails: Yup.object().shape({
 			drivernumber: Yup.string()
-				.matches(/[0-9]{10}/, 'Invalid mobile number, Please enter 10-digits')
+				// .matches(/[0-9]{10}/, 'Invalid mobile number, Please enter 10-digits')
 				.required('Driver Number is required'),
 			vechiclenumber: Yup.string()
 				// .matches(
@@ -1091,8 +1091,8 @@ function AdminCreateInvoice() {
 									id='drivernumber'
 									name='vehicledetails.drivernumber'
 									type='tel'
-									maxLength={10}
-									pattern='[0-9]{10}'
+									// maxLength={10}
+									// pattern='[0-9]{10}'
 									placeholder='Enter 10-digit mobile number without +91'
 									required
 									onChange={(e) => {

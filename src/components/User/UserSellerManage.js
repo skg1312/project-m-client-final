@@ -100,12 +100,12 @@ function UserSellerManage() {
 		validationSchema: Yup.object({
 			// sellerid: Yup.string().required('Agent ID is required'),
 			sellercompanyname: Yup.string().required('Company Name is required'),
-			sellercompanygstno: Yup.string()
-				.required('GST No is required')
-				.matches(
-					/^[A-Z0-9]{15}$/,
-					'GST No must be 15 characters long and contain only uppercase letters and numerics'
-				),
+			// sellercompanygstno: Yup.string()
+			// 	.required('GST No is required')
+			// 	.matches(
+			// 		/^[A-Z0-9]{15}$/,
+			// 		'GST No must be 15 characters long and contain only uppercase letters and numerics'
+			// 	),
 			sellercompanyaddress: Yup.string().required(
 				'Company Address is required'
 			),
@@ -468,7 +468,7 @@ function UserSellerManage() {
 				<div className='admin-seller-manage-data'>
 					<div className='admin-seller-manage-data-header'>
 						<h1 className='admin-seller-manage-data-title'>ALL CONSIGNEES</h1>
-          {/*
+						{/*
 						<div className='admin-seller-manage-file-upload'>
 							<input
 								className='admin-seller-manage-file-upload-input'
@@ -538,7 +538,7 @@ function UserSellerManage() {
 									<th className='admin-seller-manage-data-table-header'>
 										State Code
 									</th>
-{/*
+									{/*
 									<th className='admin-seller-manage-data-table-header'>
 										Action
 									</th>
@@ -580,7 +580,8 @@ function UserSellerManage() {
 										</td>
 										<td className='admin-seller-manage-data-table-data'>
 											{seller.sellercompanystatecode?.substring(0, 12) ?? 'N/A'}
-										</td>{/*
+										</td>
+										{/*
 										<td className='admin-seller-manage-data-table-data'>
 											<button
 												style={{
@@ -684,7 +685,7 @@ function UserSellerManage() {
 
 						<input
 							type='text'
-							required
+							// required
 							className='admin-seller-manage-form-input'
 							placeholder='Company GST Number'
 							{...formik.getFieldProps('sellercompanygstno')}

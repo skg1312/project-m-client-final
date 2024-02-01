@@ -102,12 +102,12 @@ function UserBuyerManage() {
 		validationSchema: Yup.object({
 			// buyerid: Yup.string().required('Buyer ID is required'),
 			buyercompanyname: Yup.string().required('Company Name is required'),
-			buyercompanygstno: Yup.string()
-				.required('GST No is required')
-				.matches(
-					/^[A-Z0-9]{15}$/,
-					'GST No must be 15 characters long and contain only uppercase letters and numerics'
-				),
+			// buyercompanygstno: Yup.string()
+			// 	.required('GST No is required')
+			// 	.matches(
+			// 		/^[A-Z0-9]{15}$/,
+			// 		'GST No must be 15 characters long and contain only uppercase letters and numerics'
+			// 	),
 			buyercompanyaddress: Yup.string().required('Company Address is required'),
 			buyercompanystatename: Yup.string().required(
 				'Company State Name is required'
@@ -452,7 +452,7 @@ function UserBuyerManage() {
 				<div className='admin-buyer-manage-data'>
 					<div className='admin-buyer-manage-data-header'>
 						<h1 className='admin-buyer-manage-data-title'>ALL BUYERS</h1>
-{/*
+						{/*
 						<div className='admin-buyer-manage-file-upload'>
 							<input
 								className='admin-buyer-manage-file-upload-input'
@@ -516,7 +516,7 @@ function UserBuyerManage() {
 									<th className='admin-buyer-manage-data-table-header'>
 										State Code
 									</th>
-{/*
+									{/*
 									<th className='admin-buyer-manage-data-table-header'>
 										Action
 									</th>
@@ -555,7 +555,7 @@ function UserBuyerManage() {
 										<td className='admin-buyer-manage-data-table-data'>
 											{buyer.buyercompanystatecode?.substring(0, 12) ?? 'N/A'}
 										</td>
-                      {/*
+										{/*
 										<td className='admin-buyer-manage-data-table-data'>
 											<button
 												style={{
@@ -661,7 +661,7 @@ function UserBuyerManage() {
 
 						<input
 							type='text'
-							required
+							// required
 							className='admin-buyer-manage-form-input'
 							placeholder='Company GST Number'
 							{...formik.getFieldProps('buyercompanygstno')}
